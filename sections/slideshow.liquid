@@ -75,43 +75,46 @@
               {% liquid
                 assign mobile_img = false
                 assign placeholder_slide = forloop.index | modulo: 2
-                if block.settings.image_mobile != blank
-                  assign mobile_img = true
-                  assign mobile_class = 'mobile-img'
-                  {%- if forloop.first -%}
-                    render 'image', image: block.settings.image_mobile, class: mobile_class, loading: 'eager'
-                  {%- else -%}
-                    render 'image', image: block.settings.image_mobile, class: mobile_class
-                  {%- endif -%}
-                endif
+                assign mobile_class = 'mobile-img'
                 assign desktop_class = fadeanimateClass
+              %}
+              {% if block.settings.image_mobile != blank %}
+                {% assign mobile_img = true %}
+                {% if forloop.first %}
+                  {% render 'image', image: block.settings.image_mobile, class: mobile_class, loading: 'eager' %}
+                {% else %}
+                  {% render 'image', image: block.settings.image_mobile, class: mobile_class %}
+                {% endif %}
+              {% endif %}
+
+              {% liquid
                 if mobile_img
                   assign desktop_class = 'desktop-img ' | append: fadeanimateClass
                 endif
-                if block.settings.image_desktop != blank
-                  {%- if forloop.first -%}
-                    render 'image', image: block.settings.image_desktop, class: desktop_class, loading: 'eager'
-                  {%- else -%}
-                    render 'image', image: block.settings.image_desktop, class: desktop_class
-                  {%- endif -%}
-                elsif block.settings.image_desktop == blank and mobile_img
-                  if placeholder_slide == 1
-                    assign placeholde_class = 'placeholder-svg ' | append: fadeanimateClass
-                    echo 'hero-apparel-2' | placeholder_svg_tag: placeholde_class
-                  else
-                    assign placeholde_class = 'placeholder-svg ' | append: fadeanimateClass
-                    echo 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg'
-                  endif
-                else
-                  if placeholder_slide == 1
-                    assign placeholde_class = 'placeholder-svg ' | append: fadeanimateClass
-                    echo 'hero-apparel-2' | placeholder_svg_tag: placeholde_class
-                  else
-                    assign placeholde_class = 'placeholder-svg ' | append: fadeanimateClass
-                    echo 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg'
-                  endif
-                endif
               %}
+              {% if block.settings.image_desktop != blank %}
+                {% if forloop.first %}
+                  {% render 'image', image: block.settings.image_desktop, class: desktop_class, loading: 'eager' %}
+                {% else %}
+                  {% render 'image', image: block.settings.image_desktop, class: desktop_class %}
+                {% endif %}
+              {% elsif block.settings.image_desktop == blank and mobile_img %}
+                {% if placeholder_slide == 1 %}
+                  {% assign placeholde_class = 'placeholder-svg ' | append: fadeanimateClass %}
+                  {{ 'hero-apparel-2' | placeholder_svg_tag: placeholde_class }}
+                {% else %}
+                  {% assign placeholde_class = 'placeholder-svg ' | append: fadeanimateClass %}
+                  {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+              {% else %}
+                {% if placeholder_slide == 1 %}
+                  {% assign placeholde_class = 'placeholder-svg ' | append: fadeanimateClass %}
+                  {{ 'hero-apparel-2' | placeholder_svg_tag: placeholde_class }}
+                {% else %}
+                  {% assign placeholde_class = 'placeholder-svg ' | append: fadeanimateClass %}
+                  {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+              {% endif %}
             </div>
           {% endif %}
           {% if block.settings.subheading != blank
