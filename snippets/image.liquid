@@ -1,10 +1,11 @@
 {% comment %}theme-check-disable ImgWidthAndHeight,ImgLazyLoading,DeprecateLazysizes,DeprecatedFilter{% endcomment %}
 {%- assign img_url = image | image_url: width: '100' | replace: 'width=100', 'width={width}' -%}
+{%- assign loading_attr = loading | default: 'lazy' -%}
 <img
   {% if id != blank %}
     id="{{ id }}"
   {% endif %}
-  class="no-js-hidden {{ class }} lazyload"
+  class="no-js-hidden {{ class }}{% if loading_attr == 'lazy' %} lazyload{% endif %}"
   src="{{ img_url }}"
   data-aspectratio="{{ image.aspect_ratio }}"
   data-sizes="auto"
@@ -13,9 +14,10 @@
   height="{{ image.height }}"
   data-original="{{ image | image_url }}"
   alt="{{ image.alt | escape }}"
-  loading="lazy"
+  loading="{{ loading_attr }}"
+  {% if loading_attr == 'eager' %}fetchpriority="high"{% endif %}
   style="object-position:{{ image.presentation.focal_point }}"
-  data-flickity-lazyload="{{ img_url }}"
+  {% if loading_attr == 'lazy' %}data-flickity-lazyload="{{ img_url }}"{% endif %}
 >
 <div class="loader-image"></div>
 <noscript>

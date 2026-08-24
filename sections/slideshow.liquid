@@ -78,14 +78,22 @@
                 if block.settings.image_mobile != blank
                   assign mobile_img = true
                   assign mobile_class = 'mobile-img'
-                  render 'image', image: block.settings.image_mobile, class: mobile_class
+                  {%- if forloop.first -%}
+                    render 'image', image: block.settings.image_mobile, class: mobile_class, loading: 'eager'
+                  {%- else -%}
+                    render 'image', image: block.settings.image_mobile, class: mobile_class
+                  {%- endif -%}
                 endif
                 assign desktop_class = fadeanimateClass
                 if mobile_img
                   assign desktop_class = 'desktop-img ' | append: fadeanimateClass
                 endif
                 if block.settings.image_desktop != blank
-                  render 'image', image: block.settings.image_desktop, class: desktop_class
+                  {%- if forloop.first -%}
+                    render 'image', image: block.settings.image_desktop, class: desktop_class, loading: 'eager'
+                  {%- else -%}
+                    render 'image', image: block.settings.image_desktop, class: desktop_class
+                  {%- endif -%}
                 elsif block.settings.image_desktop == blank and mobile_img
                   if placeholder_slide == 1
                     assign placeholde_class = 'placeholder-svg ' | append: fadeanimateClass

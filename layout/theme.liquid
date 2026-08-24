@@ -27,6 +27,23 @@
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
     {{ content_for_header }}
+    {%- if request.page_type == 'index' -%}
+      {%- for section in template.sections -%}
+        {%- if section.type == 'slideshow' -%}
+          {%- assign first_block = section.blocks | first -%}
+          {%- if first_block.settings.image_desktop != blank -%}
+            <link
+              rel="preload"
+              as="image"
+              href="{{ first_block.settings.image_desktop | image_url: width: 1200 }}"
+              fetchpriority="high"
+            >
+          {%- endif -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+
     {% render 'style-variable' %}
     {% render 'theme-variable' %}
     <script>
