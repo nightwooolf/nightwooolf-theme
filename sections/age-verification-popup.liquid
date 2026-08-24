@@ -1,0 +1,76 @@
+{% render 'age-verifier-popup', section: section %}
+
+{% schema %}
+{
+  "name": "t:sections.age_verification_popup.name",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_age_verification",
+      "label": "t:sections.age_verification_popup.settings.enable_age_verification.label",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "age_logo_img",
+      "label": "t:sections.age_verification_popup.settings.age_logo_img.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "age_verification_heading",
+      "label": "t:common.global.heading.label",
+      "default": "Confirm your age"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "age_verification_content",
+      "label": "t:common.global.description.label",
+      "default": "Are you 18 years old or older?"
+    },
+    {
+      "type": "text",
+      "id": "decline_text",
+      "label": "t:sections.age_verification_popup.settings.decline_text.label",
+      "default": "No, I'm not"
+    },
+    {
+      "type": "text",
+      "id": "approve_text",
+      "label": "t:sections.age_verification_popup.settings.approve_text.label",
+      "default": "Yes, I am"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.age_verification_popup.settings.paragraph_verification_requirment.content"
+    },
+    {
+      "type": "text",
+      "id": "decline_heading",
+      "label": "t:sections.age_verification_popup.settings.decline_heading.label",
+      "default": "Come back when you're older"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "decline_subheading",
+      "label": "t:sections.age_verification_popup.settings.decline_subheading.label",
+      "default": "Sorry, the content of this store can't be seen by a younger audience. Come back when you're older."
+    },
+    {
+      "type": "text",
+      "id": "age_decline_button_text",
+      "label": "t:sections.age_verification_popup.settings.age_decline_button_text.label",
+      "default": "Oops, I entered incorrectly"
+    },
+    {
+      "type": "range",
+      "id": "agepopup_cookie_set",
+      "min": 1,
+      "max": 30,
+      "step": 1,
+      "label": "t:sections.age_verification_popup.settings.agepopup_cookie_set.label",
+      "info": "t:sections.age_verification_popup.settings.agepopup_cookie_set.info",
+      "default": 10
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,37 @@
+{%- for i in (1..5) -%}
+  {%- liquid
+    assign headingOption = 'title_' | append: i
+    assign linkOption = 'link_' | append: i
+    assign imageOption = 'image_' | append: i
+    assign descriptionOption = 'description_' | append: i
+    assign overlayOption = 'overlay_opacity_' | append: i
+  -%}
+  {%- if block.settings[headingOption] != blank
+    or block.settings[imageOption] != blank
+    or block.settings[descriptionOption] != blank
+  -%}
+    <div class="megamenu-item">
+      <{% if block.settings[linkOption] != blank  %}a href="{{ block.settings[linkOption] }}"{% else %}div{% endif%} class="megamenu-promotion-box">
+        {%- if block.settings[imageOption] != blank -%}
+          {% assign image = block.settings[imageOption] %}
+          <div class="megamenu-promotion-img">
+            <div class="media-image" style="--mediaRatio:120%">
+              {% render 'image', image: image %}
+            </div>
+          </div>
+        {%- endif -%}
+        {%- if block.settings[headingOption] != blank or block.settings[descriptionOption] != blank -%}
+            <div class="megamenu-promotion-text align-center">
+                {% if block.settings[headingOption] != blank %}
+                <strong class="textLarge font-heading">{{ block.settings[headingOption] }}</strong>
+                {% endif %}
+                {% if  block.settings[descriptionOption] != blank  %}
+                    <p class="textSmall">{{ block.settings[descriptionOption] }}</p>
+                {% endif %}
+            </div>
+        {%- endif -%}
+        </{% if block.settings[linkOption] != blank  %}a{% else %}div{% endif%}>
+      </div>
+  {%- endif -%}
+{%- endfor -%}
+

@@ -1,0 +1,525 @@
+{% doc %}
+  @prompt
+    产品详情页 生成一个自定义tabs  tabs的标题和内容都可以自定义  内容可以使用自定义liquid代码片段
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-custom-tabs-{{ ai_gen_id }} {
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding:0 20px;
+    display: block;
+  }
+
+  .ai-custom-tabs__nav-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.tab_gap }}px;
+    border-bottom: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    margin-bottom: {{ block.settings.content_spacing }}px;
+    flex-wrap: wrap;
+  }
+
+  .ai-custom-tabs__button-{{ ai_gen_id }} {
+    padding: {{ block.settings.tab_padding_vertical }}px {{ block.settings.tab_padding_horizontal }}px;
+    background: {{ block.settings.tab_bg_color }};
+    color: {{ block.settings.tab_text_color }};
+    border: none;
+    cursor: pointer;
+    font-size: {{ block.settings.tab_font_size }}px;
+    font-weight: {{ block.settings.tab_font_weight }};
+    transition: all 0.3s ease;
+    border-bottom: {{ block.settings.border_width }}px solid transparent;
+    margin-bottom: -{{ block.settings.border_width }}px;
+    border-radius: {{ block.settings.tab_border_radius }}px {{ block.settings.tab_border_radius }}px 0 0;
+  }
+
+  .ai-custom-tabs__button-{{ ai_gen_id }}:hover {
+    background: {{ block.settings.tab_hover_bg_color }};
+    color: {{ block.settings.tab_hover_text_color }};
+  }
+
+  .ai-custom-tabs__button-{{ ai_gen_id }}.active {
+    background: {{ block.settings.tab_active_bg_color }};
+    color:  {{ block.settings.tab_active_text_color }};
+    border-bottom-color: {{ block.settings.tab_active_border_color }};
+  }
+
+  .ai-custom-tabs__content-{{ ai_gen_id }} {
+    display: none;
+    padding: {{ block.settings.content_padding }}px;
+    background: {{ block.settings.content_bg_color }};
+    color: {{ block.settings.content_text_color }};
+    border-radius: 0 {{ block.settings.content_border_radius }}px {{ block.settings.content_border_radius }}px {{ block.settings.content_border_radius }}px;
+    line-height: 1.6;
+  }
+
+  .ai-custom-tabs__content-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-custom-tabs__content-{{ ai_gen_id }} p {
+    margin: 0 0 1em 0;
+  }
+
+  .ai-custom-tabs__content-{{ ai_gen_id }} p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-custom-tabs__nav-{{ ai_gen_id }} {
+      gap: {{ block.settings.tab_gap | times: 0.5 }}px;
+    }
+
+    .ai-custom-tabs__button-{{ ai_gen_id }} {
+      font-size: {{ block.settings.tab_font_size | times: 0.9 }}px;
+      padding: {{ block.settings.tab_padding_vertical | times: 0.8 }}px {{ block.settings.tab_padding_horizontal | times: 0.8 }}px;
+    }
+
+    .ai-custom-tabs__content-{{ ai_gen_id }} {
+      padding: {{ block.settings.content_padding | times: 0.7 }}px;
+    }
+  }
+{% endstyle %}
+
+<custom-tabs-{{ ai_gen_id }} class="ai-custom-tabs-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-custom-tabs__nav-{{ ai_gen_id }}">
+    {% for i in (1..5) %}
+      {% liquid
+        assign tab_enabled_key = 'tab_' | append: i | append: '_enabled'
+        assign tab_title_key = 'tab_' | append: i | append: '_title'
+        assign tab_enabled = block.settings[tab_enabled_key]
+        assign tab_title = block.settings[tab_title_key]
+      %}
+      
+      {% if tab_enabled and tab_title != blank %}
+        <button
+          class="ai-custom-tabs__button-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}"
+          data-tab="tab-{{ i }}"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+          role="tab"
+        >
+          {{ tab_title }}
+        </button>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="ai-custom-tabs__panels-{{ ai_gen_id }}">
+    {% for i in (1..5) %}
+      {% liquid
+        assign tab_enabled_key = 'tab_' | append: i | append: '_enabled'
+        assign tab_content_key = 'tab_' | append: i | append: '_content'
+        assign tab_liquid_key = 'tab_' | append: i | append: '_liquid'
+        assign tab_enabled = block.settings[tab_enabled_key]
+        assign tab_content = block.settings[tab_content_key]
+        assign tab_liquid = block.settings[tab_liquid_key]
+      %}
+      
+      {% if tab_enabled %}
+        <div
+          class="ai-custom-tabs__content-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}"
+          data-tab-content="tab-{{ i }}"
+          role="tabpanel"
+        >
+          {% if tab_liquid != blank %}
+            {{ tab_liquid }}
+          {% elsif tab_content != blank %}
+            {{ tab_content }}
+          {% else %}
+            <p style="color: #999; font-style: italic;">请在设置中添加此标签页的内容</p>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</custom-tabs-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class CustomTabs{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.buttons = this.querySelectorAll('.ai-custom-tabs__button-{{ ai_gen_id }}');
+        this.contents = this.querySelectorAll('.ai-custom-tabs__content-{{ ai_gen_id }}');
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.buttons.forEach((button) => {
+          button.addEventListener('click', () => {
+            const targetTab = button.getAttribute('data-tab');
+            this.switchTab(targetTab);
+          });
+        });
+      }
+
+      switchTab(targetTab) {
+        this.buttons.forEach((btn) => {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+        });
+
+        this.contents.forEach((content) => {
+          content.classList.remove('active');
+        });
+
+        const activeButton = this.querySelector(`[data-tab="${targetTab}"]`);
+        const activeContent = this.querySelector(`[data-tab-content="${targetTab}"]`);
+
+        if (activeButton && activeContent) {
+          activeButton.classList.add('active');
+          activeButton.setAttribute('aria-selected', 'true');
+          activeContent.classList.add('active');
+        }
+      }
+    }
+
+    customElements.define('custom-tabs-{{ ai_gen_id }}', CustomTabs{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "自定义标签页",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "标签页 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_1_enabled",
+      "label": "启用标签页 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_1_title",
+      "label": "标题",
+      "default": "产品详情"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_content",
+      "label": "内容"
+    },
+    {
+      "type": "liquid",
+      "id": "tab_1_liquid",
+      "label": "自定义 Liquid 代码"
+    },
+    {
+      "type": "header",
+      "content": "标签页 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_2_enabled",
+      "label": "启用标签页 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_2_title",
+      "label": "标题",
+      "default": "规格参数"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_content",
+      "label": "内容"
+    },
+    {
+      "type": "liquid",
+      "id": "tab_2_liquid",
+      "label": "自定义 Liquid 代码"
+    },
+    {
+      "type": "header",
+      "content": "标签页 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_3_enabled",
+      "label": "启用标签页 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_3_title",
+      "label": "标题",
+      "default": "配送信息"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_content",
+      "label": "内容"
+    },
+    {
+      "type": "liquid",
+      "id": "tab_3_liquid",
+      "label": "自定义 Liquid 代码"
+    },
+    {
+      "type": "header",
+      "content": "标签页 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_4_enabled",
+      "label": "启用标签页 4",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "tab_4_title",
+      "label": "标题"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_4_content",
+      "label": "内容"
+    },
+    {
+      "type": "liquid",
+      "id": "tab_4_liquid",
+      "label": "自定义 Liquid 代码"
+    },
+    {
+      "type": "header",
+      "content": "标签页 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_5_enabled",
+      "label": "启用标签页 5",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "tab_5_title",
+      "label": "标题"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_5_content",
+      "label": "内容"
+    },
+    {
+      "type": "liquid",
+      "id": "tab_5_liquid",
+      "label": "自定义 Liquid 代码"
+    },
+    {
+      "type": "header",
+      "content": "布局"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "桌面宽度",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "tab_gap",
+      "label": "标签间距",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "content_spacing",
+      "label": "内容间距",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "标签样式"
+    },
+    {
+      "type": "range",
+      "id": "tab_font_size",
+      "label": "字体大小",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "tab_font_weight",
+      "label": "字体粗细",
+      "options": [
+        {
+          "value": "400",
+          "label": "正常"
+        },
+        {
+          "value": "500",
+          "label": "中等"
+        },
+        {
+          "value": "600",
+          "label": "半粗"
+        },
+        {
+          "value": "700",
+          "label": "粗体"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "tab_padding_vertical",
+      "label": "垂直内边距",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "tab_padding_horizontal",
+      "label": "水平内边距",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "tab_border_radius",
+      "label": "圆角",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "color",
+      "id": "tab_bg_color",
+      "label": "背景色",
+      "default": "#f3f3f3"
+    },
+    {
+      "type": "color",
+      "id": "tab_text_color",
+      "label": "文字颜色",
+      "default": "#494949"
+    },
+    {
+      "type": "color",
+      "id": "tab_hover_bg_color",
+      "label": "悬停背景色",
+      "default": "#e9e9e9"
+    },
+    {
+      "type": "color",
+      "id": "tab_hover_text_color",
+      "label": "悬停文字颜色",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_bg_color",
+      "label": "激活背景色",
+      "default": "#EB5C20"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_text_color",
+      "label": "激活文字颜色",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_border_color",
+      "label": "激活边框颜色",
+      "default": "#EB5C20"
+    },
+    {
+      "type": "header",
+      "content": "内容样式"
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "内边距",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "content_border_radius",
+      "label": "圆角",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "color",
+      "id": "content_bg_color",
+      "label": "背景色",
+      "default": "#EB5C20"
+    },
+    {
+      "type": "color",
+      "id": "content_text_color",
+      "label": "文字颜色",
+      "default": "#494949"
+    },
+    {
+      "type": "header",
+      "content": "边框"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "边框宽度",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "边框颜色",
+      "default": "#d6d6d6"
+    }
+  ],
+  "presets": [
+    {
+      "name": "自定义标签页"
+    }
+  ]
+}
+{% endschema %}

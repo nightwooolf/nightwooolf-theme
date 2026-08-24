@@ -1,0 +1,136 @@
+{%- liquid
+  assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
+  assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
+  assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+%}
+
+<style>
+    {{ settings.type_body_font | font_face: font_display: 'swap' }}
+    {{ body_font_bold | font_face: font_display: 'swap' }}
+    {{ body_font_italic | font_face: font_display: 'swap' }}
+    {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+    {{ settings.type_heading_font | font_face: font_display: 'swap' }}
+
+  :root {
+    --textFontFamily: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+    --textFontStyle: {{ settings.type_body_font.style }};
+    --textFontWeight: {{ settings.type_body_font.weight }};
+    --textFontStyle: {{ settings.type_body_font.weight | plus: 300 | at_most: 1000 }};
+
+    --textFontScale: {{ settings.type_body_scale | divided_by: 100.0 }};
+    --textLetterSpacing: {{settings.type_body_spacing }}px;
+    --bodyTextLineHeight: {{ settings.type_body_line_height }};
+
+    --headingFontFamily: {{ settings.type_heading_font.family }}, {{ settings.type_heading_font.fallback_families }};
+    --headingFontStyle: {{ settings.type_heading_font.style }};
+    --headingFontWeight: {{ settings.type_heading_font.weight }};
+    --headingLetterSpacing: {{settings.type_heading_spacing }}px;
+    --headingTextTransform: {{ settings.type_heading_font.weight | plus: 300 | at_most: 1000 }};
+
+    --headingFontScale: {{ settings.type_heading_scale | times: 1.0 | divided_by: settings.type_body_scale }};
+    --headingBaseLineHeight: {{ settings.type_heading_line_height }};
+
+    --colorSaleBadge: {{ settings.sale_badge_text }};
+    --bgSaleBadge: {{ settings.sale_badge_background }};
+    --colorSoldBadge:{{ settings.soldout_badge_text }};
+    --bgSoldBadge: {{ settings.soldout_badge_background }};
+    --colorCustomBadge: {{ settings.custom_badge_text }};
+    --bgCustomBadge: {{ settings.custom_badge_background }};
+    --dividerColor: {{ settings.divider }};
+
+   --imageBg: {{ settings.image_background_color }};
+   --shadowColor: {{ settings.shadow_color.red }},{{ settings.shadow_color.green }},{{ settings.shadow_color.blue }};
+   --shadowOpacity:{{ settings.shadow_opacity | divided_by:100.0 }};
+   --sideLayerBg: {{ settings.blur_background_color.red }},{{ settings.blur_background_color.green }},{{ settings.blur_background_color.blue }};
+   --colorPreorderBadge: {{ settings.preorder_badge_text }};
+   --bgPreorderBadge: {{ settings.preorder_badge_background }};
+   --successMsgText:  {{ settings.successMsg }};
+   --successMsgbg:  {{ settings.successMsgbg }};
+   --errorsMsgText:{{ settings.errorMsg }};
+   --errorMsgbg: {{ settings.errorMsgbg }};
+
+    --headerBgColor:  {{ settings.header_bg_color }};
+    --headerTransparentColor:  {{ settings.header_tsp_color }};
+    --headerTextColor: {{ settings.header_text_color }};
+    --headerTextHoverColor: {{ settings.header_hover_color }};
+
+      --header-icon-color: {{ settings.icon_color }};
+    --header-icon-bgcolor:{{ settings.icon_background }};
+     --header-icon-color-hover: {{ settings.icon_color_hover }};
+
+
+    --submenuBgColor: {{ settings.submenu_bg_color }};
+    --submenuTextColor: {{ settings.submenu_text_color }};
+    --submenuTextHoverColor:{{ settings.submenu_hover_color }};
+
+    --footerBgColor: {{ settings.footer_background_color }};
+    --footerHeadingColor: {{ settings.footer_heading_color }};
+    --footerTextColor: {{ settings.footer_text_color }};
+    --footerTextHoverColor: {{ settings.footer_hover_color }};
+    --footerBorderColor: {{ settings.footer_border }};
+    --footerLinkColor:{{ settings.footer_link }};
+
+
+    --textXXLarge: calc(var(--textFontScale) * 24px);
+    --textXLarge: calc(var(--textFontScale) * 20px);
+    --textLarge: calc(var(--textFontScale) * 18px);
+    --textMedium: calc(var(--textFontScale) * 16px);
+    --textBase: calc(var(--textFontScale) * 14px);
+    --textMSmall: calc(var(--textFontScale) * 13px);
+    --textSmall: calc(var(--textFontScale) * 12px);
+    --textXsmall: calc(var(--textFontScale) * 10px);
+    --dividerColor: {{ settings.divider }};
+    --h1Text: 45px;
+    --h2TextLarge: 38px;
+    --h2TextMedium: 32px;
+    --h2Text: 26px;
+    --h3Text: 22px;
+    --h4Text: 20px;
+    --h5Text: 18px;
+    --h6Text: 16px;
+
+    /* =========== New Variables ========== */
+    --inventoryTextinstock: #279A4B;
+    --inventoryTextlowstock: #e97f32;
+    --inventoryTextoutstock: #f25555;
+
+    --boxRadius: {{ settings.all_box_radius }}px;
+    --productRadius:{{ settings.all_product_grid_radius }}px;
+    --inputRadius: {{ settings.all_input_radius }}px;
+    --btnRadius: {{ settings.all_button_radius }}px;
+
+  }
+
+   {% for scheme in settings.color_schemes -%}
+    {% if forloop.index == 1 -%} :root,{%- endif %}
+     .{{ scheme.id }}-scheme{
+      --bodyColor: {{ scheme.settings.bg_color }};
+      --bodyForegroundColor: {{scheme.settings.alternate_bg_color}};
+      --bodyTextColor: {{ scheme.settings.text_color }};
+      --mainHeadingColor: {{ scheme.settings.heading_color }};
+
+      --btnBgColor: {{scheme.settings.btn_bg_color }};
+      --btnTextColor: {{scheme.settings.btn_text_color }};
+      --btnBorderColor: {{scheme.settings.btn_border_color }};
+      --btnBgHoverColor: {{ scheme.settings.btn_hover_color }};
+      --btnTextHoverColor: {{ scheme.settings.btn_hovertext_color }};
+      --btnBorderHoverColor: {{ scheme.settings.btn_hover_border_color }};
+
+      --borderColor: {{ scheme.settings.border_color }};
+      --colorLink: {{ scheme.settings.link_color }};
+      --bgColorForm: {{ scheme.settings.input_bg }};
+      --colorFormBorder:{{ scheme.settings.input_border }};
+      --colorFormInput:{{  scheme.settings.input_text }};
+     }
+
+  {% endfor %}
+
+   @media only screen and (max-width:767px) {
+     /* :root {
+      --boxRadius: {{ settings.mobile_box_radius }}px;
+      --productRadius:{{ settings.mobile_product_grid_radius }}px;
+      --inputRadius: {{ settings.mobile_input_radius }}px;
+      --btnRadius: {{ settings.mobile_button_radius }}px;
+     } */
+   }
+</style>

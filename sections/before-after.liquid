@@ -1,0 +1,412 @@
+<div class="{{ section.settings.color_scheme }}-scheme spacing-box">
+  <div class="{{ settings.layout_width }}">
+    <div class="grid-row">
+      <div class="grid-item-md-12">
+        {% if section.settings.heading != blank or section.settings.description != blank %}
+          <div class="heading-header align-{{ section.settings.content_alignment }} content-width-{{ section.settings.content_width }}">
+            {% if section.settings.heading != blank %}
+              <h2 class="{{ section.settings.heading_size }} {{ section.settings.heading_size_mobile }}">
+                {{ section.settings.heading }}
+              </h2>
+            {% endif %}
+            {% if section.settings.description != blank %}
+              <div class="{{ section.settings.description_size }}">
+                {{ section.settings.description | replace: '<p></p>', '<br>' }}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+        <div class="before-after-container">
+          <div class="before-after-card">
+            <div class="before-after-before-card beforeAfterHeight {{ section.settings.desktop_height }} {{ section.settings.mobile_height }}">
+              {%- if section.settings.before_image != blank -%}
+                {%- render 'image', image: section.settings.before_image, class: 'before-after-img-before' -%}
+              {%- else -%}
+                {{ 'hero-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif %}
+              {% if section.settings.before_text != blank %}
+                <div class="before-after-text before-after-left {{ section.settings.before_text_alignment }}">
+                  <span class="before-after-text-inner"> {{ section.settings.before_text }}</span>
+                </div>
+              {% endif %}
+            </div>
+            <div class="before-after-after-card {{ section.settings.desktop_height }} {{ section.settings.mobile_height }}">
+              {%- if section.settings.after_image != blank -%}
+                {%- render 'image', image: section.settings.after_image, class: 'before-after-img-after' -%}
+              {%- else -%}
+                {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif %}
+              {% if section.settings.after_text != blank %}
+                <div class="before-after-text before-after-right {{ section.settings.after_text_alignment }}">
+                  <span class="before-after-text-inner"> {{ section.settings.after_text }}</span>
+                </div>
+              {% endif %}
+            </div>
+            <div class="before-after-cursor">
+              <div class="before-after-cursor-point" data-before-after-pointer>
+                <svg width="12" height="18" viewBox="0 0 12 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0H2V18H0V0Z" fill="currentColor"/>
+                  <path d="M5 3H7V15H5V3Z" fill="currentColor"/>
+                  <path d="M10 0H12V18H10V0Z" fill="currentColor"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  #shopify-section-{{ section.id }} {
+    --topSpace:{{ section.settings.top_space_desktop }}px;
+    --bottomSpace:{{ section.settings.bottom_space_desktop }}px;
+     --dragPosition: {{ section.settings.drag_position }}%;
+    --image-clip-position:0px;
+  }
+    #shopify-section-{{ section.id }} .before-after-text-inner{
+    --bodyForegroundColor:{{ section.settings.before_after_background}};
+    --bodyTextColor:{{ section.settings.before_after_text }};
+    }
+  @media only screen and (max-width:767px) {
+    #shopify-section-{{ section.id }}.shopify-section{
+      --topSpace:{{ section.settings.top_space_mobile }}px;
+      --bottomSpace:{{ section.settings.bottom_space_mobile }}px;
+    }
+
+  }
+</style>
+
+{% schema %}
+{
+  "name": "t:sections.before_after.name",
+  "tag": "section",
+  "class": "section-before-after",
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:common.global.heading.label",
+      "default": "Before/After"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "default": "h2",
+      "label": "t:common.heading_size.desktop_label",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:common.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:common.heading_size.options.large.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:common.heading_size.options.medium.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:common.heading_size.options.small.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:common.heading_size.options.extra_small.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_size_mobile",
+      "default": "h3_mobile",
+      "label": "t:common.heading_size.mobile_label",
+      "options": [
+        {
+          "value": "h1_mobile",
+          "label": "t:common.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h2_mobile",
+          "label": "t:common.heading_size.options.large.label"
+        },
+        {
+          "value": "h3_mobile",
+          "label": "t:common.heading_size.options.medium.label"
+        },
+        {
+          "value": "h4_mobile",
+          "label": "t:common.heading_size.options.small.label"
+        },
+        {
+          "value": "h5_mobile",
+          "label": "t:common.heading_size.options.extra_small.label"
+        }
+      ]
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:common.global.description.label",
+      "default": "<p>Use this text to share information about your brand with your customers.</p>"
+    },
+    {
+      "type": "select",
+      "id": "description_size",
+      "default": "textMedium",
+      "label": "t:common.description_size.label",
+      "options": [
+        {
+          "value": "textBase",
+          "label": "t:common.description_size.options.small.label"
+        },
+        {
+          "value": "textMedium",
+          "label": "t:common.description_size.options.medium.label"
+        },
+        {
+          "value": "textLarge",
+          "label": "t:common.description_size.options.large.label"
+        }
+      ]
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_alignment",
+      "label": "t:common.global.alignment.label",
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "t:common.content_width.label",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:common.content_width.options.small.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:common.content_width.options.medium.label"
+        },
+        {
+          "value": "large",
+          "label": "t:common.content_width.options.Large.label"
+        }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.before.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "before_image",
+      "label": "t:common.global.image.label"
+    },
+    {
+      "type": "text",
+      "id": "before_text",
+      "label": "t:common.global.text.label",
+      "default": "Before"
+    },
+    {
+      "type": "select",
+      "id": "before_text_alignment",
+      "label": "t:common.text_alignment.label",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:common.text_alignment.options.top.label"
+        },
+        {
+          "value": "center",
+          "label": "t:common.text_alignment.options.center.label"
+        },
+        {
+          "value": "bottom",
+          "label": "t:common.text_alignment.options.bottom.label"
+        }
+      ],
+      "default": "bottom"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.after.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "after_image",
+      "label": "t:common.global.image.label"
+    },
+    {
+      "type": "text",
+      "id": "after_text",
+      "label": "t:common.global.text.label",
+      "default": "After"
+    },
+    {
+      "type": "select",
+      "id": "after_text_alignment",
+      "label": "t:common.text_alignment.label",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:common.text_alignment.options.top.label"
+        },
+        {
+          "value": "center",
+          "label": "t:common.text_alignment.options.center.label"
+        },
+        {
+          "value": "bottom",
+          "label": "t:common.text_alignment.options.bottom.label"
+        }
+      ],
+      "default": "bottom"
+    },
+    {
+      "type": "select",
+      "id": "desktop_height",
+      "label": "t:common.global.desktop_height.label",
+      "default": "desktop-height-large",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:common.global.auto.label"
+        },
+        {
+          "value": "desktop-height-small",
+          "label": "550px"
+        },
+        {
+          "value": "desktop-height-medium",
+          "label": "650px"
+        },
+        {
+          "value": "desktop-height-large",
+          "label": "750px"
+        },
+        {
+          "value": "desktop-height-full",
+          "label": "t:common.global.full.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_height",
+      "label": "t:common.global.mobile_height.label",
+      "default": "mobile-height-large",
+      "options": [
+        {
+          "value": "mobile-adapt-image",
+          "label": "t:common.global.auto.label"
+        },
+        {
+          "value": "mobile-height-small",
+          "label": "400px"
+        },
+        {
+          "value": "mobile-height-medium",
+          "label": "530px"
+        },
+        {
+          "value": "mobile-height-large",
+          "label": "600px"
+        },
+        {
+          "value": "mobile-height-full",
+          "label": "t:common.global.full.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.drag.content"
+    },
+    {
+      "type": "range",
+      "id": "drag_position",
+      "label": "t:common.global.position.label",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.colors.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "primary",
+      "label": "t:common.global.color_scheme.label"
+    },
+    {
+      "type": "color",
+      "id": "before_after_text",
+      "label": "t:sections.before_after.settings.before_after_text.label",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "before_after_background",
+      "label": "t:sections.before_after.settings.before_after_background.label",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.section_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 80,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 80,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.before_after.presets.name"
+    }
+  ]
+}
+{% endschema %}

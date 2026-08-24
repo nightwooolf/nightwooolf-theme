@@ -1,0 +1,365 @@
+{{ 'search.css' | asset_url | stylesheet_tag }}
+{{ 'nouislider.min.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'nouislider.min.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'filter.js' | asset_url }}" defer="defer"></script>
+{% paginate search.results by 24 %}
+  <div class="{{ section.settings.color_scheme }}-scheme">
+    <div class="search-inner-card">
+      <div class="{{ settings.layout_width }}">
+        <div class="grid-row">
+          <div class="grid-item-md-12">
+            <div class="heading-header align-center">
+              <h3>{{ 'templates.search.title' | t }}</h3>
+            </div>
+            <div class="search-wrapper">
+              <div class="search-box">
+                <form action="{{ routes.search_url }}" method="get" role="search" class="search">
+                  <input type="hidden" name="type" value="product">
+                  <label class="hidden" for="Search-In-Template_page">{{ 'general.search.search' | t }}</label>
+                  <input
+                    type="text"
+                    id="Search-In-Template_page"
+                    class="form-input-field large textLarge"
+                    name="q"
+                    value="{{ search.terms | escape }}"
+                    placeholder="{{ 'general.search.search' | t }}..."
+                  >
+                  <button type="submit" class="search-icon" aria-label="{{ 'general.search.search' | t }}">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M22 22L20 20" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </form>
+              </div>
+            </div>
+            {%- if search.performed -%}
+              <div class="search-tab-section align-center">
+                <ul class="no-bullet search-tab">
+                  <li class="{% if search.types contains 'product' %}active{% endif %}">
+                    <a
+                      class="tab-item"
+                      href="{{ '?type=product&options%5Bprefix%5D=last&q=' | append: search.terms | escape }}"
+                    >
+                      {{- 'templates.search.products' | t }}
+                    </a>
+                  </li>
+                  <li class="{% if search.types contains 'article' %}active{% endif %}">
+                    <a
+                      class="tab-item"
+                      href="{{ '?type=article&options%5Bprefix%5D=last&q=' | append: search.terms | escape }}"
+                    >
+                      {{- 'templates.search.articles' | t -}}
+                    </a>
+                  </li>
+                  <li class="{% if search.types contains 'page' %}active{% endif %}">
+                    <a
+                      class="tab-item"
+                      href="{{ '?type=page&options%5Bprefix%5D=last&q=' | append: search.terms | escape }}"
+                    >
+                      {{- 'templates.search.pages' | t -}}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="spacing-box">
+    {%- if search.performed -%}
+      <div class="search-result-wrapper">
+        {% if search.results_count == 0 %}
+          <div class="search-result not-found align-center ">
+            <span>
+              <svg width="79" height="84" viewBox="0 0 79 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M16.001 2.362L15.995 2.366C15.881 2.442 15.775 2.528 15.677 2.624L2.159 15.951C0.837 17.097 0 18.789 0 20.676V76.903C0 80.355 2.798 83.153 6.25 83.153H41.675C42.825 83.153 43.758 82.219 43.758 81.07C43.758 79.92 42.825 78.986 41.675 78.986H6.25C5.1 78.986 4.167 78.053 4.167 76.903V20.676C4.167 20.083 4.415 19.548 4.812 19.169C4.863 19.129 4.913 19.086 4.961 19.04C5.315 18.76 5.763 18.593 6.25 18.593H12.431C15.831 18.593 18.607 15.875 18.679 12.475C18.721 10.513 18.771 8.168 18.812 6.206C18.836 5.072 19.762 4.166 20.895 4.166H57.622C58.772 4.166 59.705 5.099 59.705 6.25C59.705 14.725 59.705 33.176 59.705 33.176C59.705 34.326 60.639 35.26 61.788 35.26C62.938 35.26 63.872 34.326 63.872 33.176V6.25C63.872 2.798 61.073 0 57.622 0C49.025 0 29.416 0 20.895 0C18.915 0 17.147 0.921 16.001 2.362ZM65.732 68.702L75.065 78.036C75.878 78.849 77.199 78.849 78.012 78.036C78.825 77.223 78.825 75.903 78.012 75.09L68.733 65.811C70.949 63.044 72.276 59.535 72.276 55.718C72.276 46.8 65.035 39.559 56.117 39.559C47.199 39.559 39.958 46.8 39.958 55.718C39.958 64.636 47.199 71.876 56.117 71.876C59.717 71.876 63.044 70.696 65.732 68.702ZM56.117 43.726C62.736 43.726 68.109 49.099 68.109 55.718C68.109 62.336 62.736 67.71 56.117 67.71C49.498 67.71 44.125 62.336 44.125 55.718C44.125 49.099 49.498 43.726 56.117 43.726ZM53.171 55.718L49.436 59.452C48.623 60.265 48.623 61.585 49.436 62.398C50.249 63.211 51.57 63.211 52.383 62.398L56.117 58.664L59.851 62.398C60.664 63.212 61.984 63.212 62.798 62.399C63.611 61.585 63.611 60.265 62.798 59.452L59.063 55.718L62.798 51.983C63.611 51.17 63.611 49.85 62.798 49.037C61.985 48.224 60.664 48.224 59.851 49.037L56.117 52.771L52.383 49.037C51.57 48.224 50.25 48.224 49.436 49.037C48.623 49.85 48.623 51.17 49.436 51.983L53.171 55.718ZM17.655 56.173H32.296C33.446 56.173 34.38 55.239 34.38 54.09C34.38 52.94 33.446 52.006 32.296 52.006H17.655C16.506 52.006 15.572 52.94 15.572 54.09C15.572 55.239 16.506 56.173 17.655 56.173ZM17.655 43.668H32.296C33.446 43.668 34.38 42.735 34.38 41.585C34.38 40.435 33.446 39.502 32.296 39.502H17.655C16.506 39.502 15.572 40.435 15.572 41.585C15.572 42.735 16.506 43.668 17.655 43.668ZM17.655 31.146H46.938C48.087 31.146 49.021 30.213 49.021 29.063C49.021 27.913 48.087 26.98 46.938 26.98H17.655C16.506 26.98 15.572 27.913 15.572 29.063C15.572 30.213 16.506 31.146 17.655 31.146ZM14.573 9.563L9.64 14.426H12.431C13.564 14.426 14.49 13.52 14.514 12.387L14.573 9.563Z" fill="#B3B3B3"/>
+              </svg>
+            </span>
+            <h3>
+              {{ 'templates.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+            </h3>
+            <p>{{ 'templates.search.no_results' | t }}</p>
+          </div>
+        {% endif %}
+        {%- if search.types contains 'product' -%}
+          <div class="search-products-wrapper {% if search.results_count == 0  %} hidden{% endif %}">
+            <div class="container">
+              {% render 'filter-and-sort', results: search, section: section %}
+              <div class="collection-grid">
+                {% if section.settings.enable_filtering and search.filters.size > 0 %}
+                  {% render 'filters', results: search, section: section %}
+                {% endif %}
+                {% capture activeFilterValue %}
+                {%- for filter in search.filters -%}
+                    {%- for value in filter.active_values -%}
+                      <filter-remove class="facet-tag">
+                        {{ value.label | escape }}
+                        <a class="filter-remove" href="{{ value.url_to_remove }}">
+                          <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 23.691 22.723">
+                            <g transform="translate(-126.154 -143.139)">
+                              <line x2="23" y2="22" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></line>
+                              <path d="M0,22,23,0" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></path>
+                            </g>
+                          </svg>
+                        </a>
+                      </filter-remove>
+                    {% endfor %}
+                      {% if filter.type == 'price_range' %}
+                        {%- if filter.min_value.value != null or filter.max_value.value != null -%}
+                          <filter-remove class="facet-tag">
+                            {%- if filter.min_value.value -%}
+                              {{ filter.min_value.value | money }}
+                            {%- else -%}
+                              {{ 0 | money }}
+                            {%- endif -%}
+                            -
+                            {%- if filter.max_value.value -%}
+                              {{ filter.max_value.value | money }}
+                            {%- else -%}
+                              {{ filter.range_max | money }}
+                            {%- endif -%}
+                            <a class="filter-remove" href="{{ filter.url_to_remove }}">
+                              <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 23.691 22.723">
+                                <g transform="translate(-126.154 -143.139)">
+                                  <line x2="23" y2="22" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></line>
+                                  <path d="M0,22,23,0" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></path>
+                                </g>
+                              </svg>
+                            </a>
+                          </filter-remove>
+                          {% endif %}
+                      {% endif %}
+                  {% endfor %}
+              {% endcapture %}
+                <div id="ProductGridContainer" class="product-list-wrapper column-spacing">
+                  <div class="facets-apply-list active-filter-desktop">
+                    {% if section.settings.enable_filtering
+                      and search.filters.size > 0
+                      and activeFilterValue != blank
+                    %}
+                      <span class="select-facet-title textBase">
+                        {{- 'sections.collection_template.selected_filter' | t -}}
+                      </span>
+                      {{ activeFilterValue }}
+                      <a
+                        href="{{ '?type=product&options%5Bprefix%5D=last&q=' | append: search.terms | escape }}"
+                        class="btn btn-xsmall fill-btn"
+                        ><span>{{ 'sections.collection_template.clear_all' }}</span></a
+                      >
+                    {% endif %}
+                  </div>
+                  <div class="collection-result" id="result-product-grid" data-id="{{ section.id }}">
+                    <div class="loading-overlay gradient"></div>
+
+                    <div class="grid-row">
+                      {%- for item in search.results -%}
+                        {%- case item.object_type -%}
+                          {%- when 'product' -%}
+                            {%- capture current -%}{% cycle section.id: 1, 2, 3, 4 %}{%- endcapture -%}
+                            {%- assign placeholder_image = 'product-apparel-' | append: current -%}
+                            {% assign productFormId = 'product-form-'
+                              | append: section.id
+                              | append: forloop.index
+                              | append: '-'
+                              | append: collection.handle
+                            %}
+                            <div class="grid-item-md-3">
+                              {% assign productFormId = 'product-form-'
+                                | append: section.id
+                                | append: forloop.index
+                                | append: '-'
+                                | append: collection.handle
+                              %}
+                              {% render 'product-grid',
+                                cardProduct: item,
+                                section: section,
+                                search: true,
+                                productFormId: productFormId,
+                                placeholder_image: placeholder_image,
+                                imageRatio: section.settings.grid_image_size
+                              %}
+                            </div>
+                        {% endcase %}
+                      {%- else -%}
+                        <div class="empty-wrapper">
+                          <h3 class="empty-text">{{ 'sections.collection_template.empty' }}</h3>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  {%- if paginate.pages > 1 -%}
+                    {% render 'pagination', paginate: paginate, anchor: '' %}
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% if search.types contains 'article' %}
+          <div class="search-article">
+            <div class="container">
+              <div class="grid-row gutter-0">
+                {%- for item in search.results -%}
+                  {%- case item.object_type -%}
+                    {%- when 'article' -%}
+                      {% assign placeholder_image_index = forloop.index0 | modulo: 3 | plus: 1 %}
+                      {% assign placeholder_image = 'blog-apparel-' | append: placeholder_image_index %}
+                      <div class="grid-item-md-4">
+                        {% render 'post-grid', article: item, section: section, placeholder_image: placeholder_image %}
+                      </div>
+                  {%- endcase -%}
+                {%- endfor -%}
+                {%- liquid
+                  if search.types contains 'article'
+                    if paginate.pages > 1
+                      render 'pagination', paginate: paginate, anchor: ''
+                    endif
+                  endif
+                -%}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% if search.types contains 'page' %}
+          <div class="page-wrapper">
+            <div class="container">
+              <ul class="no-bullet page-list rounded">
+                {%- for item in search.results limit: 50 -%}
+                  {%- case item.object_type -%}
+                    {%- when 'page' -%}
+                      <li>
+                        <a href="{{ item.url }}" class="page-view">
+                          <span class="textSmall">{{ 'templates.search.pages' | t }}</span>
+                          <p>{{ item.title }}</p>
+                        </a>
+                      </li>
+                  {%- endcase -%}
+                {%- endfor -%}
+              </ul>
+              {%- liquid
+                if search.types contains 'page'
+                  if paginate.pages > 1
+                    render 'pagination', paginate: paginate, anchor: ''
+                  endif
+                endif
+              -%}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+{%- endpaginate -%}
+<style>
+  #shopify-section-{{ section.id }} {
+     --topSpace:{{ section.settings.top_space_desktop }}px;
+     --bottomSpace:{{ section.settings.bottom_space_desktop }}px;
+   }
+
+   @media only screen and (max-width:767px) {
+     #shopify-section-{{ section.id }}.shopify-section{
+       --topSpace:{{ section.settings.top_space_mobile }}px;
+       --bottomSpace:{{ section.settings.bottom_space_mobile }}px;
+     }
+
+   }
+</style>
+{% schema %}
+{
+  "name": "t:sections.main_search.name",
+  "tag": "section",
+  "class": "section-search",
+  "settings": [
+    {
+      "type": "select",
+      "id": "grid_image_size",
+      "label": "t:common.image_size.label",
+      "default": "auto",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:common.image_size.options.auto.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:common.image_size.options.landscape.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:common.image_size.options.portrait.label"
+        },
+        {
+          "value": "square",
+          "label": "t:common.image_size.options.square.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "default": true,
+      "label": "t:sections.main_search.settings.enable_filtering.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "default": true,
+      "label": "t:sections.main_search.settings.enable_sorting.label"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.colors.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "primary",
+      "label": "t:common.global.color_scheme.label"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.section_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 80,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ]
+}
+{% endschema %}

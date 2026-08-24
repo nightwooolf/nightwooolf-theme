@@ -1,0 +1,41 @@
+{% render 'newsletter-popup', section: section %}
+{% schema %}
+{
+  "name": "t:sections.newsletter_popup.name",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "newsletter_enable",
+      "label": "t:sections.newsletter_popup.settings.newsletter_enable.label",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "newsletter_img",
+      "label": "t:common.global.image.label"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "t:common.global.heading.label",
+      "default": "Keep in touch"
+    },
+    {
+      "type": "richtext",
+      "id": "newsletter_content",
+      "label": "t:common.global.description.label",
+      "default": "<p>Sign up for newsletter<p>"
+    },
+    {
+      "type": "range",
+      "id": "popup_cookie_set",
+      "min": 1,
+      "max": 30,
+      "step": 1,
+      "label": "t:sections.newsletter_popup.settings.popup_cookie_set.label",
+      "info": "t:sections.newsletter_popup.settings.popup_cookie_set.info",
+      "default": 5
+    }
+  ]
+}
+{% endschema %}

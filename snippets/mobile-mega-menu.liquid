@@ -1,0 +1,79 @@
+<div class="mobile-mega-menu">
+  {%- for i in (1..5) -%}
+  {%- liquid
+    assign headingOption = 'title_' | append: i
+    assign linkOption = 'link_' | append: i
+    assign imageOption = 'image_' | append: i
+    assign descriptionOption = 'description_' | append: i
+    assign overlayOption = 'overlay_opacity_' | append: i
+  -%}
+  {%- if block.settings[headingOption] != blank
+    or block.settings[imageOption] != blank
+    or block.settings[descriptionOption] != blank
+  -%}
+    <div class="megamenu-item">
+      <{% if block.settings[linkOption] != blank %}a href="{{ block.settings[linkOption] }}"{% else %}div{% endif%} class="megamenu-promotion-box">
+        {%- if block.settings[imageOption] != blank -%}
+          {% assign image = block.settings[imageOption] %}
+          <div class="megamenu-promotion-img">
+            <div class="media-image" style="--mediaRatio:120%">
+              {% render 'image', image: image %}
+            </div>
+          </div>
+        {%- endif -%}
+        {%- if block.settings[headingOption] != blank or block.settings[descriptionOption] != blank -%}
+            <div class="megamenu-promotion-text align-center">
+                {% if block.settings[headingOption] != blank %}
+                <strong class="textLarge font-heading">{{ block.settings[headingOption] }}</strong>
+                {% endif %}
+                {% if  block.settings[descriptionOption] != blank  %}
+                    <p class="textSmall">{{ block.settings[descriptionOption] }}</p>
+                {% endif %}
+            </div>
+        {%- endif -%}
+        </{% if block.settings[linkOption] != blank  %}a{% else %}div{% endif%}>
+      </div>
+  {%- endif -%}
+{%- endfor -%}
+</div>
+ {% assign blockLabel = block.settings.title | handleize %}
+  {% if blockLabel == linkTitle %}
+    {% if block.settings.sale_icon != blank
+      or block.settings.sale_text != blank
+      or block.settings.btn_link != blank
+    %}
+    <div class="mobile-banner">
+      <div class="sale-banner" id="sale-banner-{{ block.id }}">
+        <div class="sale-banner-box">
+          {% if block.settings.sale_icon != blank %}
+            <div class="gift-icon">
+              <img
+                class="logo-img"
+                srcset="{{ block.settings.sale_icon | image_url: width: block.settings.icon_width }} 1x, {{ block.settings.sale_icon | image_url: width: image_2x_size }} 2x"
+                src="{{ block.settings.sale_icon | image_url: width: block.settings.icon_width }}"
+                loading="lazy"
+                width="{{ block.settings.icon_width }}"
+                height="{{ block.settings.icon_width | divided_by : block.settings.sale_icon.aspect_ratio | round }}"
+                alt="{{ block.settings.sale_icon.alt | default: shop.name | escape }}"
+              >
+            </div>
+          {% endif %}
+          <div class="sale-content-box">
+              {% if block.settings.sale_text != blank %}
+                <div>{{ block.settings.sale_text | replace: '<p></p>', '<br>' }}</div>
+              {% endif %}
+          {% if block.settings.btn_link != blank and block.settings.btn_text != blank %}
+              <a
+                href="{{ block.settings.btn_link }}"
+                class="btn btn-{{ block.settings.btn_size }} fill-btn"
+              >
+                <span>{{ block.settings.btn_text }}</span>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>        
+    </div>
+    {% endif %}
+{% endif %}
+

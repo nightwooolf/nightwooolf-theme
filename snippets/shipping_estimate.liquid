@@ -1,0 +1,66 @@
+<shipping-calculator id="getshipping" class="cart-tools-wrapper">
+  <a href="#" class="close-btn" aria-label="Close" data-close-details>
+    <svg
+      class="close-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 23.691 22.723"
+    >
+      <g transform="translate(-126.154 -143.139)">
+        <line x2="23" y2="22" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></line>
+        <path d="M0,22,23,0" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></path>
+      </g>
+    </svg>
+  </a>
+
+  <h6 class="cart-options-title font-body textMedium">{{ 'general.shipping.estimate_shipping' | t }}</h6>
+  <div class="form-row">
+    <div class="form-field">
+      <label for="shippingCountry">{{ 'general.shipping.country' | t }}</label>
+      <select
+        id="shippingCountry"
+        name="shipping_address[country]"
+        data-address-country-select
+        data-default="{{ shop.address.country }}"
+        autocomplete="country"
+        class="form-input-field select-box"
+        placeholder="Country"
+        tanbindex="0"
+      >
+        {{ country_option_tags }}
+      </select>
+    </div>
+    <div class="form-field " id="shipping-province">
+      <label for="shippingProvince">{{ 'general.shipping.province' | t }}</label>
+      <select
+        id="shippingProvince"
+        name="shipping_address[province]"
+        autocomplete="address-level1"
+        class="form-input-field select-box"
+        tanbindex="0"
+      ></select>
+    </div>
+    <div class="form-field">
+      <label for="shippingZip">{{ 'general.shipping.psotal_code' | t }}</label>
+      <input
+        type="text"
+        id="shippingZip"
+        name="shipping_address[zip]"
+        class="form-input-field"
+        placeholder="Pin Code"
+      >
+    </div>
+    <div class="form-field">
+      <button type="button" id="shippingEstimates" class="btn fill-btn btn-w100">
+        <span>{{ 'general.shipping.shipping_estimate' | t }}</span>
+      </button>
+    </div>
+  </div>
+  <div class="form-field">
+    <div class="field form__message errors hidden" id="shippingErrors">
+      <div class="errors"></div>
+    </div>
+    <div id="shippingResponse" class="success hidden"></div>
+  </div>
+</shipping-calculator>

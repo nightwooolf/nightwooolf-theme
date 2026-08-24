@@ -1,0 +1,149 @@
+{% render 'quick-view-model', product: product, section: section %}
+{% schema %}
+{
+  "name": "Quick view",
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "sku",
+      "name": "Sku",
+      "limit": 1
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "hide_shipping_content",
+          "label": "Hide shipping content",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "review_rating",
+      "name": "Review rating",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "To display ratings, add any product Review app."
+        }
+      ]
+    },
+    {
+      "type": "volume_pricing",
+      "name": "t:sections.main_product.blocks.volume_pricing.name",
+      "limit": 1
+    },
+    {
+      "type": "variant",
+      "name": "Variant picker",
+      "limit": 1
+    },
+    {
+      "type": "quantity",
+      "name": "Qunatity picker",
+      "limit": 1
+    },
+    {
+      "type": "button",
+      "name": "Buy buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "dynamic_checkout_btn",
+          "default": true,
+          "label": "Show dynamic checkout button"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_recipient_form",
+          "default": false,
+          "label": "Show recipient information form for gift cards",
+          "info": "Allows buyers to send gift cards on a scheduled date along with a personal message. [Learn more](https:\/\/help.shopify.com\/en\/manual\/online-store\/themes\/customizing-themes\/add-gift-card-recipient-fields)"
+        }
+      ]
+    },
+    {
+      "type": "share",
+      "name": "Social sharing",
+      "limit": 1
+    },
+    {
+      "type": "inventory",
+      "name": "Inventory",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "minimun_inventory",
+          "label": "Minimum inventory",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 10
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "review_rating"
+      },
+      {
+        "type": "title"
+      },
+      {
+        "type": "text"
+      },
+      {
+        "type": "sku"
+      },
+      {
+        "type": "inventory"
+      },
+      {
+        "type": "price"
+      },
+      {
+        "type": "variant"
+      },
+      {
+        "type": "volume_pricing"
+      },
+      {
+        "type": "quantity"
+      },
+      {
+        "type": "button",
+        "settings": {
+          "dynamic_checkout_btn": true
+        }
+      },
+      {
+        "type": "share"
+      }
+    ]
+  }
+}
+{% endschema %}

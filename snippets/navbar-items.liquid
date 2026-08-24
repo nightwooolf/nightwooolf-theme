@@ -1,0 +1,243 @@
+{% if section.settings.menu != blank %}
+  <nav class="nav-main-wrapper">
+    <ul class="no-bullet navbar-nav">
+      {%- for link in linklists[section.settings.menu].links -%}
+        {%- liquid
+          assign megamenutitle = false
+          assign megaMenuBlocks = section.blocks | where: 'type', 'mega_menu'
+          assign linkTitle = link.title | handleize
+          capture megaMenuData
+            for block in megaMenuBlocks
+              assign blockLabel = block.settings.title | handleize
+              if blockLabel == linkTitle
+                assign megamenutitle = true
+                render 'mega-menu', block: block
+              endif
+            endfor
+          endcapture
+        -%}
+        <li
+          class="site-nav-item {% if section.settings.menu_type == 'mega_menu' or megaMenuData != blank or megamenutitle == true %} site-nav-mega-menu{% else %} site-nav-dropdown{% if link.links.size > 0%}  menu-children{% endif %}{% endif %}"
+          data-title="{{- link.title }}"
+        >
+          <a
+            href="{{ link.url }}"
+            class="site-nav-link site-nav-dropdown-item font-{{ section.settings.menu_font }}"
+            aria-label="{{ link.title }}"
+          >
+            <span>
+              {{- link.title }}
+
+              {% if link.links.size > 0 or megaMenuData != blank %}
+                <span>
+                  <svg width="15" height="15" fill="currentColor" viewBox="0 0 448 512">
+                    <path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" class=""></path>
+                  </svg>
+                </span>
+              {% endif %}
+            </span>
+          </a>
+          {% if link.links.size > 0 or megaMenuData != blank %}
+            {% if section.settings.menu_type == 'mega_menu' or megaMenuData != blank %}
+              {% comment %} <div class="dropdown-menus-outer fullwidth-megamenus"> {% endcomment %}
+                <div class="submenu-dropdown">
+                  <div class="container">
+                    <div class="megamenus-main">
+                      {% comment %} <div class="megamenus-inner">
+                        {% for childlink in link.links %}
+                          <div class="megamenu-item">
+                            <a
+                              href="{{ childlink.url }}"
+                              title="{{- childlink.title }}"
+                              class="submenu-heading font-{{ section.settings.sub_menu_font }}"
+                              role="menuitem"
+                            >
+                              <span>
+                                {{- childlink.title -}}
+                              </span>
+                            </a>
+                            {% if childlink.links.size > 0 %}
+                              <ul class="no-bullet">
+                                {% for grandchild in childlink.links %}
+                                  <li class="" role="none">
+                                    <a
+                                      class="megamenu-link"
+                                      href="{{ grandchild.url }}"
+                                      title="{{ grandchild.title }}"
+                                      role="menuitem"
+                                    >
+                                      <span>
+                                        {{- grandchild.title -}}
+                                      </span>
+                                    </a>
+                                  </li>
+                                {% endfor %}
+                              </ul>
+                            {% endif %}
+                          </div>
+                        {% endfor %}
+
+                        {% liquid
+                          if megaMenuData != blank
+                            echo megaMenuData
+                          endif
+                        %}
+                      </div> {% endcomment %}
+                      <div class="megamenus-inner">
+                        {%- comment -%} 左侧：文字导航列表 {%- endcomment -%}
+                        {% for childlink in link.links %}
+                          <div class="megamenu-item">
+                            <a
+                              href="{{ childlink.url }}"
+                              title="{{ childlink.title }}"
+                              class="submenu-heading font-{{ section.settings.sub_menu_font }}"
+                              role="menuitem"
+                            >
+                              <span>{{- childlink.title -}}</span>
+                            </a>
+                          </div>
+                        {% endfor %}
+                      </div>
+
+                      {%- comment -%} 右侧：图片卡片网格（从 mega_menu block 读取图片） {%- endcomment -%}
+                      {% for block in megaMenuBlocks %}
+                        {% assign blockLabel = block.settings.title | handleize %}
+                        {% if blockLabel == linkTitle %}
+                          {% if block.settings.image_1 != blank or block.settings.image_2 != blank or block.settings.image_3 != blank %}
+                            <div class="megamenu-images-grid">
+                              {% if block.settings.image_1 != blank %}
+                                <a href="{{ block.settings.link_1 | default: '#' }}" class="megamenu-image-card">
+                                  <img
+                                    src="{{ block.settings.image_1 | image_url: width: 400 }}"
+                                    alt="{{ block.settings.label_1 | default: block.settings.image_1.alt }}"
+                                    loading="lazy"
+                                    width="400"
+                                    height="400"
+                                  >
+                                  {% if block.settings.label_1 != blank %}
+                                    <span class="card-label">{{ block.settings.label_1 }}</span>
+                                  {% endif %}
+                                </a>
+                              {% endif %}
+                              {% if block.settings.image_2 != blank %}
+                                <a href="{{ block.settings.link_2 | default: '#' }}" class="megamenu-image-card">
+                                  <img
+                                    src="{{ block.settings.image_2 | image_url: width: 400 }}"
+                                    alt="{{ block.settings.label_2 | default: block.settings.image_2.alt }}"
+                                    loading="lazy"
+                                    width="400"
+                                    height="400"
+                                  >
+                                  {% if block.settings.label_2 != blank %}
+                                    <span class="card-label">{{ block.settings.label_2 }}</span>
+                                  {% endif %}
+                                </a>
+                              {% endif %}
+                              {% if block.settings.image_3 != blank %}
+                                <a href="{{ block.settings.link_3 | default: '#' }}" class="megamenu-image-card">
+                                  <img
+                                    src="{{ block.settings.image_3 | image_url: width: 400 }}"
+                                    alt="{{ block.settings.label_3 | default: block.settings.image_3.alt }}"
+                                    loading="lazy"
+                                    width="400"
+                                    height="400"
+                                  >
+                                  {% if block.settings.label_3 != blank %}
+                                    <span class="card-label">{{ block.settings.label_3 }}</span>
+                                  {% endif %}
+                                </a>
+                              {% endif %}
+                            </div>
+                          {% endif %}
+                        {% endif %}
+                      {% endfor %}
+
+                      {% if megaMenuData != blank %}
+                        {% for block in megaMenuBlocks %}
+                          {% assign blockLabel = block.settings.title | handleize %}
+                          {% if blockLabel == linkTitle %}
+                            {% if block.settings.sale_icon != blank
+                              or block.settings.sale_text != blank
+                              or block.settings.btn_link != blank
+                            %}
+                              <div class="sale-banner" id="sale-banner-{{ block.id }}">
+                                <div class="sale-banner-box">
+                                  {% if block.settings.sale_icon != blank %}
+                                    <div class="gift-icon">
+                                      <img
+                                        class="logo-img"
+                                        srcset="{{ block.settings.sale_icon | image_url: width: block.settings.icon_width }} 1x, {{ block.settings.sale_icon | image_url: width:  block.settings.icon_width }} 2x"
+                                        src="{{ block.settings.sale_icon | image_url: width: block.settings.icon_width }}"
+                                        loading="lazy"
+                                        width="{{ block.settings.icon_width }}"
+                                        height="{{ block.settings.icon_width | divided_by : block.settings.sale_icon.aspect_ratio | round }}"
+                                        alt="{{ block.settings.sale_icon.alt | default: shop.name | escape }}"
+                                      >
+                                    </div>
+                                  {% endif %}
+                                  {% if block.settings.sale_text != blank %}
+                                    <div>{{ block.settings.sale_text | replace: '<p></p>', '<br>' }}</div>
+                                  {% endif %}
+                                </div>
+
+                                {% if block.settings.btn_link != blank and block.settings.btn_text != blank %}
+                                  <a
+                                    href="{{ block.settings.btn_link }}"
+                                    class="btn btn-{{ block.settings.btn_size }} fill-btn"
+                                  >
+                                    <span>{{ block.settings.btn_text }}</span>
+                                  </a>
+                                {% endif %}
+                              </div>
+                            {% endif %}
+                          {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              {% comment %} </div> {% endcomment %}
+            {% else %}
+              <ul class="no-bullet site-nav-submenu">
+                {% for childlink in link.links %}
+                  <li class="site-nav-submenu-item{% if childlink.links.size > 0%}  menu-children{% endif %}">
+                    <a
+                      class="site-nav-submenu-link font-{{ section.settings.sub_menu_font }}"
+                      href="{{ childlink.url }}"
+                    >
+                      <span class="site-nav-submenu-text">
+                        {{- childlink.title }}
+                        {% if childlink.links.size > 0 %}
+                          <span>
+                            <svg width="15" height="15" fill="currentColor" viewBox="0 0 448 512">
+                              <path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" class=""></path>
+                            </svg>
+                          </span>
+                        {% endif %}
+                      </span>
+                    </a>
+                    {% if childlink.links.size > 0 %}
+                      <ul class="no-bullet site-nav-submenu inner">
+                        {% for grandchild in childlink.links %}
+                          <li class="site-nav-submenu-item">
+                            <a
+                              class="site-nav-submenu-link font-{{ section.settings.sub_menu_font }}"
+                              href="{{ grandchild.url }}"
+                              title="{{ grandchild.title }}"
+                            >
+                              <span class="site-nav-submenu-text">{{- grandchild.title -}}</span>
+                            </a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}

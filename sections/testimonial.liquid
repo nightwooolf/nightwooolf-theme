@@ -1,0 +1,341 @@
+<div
+  class="{{ section.settings.color_scheme }}-scheme spacing-box"
+  {% if section.settings.background_image != blank %}
+    style=" background-image: url('{{ section.settings.background_image | image_url }}')"
+  {% endif -%}
+>
+  <div class="{{ settings.layout_width }}">
+    {% if section.settings.heading != blank %}
+      <div class="heading-header">
+        <h2 class="{{ section.settings.heading_size }} {{ section.settings.heading_size_mobile }} align-{{ section.settings.heading_alignment }}">
+          {{ section.settings.heading }}
+        </h2>
+      </div>
+    {% endif %}
+    <div class="testimonial-inner-box">
+      <div class="">
+        {%- if section.blocks.size > 0 -%}
+          {% if section.settings.column_count == 1 %}
+            {% assign gridValue = 12 %}
+          {% elsif section.settings.column_count == 2 %}
+            {% assign gridValue = 6 %}
+          {% elsif section.settings.column_count == 3 %}
+            {% assign gridValue = 4 %}
+          {% endif %}
+          <div class="align-self-flex-center {% if section.settings.image == blank %}align-{{ section.settings.content_alignment }}{% endif %}">
+            <div
+              class="grid-row testimonial-slider slider-wrapper "
+              data-flickity-slider
+              data-flickity='
+                {
+                "cellAlign": "left",
+                "wrapAround": true,
+                "contain": true,
+                "resize": true,
+                 "pageDots":false,
+                "autoPlay":true
+                }
+              '
+            >
+              {%- for block in section.blocks -%}
+                <div class="testimonial-slider-item grid-item-md-{{ gridValue }}">
+                  <div class="testi-content-wrapper">
+                    {% if block.settings.image != blank %}
+                      <div class="testimonial-image-wrapper">
+                        <div
+                          class="media-image"
+                          style="--mediaRatio:{{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 | plus: 1  }}%"
+                        >
+                          {%- render 'image', image: block.settings.image -%}
+                        </div>
+                      </div>
+                    {% endif %}
+                    {% if block.settings.heading != blank
+                      or block.settings.rating != blank
+                      or block.settings.message != blank
+                      or block.settings.author != blank
+                    %}
+                      <div class="testimonial-content-wrap">
+                        {% if block.settings.rating != blank %}
+                          <ul class="no-bullet ratings">
+                            {%- for i in (1..block.settings.rating) -%}
+                              <li>
+                                <svg width="35 " height="33 " viewBox="0 0 35 33 " fill="none ">
+                                                  <path fill-rule="evenodd " clip-rule="evenodd " d="M18.9856 0.966856L22.402 11.5442L33.5169 11.5168C34.9199 11.5168 35.4483 13.2569 34.2184 14.1498L25.3356 20.5727L28.7885 31.1318C29.2349 32.4801 27.6132 33.546
+                                  26.5473 32.635L17.6555 26.1483L8.67249 32.6988C7.45168 33.5825 6.10332 32.389 6.61351 30.8402L9.97529 20.5727L0.974105 14.0587C-0.17382 13.2296 0.500358 11.4257 1.89427 11.5168L12.9089 11.5442L16.3253 0.966856C16.7353 -0.326837
+                                  18.5756 -0.317726 18.9856 0.966856Z " fill="#1E1E1E "></path>
+                                </svg>
+                              </li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                        {% if block.settings.heading != blank %}
+                          <h5 class="h4 font-heading">{{ block.settings.heading }}</h5>
+                        {% endif %}
+                        {% if block.settings.message != blank %}
+                          <div class="testi-content-inner">
+                            <div class="font-body">{{ block.settings.message | replace: '<p><p>', '<br>' }}</div>
+                          </div>
+                        {% endif %}
+                        {% if block.settings.author != blank %}
+                          <p class="author" bold>{{ block.settings.author -}}</p>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  #shopify-section-{{ section.id }} {
+     --topSpace:{{ section.settings.top_space_desktop }}px;
+     --bottomSpace:{{ section.settings.bottom_space_desktop }}px;
+      --overlayBgColor:{{ section.settings.overlay_color }};
+      --overlayOpacity:{{ section.settings.overlay_opacity | divided_by:100.0 }};
+   }
+
+   @media only screen and (max-width:767px) {
+     #shopify-section-{{ section.id }}.shopify-section{
+       --topSpace:{{ section.settings.top_space_mobile }}px;
+       --bottomSpace:{{ section.settings.bottom_space_mobile }}px;
+     }
+
+   }
+</style>
+{% schema %}
+{
+  "name": "t:sections.testimonials.name",
+  "tag": "section",
+  "class": "section-testimonials",
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "t:common.global.background_image.label"
+    },
+    {
+      "type": "range",
+      "id": "column_count",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Columns count",
+      "default": 3
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "info": "It will be aplicable when image is blank.",
+      "default": "center"
+    },
+
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Testimonials",
+      "label": "t:common.global.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "default": "h2",
+      "label": "t:common.heading_size.desktop_label",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:common.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:common.heading_size.options.large.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:common.heading_size.options.medium.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:common.heading_size.options.small.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:common.heading_size.options.extra_small.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_size_mobile",
+      "default": "h3_mobile",
+      "label": "t:common.heading_size.mobile_label",
+      "options": [
+        {
+          "value": "h1_mobile",
+          "label": "t:common.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h2_mobile",
+          "label": "t:common.heading_size.options.large.label"
+        },
+        {
+          "value": "h3_mobile",
+          "label": "t:common.heading_size.options.medium.label"
+        },
+        {
+          "value": "h4_mobile",
+          "label": "t:common.heading_size.options.small.label"
+        },
+        {
+          "value": "h5_mobile",
+          "label": "t:common.heading_size.options.extra_small.label"
+        }
+      ]
+    },
+    {
+      "type": "text_alignment",
+      "id": "heading_alignment",
+      "label": "t:common.global.heading_alignment.label",
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.colors.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "primary",
+      "label": "t:common.global.color_scheme.label"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "t:common.global.overlay_background.label",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "t:common.global.overlay_opacity.label",
+      "min": 0,
+      "max": 100,
+      "default": 0,
+      "step": 10,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.section_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 80,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 80,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "t:sections.testimonials.blocks.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:common.global.image.label"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "t:sections.testimonials.blocks.settings.rating.label",
+          "default": 4,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "t:common.global.heading.label",
+          "default": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "message",
+          "default": "<p>Add client reviews & testimonials to showcase your store’s happy clients.</p>",
+          "label": "t:common.global.description.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.testimonials.blocks.settings.header.content"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "default": "Author name here",
+          "label": "t:sections.testimonials.blocks.settings.author.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.testimonials.presets.name",
+      "blocks": [
+        {
+          "type": "quote"
+        },
+        {
+          "type": "quote"
+        },
+        {
+          "type": "quote"
+        },
+        {
+          "type": "quote"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

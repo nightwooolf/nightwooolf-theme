@@ -1,0 +1,48 @@
+{%- liquid
+  assign targetProduct = product.selected_or_first_available_variant
+  assign compare_at_price = targetProduct.compare_at_price
+  assign price = targetProduct.price | default: 1999
+  assign money_price = price | money
+
+  assign has_volume_pricing = false
+  assign price_min = nil
+  assign price_max = nil
+  if product.quantity_price_breaks_configured? and targetProduct.quantity_price_breaks.size > 0
+    assign has_volume_pricing = true
+    assign price_min = targetProduct.quantity_price_breaks.last.price
+    assign price_max = targetProduct.price
+  endif
+-%}
+
+<span class="hidden">{%- if targetProduct.compare_at_price > targetProduct.price -%}{{ 'products.product.price.sale_price' | t }}{%- else -%}{{ 'products.product.price.regular_price' | t }}{% endif %}</span>
+
+{% if has_volume_pricing %}
+  {% if compare_at_price != blank and compare_at_price > price_max %}
+    <span class="item-price-old textMedium" data-compare-price>{{ compare_at_price | money }}</span>
+  {% endif %}
+  <span class="item-price h4" data-product-actual-price>{{ price_min | money }} - {{ price_max | money }}</span>
+{% else %}
+  <span class="item-price h4" data-product-actual-price>{{ money_price }}</span>
+  <span class="hidden">{{ 'products.product.price.regular_price' | t }}</span>
+  <span class="item-price-old textMedium" data-compare-price>{{ compare_at_price | money }}</span>
+{% endif %}
+
+<span class="hidden">{{ 'products.product.sold_out' | t }}</span>
+<span data-product-soldout class="item-soldeout text-small hidden">
+  {%- unless targetProduct.available -%}{{ 'products.product.sold_out' | t }}{%- endunless -%}
+</span>
+{% if settings.show_save_amount and has_volume_pricing == false %}
+{% assign offText = settings.save_amount_text %}
+  <span class="item-discount-price {% if targetProduct.compare_at_price > targetProduct.price %}price-saving{% else %}hidden{% endif %}"  data-price-saving> 
+      {%- if targetProduct.compare_at_price > targetProduct.price -%}
+        {{- targetProduct.compare_at_price | minus: targetProduct.price | times: 100 | divided_by: targetProduct.compare_at_price | append: '% ' | append: offText -}}
+      {% endif %}
+  </span>
+{% endif %}
+<span class="hidden">{{ 'products.product.price.unit_price' | t }}</span>
+<span class="item-unit-price textSmall" {%- if targetProduct.unit_price_measurement -%}product-unite-price {% else %} hidden {% endif %}" data-unit-price>
+  {{ targetProduct.unit_price | money }} / {% if targetProduct.unit_price_measurement.reference_value != 1 %}{{ targetProduct.unit_price_measurement.reference_value }}{% endif %} {{ targetProduct.unit_price_measurement.reference_unit }}
+</span>
+{%- if has_volume_pricing -%}
+  <small class="volume-pricing-note textSmall" ref="volumePricingNote">{{ 'products.product.volume_pricing.note' | t }}</small>
+{%- endif -%}

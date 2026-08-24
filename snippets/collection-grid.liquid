@@ -1,0 +1,54 @@
+{%- liquid
+  assign collectionFetauredImage = collection.featured_image
+  if imageRatio == 'landscape'
+    assign collectionMainImageRatio = 75
+  elsif imageRatio == 'square'
+    assign collectionMainImageRatio = 100
+  elsif imageRatio == 'portrait'
+    assign collectionMainImageRatio = 125
+  else
+    if collectionFetauredImage != blank
+      assign collectionMainImageRatio = 1 | divided_by: collectionFetauredImage.aspect_ratio | times: 100
+    else
+      assign collectionMainImageRatio = 100
+    endif
+  endif
+  if section.settings.layout_style == 'rounded'
+    assign collectionMainImageRatio = 100
+  endif
+-%}
+<{% if collection %}a
+  href="{{ collection.url }}"
+{% else %}div{% endif %}
+  class="image-links-item"
+  {% if settings.animation_enable %}
+    data-aos="fade-up"
+    data-aos-easing="ease"
+    data-aos-offset="0"
+    data-aos-duration="1000"
+    data-aos-delay="0"
+  {% endif %}
+   
+ 
+>
+  <div class="image-links-item-img">
+    <div class="media-image" style="--mediaRatio:{{ collectionMainImageRatio }}%">
+      {% if collectionFetauredImage != blank %}
+        {% render 'image', image: collectionFetauredImage %}
+      {% else %}
+        {{ 'collection-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+    </div>
+  </div>
+  <div class="category-content {{ section.settings.title_postion }}">
+    <h6 class="category-list-title">
+      <span class="">
+        {% if collection != blank %}
+          {{- collection.title -}}
+        {% else %}
+          {{ 'onboarding.collection_title' | t }}
+        {% endif -%}
+      </span>
+    </h6>
+  </div>
+</{% if collection %}a{% else %}div{% endif %}>

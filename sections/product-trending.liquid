@@ -1,0 +1,300 @@
+<div class="{{ section.settings.color_scheme }}-scheme spacing-box">
+  <div class="{{ settings.layout_width }}">
+    {% if section.settings.heading != blank %}
+      <div class="heading-header align-{{ section.settings.heading_alignment }}">
+        <h2 class="{{ section.settings.heading_size }} {{ section.settings.heading_size_mobile }} ">
+          {% if section.settings.heading != blank %}{{ section.settings.heading }}{% endif %}
+        </h2>
+      </div>
+    {% endif %}
+
+    <div class="grid-row justify-content-center">
+      {% if section.settings.product_list.count > 0 %}
+        {% for trproduct in section.settings.product_list %}
+          <div class="grid-item-md-4">
+            <div
+              class="trending-products-item align-center"
+              aria-hidden="true"
+            >
+              {% if section.settings.title_animation %}
+                <loop-heading-outer
+                  data-scrolling-content
+                  data-scrolling-speed="{{ section.settings.scrolling_speed }}"
+                  data-scrolling-speed-mobile="{{ section.settings.scrolling_speed_mobile }}"
+                >
+                  <div class="loop-heading">
+                    {% for i in (1..20) %}
+                      <div class="loop-heading-item" data-scrolling-item>
+                        <h3>{{- trproduct.title | strip_html -}}</h3>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </loop-heading-outer>
+              {% endif %}
+              <a href="{{ trproduct.url  }}" class="product-link ">
+                <div class="trending-products-img ">
+                  {%- if trproduct.featured_media != blank -%}
+                    {%- render 'image', image: trproduct.featured_media.preview_image -%}
+                  {% else %}
+                    {{ 'product-appreal-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {% endif %}
+                </div>
+              </a>
+              <div class="trending-pro-cont">
+                <div class="product-title-wrapper">
+                  <a href="{{ trproduct.url  }}" class="product-link ">
+                    <p class="product-name textLarge">{{- trproduct.title | strip_html -}}</p>
+                  </a>
+                  <div class="price-wrapper  {% if trproduct.compare_at_price_min > trproduct.price_min %} discount-price {% endif %}">
+                    {% liquid
+                      assign current_variant = trproduct.selected_or_first_available_variant
+                    %}
+                    {%- assign price_min = trproduct.price_min | default: 1900 | money -%}
+                    {%- if trproduct.price_varies -%}
+                      <div class="item-price textBase price-varies">
+                        {{- 'products.product.price.from_price_html' | t: price: price_min -}}
+                      </div>
+                    {%- else -%}
+                      <span class="item-price textBase">{{ price_min }}</span>
+                    {%- endif -%}
+                    {%- if trproduct.compare_at_price_min > trproduct.price_min -%}
+                      <span class="item-price-old textSmall">{{ trproduct.compare_at_price_min | money }}</span>
+                    {%- endif -%}
+                    {%- if current_variant.unit_price_measurement -%}
+                      <span class="item-unit-price textSmall">
+                        {{ current_variant.unit_price | money }} /
+                        {% if current_variant.unit_price_measurement.reference_value != 1 -%}
+                          {{- current_variant.unit_price_measurement.reference_value -}}
+                        {%- endif %}
+                        {{ current_variant.unit_price_measurement.reference_unit }}
+                      </span>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        {% for i in (1..3) %}
+          <div class="grid-item-md-4">
+            <div
+              class="trending-products-item align-center"
+              aria-hidden="true"
+            >
+              {% if section.settings.title_animation %}
+                <loop-heading-outer
+                  data-scrolling-content
+                  data-scrolling-speed="{{ section.settings.scrolling_speed }}"
+                  data-scrolling-speed-mobile="{{ section.settings.scrolling_speed_mobile }}"
+                >
+                  <div class="loop-heading">
+                    {% for i in (1..20) %}
+                      <div class="loop-heading-item" data-scrolling-item>
+                        <h3>{{ 'onboarding.product_title' | t }}</h3>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </loop-heading-outer>
+              {% endif %}
+              <div class="trending-products-img ">
+                <div class="product-link ">
+                  {%- capture current -%}{% cycle section.id: 1, 2, 3 %}{%- endcapture -%}
+                  {%- assign placeholder_image = 'product-apparel-' | append: current -%}
+                  {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              </div>
+              <div class="trending-pro-cont">
+                <div class="product-title-wrapper">
+                  <p class="product-name textLarge">{{ 'onboarding.product_title' | t }}</p>
+                  <div class="price-wrapper">
+                    <div class="item-price textLarge">{{ 1990 | money }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+<style>
+  #shopify-section-{{ section.id }} {
+    --topSpace:{{ section.settings.top_space_desktop }}px;
+    --bottomSpace:{{ section.settings.bottom_space_desktop }}px;
+  }
+
+  @media only screen and (max-width:767px) {
+    #shopify-section-{{ section.id }}.shopify-section{
+      --topSpace:{{ section.settings.top_space_mobile }}px;
+      --bottomSpace:{{ section.settings.bottom_space_mobile }}px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "t:sections.trending_products.name",
+  "tag": "section",
+  "class": "section-trending-products",
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Trending products",
+      "label": "t:common.global.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "default": "h2",
+      "label": "t:common.heading_size.desktop_label",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:common.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:common.heading_size.options.large.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:common.heading_size.options.medium.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:common.heading_size.options.small.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:common.heading_size.options.extra_small.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_size_mobile",
+      "default": "h3_mobile",
+      "label": "t:common.heading_size.mobile_label",
+      "options": [
+        {
+          "value": "h1_mobile",
+          "label": "t:common.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h2_mobile",
+          "label": "t:common.heading_size.options.large.label"
+        },
+        {
+          "value": "h3_mobile",
+          "label": "t:common.heading_size.options.medium.label"
+        },
+        {
+          "value": "h4_mobile",
+          "label": "t:common.heading_size.options.small.label"
+        },
+        {
+          "value": "h5_mobile",
+          "label": "t:common.heading_size.options.extra_small.label"
+        }
+      ]
+    },
+    {
+      "type": "text_alignment",
+      "id": "heading_alignment",
+      "label": "t:common.global.heading_alignment.label",
+      "default": "left"
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "t:sections.trending_products.settings.product_list.label",
+      "limit": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "title_animation",
+      "label": "t:sections.trending_products.settings.title_animation.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "scrolling_speed",
+      "label": "t:sections.trending_products.settings.scrolling_speed.label",
+      "info": "t:sections.trending_products.settings.scrolling_speed.info",
+      "min": 5,
+      "max": 100,
+      "unit": "s",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "scrolling_speed_mobile",
+      "label": "Mobile speed",
+      "min": 5,
+      "max": 100,
+      "unit": "s",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.colors.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "secondary",
+      "label": "t:common.global.color_scheme.label"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.section_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 80,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 80,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.trending_products.presets.name"
+    }
+  ]
+}
+{% endschema %}

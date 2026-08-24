@@ -1,0 +1,87 @@
+{% liquid
+  assign preOrder = false
+  if settings.enable_preorder and product_variant.inventory_quantity <= 0 and product_variant.inventory_policy == 'continue'
+    assign preOrder = true
+  endif
+  assign gift_card_recipient = false
+  if block.settings.show_recipient_form and product.gift_card?
+    assign gift_card_recipient = true
+  endif
+%}
+<{% if product != blank %}product-form{% else %}div{% endif %}
+  class="product-form"
+  data-hide-errors="{{ gift_card_recipient }}"
+  data-section-id="{{ section.id }}"
+  {% if product != blank and product.selected_or_first_available_variant.quantity_rule.max != null %}
+    data-quantity-error="{{ 'sections.cart.cart_quantity_error_html' | t: quantity: product.selected_or_first_available_variant.quantity_rule.max }}"
+  {% endif %}
+>
+
+  <div class="product-form__error-message-wrapper" role="alert" hidden="">
+    <span class="product-form__error-message"></span>
+  </div>
+  {% if product != blank %}
+    {%- form 'product',
+      product,
+      id: product_form_id,
+      class: 'form main-product-form',
+      novalidate: 'novalidate',
+      data-type: 'add-to-cart-form'
+    -%}
+      <input
+        type="hidden"
+        class="product-variant-id"
+        name="id"
+        value="{{product.selected_or_first_available_variant.id  }}"
+        disabled
+      >
+
+      {% if gift_card_recipient %}
+        {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
+      {% endif %}
+
+      <div class="item-checkout-buttons checkout-btn {% if block.settings.dynamic_checkout_btn %}  dynamic-checkout-enabled {% endif %}">
+        <button
+          type="submit"
+          name="add"
+          class="btn btn-medium add-to-cart-btn"
+          {% unless product_variant.available %}
+            disabled
+          {% endunless %}
+          {% if settings.enable_cartdrawer %}
+            data-add-to-cart
+          {% endif %}
+          data-addtocart-main
+        >
+          <span data-addtocart-text>
+            {%- unless product_variant.available -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- else -%}
+              {%- if preOrder -%}
+                Preorder
+              {%- else -%}
+                {{ 'products.product.add_to_cart' | t }}
+              {%- endif -%}
+            {%- endunless -%}
+          </span>
+          <span class="btn-loader loading-overlay__spinner hidden">
+            <svg width="25" height="25" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="6" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+                <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"/>
+              </circle>
+            </svg>
+          </span>
+        </button>
+        {%- if block.settings.dynamic_checkout_btn -%}
+          {{ form | payment_button }}
+        {%- endif -%}
+      </div>
+    {% endform %}
+  {% else %}
+    <div class="item-checkout-buttons checkout-btn ">
+      <button class="btn btn-medium add-to-cart-btn" disabled>
+        <span>{{ 'products.product.sold_out' | t }}</span>
+      </button>
+    </div>
+  {% endif %}
+</{% if product != blank %}product-form{% else %}div{% endif %}>

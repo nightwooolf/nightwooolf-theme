@@ -1,0 +1,126 @@
+{%- liquid
+  assign variant = variant | default: product.selected_or_first_available_variant
+  assign use_currency = false
+  if settings.currency_code_enabled
+    assign use_currency = true
+  endif
+  assign current_quantity = quantity | default: variant.quantity_rule.min | default: 1
+  assign current_quantity = current_quantity | plus: 0
+  assign min_qty = variant.quantity_rule.min | default: 1
+  assign first_break = variant.quantity_price_breaks.first.minimum_quantity
+-%}
+
+{%- if product.quantity_price_breaks_configured? and variant.quantity_price_breaks.size > 0 -%}
+  {{ 'volume-pricing.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'volume-pricing.js' | asset_url }}" defer></script>
+  <volume-pricing
+    class="volume-pricing"
+    data-section-id="{{ section.id }}"
+  >
+    <span class="volume-pricing__title">{{ 'products.product.volume_pricing.title' | t }}</span>
+    <div class="volume-pricing__table">
+      <div
+        class="volume-pricing__row volume-pricing__row--even{% if current_quantity >= min_qty and current_quantity < first_break %} volume-pricing__row--active{% endif %}"
+        data-quantity="{{ min_qty }}"
+      >
+        <span class="volume-pricing__quantity">{{ min_qty }}+</span>
+        <span class="volume-pricing__price">
+          <span class="volume-pricing__checkmark" aria-hidden="true">✓</span>
+          {%- if use_currency -%}
+            {{- variant.price | money_with_currency | strip -}}
+          {%- else -%}
+            {{- variant.price | money | strip -}}
+          {%- endif -%}
+          /{{ 'products.product.volume_pricing.each_abbreviation' | t -}}
+        </span>
+      </div>
+      {%- for price_break in variant.quantity_price_breaks limit: 2 -%}
+        {%- liquid
+          assign row_index = forloop.index
+          assign next_tier = variant.quantity_price_breaks[forloop.index].minimum_quantity
+          assign is_active = false
+          if next_tier == null
+            if current_quantity >= price_break.minimum_quantity
+              assign is_active = true
+            endif
+          elsif current_quantity >= price_break.minimum_quantity and current_quantity < next_tier
+            assign is_active = true
+          endif
+          if row_index == 1
+            assign row_class = 'volume-pricing__row volume-pricing__row--odd'
+          else
+            assign row_class = 'volume-pricing__row volume-pricing__row--even'
+          endif
+          if is_active
+            assign row_class = row_class | append: ' volume-pricing__row--active'
+          endif
+        -%}
+        <div class="{{ row_class }}" data-quantity="{{ price_break.minimum_quantity }}">
+          <span class="volume-pricing__quantity">{{ price_break.minimum_quantity }}+</span>
+          <span class="volume-pricing__price">
+            <span class="volume-pricing__checkmark" aria-hidden="true">✓</span>
+            {%- if use_currency -%}
+              {{- price_break.price | money_with_currency | strip -}}
+            {%- else -%}
+              {{- price_break.price | money | strip -}}
+            {%- endif -%}
+            /{{ 'products.product.volume_pricing.each_abbreviation' | t -}}
+          </span>
+        </div>
+      {%- endfor -%}
+
+      {%- if variant.quantity_price_breaks.size > 2 -%}
+        <div class="volume-pricing__collapsible-wrapper">
+          {%- for price_break in variant.quantity_price_breaks offset: 2 -%}
+            {%- liquid
+              assign total_index = forloop.index | plus: 2
+              assign global_index = forloop.index | plus: 2
+              assign next_tier = variant.quantity_price_breaks[global_index].minimum_quantity
+              assign is_active = false
+              if next_tier == null
+                if current_quantity >= price_break.minimum_quantity
+                  assign is_active = true
+                endif
+              elsif current_quantity >= price_break.minimum_quantity and current_quantity < next_tier
+                assign is_active = true
+              endif
+              assign modulo_result = total_index | modulo: 2
+              if modulo_result == 1
+                assign row_class = 'volume-pricing__row volume-pricing__row--odd'
+              else
+                assign row_class = 'volume-pricing__row volume-pricing__row--even'
+              endif
+              if is_active
+                assign row_class = row_class | append: ' volume-pricing__row--active'
+              endif
+            -%}
+            <div class="{{ row_class }}" data-quantity="{{ price_break.minimum_quantity }}">
+              <span class="volume-pricing__quantity">{{ price_break.minimum_quantity }}+</span>
+              <span class="volume-pricing__price">
+                <span class="volume-pricing__checkmark" aria-hidden="true">✓</span>
+                {%- if use_currency -%}
+                  {{- price_break.price | money_with_currency | strip -}}
+                {%- else -%}
+                  {{- price_break.price | money | strip -}}
+                {%- endif -%}
+                /{{ 'products.product.volume_pricing.each_abbreviation' | t -}}
+              </span>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <button
+          type="button"
+          class="volume-pricing__toggle button-unstyled"
+          data-volume-pricing-toggle
+          aria-expanded="false"
+        >
+          <span class="volume-pricing__toggle-text">
+            <span class="volume-pricing__show-more">+ {{ 'products.facets.show_more' | t }}</span>
+            <span class="volume-pricing__show-less">- {{ 'products.facets.show_less' | t }}</span>
+          </span>
+        </button>
+      {%- endif -%}
+    </div>
+  </volume-pricing>
+{%- endif -%}

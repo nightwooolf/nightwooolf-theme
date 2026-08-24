@@ -1,0 +1,147 @@
+<div class="{{ section.settings.color_scheme }}-scheme spacing-box">
+  <div class="container">
+    <nav class="breadcrumb-nav">
+      <ul class="no-bullet breadcrumb-wrapper">
+        <li class="breadcrumb-item">
+          <a href="{{ routes.root_url }}" title="Home" class="link-breadcrumbs text-underline">Home</a>
+        </li>
+        {%- if template contains 'page' -%}
+          <li class="breadcrumb-item">
+            <span class="link-breadcrumbs text-breadcrumbs">{{ page.title | strip_html }}</span>
+          </li>
+        {%- elsif template contains 'product' -%}
+          {%- if collection.url -%}
+            <li class="breadcrumb-item">
+              <span class="link-breadcrumbs">
+                {{- collection.title | strip_html | truncatewords: 5 | link_to: collection.url }}
+              </span>
+            </li>
+          {%- endif -%}
+          <li class="breadcrumb-item">
+            <span class="link-breadcrumbs text-breadcrumbs">{{ product.title | strip_html | truncatewords: 5 }}</span>
+          </li>
+        {%- elsif template contains 'collection' and collection.handle -%}
+          {%- if current_tags -%}
+            <li class="breadcrumb-item">
+              <span class="link-breadcrumbs text-breadcrumbs">
+                {{- collection.title | strip_html | truncatewords: 5 | link_to: url }}
+                <span>{{ current_tags | join: ' + ' }}</span>
+              </span>
+            </li>
+          {%- else -%}
+            <li class="breadcrumb-item">
+              <span class="link-breadcrumbs text-breadcrumbs">
+                {{- collection.title | strip_html | truncatewords: 5 -}}
+              </span>
+            </li>
+          {%- endif -%}
+        {%- elsif template == 'blog' -%}
+          {%- if current_tags -%}
+            {{ blog.title | link_to: blog.url }}
+            <li class="breadcrumb-item">
+              <span class="link-breadcrumbs text-breadcrumbs">{{ current_tags | join: ' + ' }}</span>
+            </li>
+          {%- else -%}
+            <li class="breadcrumb-item">
+              <span class="link-breadcrumbs text-breadcrumbs">{{ blog.title | strip_html }}</span>
+            </li>
+          {%- endif -%}
+        {%- elsif template == 'article' -%}
+          <li class="breadcrumb-item">
+            <span class="link-breadcrumbs text-breadcrumbs">{{ blog.title | strip_html | link_to: blog.url }} </span>
+          </li>
+          <li class="breadcrumb-item">
+            <span class="link-breadcrumbs text-breadcrumbs"> {{ 'blogs.article.blog_detail' | t }}</span>
+          </li>
+        {%- else -%}
+          <li class="breadcrumb-item">
+            <span class="link-breadcrumbs text-breadcrumbs">{{ page_title }}</span>
+          </li>
+        {%- endif -%}
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<style>
+  #shopify-section-{{ section.id }} {
+     --topSpace:{{ section.settings.top_space_desktop }}px;
+     --bottomSpace:{{ section.settings.bottom_space_desktop }}px;
+   }
+
+   @media only screen and (max-width:767px) {
+     #shopify-section-{{ section.id }}.shopify-section{
+       --topSpace:{{ section.settings.top_space_mobile }}px;
+       --bottomSpace:{{ section.settings.bottom_space_mobile }}px;
+     }
+
+   }
+</style>
+{% schema %}
+{
+  "name": "t:sections.breadcrumb.name",
+  "tag": "section",
+  "class": "breadcrumb-section",
+  "disabled_on": {
+    "templates": ["index"],
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:common.header.colors.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "primary",
+      "label": "t:common.global.color_scheme.label"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.section_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.breadcrumb.presets.name"
+    }
+  ]
+}
+{% endschema %}

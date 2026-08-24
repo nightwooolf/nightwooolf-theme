@@ -1,0 +1,32 @@
+{
+  "type": "aside",
+  "name": "Overlay group",
+  "sections": {
+    "age-verification-popup": {
+      "type": "age-verification-popup",
+      "settings": {
+        "enable_age_verification": false,
+        "age_logo_img": "shopify:\/\/shop_images\/solid.svg",
+        "age_verification_heading": "Are You Over 18?",
+        "age_verification_content": "You must be over age to enter this site.",
+        "decline_text": "No, I'm not",
+        "approve_text": "Yes, I am",
+        "decline_heading": "Come back when you're older",
+        "decline_subheading": "Sorry, the content of this store can't be seen by a younger audience. Come back when you're older.",
+        "age_decline_button_text": "Oops, I entered incorrectly",
+        "agepopup_cookie_set": 10
+      }
+    },
+    "newsletter-popup": {
+      "type": "newsletter-popup",
+      "settings": {
+        "newsletter_enable": false,
+        "newsletter_img": "shopify:\/\/shop_images\/featured_pro1.jpg",
+        "newsletter_heading": "Sign up and get 20% off first order",
+        "newsletter_content": "<p>Our Collections Embrace eco-friendlys<\/p>",
+        "popup_cookie_set": 5
+      }
+    }
+  },
+  "order": ["age-verification-popup", "newsletter-popup"]
+}

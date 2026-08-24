@@ -1,0 +1,160 @@
+{{ 'address.css' | asset_url | stylesheet_tag }}
+<div class="{{ section.settings.color_scheme  }}-scheme spacing-box">
+  <div class="account-inner-box">
+    <div class="{{ settings.layout_width }}">
+      <div class="grid-row">
+        <div class="grid-item-md-12">
+          <div class="heading-header flex">
+            <div class="account-header">
+              <h3>{{- 'customer.account.title' | t -}}</h3>
+              <a href="{{routes.account_addresses_url  }}" class="text-underline">
+                {{- 'customer.account.view_addresses' | t -}}
+              </a>
+            </div>
+            <a href="{{ routes.account_logout_url }}" class="text-underline textXLarge ac-logout"
+              ><strong>{{ 'customer.log_out' | t }}</strong></a
+            >
+          </div>
+          {% paginate customer.orders by 25 %}
+            <div class="account-main-box">
+              {%- if customer.orders.size > 0 -%}
+                <h4 class="account-title">{{ 'customer.orders.title' | t }}</h4>
+                <div class="order-history-list">
+                  <div class="order-list">
+                    <div class="table-scroll">
+                      <table class="order-table">
+                        <thead align="left " class="cart-order-head">
+                          <tr>
+                            <th>{{ 'customer.orders.order_number' | t }}</th>
+                            <th>{{ 'customer.orders.date' | t }}</th>
+                            <th>{{ 'customer.orders.payment_status' | t }}</th>
+                            <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                            <th>{{ 'customer.orders.total' | t }}</th>
+                          </tr>
+                        </thead>
+                        <tbody class="cart-order-detail ">
+                          {%- for order in customer.orders -%}
+                            <tr>
+                              <td
+                                id="RowOrder-{{ forloop.index }}"
+                                data-label="{{ 'customer.orders.order_number' | t }}"
+                              >
+                                <a
+                                  class="text-underline"
+                                  href="{{ order.customer_url }}"
+                                  aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}"
+                                  bold
+                                >
+                                  {{ order.name -}}
+                                </a>
+                              </td>
+                              <td data-label="{{ 'customer.orders.date' | t }}">
+                                {{ order.created_at | time_tag: format: 'date' }}
+                              </td>
+                              <td data-label="{{ 'customer.orders.payment_status' | t }}">
+                                <span class="order-paid">{{- order.financial_status_label -}}</span>
+                              </td>
+                              <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">
+                                <span class="order-unfulfilled"> {{ order.fulfillment_status_label }}</span>
+                              </td>
+                              <td data-label="{{ 'customer.orders.total' | t }}">
+                                {{ order.total_price | money_with_currency }}
+                              </td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              {% else %}
+                <div class="order-not-found">
+                  <div class="data-not-found_box">
+                    <h3>{{ 'customer.orders.none' | t }}</h3>
+                  </div>
+                </div>
+              {% endif %}
+              {%- if paginate.pages > 1 -%}
+                {% render 'pagination', paginate: paginate, anchor: '' %}
+              {%- endif -%}
+            </div>
+          {% endpaginate %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #shopify-section-{{ section.id }} {
+     --topSpace:{{ section.settings.top_space_desktop }}px;
+     --bottomSpace:{{ section.settings.bottom_space_desktop }}px;
+   }
+
+   @media only screen and (max-width:767px) {
+     #shopify-section-{{ section.id }}.shopify-section{
+       --topSpace:{{ section.settings.top_space_mobile }}px;
+       --bottomSpace:{{ section.settings.bottom_space_mobile }}px;
+     }
+
+   }
+</style>
+{% schema %}
+{
+  "name": "t:sections.main_account.name",
+  "class": "section-account",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:common.header.colors.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "primary",
+      "label": "t:common.global.color_scheme.label"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.section_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ]
+}
+{% endschema %}

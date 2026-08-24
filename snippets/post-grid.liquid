@@ -1,0 +1,59 @@
+<div class="article-list-item">
+    <div class="article-list-img">
+        <{%- if article != blank -%}a href="{{- article.url -}}"  aria-label="{{ article.title }}"  {% else %}div{% endif %} class="product-link">
+          {% if article.image != blank %}
+            {% render 'image', image: article.image.src %}
+          {% else %}
+          {% if placeholder_image != blank %}
+            {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+          {% endif %}
+        </{%- if article != blank -%}a{% else %}div{% endif %}>
+         {% if section.settings.show_date %}
+              <span class="date">{{ article.published_at | date: '%B %d, %Y' }}</span>
+          {% endif %}
+          <div class="arrow-icon-wrapper">
+          <a class="arrow-icon-inner" {% if article != blank %}href="{{- article.url -}}"{% endif %} {% if article == blank %}aria-hidden="true"{% endif %} aria-label="{% if article != blank %}{{ article.title }}{% else %}{{ 'onboarding.article_title' | t }}
+            {% endif %}">
+                <span class="arrow-icon-item">
+                  <svg class="arrow-icon-button" xmlns="http://www.w3.org/2000/svg" width="18.414" height="18.385" viewBox="0 0 18.414 18.385">
+                    <g fill="none" stroke="currentColor" stroke-linecap="square" stroke-width="2">
+                      <path data-name="Path 1928" d="M16 9.192H1"></path>
+                      <path data-name="Path 1929" d="m9.22152055 1.4139461 7.7781746 7.7781746"></path>
+                      <path data-name="Path 1930" d="m9.2219461 16.97047945 7.7781746-7.7781746"></path>
+                    </g>
+                  </svg>
+                </span>
+            </a>
+          </div>
+    </div>
+    <div class="article-list-content align-left">
+        <div class="article-list-content-innr">
+           {%- if section.settings.show_author -%}
+            <span class="author">{{ article.author }}</span>
+          {%- endif -%}
+            <h5 class="article-title h5">
+              <{%- if article != blank -%}a href="{{- article.url -}}" aria-label="{{ article.title }}" {% else %}div{% endif %}> 
+              {% if article != blank %}
+                {{ article.title }}
+            {% else %}
+             {{ 'onboarding.article_title' | t }}
+            {% endif %}
+            </{%- if article != blank -%}a{% else %}div{% endif %}>
+         
+          </h5>
+           {%- if section.settings.show_excerpt  -%}
+            <p class="article-desc">
+              {% liquid
+                if article != blank
+                  echo article.excerpt_or_content | strip_html | truncatewords: 10
+                else
+                  echo 'blogs.onboarding.content' | t
+                endif
+              %}
+            </p>
+          {% endif %}
+          <a class="article-card__readmore" href="{{- article.url -}}" aria-label="{{ article.title }}">Read more</a>
+        </div>
+    </div>
+</div>

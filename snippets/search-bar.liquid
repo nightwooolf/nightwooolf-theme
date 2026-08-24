@@ -1,0 +1,102 @@
+{{ 'search.css' | asset_url | stylesheet_tag }}
+<div id="predictive-search" class="predictive-search-main" data-model-main-body>
+  <div class="{% if settings.enable_full_width %}{% else %}container{% endif %}">
+    <div class="search-modal predictive-search-card">
+      <predictive-search class="predictive-search-container" data-loading-text="Loading....">
+        <form action="{{ routes.search_url }}" method="get" role="search" class="search" data-search-form>
+          <div class="searchinput-box">
+            <label class="hidden" for="Search-In-Template">{{ 'general.search.search' | t }}</label>
+            <input
+              type="search"
+              class="form-input-field searchbarinput small"
+              id="Search-In-Template"
+              name="q"
+              value="{{ search.terms | escape }}"
+              placeholder="{{ 'general.search.search' | t }}..."
+              data-search-input
+              tabindex="0"
+            >
+            <input type="hidden" name="type" value="product">
+            <button type="reset" class="seachbar-btn hidden" data-search-clear>{{ 'general.search.clear' | t }}</button>
+            <button type="button" class="search-close" aria-label="Close" data-model-close>
+              <svg
+                class="close-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 23.691 22.723"
+              >
+                <g transform="translate(-126.154 -143.139)">
+                  <line x2="23" y2="22" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></line>
+                  <path d="M0,22,23,0" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></path>
+                </g>
+              </svg>
+            </button>
+          </div>
+        </form>
+        {% liquid
+          assign popularContentStatus = false
+          if settings.suggestions_list != blank and settings.enable_suggestions
+            assign popularContentStatus = true
+          elsif settings.enable_product_suggestions and settings.product_suggestions != blank
+            assign popularContentStatus = true
+          endif
+        %}
+        {% if popularContentStatus == true %}
+          <div class="popular-search-data-container" data-popular-search>
+            {%- if settings.enable_suggestions and settings.suggestions_list != blank -%}
+              <div class="popular-search-query-suggestions">
+                {%- if settings.suggestions_heading != blank -%}
+                  <div class="title-flex">
+                    <span class="textMedium font-heading">{{ settings.suggestions_heading }}</span>
+                  </div>
+                {% endif %}
+                {% if settings.suggestions_list != blank %}
+                  <div class="popular-suggestion-list">
+                    {% assign listQuery = settings.suggestions_list | split: ',' %}
+                    {% for query in listQuery %}
+                      {% assign query = query | strip %}
+                      {% if query != blank %}
+                        <a title="{{ query }}" href="{{ routes.search_url }}?q={{query}}" tabindex="0">
+                          {{ query -}}
+                        </a>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+            {%- if settings.enable_product_suggestions and settings.product_suggestions != blank -%}
+              <div class="popular-search-products-conatiner">
+                {%- if settings.product_suggestions_heading != blank -%}
+                  <div class="title-flex">
+                    <span class="textMedium font-heading">{{ settings.product_suggestions_heading }}</span>
+                  </div>
+                {%- endif -%}
+                <div class="popular-search-products column-spacing">
+                  <div class="grid-row mobile-swipe">
+                    {%- for item in settings.product_suggestions -%}
+                      {%- capture current -%}{% cycle section.id: 1, 2, 3, 4 %}{%- endcapture -%}
+                      {%- assign placeholder_image = 'product-apparel-' | append: current -%}
+                      {% assign productFormId = 'product-form-' | append: section.id | append: forloop.index %}
+                      <div class="grid-item-sm-6 grid-item-md-3 grid-item-l-2">
+                        {% assign productFormId = 'product-form-' | append: section.id | append: forloop.index %}
+                        {% render 'product-grid',
+                          cardProduct: item,
+                          productFormId: productFormId,
+                          placeholder_image: placeholder_image,
+                          search: true
+                        %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+        <div class="predictive-search-result-outer" data-predictive-search></div>
+      </predictive-search>
+    </div>
+  </div>
+</div>

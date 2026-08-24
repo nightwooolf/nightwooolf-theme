@@ -1,0 +1,107 @@
+{% if section.settings.enable_language_selector or section.settings.enable_currency_selector %}
+  <side-drawer
+    id="languange-currency-drawer"
+    class="language-panel side-drawer-panel"
+  >
+    <div class="blur-layer-bg" data-sideDrawer-close></div>
+    <moving-cursor class="moving-cursor">
+      <svg class="close-icon" width="20" height="20" viewBox="0 0 23.691 22.723">
+        <g transform="translate(-126.154 -143.139)">
+          <line x2="23" y2="22" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></line>
+          <path d="M0,22,23,0" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></path>
+        </g>
+      </svg>
+    </moving-cursor>
+    <div class="side-drawer-modal">
+      <div class="side-drawer-modal-inner">
+        <div class="side-drawer-modal-head">
+          {% if section.settings.enable_language_selector and section.settings.enable_currency_selector %}
+            {% assign headerContent = 'Choose Language & currency' %}
+          {% elsif section.settings.enable_language_selector %}
+            {% assign headerContent = 'Choose Language' %}
+          {% elsif section.settings.enable_currency_selector %}
+            {% assign headerContent = 'Choose Currency' %}
+          {% endif %}
+          <h6 class="side-drawer-modal-title">{{ headerContent }}</h6>
+          <a href="#" class="close-btn" aria-label="Close" data-sideDrawer-close>
+            <svg
+              class="close-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 23.691 22.723"
+            >
+              <g transform="translate(-126.154 -143.139)">
+                <line x2="23" y2="22" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></line>
+                <path d="M0,22,23,0" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></path>
+              </g>
+            </svg>
+          </a>
+        </div>
+        <div class="side-drawer-modal-body">
+          <div class="language-currency-wrapper">
+            {% if section.settings.enable_language_selector %}
+              <h6>Language</h6>
+
+              {% assign formID = 'localization_form_language_language-' | append: position %}
+              {% form 'localization', id: formID, class: 'shopify-localization-form' %}
+                <details class="disclosure" data-item-localization-main>
+                  <summary class="disclosure-item align-center" aria-expanded="false" data-item-localization-head>
+                    {{- localization.language.endonym_name | upcase }}
+                    <svg width="14" height="8" viewBox="0 0 14 8" fill="none">
+                      <path d="M12.6667 1L6.83333 6.83333L1 1" stroke="currentColor" stroke-width="1.25"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </summary>
+                  <div class="disclosure-footer" data-item-localization-content>
+                    <ul class="no-bullet disclosure-listing">
+                      {% for language in localization.available_languages %}
+                        <li class="custom-select-item {% if localization.language.currency.endonym_name == language.currency.iso_code %}active{% endif %}">
+                          <button
+                            type="submit"
+                            name="language_code"
+                            id="language-code-{{ forloop.index }}"
+                            value="{{ language.iso_code }}"
+                            class="custom-select-item-active"
+                          >
+                            {{ language.endonym_name | capitalize }}
+                          </button>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </details>
+              {% endform %}
+            {% endif %}
+            {% if section.settings.enable_currency_selector %}
+              {% assign formID = 'localization_form_language_currency-' | append: position %}
+              {% form 'localization', id: formID, class: 'shopify-localization-form' %}
+                <div class="disclosure-header">
+                  <h6>Currency</h6>
+                  <ul class="no-bullet disclosure-listing">
+                    {% for country in localization.available_countries %}
+                      <li class="custom-select-item {% if localization.country.currency.iso_code == country.currency.iso_code and localization.country.name==country.name %}active{% endif %}">
+                        <button
+                          type="submit"
+                          name="country_code"
+                          id="country-code-{{ forloop.index }}"
+                          value="{{ country.iso_code }}"
+                          class="custom-select-item-active"
+                        >
+                          <span>
+                            {{- country.name }} ({{ country.currency.iso_code -}}
+                            {{- country.currency.symbol }})
+                          </span>
+                        </button>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endform %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </side-drawer>
+{% endif %}

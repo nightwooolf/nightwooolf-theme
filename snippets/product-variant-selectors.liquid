@@ -1,0 +1,146 @@
+{% if product != blank %}
+{%- unless product.has_only_default_variant -%}
+<{% if settings.option_style=='swatch' %}variant-radios{% else %}variant-selects{% endif %}
+  class="product-variants-options-details" {{ block.shopify_attributes }} data-url="{{  product.url }}"
+  data-section="{{ section.id }}" {% if update_url==false %} data-update-url="false" {% endif %}>
+  {%- for option in product.options_with_values -%}
+  {%- liquid
+  assign colorOptionsname = settings.colorname | downcase
+  assign variantOption = 'option' | append: option.position
+  assign optionaname = option.name | downcase
+  -%}
+
+  <fieldset
+    class="product-form__controls {% if colorOptionsname contains optionaname %}color-swatches-box{% else %}product-variants-box{% endif %}">
+    <label class="variant-title textSmall">{{ option.name }}</label>
+    {% if settings.option_style == 'swatch' %}
+    <ul
+      class="no-bullet product-swatch-list {% if colorOptionsname contains optionaname %}rounded-enabled {% else %}product-variants-options small-variant{% endif %}">
+      {%- for value in option.values -%}
+      {%- assign option_value = value -%}
+      {%- assign variantdetails = null -%}
+      {%- if value.variant -%}
+        {%- assign variantdetails = value.variant -%}
+      {%- endif -%}
+      <li
+        class="{% if colorOptionsname contains optionaname %}color-swatch{% if settings.swatches_style == 'circle' %} swatch-circle{% endif %}{% endif %} product-swatch-item {% if value.available %}available{% else %}unavailable{% endif %} {% if option.selected_value == value.name %}active{% endif %}">
+        <label class="hidden" for="option-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">{{ value.name | escape }}</label>
+        <input class="swatch-option" id="option-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+          type="radio" name="{{ option.name }}" value="{{ value.name | escape }}" form="{{ product_form_id }}" {% if
+          option.selected_value==value.name %} checked {% endif %} title="{{ value.name | escape }}" {% unless value.available %}disabled{% endunless %}>
+        <span
+          class="swatch-variant-item {% if variantdetails and settings.show_variant_image %} swatch-variant-img{% endif %} {% if colorOptionsname contains optionaname %}swatch-variant-color{% else %} swatch-variant-option-name{% endif %}"
+          {% if colorOptionsname contains optionaname %} data-tooltip="{{ value.name }}" {% if variantdetails and
+          settings.show_variant_image %}
+          style="background-image:url({{ variantdetails.featured_media.preview_image | image_url: width: '22' }});" {%
+          else %} data-color="{{ value.name }}" style="background-color:{{ value.name }};" {% endif %} {% endif %}>{% unless colorOptionsname contains optionaname -%}{{- value.name -}}{%- endunless -%}
+        </span>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <div class="select-variant">
+      <select id="option-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" class="select_options select-box"
+        name="{{ option.name }}" form>
+        {% for value in option.values %}
+        <option {% if option.selected_value==value.name %} selected {% endif %} data-option value="{{ value.name }}" {% unless value.available %}disabled{% endunless %}>
+          {{- value.name -}}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    {% endif %}
+  </fieldset>
+  {% endfor %}
+
+  <script type="application/json" data-selected-variant>
+    {{ product.selected_or_first_available_variant | json }}
+  </script>
+</{% if settings.option_style=='swatch' %}variant-radios{% else %}variant-selects{% endif %}>
+<noscript>
+  <div class="product-variants-options-details">
+    <p class="variant-title">{{ 'products.product.product_variants' | t }}</p>
+    <div class="select-box">
+      <select class="form-control" name="id" form="{{ product_form_id }}">
+        {%- if product.selected_or_first_available_variant -%}
+        <option selected="selected" value="{{ product.selected_or_first_available_variant.id }}">
+          {{ product.selected_or_first_available_variant.title }}
+          {%- if product.selected_or_first_available_variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+          - {{ product.selected_or_first_available_variant.price | money | strip_html }}
+        </option>
+        {%- else -%}
+        <option disabled>{{ 'products.product.unavailable' | t }}</option>
+        {%- endif -%}
+      </select>
+    </div>
+  </div>
+</noscript>
+{% endunless %}
+{% else %}
+{%- for i in (1..2) -%}
+
+  {%- liquid
+  assign colorOptionsname = settings.colorname | downcase
+  assign variantOption = 'option' | append: option.position
+  assign optionIndex = forloop.index
+  assign optionaname =  'products.product.options.option' | append: i | append: '.label' | t
+     assign optiondwoncase = optionaname | downcase
+
+  -%}
+ 
+  <{% if settings.option_style=='swatch' %}variant-radios{% else %}variant-selects{% endif %}
+    class="product-variants-options-details" {{ block.shopify_attributes }}>
+
+    <fieldset
+      class="product-form__controls {% if colorOptionsname contains optiondwoncase %}color-swatches-box{% else %}product-variants-box{% endif %}">
+      <label class="variant-title textSmall">{{ optionaname }}</label>
+      {% if settings.option_style == 'swatch' %}
+      <ul
+        class="no-bullet product-swatch-list {% if colorOptionsname contains optiondwoncase %}rounded-enabled {% else %}product-variants-options small-variant{% endif %}">
+        {%- for i in (1..5) -%}
+          {%- assign optionValue = 'products.product.options.option'
+            | append: optionIndex
+            | append: '.value'
+            | append: i
+            | t
+          -%}
+            <li
+              class="{% if colorOptionsname contains optionaname %}color-swatch{% endif %} product-swatch-item  {% if option.selected_value == value %}active{% endif %}">
+              <label class="hidden" for="option-{{ optionValue }}-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">{{ optionValue }}</label>
+              <input class="swatch-option" id="option-{{ optionValue }}-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                type="radio" name="{{optionaname}}" value="{{ optionValue | escape }}" {%if forloop.first %}
+              checked{%endif %}  title="{{ optionValue | escape }}">
+              <span
+                class="swatch-variant-item {% if colorOptionsname contains optiondwoncase %}swatch-variant-color{% else %} swatch-variant-option-name{% endif %}"
+                {% if colorOptionsname contains optiondwoncase %} data-tooltip="{{ optionValue }}"  data-color="{{ optionValue }}" style="background-color:{{ optionValue }};" {% endif %}>
+                {% unless colorOptionsname contains optiondwoncase -%}
+                {{- optionValue -}}
+                {%- endunless -%}
+              </span>
+            </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <div class="select-variant">
+        <select id="option-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" class="select_options select-box"
+          name="{{ option.name }}" form>
+          {%- for i in (1..5) -%}
+            {%- assign optionValue = 'products.product.onboarding.options.option'
+              | append: optionIndex
+              | append: '.value'
+              | append: i
+              | t
+            -%}
+          <option {% if forloop.first %} selected {% endif %} data-option value="{{ optionValue }}">
+            {{ value }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      {% endif %}
+    </fieldset>
+  </{% if settings.option_style=='swatch' %}variant-radios{% else %}variant-selects{% endif %}>
+
+{% endfor %}
+
+{% endif %}

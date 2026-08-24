@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-register",
+      "settings": {
+        "color_scheme": "secondary",
+        "top_space_desktop": 100,
+        "bottom_space_desktop": 110,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 55
+      }
+    }
+  },
+  "order": ["main"]
+}

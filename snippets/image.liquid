@@ -1,0 +1,30 @@
+{% comment %}theme-check-disable ImgWidthAndHeight,ImgLazyLoading,DeprecateLazysizes,DeprecatedFilter{% endcomment %}
+{%- assign img_url = image | image_url: width: '100' | replace: 'width=100', 'width={width}' -%}
+<img
+  {% if id != blank %}
+    id="{{ id }}"
+  {% endif %}
+  class="no-js-hidden {{ class }} lazyload"
+  src="{{ img_url }}"
+  data-aspectratio="{{ image.aspect_ratio }}"
+  data-sizes="auto"
+  data-widths="{{ sizes }}"
+  width="{{ image.width }}"
+  height="{{ image.height }}"
+  data-original="{{ image | image_url }}"
+  alt="{{ image.alt | escape }}"
+  loading="lazy"
+  style="object-position:{{ image.presentation.focal_point }}"
+  data-flickity-lazyload="{{ img_url }}"
+>
+<div class="loader-image"></div>
+<noscript>
+  <img
+    class="{{ class }}"
+    src="{{ image | img_url: 'master' }}"
+    alt="{{ image.alt | default: shop.name | strip_html }}"
+    width="{{ image.width }}"
+    height="{{ image.height }}"
+  >
+</noscript>
+{% comment %}theme-check-enable ImgWidthAndHeight,ImgLazyLoading,DeprecateLazysizes,DeprecatedFilter{% endcomment %}

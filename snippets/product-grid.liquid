@@ -1,0 +1,203 @@
+{%- liquid
+  assign current_variant = cardProduct.selected_or_first_available_variant
+  assign second_image = ''
+  assign compare_at_price = current_variant.compare_at_price
+  assign price = current_variant.price | default: 1999
+  assign money_price = price | money
+  assign price_size = priceSize | default: 'large'
+  assign has_volume_pricing = false
+  if cardProduct.quantity_price_breaks_configured? and current_variant.quantity_price_breaks.size > 0
+   assign has_volume_pricing = true
+  endif
+  if imageRatio == 'landscape'
+    assign cardproductImageRatio = 75
+  elsif imageRatio == 'square'
+    assign cardproductImageRatio = 100
+  elsif imageRatio == 'portrait'
+    assign cardproductImageRatio = 125
+  else
+    if cardProduct.featured_media != blank
+      assign cardproductImageRatio = 1 | divided_by: cardProduct.featured_media.preview_image.aspect_ratio | times: 100
+    else
+      assign cardproductImageRatio = 100
+    endif
+  endif
+  if cardProduct.media.size > 1 
+    for media in cardProduct.media
+      unless media.preview_image.src == cardProduct.featured_media.preview_image.src
+        assign second_image = media.preview_image
+        break
+      endunless
+    endfor
+  endif
+-%}
+ 
+{% capture colorSwatchesProduct %}
+  
+{% if settings.show_swatches %}
+  {%- for option in cardProduct.options_with_values -%}
+      {%- liquid
+        assign colorOptions = settings.colorname | downcase
+        assign downOption = option.name | downcase
+      -%}
+      {% if colorOptions contains downOption %}
+          <ul class="no-bullet product-swatch-list small-variant rounded-enabled">
+            {%- for value in option.values limit: 5 -%}
+              {% liquid 
+                if forloop.first
+                endif
+                assign variant_option = 'option' | append: option.position 
+                assign color_variant = cardProduct.variants | where: variant_option, value | first
+                assign variantValue = cardProduct.variants | where: variant_option, value | compact: 'featured_media' | first
+                if cardProduct.url contains '?'
+                  assign product_Url =  cardProduct.url | split : '&variant=' | first | append:'&variant=' | append: color_variant.id
+                else
+                  assign product_Url =  cardProduct.url | append:'?variant=' | append: color_variant.id
+                endif
+              -%}
+              <li class="color-swatch {% if settings.swatches_style == 'circle' %} swatch-circle{% endif %} product-swatch-item" data-card-color-option data-product-url="{{ product_Url }}">
+             
+                <label class="hidden" for="product-{{ cardProduct.id }}_option-{{ section.id }}-{{ forloop.index }}-{{ block.id }}-{{ value | handle }}">{{ value | escape }}</label>
+                <input
+                  class="swatch-option"
+                  id="product-{{ cardProduct.id }}_option-{{ section.id }}-{{ forloop.index }}-{{ block.id }}-{{ value | handle }}"
+                  type="radio"
+                  name="option-{{ forloop.index }}"
+                  value="{{ value | escape }}"
+                  title="{{ value | escape }}"
+        
+                >
+                <span class="swatch-variant-item swatch-variant-color {% if settings.show_variant_image %} variant-img{% endif %}"
+                  {% if variantValue and settings.show_variant_image %}
+                    style="background-image:url({{ variantValue.featured_media.preview_image | image_url: width: 22 }});"
+                  {% else %}
+                    data-color="{{ value }}"
+                    style="background-color:{{ value }};"
+                  {% endif %}
+                ></span>
+                {% render 'color-media', variant: variantValue %}
+              </li>
+            {% endfor %}
+            {% if option.values.size > 5 %}
+              <li class="product-swatch-item product-value">
+                <a href="{{ cardProduct.url | within : collection }}" class="textSmall"
+                  >+{{ option.values.size | minus: 5 -}} more
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+
+    {% endif %}
+  {% endfor %}
+{% endif %}        
+{% endcapture %}
+ <product-card class="product-card"  data-product-grid>
+    <div class="product-card-inner align-{{ settings.product_conetnt_aligment }}"  {% if search != true and aosDelayAttr and settings.animation_enable %}data-aos="fade-up" data-aos-delay="{{ aosDelayAttr }}"{% endif %}>
+   <div class="product-media-card{% if settings.image_border %} border-enabled{% endif %}">
+        {% render 'badges', product:cardProduct %}
+          <div class="media-image" style="--mediaRatio:{{ cardproductImageRatio }}%">
+              <{% if cardProduct != blank %}a href="{{ cardProduct.url | within : collection }}" aria-label="{{ cardProduct.title }}"{% else %}div{%endif %} data-main-image tabindex="-1">
+                 {%- if cardProduct.featured_media != blank -%}
+                  {%- render 'image', image: cardProduct.featured_media.preview_image -%}
+                  {%- if second_image != blank and settings.hover_second_image == true -%}
+                    {%- render 'image', image: second_image, class: 'img-hovered' -%}
+                  {%- endif -%}
+              {% else %}
+                {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+              </{% if cardProduct != blank %}a{% else %}div{% endif %}>
+          </div>
+          <div class="view-product-box">
+           {% if  cardProduct != blank and  search != true and settings.quickview %}
+              <quick-view id="{{ current_variant.selected_or_first_available_variant.id |append : "now" | date: "%N" | modulo: 100 }}" class="quick-view-element" data-product-url="{{ cardProduct.url }}">    
+                    <a
+                      href="{{ cardProduct.url }}"
+                      class="icon quick-view-icon"
+                      data-quickview-action
+                      aria-label="Quick view"
+                    >
+                    <span class="quick-view-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M22 22L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                        
+                      <span>{{ 'products.product.quick_view' | t }}</span>
+                   </span>
+                    <span class="quick-view-loader hidden">
+                      <svg height="18" width="18" class="loader-icon"><circle r="7" cx="9" cy="9"></circle><circle stroke-dasharray="87.96459430051421 87.96459430051421" r="7" cx="9" cy="9"></circle></svg>
+                    </span>
+                </a>
+                </quick-view>
+             {% endif %}
+          </div>
+          </div>
+            <div class="product-header">
+              {% if search != true %}
+               {{ colorSwatchesProduct }}
+              {% endif %}
+                <div class="product-title-wrapper">
+                  {% if settings.product_vendor %}
+                  <p class="vendor">{{ cardProduct.vendor }}</p>
+                    {% endif %}
+                  <{% if  cardProduct != blank  %}a href="{{ cardProduct.url | within : collection }}"{% else %}div{% endif %} class="product-name textMedium" >
+                    {% if  cardProduct.title  %}
+                        {{- cardProduct.title | strip_html -}}
+                      {% else %}
+                         {{ 'onboarding.product_title' | t }}
+                      {% endif %}
+                </{% if  cardProduct.url != blank  %}a{% else %}div{% endif %}>
+                    <div class="price-wrapper">
+                      {%- assign price_min = cardProduct.price_min | default: 1900 | money -%}
+                        {%- if cardProduct.price_varies -%}
+                          <div class="item-price textBase price-varies">
+                            {{- 'products.product.price.from_price_html' | t: price: price_min -}}
+                          </div>
+                        {%- else -%}
+                            <span class="item-price textBase">{{ price_min }}</span>
+                    {%- endif -%}
+              {%- if cardProduct.compare_at_price_min > cardProduct.price_min -%}
+                <span class="item-price-old textSmall">{{ cardProduct.compare_at_price_min | money }}</span>
+              {%- endif -%}
+
+              {%- if current_variant.unit_price_measurement -%}
+                <span class="item-unit-price textSmall">
+                  {{ current_variant.unit_price | money }} /
+                  {% if current_variant.unit_price_measurement.reference_value != 1 -%}
+                    {{- current_variant.unit_price_measurement.reference_value -}}
+                  {%- endif %}
+                  {{ current_variant.unit_price_measurement.reference_unit }}
+                </span>
+              {%- endif -%}
+            </div>
+           
+          </div>
+      </div>
+           {%- if has_volume_pricing -%}
+        <small class="volume-pricing-note textSmall" ref="volumePricingNote">{{ 'products.product.volume_pricing.note' | t }}</small>
+      {%- endif -%}
+
+      {%- if cardProduct != blank -%}
+        <div class="product-card-action">
+          {%- if cardProduct.variants.size == 1 and cardProduct.selling_plan_groups.size == 0 -%}
+            <form method="post" action="/cart/add" class="quick-add-form">
+              <input type="hidden" name="id" value="{{ current_variant.id }}">
+              <input type="hidden" name="quantity" value="1">
+              <button type="submit" class="product-card-btn" {% unless current_variant.available %}disabled{% endunless %}>
+                {%- if current_variant.available -%}
+                  {{ 'products.product.add_to_cart' | t }}
+                {%- else -%}
+                  {{ 'products.product.sold_out' | t }}
+                {%- endif -%}
+              </button>
+            </form>
+          {%- else -%}
+            <a href="{{ cardProduct.url | within: collection }}" class="product-card-btn">
+              {{ 'products.product.choose_options' | t }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+ </div>
+</product-card>

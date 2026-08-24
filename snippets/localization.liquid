@@ -1,0 +1,68 @@
+{%- if section.settings.enable_currency_selector or section.settings.enable_language_selector -%}
+  {% if section.settings.enable_currency_selector %}
+    {% assign formID = 'localization_form_language_currency-' | append: position %}
+    {% form 'localization', id: formID, class: 'shopify-localization-form' %}
+      <details class="disclosure" data-item-localization-main>
+        <summary class="disclosure-item align-center" aria-expanded="false" data-item-localization-head>
+          {{- localization.country.name }} ({{ localization.country.currency.iso_code -}}
+          {{- localization.country.currency.symbol }})
+          <svg width="14" height="8" viewBox="0 0 14 8" fill="none">
+            <path d="M12.6667 1L6.83333 6.83333L1 1" stroke="currentColor" stroke-width="1.25"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </summary>
+        <div class="disclosure-header" data-item-localization-body>
+          <ul class="no-bullet disclosure-listing">
+            {% for country in localization.available_countries %}
+              <li class="custom-select-item">
+                <button
+                  type="submit"
+                  name="country_code"
+                  id="country-{{ section.id }}-{{ forloop.index }}"
+                  value="{{ country.iso_code }}"
+                  class="custom-select-item-active"
+                >
+                  <span>
+                    {{- country.name }} ({{ country.currency.iso_code -}}
+                    {{- country.currency.symbol }})
+                  </span>
+                </button>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </details>
+    {% endform %}
+  {% endif %}
+  {% if section.settings.enable_language_selector %}
+    {% assign formID = 'localization_form_language_language-' | append: position %}
+    {% form 'localization', id: formID, class: 'shopify-localization-form' %}
+      <details class="disclosure" data-item-localization-main>
+        <summary class="disclosure-item align-center" aria-expanded="false" data-item-localization-head>
+          {{- localization.language.endonym_name | upcase }}
+          <svg width="14" height="8" viewBox="0 0 14 8" fill="none">
+            <path d="M12.6667 1L6.83333 6.83333L1 1" stroke="currentColor" stroke-width="1.25"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </summary>
+        <div class="disclosure-footer" data-item-localization-content>
+          <ul class="no-bullet disclosure-listing">
+            {% for language in localization.available_languages %}
+              <li class="custom-select-item">
+                <button
+                  type="submit"
+                  name="language_code"
+                  id="language-{{ section.id }}-{{ forloop.index }}"
+                  value="{{ language.iso_code }}"
+                  class="custom-select-item-active"
+                >
+                  {{ language.endonym_name | capitalize }}
+                </button>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </details>
+    {% endform %}
+  {% endif %}
+{% endif %}

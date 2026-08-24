@@ -1,0 +1,253 @@
+<div class="recently-view-products  {{ section.settings.color_scheme }}-scheme spacing-box">
+  <div class="{{ settings.layout_width }}">
+    <recently-view-products
+      data-url="{{ routes.search_url }}.json?section_id={{ section.id }}&type=product&q="
+      data-product-id="{{ product.id }}"
+      data-recently-viewed-products
+    >
+      {% if section.settings.heading != blank %}
+        <div class="heading-header">
+          <h2 class="{{ section.settings.heading_size }} {{ section.settings.heading_size_mobile }} align-{{ section.settings.heading_alignment }}">
+            {% if section.settings.heading != blank -%}
+              {{- section.settings.heading -}}
+            {% endif %}
+          </h2>
+        </div>
+      {% endif %}
+      <div class="recently-viewed-wrapper">
+        {% if search.performed and search.results.size > 0 %}
+          {% paginate search.results by 28 %}
+            <div
+              id="recently-viewed-products-{{ section.id }}"
+              class="recently-viewed-slider product_card  slider"
+
+              data-flickity-slider
+              data-flickity='
+                {
+                 "cellAlign": "left",
+                "wrapAround": false,
+                "contain": true,
+                "resize": true,
+                "pageDots": false,
+                "groupCells": true,
+                "prevNextButtons": true
+                }
+              '
+            >
+              {%- for item in search.results limit: section.settings['products_count-'] %}
+                {% case item.object_type %}
+                  {% when 'product' %}
+                    {% assign aosDelayAttr = forloop.index | times: 50 %}
+                    {% assign productFormId = 'product-form-'
+                      | append: section.id
+                      | append: forloop.index
+                      | append: '-'
+                      | append: collection.handle
+                    %}
+                    <div class="product-media-cards">
+                      {%- capture current -%}{% cycle section.id: 1, 2, 3, 4 %}{%- endcapture -%}
+                      {%- assign placeholder_image = 'product-apparel-' | append: current -%}
+                      {% render 'product-grid',
+                        cardProduct: item,
+                        section: section,
+                        productFormId: productFormId,
+                        aosDelayAttr: aosDelayAttr,
+                        placeholder_image: placeholder_image,
+                        imageRatio: section.settings.grid_image_size
+                      %}
+                    </div>
+                {% endcase %}
+              {% endfor %}
+            </div>
+          {% endpaginate %}
+        {% endif %}
+      </div>
+    </recently-view-products>
+  </div>
+</div>
+<style>
+  #shopify-section-{{ section.id }} {
+    --topSpace:{{ section.settings.top_space_desktop }}px;
+    --bottomSpace:{{ section.settings.bottom_space_desktop }}px;
+  }
+
+  @media only screen and (max-width:767px) {
+    #shopify-section-{{ section.id }}.shopify-section{
+      --topSpace:{{ section.settings.top_space_mobile }}px;
+      --bottomSpace:{{ section.settings.bottom_space_mobile }}px;
+    }
+
+  }
+</style>
+{% schema %}
+{
+  "name": "t:sections.recently_view_products.name",
+  "tag": "section",
+  "class": "recent-viewed-product-content hidden",
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.recently_view_products.settings.paragraph.content"
+    },
+    {
+      "type": "select",
+      "id": "grid_image_size",
+      "label": "t:common.image_size.label",
+      "default": "auto",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:common.image_size.options.auto.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:common.image_size.options.landscape.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:common.image_size.options.portrait.label"
+        },
+        {
+          "value": "square",
+          "label": "t:common.image_size.options.square.label"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Recently view products",
+      "label": "t:common.global.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "default": "h3",
+      "label": "t:common.heading_size.desktop_label",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:common.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:common.heading_size.options.large.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:common.heading_size.options.medium.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:common.heading_size.options.small.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:common.heading_size.options.extra_small.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_size_mobile",
+      "default": "h3_mobile",
+      "label": "t:common.heading_size.mobile_label",
+      "options": [
+        {
+          "value": "h1_mobile",
+          "label": "t:common.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h2_mobile",
+          "label": "t:common.heading_size.options.large.label"
+        },
+        {
+          "value": "h3_mobile",
+          "label": "t:common.heading_size.options.medium.label"
+        },
+        {
+          "value": "h4_mobile",
+          "label": "t:common.heading_size.options.small.label"
+        },
+        {
+          "value": "h5_mobile",
+          "label": "t:common.heading_size.options.extra_small.label"
+        }
+      ]
+    },
+    {
+      "type": "text_alignment",
+      "id": "heading_alignment",
+      "label": "t:common.global.heading_alignment.label",
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "products_count",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "label": "t:sections.recently_view_products.settings.products_count.label",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.colors.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "primary",
+      "label": "t:common.global.color_scheme.label"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.section_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.recently_view_products.presets.name"
+    }
+  ]
+}
+{% endschema %}

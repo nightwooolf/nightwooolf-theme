@@ -1,0 +1,76 @@
+{% if section.settings.enable_age_verification %}
+  {% capture ageverificationpopup %}
+      {% if section.settings.age_logo_img != blank %}
+         <div class="popup-logo">
+          	 <img
+                    srcset="{{ section.settings.age_logo_img | image_url: width: 200 }} 1x, {{ section.settings.age_logo_img | image_url: width: 200 }} 2x"
+                    src="{{ section.settings.age_logo_img | image_url: width:200 }}"
+                    loading="lazy"
+                    aspect-ratio="{{ section.settings.age_logo_img.aspect_ratio }}"
+                    width="200"
+                    height="{{ 200 | divided_by:section.settings.age_logo_img.aspect_ratio }}"
+                    alt="{{ section.settings.age_logo_img.alt | default: shop.name | escape }}"
+                  >
+        </div>
+      {% endif %}
+    <div class="age-verification-popup-wrapper">
+    
+      {% if section.settings.age_verification_heading != blank %}
+        <div class="popup-heading">
+            <h3 class="popup-title">{{ section.settings.age_verification_heading }}</h3>
+        </div>
+    {% endif %}
+    {% if section.settings.age_verification_content != blank %}
+      <div class="popup-descption">
+         {{ section.settings.age_verification_content }}
+      </div>
+    {% endif %}
+    {% if section.settings.approve_text != blank or section.settings.decline_text != blank %}
+      <div class="popup-btns">
+      {% if section.settings.decline_text != blank %}
+         <button type="button" class="btn" data-decline-age-button><span>{{ section.settings.decline_text }}</span></button>
+      {% endif %}
+      {% if section.settings.approve_text != blank %}
+           <button type="button" class="btn fill-btn" data-approve-age-button><span>{{ section.settings.approve_text }}</span></button>   
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="hidden age-decline-message" data-decline-container>
+          <h3 class="age-verification-heading">{{ section.settings.decline_heading }}</h3>
+          <div class="age-verification-description">{{ section.settings.decline_subheading }}</div>
+          <div class="age-verifiction-button">
+              <button class="btn fill-btn" data-age-back-button><span>{{ section.settings.age_decline_button_text }}</span></button>
+          </div> 
+	</div>
+     {% if section.section.settings.show_social %}
+          <div class="social-icons-wrapper">
+                {% render 'social-media' %}
+          </div>
+      {% endif %}
+    
+{% endcapture %}
+  <age-verification
+    data-ageverification="true"
+    data-model-main-body
+    data-expiry="{{ section.settings.agepopup_cookie_set }}"
+  >
+    <div
+      id="ageverification-popup"
+      class="age-verification-popup modal-drawer-panel"
+      data-model-main-body
+    >
+      <div class="blur-layer-bg"></div>
+      <div class="modal-drawer-card">
+        <div class="align-center modal-drawer-inner">
+          <div class="modal-drawer--body" data-model-content-wrapper>
+            <div class="modal-content-box">
+              {{ ageverificationpopup }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </age-verification>
+  <script src="{{ 'age-verification.js' | asset_url }}" defer></script>
+{% endif %}

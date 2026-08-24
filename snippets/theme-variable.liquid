@@ -1,0 +1,103 @@
+<link rel="preload" as="style" href="{{ 'flickity.min.css' | asset_url }}">
+{% if settings.animation_enable %}
+  <link rel="preload" as="style" href="{{ 'animation.css' | asset_url }}">
+{% endif %}
+<link rel="preload" as="style" href="{{ 'theme.css' | asset_url }}">
+<link rel="preload" as="style" href="{{ 'parallax-min.css' | asset_url }}">
+
+<link rel="preload" as="style" href="{{ 'base.css' | asset_url }}">
+<link rel="preload" as="style" href="{{ 'header.css' | asset_url }}">
+<link rel="preload" as="style" href="{{ 'footer.css' | asset_url }}">
+<link rel="preload" as="style" href="{{ 'responsive.css' | asset_url }}">
+<link rel="preload" as="style" href="{{ 'cart.css' | asset_url }}">
+{{ 'animation.css' | asset_url | stylesheet_tag }}
+{{ 'parallax-min.css' | asset_url | stylesheet_tag }}
+{{ 'flickity.min.css' | asset_url | stylesheet_tag }}
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'header.css' | asset_url | stylesheet_tag }}
+{{ 'footer.css' | asset_url | stylesheet_tag }}
+{{ 'cart.css' | asset_url | stylesheet_tag }}
+{{ 'base.css' | asset_url | stylesheet_tag }}
+{{ 'responsive.css' | asset_url | stylesheet_tag }}
+
+<style>
+   {% assign swatchesColor = settings.swatchs_custom_value | newline_to_br %}
+  {% assign swatchesColor = swatchesColor | split: '<br />' %}
+  {% for color in swatchesColor %}
+    {% assign colorValue = color | strip | split: ':' %}
+    [data-color="{{- colorValue.first -}}"]{
+      {%- if colorValue.last contains '#' -%}
+         background-color: {{- colorValue.last -}}!important;
+      {%- else -%}
+         background-image:url({{ colorValue.last }}) !important;
+      {%- endif -%}
+    }
+  {% endfor %}
+</style>
+<script>
+window.routes = {
+    cart_add_url: '{{ routes.cart_add_url }}',
+    cart_change_url: '{{routes.cart_change_url }}',
+    cart_update_url: '{{routes.cart_update_url }}',
+    cart_url: '{{ routes.cart_url }}',
+    predictive_search_url:'{{ routes.search_url }}/suggest'
+ 
+};
+
+window.cartStrings = {
+    error: `{{ 'sections.cart.cart_error' | t }}`,
+    quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: quantity }}`,
+    empty: `{{ 'sections.cart.empty' | t }}`,
+    shop_now: `Shop Now`
+}
+  window.variantStrings = {
+    addToCart: `{{'products.product.add_to_cart' | t }}`,
+    soldOut: `{{ 'products.product.sold_out' | t }}`,
+    unavailable: `{{ 'products.product.unavailable' | t }}`,
+    unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: option_value }}`
+}
+window.cartStrings = {
+  error: `{{ 'sections.cart.cart_error' | t }}`,
+  quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
+};
+
+const animationCheck = {{ settings.animation_enable }};
+const googleMapApiKey = `{{ settings.google_map_api }}`;
+const mapID = `{{ settings.map_id }}`;
+const currencyRate = `{{settings.shipping_rate}}`;
+const shippingmessage = `{{ settings.shipping_text }}`;
+const shippingsuccessmessage = `{{ settings.shipping_success_text }}`;
+
+const shippingStatus ={{ settings.show_shipping }}
+const ON_CHANGE_DEBOUNCE_TIMER = 300;
+const PUB_SUB_EVENTS = {
+  cartUpdate: 'cart-update',
+  quantityUpdate: 'quantity-update',
+  variantChange: 'variant-change',
+  cartError: 'cart-error'
+};
+  const storeLoader='<div class="loader-state"><svg height="18" width="18" class="loader-icon"><circle r="7" cx="9" cy="9"></circle><circle stroke-dasharray="87.96459430051421 87.96459430051421" r="7" cx="9" cy="9"></circle></svg></div>';
+</script>
+
+<script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
+<script src="{{ 'lazysizes.min.js' | asset_url }}" defer></script>
+{% if settings.animation_enable %}
+  <script src="{{ 'animation.js' | asset_url }}" defer></script>
+{% endif %}
+
+<script src="{{ 'flickity.min.js' | asset_url }}" defer></script>
+
+<script src="{{ 'header.js' | asset_url }}" defer></script>
+<script src="{{ 'common.js' | asset_url }}" defer></script>
+<script src="{{ 'popup-drawer.js' | asset_url }}" defer></script>
+<script src="{{ 'pickup-availability.js' | asset_url }}" defer></script>
+
+<script src="{{ 'theme.js' | asset_url }}" defer></script>
+<script src="{{ 'quick-view.js' | asset_url }}" defer></script>
+<script src="{{ 'cart-drawer.js' | asset_url }}" defer></script>
+<script src="{{ 'cart.js' | asset_url }}" defer></script>
+<script src="{{ 'gift-wrapping.js' | asset_url }}" defer></script>
+<script src="{{ 'product-form.js' | asset_url }}" defer></script>
+<script src="{{ 'recipient-form.js' | asset_url }}" defer></script>
+<script src="{{ 'player.js' | asset_url }}" defer></script>
+<script src="{{ 'parallax-min.js' | asset_url }}" defer></script>

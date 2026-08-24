@@ -1,0 +1,105 @@
+<product-recommendations
+  class="comparatively-products"
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ block.settings.products_count }}&intent=complementary"
+  product-recommendations
+  {{ block.shopify_attributes }}
+>
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    <div class="comparatively-products-card">
+      {% if block.settings.heading != blank %}
+        <div class="comparatively-head">
+          <span>{{ block.settings.heading }}</span>
+        </div>
+      {% endif %}
+      <div class="comparatively-product-inner">
+        <div
+          id="complementary_products-{{ section.id }}"
+          class="comparatively-product-item"
+          data-flickity-slider
+          data-flickity='{ "cellAlign": "left", "contain": "true", "prevNextButtons": "true", "pageDots": false }'
+        >
+          {%- for recomproduct in recommendations.products limit: block.settings.products_count -%}
+            {%- assign assign current_variant = recomproductt.selected_or_first_available_variant %}
+            <div class="comparatively-product-card">
+              <a href="{{ recomproduct.url | within : collection }}" class="comparatively-product-image">
+                {%- capture current -%}{% cycle section.id: 1, 2, 3, 4 %}{%- endcapture -%}
+                {%- assign placeholder_image = 'product-apparel-' | append: current -%}
+                {% if recomproduct.featured_media != blank %}
+                  {%- render 'image', image: recomproduct.featured_media.preview_image -%}
+                {% else %}
+                  {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+              </a>
+              <div class="comparatively-product-info">
+                <a href="{{ recomproduct.url | within : collection }}">
+                  <p class="textBase">{{- recomproduct.title | strip_html -}}</p>
+                </a>
+
+                <div class="price-wrapper">
+                  {%- assign price_min = recomproduct.price_min | default: 1900 | money -%}
+                  {%- if recomproduct.price_varies -%}
+                    <div class="item-price textBase price-varies">
+                      {{- 'products.product.price.from_price_html' | t: price: price_min -}}
+                    </div>
+                  {%- else -%}
+                    <span class="item-price textBase">{{ price_min }}</span>
+                  {%- endif -%}
+                  {%- if recomproduct.compare_at_price_min > recomproduct.price_min -%}
+                    <span class="item-price-old textSmall">{{ recomproduct.compare_at_price_min | money }}</span>
+                  {%- endif -%}
+
+                  {%- if recomproduct.compare_at_price_min > recomproduct.price_min -%}
+                    {% if settings.product_price_saving %}
+                      {% assign offText = 'products.product.off' | t %}
+                      <span
+                        class="product-discount-price {% if recomproduct.compare_at_price_min > recomproduct.price_min %}price-saving{% else %}hidden{% endif %}"
+                        data-price-saving
+                      >
+                        {%- if recomproduct.compare_at_price_min > recomproduct.price_min %}
+                          {{-
+                            recomproduct.compare_at_price_min
+                            | minus: recomproduct.price_min
+                            | times: 100
+                            | divided_by: recomproduct.compare_at_price_min
+                            | append: '% '
+                            | append: offText
+                          -}}
+                        {% endif %}
+                      </span>
+                    {% endif %}
+                  {% endif %}
+
+                  {%- if current_variant.unit_price_measurement -%}
+                    <span class="item-unit-price textSmall">
+                      {{ current_variant.unit_price | money }} /
+                      {% if current_variant.unit_price_measurement.reference_value != 1 -%}
+                        {{- current_variant.unit_price_measurement.reference_value -}}
+                      {%- endif %}
+                      {{ current_variant.unit_price_measurement.reference_unit }}
+                    </span>
+                  {%- endif -%}
+                </div>
+                <quick-view class="quick-view-element" data-product-url="{{ recomproduct.url }}">
+                  <a
+                    href="{{ recomproduct.url }}"
+                    tabindex="-1"
+                    class="btn btn-xsmall"
+                    data-quickview-action
+                    aria-label="Quick view"
+                  >
+                    <span class="quick-view-icon">{{ 'accessibility.complementary_quickview' | t }}</span>
+                    <span class="quick-view-loader hidden">
+                      <svg height="18" width="18" class="loader-icon">
+                        <circle r="7" cx="9" cy="9"></circle><circle stroke-dasharray="87.96459430051421 87.96459430051421" r="7" cx="9" cy="9"></circle>
+                      </svg>
+                    </span>
+                  </a>
+                </quick-view>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</product-recommendations>

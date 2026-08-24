@@ -1,0 +1,153 @@
+{% if section.settings.menu != blank %}
+  <div class="mobile-nav-wrapper">
+    <a href="#mobile-nav-menu" class="toggle-btn" data-hamburger-mobile aria-label="humburger icon">
+       <img src="https://cdn.shopify.com/s/files/1/0994/6107/1134/files/menu-mobile.png?v=1784648120" width="30" height="30">
+    </a>
+    <nav id="mobile-nav-menu" class="drawer-mobile-menu" data-mobile-menu>
+      <div class="drawer-mobile-box">
+        <ul class="no-bullet mobile-nav">
+          {%- for link in linklists[section.settings.menu].links -%}
+            {%- liquid
+              assign mobileMegamenu = section.blocks | where: 'type', 'mega_menu'
+              assign linkTitle = link.title | handleize
+              capture mobileMegaMenu
+                for block in mobileMegamenu
+                  assign blockLabel = block.settings.title | handleize
+                  if blockLabel == linkTitle
+                    render 'mobile-mega-menu', setion: section, block: block, linkTitle: linkTitle
+                  endif
+                endfor
+              endcapture
+            -%}
+            <li
+              class="site-nav-item {% if link.links.size > 0  %}dropdown {% endif %} {% if mobileMegaMenu != blank %}nav-megamenu{% endif %}"
+              {% if link.links.size > 0 or mobileMegaMenu != blank %}
+                data-child-items
+              {% endif %}
+            >
+              {% if link.links.size > 0 or mobileMegaMenu != blank %}
+                <details class="site-nav-dropdown-detail">
+                  <summary class="site-nav-link">
+                    <a
+                      href="{{ link.url }}"
+                      title="{{- grandchild.title }}"
+                      class="site-nav-link"
+                    >
+                      {{- link.title -}}
+                    </a>
+                    <svg width="8" height="14" viewBox="0 0 8 14" fill="none" class="mobile-menus-item">
+                      <path d="M0.999999 0.666675L7.16666 6.83334L1 13" stroke="currentColor" stroke-width="1.3"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </summary>
+                  <div class="nav-dropdown-wrapper">
+                    <button type="button" class="menu-back" bold data-backtonav-items>
+                      <svg width="7" height="10" viewBox="0 0 7 10" fill="none">
+                        <path d="M5.67348 1.00041L1.54593 5.20253L5.74805 9.33008" stroke="currentColor" stroke-width="1.25"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                      {{- link.title -}}
+                    </button>
+                    <ul class="no-bullet nav-inner-menu">
+                      {% for childlink in link.links %}
+                        <li
+                          class="site-nav-item {% if childlink.links.size > 0 %}dropdown nav-grandmenu{% endif %}"
+                          {% if link.links.size > 0 or mobileMegaMenu != blank %}
+                            data-child-items
+                          {% endif %}
+                        >
+                          {% if childlink.links.size > 0 %}
+                            <details class="site-nav-dropdown-detail">
+                              <summary class="site-nav-link nav-dropdown-item">
+                                <a
+                                  href="{{ link.url }}"
+                                  title="{{- grandchild.title }}"
+                                  class="site-nav-link"
+                                >
+                                  {{- childlink.title -}}
+                                </a>
+                                <svg width="8" height="14" viewBox="0 0 8 14" fill="none" class="mobile-menus-item">
+                                  <path d="M0.999999 0.666675L7.16666 6.83334L1 13" stroke="currentColor" stroke-width="1.3"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                              </summary>
+                              <div class="nav-dropdown-wrapper">
+                                <button type="button" class="menu-back" bold data-subbacktonav-items>
+                                  <svg width="7" height="10" viewBox="0 0 7 10" fill="none">
+                                    <path opacity="0.5" d="M5.67348 1.00041L1.54593 5.20253L5.74805 9.33008" stroke="currentColor"
+                                      stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                                  </svg>
+                                  {{- childlink.title -}}
+                                </button>
+                                <ul class="no-bullet nav-grand-menu">
+                                  {% for grandchild in childlink.links %}
+                                    <li class="site-nav-item">
+                                      <a
+                                        href="{{ grandchild.url }}"
+                                        title="{{- grandchild.title }}"
+                                        class="site-nav-link"
+                                      >
+                                        {{- grandchild.title -}}
+                                      </a>
+                                    </li>
+                                  {% endfor %}
+                                </ul>
+                              </div>
+                            </details>
+                          {% else %}
+                            <a
+                              href="{{ childlink.url }}"
+                              title="{{- childlink.title }}"
+                              class="site-nav-link"
+                            >
+                              {{- childlink.title -}}
+                            </a>
+                          {% endif %}
+                        </li>
+                      {% endfor %}
+                    </ul>
+                    {% if mobileMegaMenu != blank %}
+                      {{ mobileMegaMenu }}
+                    {% endif %}
+                  </div>
+                </details>
+              {% else %}
+                <a href="{{ link.url }}" class="site-nav-link" title="{{ link.title }}">{{- link.title -}}</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="header-bottom-wrapper">
+        {%- if shop.customer_accounts_enabled and section.settings.enable_account -%}
+          <div class="user-account">
+            <a
+              href="{%- if customer -%}{{- routes.account_url -}}{%-else-%}{{ routes.account_login_url }}{%- endif -%}"
+              class="user"
+              title="{%- if customer -%}{{ 'customer.account_fallback' | t }}{%-else-%}{{ 'customer.log_in' | t }}{%- endif -%}"
+            >
+              <span>
+                <svg width="17" height="18" viewBox="0 0 17 18" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M8.5 2C6.84315 2 5.5 3.34315 5.5 5C5.5 6.65685 6.84315 8 8.5 8C10.1569 8 11.5 6.65685 11.5 5C11.5 3.34315 10.1569 2 8.5 2ZM3.5 5C3.5 2.23858 5.73858 0 8.5 0C11.2614 0 13.5 2.23858 13.5 5C13.5 7.76142 11.2614 10 8.5 10C5.73858 10 3.5 7.76142 3.5 5ZM8.5 13C5.68576 13 3.18161 14.7537 1.9023 17.4311C1.66419 17.9294 1.0672 18.1404 0.568881 17.9023C0.0705579 17.6642 -0.140392 17.0672 0.0977101 16.5689C1.6604 13.2983 4.80825 11 8.5 11C12.1918 11 15.3396 13.2983 16.9023 16.5689C17.1404 17.0672 16.9294 17.6642 16.4311 17.9023C15.9328 18.1404 15.3358 17.9294 15.0977 17.4311C13.8184 14.7537 11.3142 13 8.5 13Z"
+                    fill="currentColor"></path>
+                </svg></span
+              >Register / Login
+            </a>
+          </div>
+        {% endif %}
+        <!--
+          {% if section.settings.enable_currency_selector or section.settings.enable_language_selector %}
+            <div class="header-drop-wrapper">
+              {%- if section.settings.enable_currency_selector or section.settings.enable_language_selector -%}
+                <div class="header-selector content-justify-end">
+                  {% render 'localization', section: section %}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        -->
+      </div>
+    </nav>
+  </div>
+{% endif %}

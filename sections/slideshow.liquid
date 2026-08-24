@@ -1,0 +1,853 @@
+<div class="hero-media-wrapper">
+  {% if section.settings.layout_type == 'container' %}
+    <div class="{{ settings.layout_width }}">
+  {% endif %}
+  {%- liquid
+    assign fadeanimateClass = ''
+    if section.settings.controls == 'number'
+      assign sliderDots = true
+      assign sliderArrows = false
+    else
+      assign sliderDots = false
+      assign sliderArrows = true
+    endif
+    assign slideFade = false
+    if section.settings.transition == 'fade'
+      assign slideFade = true
+      assign fadeanimateClass = 'fade-animate'
+    endif
+  -%}
+  <div
+    class="hero-media-inner slider-wrapper{% if section.settings.controls == 'number' %} slider-controls-number{% endif %}"
+
+    data-flickity-slider
+    data-flickity='
+      {
+        "fade":{{ slideFade }},
+         "touchVerticalScroll": false,
+         "pageDots":false,
+         "prevNextButtons": {{ sliderArrows }},
+         "cellSelector": ".hero-media-card-{{ section.id }}",
+         "autoPlay":{%- if section.settings.rotate -%}{{ section.settings.interval | times: 1000 }}{%- else -%}false{%- endif -%}
+      }
+    '
+  >
+    {% for block in section.blocks %}
+      <div
+        id="slideshow-slide-{{ block.id }}"
+        class="hero-media-card hero-media-card-{{ section.id }} {{ section.settings.desktop_height }} {{ section.settings.mobile_height }} animated-text"
+        {{ block.shopify_attributes }}
+      >
+        <div class="hero-media-content-wrapper">
+          {%- if block.settings.slider_video != blank -%}
+            <div class="hero-media-img">
+              {% assign videoclass = 'video-background-file' | append: fadeanimateClass %}
+              {% assign videoId = 'slideshow-video-' | append: block.id %}
+              <deferred-media
+                class="deferred-media autoplay-true"
+                data-autoplay="true"
+              >
+                <template style="display:none">
+                  {{
+                    block.settings.slider_video
+                    | video_tag:
+                      image_size: '1400x',
+                      id: videoId,
+                      class: videoclass,
+                      autoplay: true,
+                      loop: true,
+                      controls: false,
+                      muted: true
+                  }}
+                </template>
+                <noscript>
+                  <img
+                    src="{{ block.settings.video.preview_image | image_url }}"
+                    alt="{{ block.settings.video.preview_image.alt | default: shop.name | strip_html }}"
+                    width="{{ block.settings.video.preview_image.width }}"
+                    height="{{ block.settings.video.preview_image.height }}"
+                  >
+                </noscript>
+              </deferred-media>
+            </div>
+          {% else %}
+            <div class="hero-media-img">
+              {% liquid
+                assign mobile_img = false
+                assign placeholder_slide = forloop.index | modulo: 2
+                if block.settings.image_mobile != blank
+                  assign mobile_img = true
+                  assign mobile_class = 'mobile-img'
+                  render 'image', image: block.settings.image_mobile, class: mobile_class
+                endif
+                assign desktop_class = fadeanimateClass
+                if mobile_img
+                  assign desktop_class = 'desktop-img ' | append: fadeanimateClass
+                endif
+                if block.settings.image_desktop != blank
+                  render 'image', image: block.settings.image_desktop, class: desktop_class
+                elsif block.settings.image_desktop == blank and mobile_img
+                  if placeholder_slide == 1
+                    assign placeholde_class = 'placeholder-svg ' | append: fadeanimateClass
+                    echo 'hero-apparel-2' | placeholder_svg_tag: placeholde_class
+                  else
+                    assign placeholde_class = 'placeholder-svg ' | append: fadeanimateClass
+                    echo 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg'
+                  endif
+                else
+                  if placeholder_slide == 1
+                    assign placeholde_class = 'placeholder-svg ' | append: fadeanimateClass
+                    echo 'hero-apparel-2' | placeholder_svg_tag: placeholde_class
+                  else
+                    assign placeholde_class = 'placeholder-svg ' | append: fadeanimateClass
+                    echo 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg'
+                  endif
+                endif
+              %}
+            </div>
+          {% endif %}
+          {% if block.settings.subheading != blank
+            or block.settings.heading != blank
+            or block.settings.description != blank
+            or block.settings.btn_text_1 != blank
+            and block.settings.btn_link_1 != blank
+            or block.settings.btn_text_2 != blank
+            and block.settings.btn_link_2 != blank
+          %}
+            <div class="hero-media-content">
+              <div class="container">
+                <div class="hero-media-content-wrapper">
+                  <div class="hero-media-cont-inner width-{{ block.settings.content_width }} text-position-{{ block.settings.content_position }} align-{{ block.settings.content_alignment }} mobile-text-position-{{ block.settings.mobile_content_position }} mobile-align-{{  block.settings.mobile_content_alignment }}">
+                    {% if block.settings.subheading != blank %}
+                      <h5>{{ block.settings.subheading }}</h5>
+                    {% endif %}
+                    {% if block.settings.heading != blank %}
+                      <h1 class="hero-media-heading {{block.settings.heading_size }} {{ block.settings.heading_size_mobile }} font-{{ block.settings.font_family }}">
+                        {{
+                          block.settings.heading
+                          | replace: '<strong>', '<span class="stroke">'
+                          | replace: '</strong>', '</span>'
+                        }}
+                      </h1>
+                    {% endif %}
+                    {% if block.settings.description != blank %}
+                      <p class="hero-media-desc {{ block.settings.description_size }}">
+                        {{ block.settings.description | replace: '<p></p>', '<br>' }}
+                      </p>
+                    {% endif %}
+                    {% if block.settings.btn_text_1 != blank
+                      and block.settings.btn_link_1 != blank
+                      or block.settings.btn_text_2 != blank
+                      and block.settings.btn_link_2 != blank
+                    %}
+                      <div class="btn-outer-box hero-media-btns">
+                        {% if block.settings.btn_text_1 != blank and block.settings.btn_link_1 != blank %}
+                          <a
+                            href="{{ block.settings.btn_link_1}}"
+                            class="{% if block.settings.btn_as_link_1 == false %}btn{% else %} text-underline{% endif %} btn-{{ block.settings.btn_size_1 }} hero-media-shop"
+                          >
+                            <span>{{ block.settings.btn_text_1 }}</span>
+                          </a>
+                        {% endif %}
+                        {% if block.settings.btn_text_2 != blank and block.settings.btn_link_2 != blank %}
+                          <a
+                            href="{{ block.settings.btn_link_2}}"
+                            class="{% if block.settings.btn_as_link_2 == false %}btn {% else %} text-underline {% endif %}btn-{{ block.settings.btn_size_2 }} btn-alternate hero-media-shop"
+                          >
+                            <span>{{ block.settings.btn_text_2 }}</span>
+                          </a>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+
+    {% if sliderDots and section.blocks.size > 1 %}
+      <ol class="flickity-page-dots custom-slider-dots">
+        {% for block in section.blocks %}
+          <li class="dot slider-dots" aria-label="Page dot {{ forloop.index }}" tabindex="0">
+            <svg
+              width="20px"
+              height="20px"
+              viewBox="0 0 20 20"
+              fill="none"
+              class="thumbnail-pagination-svg"
+              preserveAspectRatio="none"
+            >
+              <circle cx="10" cy="10" r="9" stroke="var(--bodyColor)" stroke-width="1px" stroke-linecap="round" stroke-linejoin="round"></circle>
+            </svg>
+          </li>
+        {% endfor %}
+      </ol>
+    {% endif %}
+  </div>
+  {% if section.settings.layout_type == 'container' %}
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  .hero-media-inner .flickity-page-dots{
+    z-index:1;
+  }
+
+  #shopify-section-{{ section.id }}{
+     --circle-speed:{{ section.settings.interval}}s;
+  }
+
+     #shopify-section-{{ section.id }}{
+      {% if section.blocks.first.settings.image_desktop != blank %}
+        {% if section.settings.desktop_height == 'desktop-adapt-image' %}
+          --mediaRatio: {{- 1 | divided_by : section.blocks.first.settings.image_desktop.aspect_ratio | times: 100 -}}%;
+          {% endif %}
+        {%- else -%}
+        --mediaRatio: 50%;
+        {% endif %}
+      }
+
+    {% for block in section.blocks %}
+      #slideshow-slide-{{ block.id }}{
+        --mainHeadingColor:{{ block.settings.heading_color }};
+        --heroMediadescColor: {{ block.settings.description_color }};
+        --btnBgColor: {{ block.settings.btn_bg_color_1 }};
+        --btnTextColor: {{ block.settings.btn_text_color_1 }};
+        --btnBorderColor: {{ block.settings.btn_border_color_1 }};
+        --btnBgHoverColor: {{ block.settings.btn_hover_bg_color_1 }};
+        --btnTextHoverColor: {{ block.settings.btn_hover_text_color_1 }};
+        --btnBorderHoverColor: {{ block.settings.btn_hover_border_color_1 }};
+        --overlayBg:{{ block.settings.text_Overlay }};
+        --overlayOpacity:{{ block.settings.text_overlay_opacity | divided_by:100.0 }};
+      }
+      #slideshow-slide-{{ block.id }} .btn-alternate{
+        --btnBgColor: {{ block.settings.btn_bg_color_2 }};
+        --btnTextColor: {{ block.settings.btn_text_color_2 }};
+        --btnBorderColor: {{ block.settings.btn_border_color_2 }};
+        --btnBgHoverColor: {{ block.settings.btn_hover_bg_color_2 }};
+        --btnTextHoverColor: {{ block.settings.btn_hover_text_color_2 }};
+        --btnBorderHoverColor: {{ block.settings.btn_hover_border_color_2 }};
+      }
+
+    {% endfor %}
+   @media only screen and (max-width:767px) {
+   #shopify-section-{{ section.id }}{
+      {% if section.blocks.first.settings.image_mobile != blank or section.blocks.first.settings.image_desktop != blank  %}
+        {% if  section.blocks.first.settings.image_mobile != blank  %}
+          {% assign imgratio= section.blocks.first.settings.image_mobile  %}
+          {% elsif section.blocks.first.settings.image_desktop != blank %}
+           {% assign imgratio= section.blocks.first.settings.image_desktop  %}
+
+          {% endif  %}
+        {% if section.settings.mobile_height == '"mobile-adapt-image' %}
+          --mediaRatio: {{- 1 | divided_by : imgratio.aspect_ratio | times: 100 -}}%;
+          {% endif %}
+        {%- else -%}
+        --mediaRatio: 50%;
+        {% endif %}
+      }
+  }
+</style>
+{% schema %}
+{
+  "name": "t:sections.slideshow.name",
+  "class": "section-hero-banner",
+  "tag": "section",
+  "max_blocks": 5,
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout_type",
+      "label": "t:sections.slideshow.settings.layout_type.label",
+      "default": "fullwidth",
+      "options": [
+        {
+          "value": "container",
+          "label": "t:sections.slideshow.settings.layout_type.options.container.label"
+        },
+        {
+          "value": "fullwidth",
+          "label": "t:sections.slideshow.settings.layout_type.options.fullwidth.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "desktop_height",
+      "label": "t:common.global.desktop_height.label",
+      "default": "slider-xlarge",
+      "options": [
+        {
+          "value": "desktop-adapt-image",
+          "label": "t:common.global.auto.label"
+        },
+        {
+          "value": "slider-small",
+          "label": "550px"
+        },
+        {
+          "value": "slider-medium",
+          "label": "650px"
+        },
+        {
+          "value": "slider-large",
+          "label": "750px"
+        },
+        {
+          "value": "slider-xlarge",
+          "label": "850px"
+        },
+        {
+          "value": "slider-full-height",
+          "label": "Full"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_height",
+      "label": "t:common.global.mobile_height.label",
+      "default": "mobile-slider-large",
+      "options": [
+        {
+          "value": "mobile-adapt-image",
+          "label": "t:common.global.auto.label"
+        },
+        {
+          "value": "mobile-slider-small",
+          "label": "500px"
+        },
+        {
+          "value": "mobile-slider-medium",
+          "label": "600px"
+        },
+        {
+          "value": "mobile-slider-large",
+          "label": "700px"
+        },
+        {
+          "value": "mobile-slider-xlarge",
+          "label": "800px"
+        },
+        {
+          "value": "mobile-slider-full-height",
+          "label": "Full"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "rotate",
+      "label": "t:sections.slideshow.settings.rotate.label",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "interval",
+      "label": "t:sections.slideshow.settings.interval.label",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    },
+    {
+      "type": "select",
+      "id": "transition",
+      "label": "t:sections.slideshow.settings.transition.label",
+      "default": "swipe",
+      "options": [
+        {
+          "value": "fade",
+          "label": "t:sections.slideshow.settings.transition.fade.label"
+        },
+        {
+          "value": "swipe",
+          "label": "t:sections.slideshow.settings.transition.swipe.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "controls",
+      "label": "t:sections.slideshow.settings.controls.label",
+      "default": "number",
+      "options": [
+        {
+          "value": "number",
+          "label": "t:sections.slideshow.settings.controls.number.label"
+        },
+        {
+          "value": "arrows",
+          "label": "t:sections.slideshow.settings.controls.arrows.label"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "t:sections.slideshow.blocks.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_desktop",
+          "label": "t:common.global.image.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "t:common.global.mobile_image.label"
+        },
+        {
+          "type": "video",
+          "id": "slider_video",
+          "label": "t:common.global.video.label"
+        },
+        {
+          "type": "header",
+          "content": "t:common.header.text.content"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "t:common.global.subheading.label",
+          "default": "Add a tagline"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "t:common.global.heading.label",
+          "default": "Slide Heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "default": "h2",
+          "label": "t:common.heading_size.desktop_label",
+          "options": [
+            {
+              "value": "h1",
+              "label": "t:common.heading_size.options.extra_large.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:common.heading_size.options.large.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:common.heading_size.options.medium.label"
+            },
+            {
+              "value": "h4",
+              "label": "t:common.heading_size.options.small.label"
+            },
+            {
+              "value": "h5",
+              "label": "t:common.heading_size.options.extra_small.label"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "heading_size_mobile",
+          "default": "h2_mobile",
+          "label": "t:common.heading_size.mobile_label",
+          "options": [
+            {
+              "value": "h1_mobile",
+              "label": "t:common.heading_size.options.extra_large.label"
+            },
+            {
+              "value": "h2_mobile",
+              "label": "t:common.heading_size.options.large.label"
+            },
+            {
+              "value": "h3_mobile",
+              "label": "t:common.heading_size.options.medium.label"
+            },
+            {
+              "value": "h4_mobile",
+              "label": "t:common.heading_size.options.small.label"
+            },
+            {
+              "value": "h5_mobile",
+              "label": "t:common.heading_size.options.extra_small.label"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_family",
+          "label": "t:sections.slideshow.blocks.settings.heading_font_family.label",
+          "options": [
+            {
+              "value": "heading",
+              "label": "t:common.font.options.heading.label"
+            },
+            {
+              "value": "body",
+              "label": "t:common.font.options.body.label"
+            }
+          ],
+          "default": "heading"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "t:common.global.description.label",
+          "default": "Add descriptive text for your slide here."
+        },
+        {
+          "type": "select",
+          "id": "description_size",
+          "default": "textMedium",
+          "label": "t:common.description_size.label",
+          "options": [
+            {
+              "value": "textBase",
+              "label": "t:common.description_size.options.small.label"
+            },
+            {
+              "value": "textMedium",
+              "label": "t:common.description_size.options.medium.label"
+            },
+            {
+              "value": "textLarge",
+              "label": "t:common.description_size.options.large.label"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "t:common.header.content.content"
+        },
+        {
+          "type": "select",
+          "id": "content_position",
+          "label": "t:sections.slideshow.blocks.settings.content_position.label",
+          "default": "down-start",
+          "options": [
+            {
+              "value": "mid-start",
+              "label": "t:sections.slideshow.blocks.settings.content_position.options.mid-start.label"
+            },
+            {
+              "value": "mid-center",
+              "label": "t:sections.slideshow.blocks.settings.content_position.options.mid-center.label"
+            },
+            {
+              "value": "mid-end",
+              "label": "t:sections.slideshow.blocks.settings.content_position.options.mid-end.label"
+            },
+            {
+              "value": "down-start",
+              "label": "t:sections.slideshow.blocks.settings.content_position.options.down-start.label"
+            },
+            {
+              "value": "down-center",
+              "label": "t:sections.slideshow.blocks.settings.content_position.options.down-center.label"
+            },
+            {
+              "value": "down-end",
+              "label": "t:sections.slideshow.blocks.settings.content_position.options.down-end.label"
+            }
+          ]
+        },
+        {
+          "type": "text_alignment",
+          "id": "content_alignment",
+          "label": "t:common.global.alignment.label",
+          "default": "left"
+        },
+        {
+          "type": "select",
+          "id": "content_width",
+          "label": "t:common.content_width.label",
+          "default": "medium",
+          "options": [
+            {
+              "value": "small",
+              "label": "t:common.content_width.options.small.label"
+            },
+            {
+              "value": "medium",
+              "label": "t:common.content_width.options.medium.label"
+            },
+            {
+              "value": "large",
+              "label": "t:common.content_width.options.Large.label"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Mobile"
+        },
+        {
+          "type": "select",
+          "id": "mobile_content_position",
+          "label": "t:sections.slideshow.blocks.settings.content_position.label",
+          "default": "down-start",
+          "options": [
+            {
+              "value": "mid-start",
+              "label": "t:sections.slideshow.blocks.settings.content_position.options.mid-start.label"
+            },
+            {
+              "value": "mid-center",
+              "label": "t:sections.slideshow.blocks.settings.content_position.options.mid-center.label"
+            },
+            {
+              "value": "mid-end",
+              "label": "t:sections.slideshow.blocks.settings.content_position.options.mid-end.label"
+            },
+            {
+              "value": "down-start",
+              "label": "t:sections.slideshow.blocks.settings.content_position.options.down-start.label"
+            },
+            {
+              "value": "down-center",
+              "label": "t:sections.slideshow.blocks.settings.content_position.options.down-center.label"
+            },
+            {
+              "value": "down-end",
+              "label": "t:sections.slideshow.blocks.settings.content_position.options.down-end.label"
+            }
+          ]
+        },
+        {
+          "type": "text_alignment",
+          "id": "mobile_content_alignment",
+          "label": "t:common.global.alignment.label",
+          "default": "left"
+        },
+        {
+          "type": "header",
+          "content": "t:common.header.button_1.content"
+        },
+        {
+          "type": "text",
+          "id": "btn_text_1",
+          "label": "t:common.global.text.label",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "btn_link_1",
+          "label": "t:common.global.link.label",
+          "default": "/collections/all"
+        },
+        {
+          "type": "select",
+          "id": "btn_size_1",
+          "label": "t:common.btn_size.label",
+          "default": "medium",
+          "options": [
+            {
+              "value": "xsmall",
+              "label": "t:common.btn_size.options.xsmall.label"
+            },
+            {
+              "value": "small",
+              "label": "t:common.btn_size.options.small.label"
+            },
+            {
+              "value": "medium",
+              "label": "t:common.btn_size.options.medium.label"
+            },
+            {
+              "value": "large",
+              "label": "t:common.btn_size.options.large.label"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "btn_as_link_1",
+          "label": "t:sections.slideshow.blocks.settings.btn_as_link_1.label",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "t:common.header.button_2.content"
+        },
+        {
+          "type": "text",
+          "id": "btn_text_2",
+          "label": "t:common.global.text.label",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "btn_link_2",
+          "label": "t:common.global.link.label",
+          "default": "/collections/all"
+        },
+        {
+          "type": "select",
+          "id": "btn_size_2",
+          "label": "t:common.btn_size.label",
+          "default": "medium",
+          "options": [
+            {
+              "value": "xsmall",
+              "label": "t:common.btn_size.options.xsmall.label"
+            },
+            {
+              "value": "small",
+              "label": "t:common.btn_size.options.small.label"
+            },
+            {
+              "value": "medium",
+              "label": "t:common.btn_size.options.medium.label"
+            },
+            {
+              "value": "large",
+              "label": "t:common.btn_size.options.large.label"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "btn_as_link_2",
+          "label": "t:sections.slideshow.blocks.settings.btn_as_link_1.label",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "t:common.header.colors.content"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "t:common.global.heading.label",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "description_color",
+          "label": "t:common.global.description.label",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "text_Overlay",
+          "label": "t:sections.slideshow.blocks.settings.overlay.label",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "text_overlay_opacity",
+          "label": "t:sections.slideshow.blocks.settings.text_overlay_opacity.label",
+          "default": 20,
+          "max": 100,
+          "min": 0,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:common.header.button_1.content"
+        },
+        {
+          "type": "color",
+          "id": "btn_bg_color_1",
+          "label": "t:common.global.background.label",
+          "default": "#0B0E0D"
+        },
+        {
+          "type": "color",
+          "id": "btn_text_color_1",
+          "label": "t:common.global.text.label",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "btn_border_color_1",
+          "label": "t:common.global.border.label",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "btn_hover_bg_color_1",
+          "label": "t:common.global.hover_background.label",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "btn_hover_text_color_1",
+          "label": "t:common.global.hover_text.label",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "btn_hover_border_color_1",
+          "label": "t:common.global.hover_border.label",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:common.header.button_2.content"
+        },
+        {
+          "type": "color",
+          "id": "btn_bg_color_2",
+          "label": "t:common.global.background.label",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "btn_text_color_2",
+          "label": "t:common.global.text.label",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "btn_border_color_2",
+          "label": "t:common.global.border.label",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "btn_hover_bg_color_2",
+          "label": "t:common.global.hover_background.label",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "btn_hover_text_color_2",
+          "label": "t:common.global.hover_text.label",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "btn_hover_border_color_2",
+          "label": "t:common.global.hover_border.label",
+          "default": "#FFFFFF"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.slideshow.presets.name",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

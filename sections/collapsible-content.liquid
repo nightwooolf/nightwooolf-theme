@@ -1,0 +1,249 @@
+<div class="{{ section.settings.color_scheme }}-scheme spacing-box">
+  <div class="{{ settings.layout_width }}">
+    <div class="grid-row">
+      <div class="grid-item-md-12">
+        <div class="accordion-wrapper">
+          {% if section.settings.heading != blank %}
+            <div class="heading-header">
+              <h2 class="faq-title {{ section.settings.heading_size }} {{ section.settings.heading_size_mobile }} align-{{ section.settings.heading_alignment }}">
+                {% if section.settings.heading != blank %}{{ section.settings.heading }}{% endif %}
+              </h2>
+            </div>
+          {% endif %}
+          {%- if section.blocks.size > 0 -%}
+            <div class="accordion-inner-card">
+              {% for block in section.blocks %}
+                {% if block.settings.heading != blank %}
+                  <details
+                    class="accordion-detail-item"
+                    {% if section.settings.enable_first_default and forloop.first %}
+                      open
+                    {% endif %}
+                  >
+                    <summary class="according-heading">
+                      <div class="quest-icon-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="18" viewBox="0 0 13 18" fill="none">
+                          <path d="M12.0301 5.39981C12.0301 6.01647 11.9384 6.56647 11.7551 7.0498C11.5884 7.51647 11.3384 7.95814 11.0051 8.3748C10.6717 8.7748 10.1217 9.2498 9.35508 9.7998L8.38008 10.5248C7.79675 10.9581 7.36341 11.4081 7.08008 11.8748C6.79674 12.3415 6.64675 12.8498 6.63008 13.3998H4.50508C4.52175 12.8331 4.60508 12.3415 4.75508 11.9248C4.92174 11.4915 5.13008 11.1165 5.38008 10.7998C5.63008 10.4665 5.91341 10.1748 6.23008 9.9248C6.54675 9.6748 6.86341 9.43314 7.18008 9.1998C7.51341 8.96647 7.83841 8.73314 8.15508 8.4998C8.47175 8.26647 8.74675 8.00814 8.98008 7.7248C9.23008 7.44147 9.43008 7.1248 9.58008 6.7748C9.73008 6.40814 9.80508 5.98314 9.80508 5.4998C9.80508 4.56647 9.48841 3.83314 8.85508 3.29981C8.22175 2.76647 7.33841 2.4998 6.20508 2.4998C5.07175 2.4998 4.17174 2.78314 3.50508 3.3498C2.83841 3.91647 2.44675 4.6998 2.33008 5.6998L0.0800781 5.5498C0.296745 3.93314 0.930078 2.6998 1.98008 1.8498C3.04674 0.983138 4.44675 0.549805 6.18008 0.549805C7.99675 0.549805 9.42175 0.983138 10.4551 1.8498C11.5051 2.6998 12.0301 3.88314 12.0301 5.39981ZM4.40508 17.9998V15.5498H6.78008V17.9998H4.40508Z" fill="currentColor"/>
+                        </svg>
+                      </div>
+                      <h4 class="according-title">{{ block.settings.heading }}</h4>
+                      <div class="arrow-icon-wrapper">
+                        <div class="arrow-icon-inner">
+                          <span class="arrow-icon-item">
+                            <svg
+                              class="arrow-icon-button"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="18.414"
+                              height="18.385"
+                              viewBox="0 0 18.414 18.385"
+                            >
+                              <g fill="none" stroke="currentColor" stroke-linecap="square" stroke-width="2">
+                                <path data-name="Path 1928" d="M16 9.192H1"></path>
+                                <path data-name="Path 1929" d="m9.22152055 1.4139461 7.7781746 7.7781746"></path>
+                                <path data-name="Path 1930" d="m9.2219461 16.97047945 7.7781746-7.7781746"></path>
+                              </g>
+                            </svg>
+                          </span>
+                        </div>
+                      </div>
+                    </summary>
+                    <div class="accordion-content rte">
+                      {{ block.settings.content | replace: '<p></p>', '<br>' }}
+                    </div>
+                  </details>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #shopify-section-{{ section.id }} {
+     --topSpace:{{ section.settings.top_space_desktop }}px;
+     --bottomSpace:{{ section.settings.bottom_space_desktop }}px;
+   }
+
+   @media only screen and (max-width:767px) {
+     #shopify-section-{{ section.id }}.shopify-section{
+       --topSpace:{{ section.settings.top_space_mobile }}px;
+       --bottomSpace:{{ section.settings.bottom_space_mobile }}px;
+     }
+
+   }
+</style>
+{% schema %}
+{
+  "name": "t:sections.collapsible_content.name",
+  "tag": "section",
+  "class": "section-accordion",
+  "disabled_on": {
+    "groups": ["header", "aside"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_first_default",
+      "label": "t:sections.collapsible_content.settings.enable_first_default.label",
+      "default": false
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Collapsible content",
+      "label": "t:common.global.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "default": "h2",
+      "label": "t:common.heading_size.desktop_label",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:common.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:common.heading_size.options.large.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:common.heading_size.options.medium.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:common.heading_size.options.small.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:common.heading_size.options.extra_small.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_size_mobile",
+      "default": "h3_mobile",
+      "label": "t:common.heading_size.mobile_label",
+      "options": [
+        {
+          "value": "h1_mobile",
+          "label": "t:common.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h2_mobile",
+          "label": "t:common.heading_size.options.large.label"
+        },
+        {
+          "value": "h3_mobile",
+          "label": "t:common.heading_size.options.medium.label"
+        },
+        {
+          "value": "h4_mobile",
+          "label": "t:common.heading_size.options.small.label"
+        },
+        {
+          "value": "h5_mobile",
+          "label": "t:common.heading_size.options.extra_small.label"
+        }
+      ]
+    },
+    {
+      "type": "text_alignment",
+      "id": "heading_alignment",
+      "label": "t:common.global.heading_alignment.label",
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.colors.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "primary",
+      "label": "t:common.global.color_scheme.label"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.section_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 0,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 80,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "content",
+      "name": "t:sections.collapsible_content.blocks.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Collapsible row",
+          "label": "t:common.global.heading.label"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "default": "<p>Make use of collapsible tabs to provide customers with more specific information so they can decide what to buy.</p>",
+          "label": "t:common.global.description.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.collapsible_content.presets.name",
+      "blocks": [
+        {
+          "type": "content"
+        },
+        {
+          "type": "content"
+        },
+        {
+          "type": "content"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,146 @@
+{
+  "sections": {
+    "banner": {
+      "type": "page-banner",
+      "disabled": true,
+      "settings": {
+        "banner_height_desktop": "small",
+        "banner_height_mobile": "small",
+        "heading": "Attire types",
+        "description": "Fashion trends are popular styles or designs that gain widespread Fashion trends are popular styles or designs that gain widespread Fashion trends.",
+        "heading_size": "h1",
+        "heading_size_mobile": "h1_mobile",
+        "content_width": "small",
+        "heading_alignment": "center",
+        "color_scheme": "secondary",
+        "bg_color_opacity": "#000000",
+        "overlay_opacity": 0,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 0
+      }
+    },
+    "scrolling_text_HG4Y6M": {
+      "type": "scrolling-text",
+      "blocks": {
+        "text_fytw8K": {
+          "type": "text",
+          "settings": {
+            "text": "New <strong>Collections<\/strong>",
+            "color": "",
+            "highlighted": "",
+            "enable_text_gradient": false,
+            "textbackground": ""
+          }
+        }
+      },
+      "block_order": ["text_fytw8K"],
+      "settings": {
+        "height": "height-ratio-adapt",
+        "heading_font_size": 80,
+        "heading_font_size_mobile": 54,
+        "scrolling_speed": 15,
+        "direction": "rtl",
+        "items_gap": 15,
+        "font_family": "heading",
+        "color_scheme": "",
+        "overlay_color": "#000000",
+        "overlay_opacity_image": 0,
+        "top_space_desktop": 50,
+        "bottom_space_desktop": 60,
+        "top_space_mobile": 20,
+        "bottom_space_mobile": 10
+      }
+    },
+    "media_grid_PgD8bp": {
+      "type": "media-grid",
+      "blocks": {
+        "grid_4JLH9G": {
+          "type": "grid",
+          "settings": {
+            "media_image": "shopify:\/\/shop_images\/vr.jpg",
+            "heading": "Airpods with Good Music",
+            "heading_size": "h4",
+            "heading_size_mobile": "h5_mobile",
+            "description": "",
+            "description_size": "textMedium",
+            "column": 2,
+            "row": 1,
+            "content_position": "mid-center",
+            "content_alignment": "center",
+            "content_width": "large",
+            "btn_text": "Shop now",
+            "btn_link": "",
+            "btn_size": "medium",
+            "heading_color": "#ffffff",
+            "text_color": "#ffffff",
+            "btn_bg_color": "#FFFFFF",
+            "btn_text_color": "#000000",
+            "btn_border_color": "#FFFFFF",
+            "btn_hover_color": "#000000",
+            "btn_hover_text_color": "#FFFFFF",
+            "btn_hover_border_color": "#000000",
+            "overlay_background_color": "#000000",
+            "overlay_background_opacity": 0
+          }
+        },
+        "grid_hKkCPr": {
+          "type": "grid",
+          "settings": {
+            "media_image": "shopify:\/\/shop_images\/smart-watch.jpg",
+            "heading": "Smart Watches",
+            "heading_size": "h3",
+            "heading_size_mobile": "h3_mobile",
+            "description": "",
+            "description_size": "textMedium",
+            "column": 2,
+            "row": 1,
+            "content_position": "mid-center",
+            "content_alignment": "center",
+            "content_width": "large",
+            "btn_text": "Shop now",
+            "btn_link": "",
+            "btn_size": "medium",
+            "heading_color": "#ffffff",
+            "text_color": "#ffffff",
+            "btn_bg_color": "#FFFFFF",
+            "btn_text_color": "#000000",
+            "btn_border_color": "#FFFFFF",
+            "btn_hover_color": "#000000",
+            "btn_hover_text_color": "#FFFFFF",
+            "btn_hover_border_color": "#000000",
+            "overlay_background_color": "#000000",
+            "overlay_background_opacity": 0
+          }
+        }
+      },
+      "block_order": ["grid_4JLH9G", "grid_hKkCPr"],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "primary",
+        "grid_row_gap": 26,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 20,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "main": {
+      "type": "main-collection-list",
+      "settings": {
+        "collections_per_page": 12,
+        "collections_column": 3,
+        "image_size": "auto",
+        "sort": "alphabetical",
+        "title_postion": "align-center",
+        "color_scheme": "primary",
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 30,
+        "top_space_mobile": 20,
+        "bottom_space_mobile": 40
+      }
+    }
+  },
+  "order": ["banner", "scrolling_text_HG4Y6M", "media_grid_PgD8bp", "main"]
+}

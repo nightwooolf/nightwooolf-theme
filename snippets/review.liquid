@@ -1,0 +1,32 @@
+{%- if product.metafields.reviews.rating.value > 0 -%}
+  {% liquid
+    assign rating_decimal =
+    assign ratingValue = product.metafields.reviews.rating.value.rating | floor
+    assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
+    if decimal >= 0.3 and decimal <= 0.7
+      assign rating_decimal = 0.5
+    elsif decimal > 0.7
+      assign rating_decimal = 1
+    endif
+  %}
+
+  <div class="reviews-wrapper">
+    <ul class="no-bullet ratings content-justify-center">
+      {% for i in (1..5) %}
+        {% if i < ratingValue %}
+          <li>
+            <svg width="35" height="33" viewBox="0 0 35 33" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M18.9856 0.966856L22.402 11.5442L33.5169 11.5168C34.9199 11.5168 35.4483 13.2569 34.2184 14.1498L25.3356 20.5727L28.7885 31.1318C29.2349 32.4801 27.6132 33.546 26.5473 32.635L17.6555 26.1483L8.67249 32.6988C7.45168 33.5825 6.10332 32.389 6.61351 30.8402L9.97529 20.5727L0.974105 14.0587C-0.17382 13.2296 0.500358 11.4257 1.89427 11.5168L12.9089 11.5442L16.3253 0.966856C16.7353 -0.326837 18.5756 -0.317726 18.9856 0.966856Z"
+                  fill="#F5512B"></path>
+            </svg>
+          </li>
+        {% elsif ratingValue < i and rating_decimal == 0.5 %}
+
+        {% else %}
+
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}

@@ -1,0 +1,69 @@
+{%- if sizedownOption == 'size' and block.settings.size_chart != blank -%}
+  {% assign size_chart = pages[block.settings.size_chart] %}
+  {% capture sizechartContetnt %}
+      {% if size_chart != blank %}
+        <div class="size-chart-content rte">
+            {{
+              size_chart.content
+              | replace: '<table', '<div class="table-wrapper table-scroll"><table'
+              | replace: '</table>', '</table></div>'
+            }}
+      </div>
+      {% endif %}
+  {% endcapture %}
+  {% if sizechartContetnt != blank %}
+    <side-drawer class="product-popup-wrapper">
+      <a
+        href="#size-chart-drawer"
+        class="unique-product-btn text-underline"
+        data-sidedrawer-open
+        data-id="size-chart-drawer"
+      >
+        <svg width="22" height="12" viewBox="0 0 22 12" fill="none">
+          <path d="M17 1V6M5 1V5M9.05 1L9 6M13 1V4M4 11H18C20 11 21 10 21 8V4C21 2 20 1 18 1H4C2 1 1 2 1 4V8C1 10 2 11 4 11Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        {% if block.settings.size_chart_text != blank %}
+          <span>{{ block.settings.size_chart_text }}</span>
+        {% endif %}
+      </a>
+    </side-drawer>
+    <side-drawer
+      id="size-chart-drawer"
+      class="size-chart-panel side-drawer-panel"
+    >
+      <div class="blur-layer-bg" data-sideDrawer-close></div>
+      <moving-cursor class="moving-cursor">
+        <svg class="close-icon" width="20" height="20" viewBox="0 0 23.691 22.723">
+          <g transform="translate(-126.154 -143.139)">
+            <line x2="23" y2="22" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></line>
+            <path d="M0,22,23,0" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></path>
+          </g>
+        </svg>
+      </moving-cursor>
+      <div class="side-drawer-modal">
+        <div class="side-drawer-modal-inner">
+          <div class="side-drawer-modal-head">
+            <h6 class="side-drawer-modal-title">{{ 'products.product.size_chart' | t }}</h6>
+            <a href="#" class="close-btn" aria-label="Close" data-sideDrawer-close>
+              <svg
+                class="close-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 23.691 22.723"
+              >
+                <g transform="translate(-126.154 -143.139)">
+                  <line x2="23" y2="22" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></line>
+                  <path d="M0,22,23,0" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></path>
+                </g>
+              </svg>
+            </a>
+          </div>
+          <div class="side-drawer-modal-body">
+            {{ sizechartContetnt }}
+          </div>
+        </div>
+      </div>
+    </side-drawer>
+  {% endif %}
+{% endif %}

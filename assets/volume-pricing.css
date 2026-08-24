@@ -1,0 +1,269 @@
+.volume-pricing {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+}
+
+.volume-pricing:not(:has(.volume-pricing__title)) {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.volume-pricing__title {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.volume-pricing__table {
+  width: 100%;
+}
+
+.volume-pricing__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.featured-product-card .volume-pricing__row {
+  padding: 0.375rem 0.75rem;
+}
+
+.volume-pricing__row--even {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.volume-pricing__row--odd {
+  background: var(--color-background, #fff);
+}
+
+/* Active tier (current quantity): left border + checkmark */
+.volume-pricing__row--active {
+  border-inline-start: 3px solid var(--bodyTextColor, currentColor);
+  font-weight: 600;
+}
+
+.volume-pricing__price {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.volume-pricing__checkmark {
+  display: none;
+  color: var(--bodyTextColor, currentColor);
+  font-size: 0.875em;
+}
+
+.volume-pricing__row--active .volume-pricing__checkmark {
+  display: inline;
+}
+
+.volume-pricing__collapsible-wrapper {
+  block-size: 0;
+  overflow-y: clip;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    block-size 0.3s ease;
+}
+
+.volume-pricing__toggle {
+  width: 100%;
+  padding: 0.375rem 0.75rem 0 0.75rem;
+  text-align: left;
+  font-size: 0.75rem;
+  cursor: pointer;
+  margin: 0;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+.volume-pricing__toggle-text {
+  cursor: pointer;
+}
+
+.volume-pricing__show-less {
+  display: none;
+}
+
+.volume-pricing--expanded .volume-pricing__collapsible-wrapper {
+  opacity: 1;
+  block-size: auto;
+}
+
+.volume-pricing--expanded .volume-pricing__show-more {
+  display: none;
+}
+
+.volume-pricing--expanded .volume-pricing__show-less {
+  display: inline;
+}
+
+.volume-pricing-note {
+  display: block;
+  margin-top: 0.25rem;
+  opacity: 0.85;
+}
+
+.volume-pricing-tooltip {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.volume-pricing-tooltip__trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bodyTextColor);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  border: none;
+}
+
+.volume-pricing-tooltip__trigger:hover {
+  background: transparent;
+}
+
+.volume-pricing-tooltip__icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.volume-pricing-tooltip__popover {
+  z-index: 9999;
+  width: 300px;
+  max-width: min(300px, calc(100vw - 24px));
+  max-height: 360px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--bodyColor);
+  color: var(--bodyTextColor);
+  border: 1px solid var(--borderColor);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(var(--shadowColor), 0.15);
+  padding: 12px;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 8px;
+}
+
+.volume-pricing-tooltip--open .volume-pricing-tooltip__popover {
+  display: block;
+}
+
+mini-cart .volume-pricing-tooltip__popover,
+[data-tooltip-context="drawer"] .volume-pricing-tooltip__popover {
+  display: none;
+  transform: translate(-50%);
+  max-height: var(--vp-max-height, 360px);
+  z-index: 99999;
+}
+
+mini-cart
+  .volume-pricing-tooltip.volume-pricing-tooltip--open
+  .volume-pricing-tooltip__popover,
+[data-tooltip-context="drawer"].volume-pricing-tooltip--open
+  .volume-pricing-tooltip__popover {
+  display: block;
+}
+
+mini-cart .volume-pricing-tooltip__popover::before,
+[data-tooltip-context="drawer"] .volume-pricing-tooltip__popover::before {
+  left: 50%;
+  margin-left: -5px;
+}
+
+/* Main cart: fixed positioning via JS (--vp-*) so popover doesn't cause table overflow */
+.cart-wrapper .volume-pricing-tooltip__popover {
+  display: none;
+  position: fixed;
+  left: var(--vp-left, 50%);
+  top: var(--vp-top, 2rem);
+  transform: translateX(-50%);
+  right: auto;
+  max-height: var(--vp-max-height, 360px);
+}
+
+.cart-wrapper .volume-pricing-tooltip--open .volume-pricing-tooltip__popover {
+  display: block;
+}
+
+.cart-wrapper .volume-pricing-tooltip__popover::before {
+  left: 50%;
+  margin-left: -5px;
+}
+
+.volume-pricing-tooltip__popover::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 20px;
+  width: 10px;
+  height: 10px;
+  background: var(--bodyColor);
+  border-left: 1px solid var(--borderColor);
+  border-top: 1px solid var(--borderColor);
+  transform: rotate(45deg);
+}
+
+.volume-pricing-tooltip__popover .volume-pricing__title {
+  display: block;
+  margin-bottom: 8px;
+  font-size: var(--textSmall);
+  font-weight: 600;
+}
+
+/* Cart context: overflow so tooltip can show; contain main-cart horizontal scroll */
+.cart-product-qty,
+.quantity-item {
+  overflow: visible;
+}
+
+.minicart-products {
+  overflow-x: visible;
+}
+
+.cart-wrapper .cart-contents {
+  overflow-x: auto;
+}
+
+.featured-product-card .volume-pricing-tooltip .volume-pricing {
+  margin: 0;
+}
+
+/* Quick view: shift popover left so it stays within the modal */
+.quickview .volume-pricing-tooltip__popover {
+  left: auto;
+  right: 0;
+}
+
+.quickview .volume-pricing-tooltip__popover::before {
+  left: auto;
+  right: 12px;
+}
+
+/* Responsive: popover positioning handled by JS on mobile for product pages */
+@media (max-width: 767px) {
+  .volume-pricing-tooltip__popover {
+    left: auto;
+    max-width: min(300px, calc(100vw - 24px));
+  }
+
+  .volume-pricing-tooltip__popover::before {
+    display: none;
+  }
+
+  .quickview .volume-pricing-tooltip__popover {
+    left: auto;
+  }
+}

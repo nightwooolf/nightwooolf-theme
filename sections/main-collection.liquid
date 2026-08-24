@@ -1,0 +1,343 @@
+{{ 'nouislider.min.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'nouislider.min.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'filter.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'infinite-scroll.js' | asset_url }}" defer="defer"></script>
+<div class="{{ section.settings.color_scheme }}-scheme spacing-box">
+  {% render 'filter-and-sort', results: collection, section: section %}
+  {% paginate collection.products by section.settings.products_per_page %}
+    <div class="{{ settings.layout_width }}">
+      <div class="collection-grid">
+        {% if section.settings.enable_filtering and collection.filters.size > 0 %}
+          {% render 'filters', results: collection, section: section %}
+        {% endif %}
+
+        {% capture activeFilterValue %}
+            {%- for filter in collection.filters -%}
+                {%- for value in filter.active_values -%}
+                  <filter-remove class="facet-tag">
+                    {{ value.label | escape }}
+                    <a class="filter-remove" href="{{ value.url_to_remove }}">
+                     <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 23.691 22.723">
+                        <g transform="translate(-126.154 -143.139)">
+                          <line x2="23" y2="22" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></line>
+                          <path d="M0,22,23,0" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></path>
+                        </g>
+                      </svg>
+                    </a>
+                  </filter-remove>
+                {% endfor %}
+                  {% if filter.type == 'price_range' %}
+                    {%- if filter.min_value.value != null or filter.max_value.value != null -%}
+                      <filter-remove class="facet-tag">
+                        {%- if filter.min_value.value -%}
+                          {{ filter.min_value.value | money }}
+                        {%- else -%}
+                          {{ 0 | money }}
+                        {%- endif -%}
+                        -
+                        {%- if filter.max_value.value -%}
+                          {{ filter.max_value.value | money }}
+                        {%- else -%}
+                          {{ filter.range_max | money }}
+                        {%- endif -%}
+                        <a class="filter-remove" href="{{ filter.url_to_remove }}">
+                          <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 23.691 22.723">
+                            <g transform="translate(-126.154 -143.139)">
+                              <line x2="23" y2="22" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></line>
+                              <path d="M0,22,23,0" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></path>
+                            </g>
+                          </svg>
+                        </a>
+                      </filter-remove>
+                      {% endif %}
+                  {% endif %}
+              {% endfor %}
+          {% endcapture %}
+        <div id="ProductGridContainer" class="product-list-wrapper column-spacing">
+          <div class="facets-apply-list active-filter-desktop">
+            {% if section.settings.enable_filtering and collection.filters.size > 0 and activeFilterValue != blank %}
+              <span class="select-facet-title textBase">{{ 'sections.collection_template.selected_filter' | t }}</span>
+              {{ activeFilterValue }}
+              <a href="{{ collection.url }}" class="btn btn-xsmall fill-btn"
+                ><span>{{ 'sections.collection_template.clear_all' | t }}</span></a
+              >
+            {% endif %}
+          </div>
+          <div class="collection-result" id="result-product-grid" data-id="{{ section.id }}">
+            <div class="loading-overlay gradient"></div>
+            {% if collection.products_count > 0 %}
+              <div class="grid-row">
+                {%- for product in collection.products limit: section.settings.products_per_page -%}
+                  {% assign show_product = true %}
+                  {% assign selected_variant = null %}
+
+                  {% if request.params.color %}
+                    {% assign selected_color = request.params.color %}
+
+                    {% assign show_product = false %}
+                    {%- for variant in product.variants -%}
+                      {% assign variant_color = variant.options[0] | downcase %}
+                      {% if variant_color == selected_color %}
+                        {% assign show_product = true %}
+                        {% assign selected_variant = variant %}
+                        {% break %}
+                      {% endif %}
+                    {%- endfor -%}
+                  {% endif %}
+
+                  {% if show_product %}
+                    {% assign aosDelayAttr = forloop.index | times: 50 %}
+                    {%- capture current -%}{% cycle section.id: 1, 2, 3, 4 %}{%- endcapture -%}
+                    {%- assign placeholder_image = 'product-apparel-' | append: current -%}
+                    {% assign productFormId = 'product-form-'
+                      | append: section.id
+                      | append: forloop.index
+                      | append: '-'
+                      | append: collection.handle
+                    %}
+                    <div class="grid-item-md-4">
+                      {% render 'product-grid',
+                        cardProduct: product,
+                        selectedVariant: selected_variant,
+                        aosDelayAttr: aosDelayAttr,
+                        section: section,
+                        productFormId: productFormId,
+                        placeholder_image: placeholder_image,
+                        imageRatio: section.settings.grid_image_size
+                      %}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% else %}
+              <div class="empty-wrapper">
+                <h2 class="empty-text">{{ 'sections.collection_template.empty' | t }}</h2>
+              </div>
+            {% endif %}
+          </div>
+          {% if section.settings.pagination_type == 'infinite' %}
+            {% if paginate.next %}
+              <div class="pagination-container align-center">
+                <infinite-scroll
+                  class="infinite-scroll button"
+                  data-url="{{ paginate.next.url }}"
+                  data-trigger="infinite"
+                  mode="on-load"
+                >
+                  <svg
+                    width="40"
+                    height="40"
+                    style="shape-rendering: auto; animation-play-state: running; animation-delay: 0s; background: none;"
+                    viewBox="0 0 100 100"
+                    preserveAspectRatio="xMidYMid"
+                  >
+                    <circle cx="50" cy="50" fill="none" stroke="#d9e2ed" stroke-width="6" r="35"
+                            stroke-dasharray="164.93361431346415 56.97787143782138"
+                            style="animation-play-state: running; animation-delay: 0s;"
+                            transform="rotate(115.597 50 50)">
+                      <animateTransform attributeName="transform" type="rotate" calcMode="linear"
+                                        values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s"
+                                        repeatCount="indefinite">
+                      </animateTransform>
+                    </circle>
+                  </svg>
+                </infinite-scroll>
+              </div>
+            {% endif %}
+          {% elsif section.settings.pagination_type == 'on-button' %}
+            {% if paginate.next %}
+              <div class="pagination-container">
+                <infinite-scroll
+                  class="infinite-scroll btn"
+                  data-url="{{ paginate.next.url }}"
+                  mode="on-click"
+                  data-infinite-scroll
+                  tabindex="0"
+                >
+                  <span>{{ 'sections.collection_template.load_more' | t }}</span>
+                  <div class="loader-icon">
+                    <svg
+                      class="loadMore"
+                      width="40"
+                      height="40"
+                      style="shape-rendering: auto; animation-play-state: running; animation-delay: 0s; background: none;"
+                      viewBox="0 0 100 100"
+                      preserveAspectRatio="xMidYMid"
+                    >
+                      <circle cx="50" cy="50" fill="none" stroke="#d9e2ed" stroke-width="6" r="35"
+                              stroke-dasharray="164.93361431346415 56.97787143782138"
+                              style="animation-play-state: running; animation-delay: 0s;"
+                              transform="rotate(115.597 50 50)">
+                        <animateTransform attributeName="transform" type="rotate" calcMode="linear"
+                                          values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s"
+                                          repeatCount="indefinite">
+                        </animateTransform>
+                      </circle>
+                    </svg>
+                  </div>
+                </infinite-scroll>
+              </div>
+            {% endif %}
+          {% else %}
+            {%- if paginate.pages > 1 -%}
+              <div class="pagination-container">
+                {% render 'pagination', paginate: paginate, anchor: '' %}
+              </div>
+            {%- endif -%}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endpaginate %}
+</div>
+
+<style>
+  #shopify-section-{{ section.id }} {
+     --topSpace:{{ section.settings.top_space_desktop }}px;
+     --bottomSpace:{{ section.settings.bottom_space_desktop }}px;
+   }
+
+   @media only screen and (max-width:767px) {
+     #shopify-section-{{ section.id }}.shopify-section{
+       --topSpace:{{ section.settings.top_space_mobile }}px;
+       --bottomSpace:{{ section.settings.bottom_space_mobile }}px;
+     }
+
+   }
+</style>
+
+{% schema %}
+{
+  "name": "t:sections.main_collection.name",
+  "tag": "section",
+  "class": "section-collection-filters",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 32,
+      "step": 1,
+      "default": 12,
+      "label": "t:sections.main_collection.settings.products_per_page.label"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.sort_filter.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "default": true,
+      "label": "t:sections.main_collection.settings.enable_filtering.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "default": true,
+      "label": "t:sections.main_collection.settings.enable_sorting.label"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.pagination.content"
+    },
+
+    {
+      "type": "select",
+      "id": "pagination_type",
+      "label": "t:sections.main_collection.settings.pagination_type.label",
+      "default": "pagination",
+      "options": [
+        {
+          "value": "pagination",
+          "label": "t:sections.main_collection.settings.pagination_type.settings.pagination.label"
+        },
+        {
+          "value": "infinite",
+          "label": "t:sections.main_collection.settings.pagination_type.settings.infinite.label"
+        },
+        {
+          "value": "on-button",
+          "label": "t:sections.main_collection.settings.pagination_type.settings.on-button.label"
+        }
+      ]
+    },
+
+    {
+      "type": "select",
+      "id": "grid_image_size",
+      "label": "t:common.image_size.label",
+      "default": "square",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:common.image_size.options.auto.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:common.image_size.options.landscape.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:common.image_size.options.portrait.label"
+        },
+        {
+          "value": "square",
+          "label": "t:common.image_size.options.square.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.colors.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "primary",
+      "label": "t:common.global.color_scheme.label"
+    },
+
+    {
+      "type": "header",
+      "content": "t:common.header.section_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 0,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ]
+}
+{% endschema %}

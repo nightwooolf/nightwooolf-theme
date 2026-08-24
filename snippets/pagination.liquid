@@ -1,0 +1,34 @@
+<ul class="no-bullet pagination">
+  <li class="pagi-prev{% unless paginate.previous %} disabled{% endunless %}">
+    <{% if paginate.previous %}a href="{{ paginate.previous.url }}{{ anchor }}" {% else %}span{% endif %} class="pagination-icon" aria-label="{{ 'general.pagination.previous' | t }}">
+       <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.45896 0.480602C5.74582 0.181794 6.22059 0.172104 6.5194 0.45896L11.5194 5.25896C11.663 5.39679 11.7459 5.58602 11.7498 5.785C11.7538 5.98397 11.6786 6.17637 11.5406 6.31983L6.54062 11.5198C6.25353 11.8184 5.77875 11.8277 5.48017 11.5406C5.18159 11.2535 5.17228 10.7787 5.45937 10.4802L9.23838 6.55H1C0.585786 6.55 0.25 6.21421 0.25 5.8C0.25 5.38579 0.585786 5.05 1 5.05H9.13577L5.4806 1.54104C5.18179 1.25419 5.1721 0.77941 5.45896 0.480602Z" fill="currentColor"/>
+      </svg>
+
+    </{% if paginate.previous %}a{% else %}span{% endif %}>
+  </li>
+  {% for page in paginate.parts %}
+  {% if page.is_link %}
+  <li class="pagi-nub">
+    <a href="{{ page.url }}{{ anchor }}" class="pagi-link" aria-label="{{ 'general.pagination.page' | t: number: page.title }}">{{page.title}}</a>
+  </li>
+  {%- else -%} 
+  {%- if page.title == paginate.current_page -%}
+  <li class="pagi-nub active">
+      <p class="pagination-text">{{ page.title }}</p>
+  </li> 
+  {%- else -%}  
+  <li class="pagi-nub">
+      <p class="pagination-text">{{ page.title }}</p>
+  </li>  
+  {%- endif -%}
+  {% endif %}
+  {% endfor %}
+  <li class="pagi-next  {% unless paginate.next %} disabled{% endunless %}">
+    <{% if paginate.next %}a href="{{ paginate.next.url }}{{ anchor }}" {% else %}span{% endif %} class="pagination-icon" aria-label="{{ 'general.pagination.next' | t }}">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.45896 0.480602C5.74582 0.181794 6.22059 0.172104 6.5194 0.45896L11.5194 5.25896C11.663 5.39679 11.7459 5.58602 11.7498 5.785C11.7538 5.98397 11.6786 6.17637 11.5406 6.31983L6.54062 11.5198C6.25353 11.8184 5.77875 11.8277 5.48017 11.5406C5.18159 11.2535 5.17228 10.7787 5.45937 10.4802L9.23838 6.55H1C0.585786 6.55 0.25 6.21421 0.25 5.8C0.25 5.38579 0.585786 5.05 1 5.05H9.13577L5.4806 1.54104C5.18179 1.25419 5.1721 0.77941 5.45896 0.480602Z" fill="currentColor"/>
+      </svg>
+    </{% if paginate.next %}a{% else %}span{% endif %}>
+  </li>
+</ul>

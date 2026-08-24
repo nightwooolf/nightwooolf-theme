@@ -1,0 +1,115 @@
+{% if section.settings.newsletter_enable %}
+  {% assign form = false %}
+  {% capture newsletterpopup %}
+    {% if section.settings.newsletter_img != blank %}
+      <div class="popup-image">
+         	{% render 'image', image: section.settings.newsletter_img %}
+      </div>
+      {% endif %}
+      <div class="signup-popup-cont">
+        {% if section.settings.newsletter_heading != blank %}
+          <div class="popup-heading">
+              <h3 class="popup-title">{{ section.settings.newsletter_heading }}</h3>
+          </div>
+        {% endif  %}
+     {% if section.settings.newsletter_content != blank %}
+          <div class="popup-descption">
+              {{ section.settings.newsletter_content }}
+          </div>
+        {% endif  %}
+        {%- form 'customer',id: 'newsletter-popup-form', class: 'news-letter__form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+		 <input type="hidden" name="contact[context]" value="newsletter_popup">
+        {%- if form.posted_successfully? -%}
+			{% assign form = true %}
+                <div class="form-message__wrapper success">
+                  <div id="Newsletter-success--{{ section.id }}" class="form-message-inner" tabindex="-1">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <circle cx="10" cy="10" r="10" fill="currentColor"></circle>
+                      <path d="M13.756 6.22351L8.60712 11.3724L6.30231 9.06764C6.0043 8.76962 5.52147 8.76962 5.22351 9.06764C4.9255 9.36566 4.9255 9.84849 5.22351 10.1464L8.06764 12.9906C8.21604 13.139 8.41216 13.2144 8.60703 13.2144C8.80191 13.2144 8.99679 13.1402 9.14641 12.9906L14.8347 7.30231C15.1327 7.0043 15.1327 6.52147 14.8347 6.22351C14.5367 5.9255 14.0539 5.9255 13.7559 6.22351H13.756Z" fill="var(--errorMsgbg)"></path>
+                    </svg>
+                    {{- 'newsletter.success' | t -}}
+                  </div>
+                </div>
+              {%- endif -%}
+							{%- if form.errors and form.context == 'newsletter_popup' -%}              
+							
+							  <div id="Newsletter-error--{{ section.id }}" class="form-message__wrapper error" tabindex="-1">
+                                    <div class="error_heading">
+                                        <span class="alerticon">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                              <circle cx="10" cy="10" r="10" fill="currentColor"></circle>
+                                              <path d="M7.05331 7L10.004 10.0269L7 13M12.9467 7L9.99602 10.0269L13 13" stroke="var(--errorMsgbg)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
+                                        </span>
+        								{{- form.errors.translated_fields.email | capitalize }}
+        								{{ form.errors.messages.email -}}
+                                  </div>
+							  </div>
+							
+							{%- endif -%}
+                  <div class="form-field">
+                    <label class="hidden" for="CustomerEmail-{{section.id}}">{{ 'newsletter.label' | t }}</label>
+                      <input type="text" class="form-input-field" name="contact[email]" 
+										 id="CustomerEmail-{{section.id}}" 
+										 autocomplete="email"  
+										 autocapitalize="off" 
+										 placeholder="Email" 
+										 pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)*[a-zA-Z]{2,}))$" 
+										 required>
+                      <button type="submit" name="commit"  class="btn btn-medium btn-w100 fill-btn"><span>{{ 'newsletter.button_label' | t }}</span></button>
+                  </div>
+        {% endform %}
+     {% if section.section.settings.show_social %}
+          <div class="social-icons-wrapper">
+                {% render 'social-media' %}
+          </div>
+      {% endif %}
+      </div>
+{% endcapture %}
+  <newsletter-popup
+    data-newsletterpopup="true"
+    data-model-main-body
+    data-expiry="{{ section.settings.popup_cookie_set }}"
+  >
+    <div
+      id="newsletter-popup"
+      class="newsletter-popup modal-drawer-panel "
+    >
+      <div class="blur-layer-bg" data-popup-close></div>
+      <moving-cursor class="moving-cursor">
+        <svg class="close-icon" width="20" height="20" viewBox="0 0 23.691 22.723">
+          <g transform="translate(-126.154 -143.139)">
+            <line x2="23" y2="22" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></line>
+            <path d="M0,22,23,0" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></path>
+          </g>
+        </svg>
+      </moving-cursor>
+
+      <div class="modal-drawer-card">
+        <div class="modal-drawer-inner">
+          <a href="#" class="close-btn" aria-label="Close" data-popup-close>
+            <svg
+              class="close-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 23.691 22.723"
+            >
+              <g transform="translate(-126.154 -143.139)">
+                <line x2="23" y2="22" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></line>
+                <path d="M0,22,23,0" transform="translate(126.5 143.5)" fill="none" stroke="CurrentColor" stroke-width="2"></path>
+              </g>
+            </svg>
+          </a>
+          <div class="modal-drawer--body" data-model-content-wrapper>
+            <div class="sign-popup-wrapper">
+              {{ newsletterpopup }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </newsletter-popup>
+  <script src="{{ 'newsletter-popup.js' | asset_url }}" defer></script>
+{% endif %}

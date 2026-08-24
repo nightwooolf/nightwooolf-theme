@@ -1,0 +1,39 @@
+{%- if product.available -%}
+  <div class="badge-card">
+    {% if settings.sale_badge and product.compare_at_price_max %}
+      {% if product.compare_at_price_max > product.price %}
+        <span class="badge-item  badge-sale">{{ 'general.badges.sale' | t }}</span>
+      {% endif %}
+    {% endif %}
+    {% if settings.preorder_badge %}
+      {% if product.selected_or_first_available_variant.inventory_quantity <= 0
+        and product.selected_or_first_available_variant.inventory_policy == 'continue'
+      %}
+        <span class="badge-item badge-preorder">{{ 'general.badges.preorder' | t }}</span>
+      {% endif %}
+    {% endif %}
+    {% if settings.custom_tag %}
+      {% liquid
+        assign customtags = settings.custom_tag | downcase | split: ','
+        assign status = false
+        for tag in customtags
+          for productTagName in product.tags
+            assign productTagName = productTagName | downcase
+            if productTagName contains tag
+              assign status = true
+            endif
+          endfor
+        endfor
+      %}
+      {% if status == true and settings.custom_tag_badge != blank %}
+        <span class="badge-item badge-custom">{{ settings.custom_tag_badge }}</span>
+      {% endif %}
+    {% endif %}
+  </div>
+{% else %}
+  {% if settings.soldout_badge %}
+    <div class="badge-card">
+      <span class="badge-item badge-sold">{{ 'general.badges.sold' | t }}</span>
+    </div>
+  {% endif %}
+{% endif %}

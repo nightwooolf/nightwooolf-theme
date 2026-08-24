@@ -1,0 +1,280 @@
+<div class="{{ section.settings.color_scheme }}-scheme spacing-box">
+  <div class="{{ settings.layout_width }}">
+    <div class="news-letter-card">
+      <div class="grid-row items-align-center">
+        <div class="grid-item-md-12">
+          {% if section.settings.heading != blank or section.settings.description != blank %}
+            <div class="heading-header align-{{ section.settings.text_alignment }}">
+              {% if section.settings.heading != blank %}
+                <h2 class="news-letter-title {{  section.settings.heading_size }} {{  section.settings.heading_size_mobile }}">
+                  {{ section.settings.heading }}
+                </h2>
+              {% endif %}
+              {% if section.settings.description != blank %}
+                <div class="textXLarge">
+                  {{ section.settings.description | replace: '<p></p>', '<br>' }}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+          <div class="news-letter-form">
+            {% assign formid = 'contact_form' | append: section.id %}
+            {%- form 'customer', id: formid, class: 'signup-form' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <input type="hidden" name="contact[context]" value="newsletter_popup">
+              {%- if form.posted_successfully? -%}
+                {% assign form = true %}
+                <div class="form-message__wrapper success">
+                  <div id="Newsletter-success--{{ section.id }}" class="form-message-inner" tabindex="-1">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <circle cx="10" cy="10" r="10" fill="currentColor"></circle>
+                      <path d="M13.756 6.22351L8.60712 11.3724L6.30231 9.06764C6.0043 8.76962 5.52147 8.76962 5.22351 9.06764C4.9255 9.36566 4.9255 9.84849 5.22351 10.1464L8.06764 12.9906C8.21604 13.139 8.41216 13.2144 8.60703 13.2144C8.80191 13.2144 8.99679 13.1402 9.14641 12.9906L14.8347 7.30231C15.1327 7.0043 15.1327 6.52147 14.8347 6.22351C14.5367 5.9255 14.0539 5.9255 13.7559 6.22351H13.756Z" fill="var(--errorMsgbg)"></path>
+                    </svg>
+                    {{- 'newsletter.success' | t -}}
+                  </div>
+                </div>
+              {%- endif -%}
+              {%- if form.errors -%}
+                <div id="Newsletter-error--{{ section.id }}" class="form-message__wrapper error" tabindex="-1">
+                  <div class="error_heading">
+                    <span class="alerticon">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <circle cx="10" cy="10" r="10" fill="currentColor"></circle>
+                        <path d="M7.05331 7L10.004 10.0269L7 13M12.9467 7L9.99602 10.0269L13 13" stroke="var(--errorMsgbg)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                    </span>
+                    {{- form.errors.translated_fields.email | capitalize }}
+                    {{ form.errors.messages.email -}}
+                  </div>
+                </div>
+              {%- endif -%}
+              <fieldset>
+                <div class="form-field">
+                  <input
+                    name="contact[email]"
+                    class="form-input-field"
+                    id="CustomerEmail-{{section.id}}"
+                    autocomplete="email"
+                    autocapitalize="off"
+                    placeholder="Your email address"
+                    pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)*[a-zA-Z]{2,}))$"
+                    required
+                  >
+                  <label class="hidden" for="CustomerEmail-{{section.id}}">{{ 'newsletter.label' | t }}</label>
+                </div>
+                <button class="btn btn-large" type="submit" aria-label="{{ 'newsletter.button_label' | t }}">
+                  <span>
+                    {{ 'newsletter.button_label' | t }}
+                    <svg width="17 " height="12 " viewBox="0 0 17 12 " fill="none ">
+                      <path d="M1 5.7619L15.5588 5.7619M11.5882 11L16 5.7619L11.5882 1 " stroke="currentColor " stroke-width="1.5 " stroke-linecap="round " stroke-linejoin="round "></path>
+                    </svg>
+                  </span>
+                </button>
+              </fieldset>
+            {% endform %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+    {% if section.settings.image != blank  %}
+    #shopify-section-{{ section.id }} .spacing-box {
+      background: url('{{ section.settings.image |image_url }}');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+       --overlayBgColor:{{ section.settings.bg_color_opacity }};
+      --overlayOpacity:{{ section.settings.overlay_opacity | divided_by:100.0 }};
+    }
+  {% endif %}
+
+  #shopify-section-{{ section.id }} .spacing-box:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--overlayBgColor);
+    opacity: var(--overlayOpacity);
+  }
+
+  #shopify-section-{{ section.id }} {
+    --topSpace:{{ section.settings.top_space_desktop }}px;
+    --bottomSpace:{{ section.settings.bottom_space_desktop }}px;
+      position: relative;
+
+  }
+  @media only screen and (max-width:767px) {
+    #shopify-section-{{ section.id }}.shopify-section{
+      --topSpace:{{ section.settings.top_space_mobile }}px;
+      --bottomSpace:{{ section.settings.bottom_space_mobile }}px;
+    }
+
+  }
+</style>
+{% schema %}
+{
+  "name": "t:sections.newsletter.name",
+  "tag": "section",
+  "class": "newsletter-section newsletter-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.newsletter.settings.background_image.label"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Our Collections",
+      "label": "t:common.global.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "default": "h2",
+      "label": "t:common.heading_size.desktop_label",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:common.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:common.heading_size.options.large.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:common.heading_size.options.medium.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:common.heading_size.options.small.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:common.heading_size.options.extra_small.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_size_mobile",
+      "default": "h3_mobile",
+      "label": "t:common.heading_size.mobile_label",
+      "options": [
+        {
+          "value": "h1_mobile",
+          "label": "t:common.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h2_mobile",
+          "label": "t:common.heading_size.options.large.label"
+        },
+        {
+          "value": "h3_mobile",
+          "label": "t:common.heading_size.options.medium.label"
+        },
+        {
+          "value": "h4_mobile",
+          "label": "t:common.heading_size.options.small.label"
+        },
+        {
+          "value": "h5_mobile",
+          "label": "t:common.heading_size.options.extra_small.label"
+        }
+      ]
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:common.global.description.label",
+      "default": "<p>Add short discription here</p>"
+    },
+    {
+      "type": "text_alignment",
+      "id": "text_alignment",
+      "label": "t:common.global.alignment.label",
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.colors.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "primary",
+      "label": "t:common.global.color_scheme.label"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_opacity",
+      "default": "#000000",
+      "label": "t:common.global.image_overlay.label"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "t:common.global.overlay_opacity.label",
+      "default": 34,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.section_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 80,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 80,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.newsletter.presets.name"
+    }
+  ]
+}
+{% endschema %}

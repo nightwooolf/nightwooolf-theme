@@ -1,0 +1,10 @@
+{% if variant.featured_media != blank %}
+  {% capture colorImageSelected %}
+    <div class="media-content">
+      {%- render 'image', image: variant.featured_media -%}
+    </div>
+  {% endcapture %}
+  <script>
+    {{- colorImageSelected | json -}}
+  </script>
+{% endif %}

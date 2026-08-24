@@ -1,0 +1,345 @@
+<div class="{{ section.settings.color_scheme }}-scheme spacing-box">
+  <div class="{{ settings.layout_width }}" data-content-main>
+    <div class="grid-row">
+      <div class="grid-item-md-6 grid-item-l-7">
+        <div
+          class="lookbook-image"
+          {% if settings.animation_enable %}
+            data-aos="fade-right"
+            data-aos-easing="ease"
+            data-aos-offset="0"
+            data-aos-duration="1000"
+            data-aos-delay="0"
+          {% endif %}
+        >
+          {% if section.settings.image != blank %}
+            <div
+              class="media-image"
+              style="--mediaRatio:{{ 1 | divided_by : section.settings.image.aspect_ratio | times: 100 | minus : 1 }}%"
+            >
+              {%- render 'image', image: section.settings.image -%}
+            </div>
+          {% else %}
+            <div class="media-image" style="--mediaRatio:100%">
+              {{ 'collection-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {% endif %}
+          {% if section.blocks.size > 0 %}
+            <ul class="no-bullet dots-lookbook">
+              {% for block in section.blocks %}
+                <li
+                  class="tab-item-list"
+                  id="spot-{{ block.id }}"
+                  {{ block.shopify_attributes }}
+                >
+                  <button
+                    class="dots-lookbook-btn {% if forloop.first%} active{% endif %}"
+                    data-index="{{ forloop.index0 }}"
+                    data-lookbook-btn
+                    role="button"
+                    aria-label="shopt"
+                  >
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                      <rect x="4" width="2" height="10" fill="currentColor" />
+                      <rect y="4" width="10" height="2" fill="currentColor" />
+                    </svg>
+                  </button>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+      <div class="grid-item-md-6 grid-item-l-5">
+        <div
+          class="lookbook-content"
+          {% if settings.animation_enable %}
+            data-aos="fade-up"
+            data-aos-easing="ease"
+            data-aos-offset="0"
+            data-aos-duration="1000"
+            data-aos-delay="100"
+          {% endif %}
+        >
+          {% if section.settings.heading != blank or section.settings.description != blank %}
+            <div class="heading-header align-{{ section.settings.content_alignment }}">
+              {% if section.settings.heading != blank %}
+                <h2 class="{{ section.settings.heading_size }} {{ section.settings.heading_size_mobile }}">
+                  {{ section.settings.heading }}
+                </h2>
+              {% endif %}
+              {% if section.settings.description != blank %}
+                <p>{{ section.settings.description }}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+          {% if section.blocks.size > 0 %}
+            <div
+              class="products-lookbook slider-wrapper column-spacing"
+              data-lookbook-slide
+              {% if section.blocks.size > 1 %}
+                data-flickity-slider
+                data-flickity='
+                  {
+                  "cellAlign": "left",
+                  "wrapAround": true,
+                  "resize": true,
+                  "pageDots": false,
+                  "prevNextButtons": true
+
+                  }
+                '
+              {% endif %}
+            >
+              {% for block in section.blocks %}
+                {%- capture current -%}{% cycle section.id: 1, 2, 3, 4 %}{%- endcapture -%}
+                {%- assign placeholder_image = 'product-apparel-' | append: current -%}
+                <div
+                  id="spotlight-{{ block.id }}"
+                  class="product-media-cards spotlight-content"
+                  {{ block.shopify_attributes }}
+                >
+                  {% liquid
+                    assign product = block.settings.product_list
+                    assign productFormId = 'product-form-' | append: section.id | append: forloop.index | append: '-' | append: product.handle
+                    render 'product-grid', cardProduct: product, section: section, block: block, productFormId: productFormId, placeholder_image: placeholder_image
+                  %}
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+   {% for block in section.blocks %}
+    #spot-{{ block.id }}{
+      position:absolute;
+      top: calc({{ block.settings.vertical }}% - 15px);
+      left: calc({{ block.settings.horizontal }}% - 15px);
+      --dotBtnBg: {{ block.settings.spot_color_bg }};
+      --dotBtnColor: {{ block.settings.spot_color }};
+    }
+  {% endfor %}
+  #shopify-section-{{ section.id }} {
+    --topSpace:{{ section.settings.top_space_desktop }}px;
+    --bottomSpace:{{ section.settings.bottom_space_desktop }}px;
+  }
+
+  @media only screen and (max-width:767px) {
+    #shopify-section-{{ section.id }}.shopify-section{
+      --topSpace:{{ section.settings.top_space_mobile }}px;
+      --bottomSpace:{{ section.settings.bottom_space_mobile }}px;
+    }
+
+  }
+</style>
+{% schema %}
+{
+  "name": "t:sections.shop_the_look.name",
+  "tag": "section",
+  "class": "section-lookbook",
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "label": "t:common.global.image.label",
+      "id": "image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Our products",
+      "label": "t:common.global.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "default": "h2",
+      "label": "t:common.heading_size.desktop_label",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:common.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:common.heading_size.options.large.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:common.heading_size.options.medium.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:common.heading_size.options.small.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:common.heading_size.options.extra_small.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_size_mobile",
+      "default": "h3_mobile",
+      "label": "t:common.heading_size.mobile_label",
+      "options": [
+        {
+          "value": "h1_mobile",
+          "label": "t:common.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h2_mobile",
+          "label": "t:common.heading_size.options.large.label"
+        },
+        {
+          "value": "h3_mobile",
+          "label": "t:common.heading_size.options.medium.label"
+        },
+        {
+          "value": "h4_mobile",
+          "label": "t:common.heading_size.options.small.label"
+        },
+        {
+          "value": "h5_mobile",
+          "label": "t:common.heading_size.options.extra_small.label"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "t:common.global.description.label"
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_alignment",
+      "label": "t:common.global.content_alignment.label",
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.colors.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "primary",
+      "label": "t:common.global.color_scheme.label"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.section_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 20,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 20,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "spot",
+      "name": "t:sections.shop_the_look.blocks.name",
+      "settings": [
+        {
+          "type": "product",
+          "label": "t:sections.shop_the_look.blocks.settings.product.label",
+          "id": "product_list"
+        },
+        {
+          "type": "range",
+          "label": "t:sections.shop_the_look.blocks.settings.horizontal.label",
+          "id": "horizontal",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "label": "t:sections.shop_the_look.blocks.settings.vertical.label",
+          "id": "vertical",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 10
+        },
+        {
+          "type": "color",
+          "label": "t:sections.shop_the_look.blocks.settings.spot_color_bg.label",
+          "id": "spot_color_bg",
+          "default": "#282828"
+        },
+        {
+          "type": "color",
+          "label": "t:sections.shop_the_look.blocks.settings.spot_color.label",
+          "id": "spot_color",
+          "default": "#FFFFFF"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.shop_the_look.presets.name",
+      "blocks": [
+        {
+          "type": "spot",
+          "settings": {
+            "horizontal": 10,
+            "vertical": 10
+          }
+        },
+        {
+          "type": "spot",
+          "settings": {
+            "horizontal": 52,
+            "vertical": 49
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1052 @@
+{%- comment -%}
+Copyright © 2026 PageUni. All rights reserved.
+This source code is the intellectual property of PageUni.
+Unauthorized copying, modification, or distribution of this code is strictly prohibited.
+Violators will be prosecuted to the fullest extent of the law.
+For inquiries or permissions, contact support@pageuni.com
+{%- endcomment -%}
+
+{%- liquid
+  assign product_tabs_id = 'pu-product-tabs-01'
+  assign mobile_breakpoint = '640px'
+
+  assign placement_mode = section.settings.placement_mode
+
+  assign background_color = section.settings.background_color
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign padding_left = section.settings.padding_left
+  assign padding_right = section.settings.padding_right
+  assign show_dividers = section.settings.show_dividers
+  assign divider_height = section.settings.divider_height
+  assign divider_color = section.settings.divider_color
+  assign allow_multiple_open = section.settings.allow_multiple_open
+
+  assign tab_title_use_theme_font = section.settings.tab_title_use_theme_font
+  assign tab_title_font = section.settings.tab_title_font
+  assign tab_title_font_size = section.settings.tab_title_font_size
+  assign tab_title_font_size_mobile = section.settings.tab_title_font_size_mobile
+  assign tab_title_line_height = section.settings.tab_title_line_height
+  assign tab_title_font_color = section.settings.tab_title_font_color
+  assign tab_title_background_color = section.settings.tab_title_background_color
+  assign tab_title_show_icon = section.settings.tab_title_show_icon
+  assign tab_title_icon_size = section.settings.tab_title_icon_size
+  assign tab_title_chevron_color = section.settings.tab_title_chevron_color
+  assign tab_title_chevron_size = section.settings.tab_title_chevron_size
+
+  assign tab_content_use_theme_font = section.settings.tab_content_use_theme_font
+  assign tab_content_font = section.settings.tab_content_font
+  assign tab_content_font_size = section.settings.tab_content_font_size
+  assign tab_content_font_size_mobile = section.settings.tab_content_font_size_mobile
+  assign tab_content_line_height = section.settings.tab_content_line_height
+  assign tab_content_font_color = section.settings.tab_content_font_color
+  assign tab_content_background_color = section.settings.tab_content_background_color
+
+  assign animation_duration = section.settings.animation_duration
+
+  assign has_blocks = false
+  if section.blocks.size > 0
+    assign has_blocks = true
+  endif
+-%}
+
+{%- liquid
+  assign targeting_mode = section.settings.targeting_mode
+  assign targeting_selected_products = section.settings.targeting_selected_products
+  assign targeting_product_collection = section.settings.targeting_product_collection
+  assign targeting_product_tags = section.settings.targeting_product_tags
+
+  assign targeting_ok = true
+
+  if template.name != 'product'
+    assign targeting_ok = false
+  else
+    if targeting_mode == 'selected_products' and targeting_selected_products != blank
+      assign targeting_ok = false
+
+      for selected_product in targeting_selected_products
+        if selected_product.id == product.id
+          assign targeting_ok = true
+          break
+        endif
+      endfor
+    elsif targeting_mode == 'products_in_collection' and targeting_product_collection != blank
+      assign targeting_ok = false
+
+      for collection in product.collections
+        if collection.handle == targeting_product_collection
+          assign targeting_ok = true
+          break
+        endif
+      endfor
+    elsif targeting_mode == 'products_with_tags' and targeting_product_tags != blank
+      assign targeting_product_tags = targeting_product_tags | split: ','
+      assign targeting_product_tags_found = false
+
+      for tag in targeting_product_tags
+        assign targeting_product_tag_strip = tag | strip
+
+        if product.tags contains targeting_product_tag_strip
+          assign targeting_product_tags_found = true
+          break
+        endif
+      endfor
+
+      unless targeting_product_tags_found
+        assign targeting_ok = false
+      endunless
+    endif
+  endif
+-%}
+
+{%- if has_blocks and targeting_ok -%}
+  {%- capture icon_info_svg -%}
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 9h.01"/><path d="M11 12h1v4h1"/><path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z"/></svg>
+{%- endcapture -%}
+
+  {%- capture icon_truck_svg -%}
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5"/></svg>
+{%- endcapture -%}
+
+  {%- capture icon_return_svg -%}
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 14l-4 -4l4 -4"/><path d="M5 10h11a4 4 0 1 1 0 8h-1"/></svg>
+{%- endcapture -%}
+  {%- liquid
+    assign smart_description_tab_block = ''
+    assign smart_description_tab_block_start_tab_index = ''
+    assign smart_description_tab_block_end_tab_index = ''
+
+    for block in section.blocks
+      if block.type == 'smart_description'
+        assign smart_description_tab_block = block
+        assign smart_description_tab_block_start_tab_index = forloop.index
+        break
+      endif
+    endfor
+
+    assign tabs_count = section.blocks.size
+    assign smart_desc_tab_titles = '' | split: ','
+    assign smart_desc_tab_contents = '' | split: ','
+
+    if smart_description_tab_block != blank
+      assign smart_desc_tab_divider_string = '__#pu#__'
+
+      assign smart_desc_tab_heading_tag = smart_description_tab_block.settings.tab_heading_tag
+      assign smart_desc_start_tag = '<' | append: smart_desc_tab_heading_tag
+      assign smart_desc_end_tag = '</' | append: smart_desc_tab_heading_tag | append: '>'
+
+      assign smart_desc_tab_titles_str = ''
+      assign smart_desc_tab_contents_str = ''
+
+      if product.description contains smart_desc_start_tag
+        assign smart_desc_sections = product.description | split: smart_desc_start_tag
+
+        for section in smart_desc_sections
+          if section != blank
+            assign smart_desc_section_parts = section | split: smart_desc_end_tag
+            assign smart_desc_section_tab_title = smart_desc_section_parts[0] | strip
+
+            if smart_desc_section_tab_title contains '>'
+              assign smart_desc_section_tab_title_parts = smart_desc_section_tab_title | split: '>'
+
+              if smart_desc_section_tab_title_parts.size == 2
+                assign smart_desc_section_tab_title = smart_desc_section_tab_title_parts[1] | strip
+              endif
+            endif
+
+            assign smart_desc_section_tab_content = ''
+
+            if smart_desc_section_parts.size > 1
+              assign smart_desc_section_tab_content = smart_desc_section_parts[1] | strip
+            endif
+
+            if smart_desc_tab_titles_str == blank
+              assign smart_desc_tab_titles_str = smart_desc_section_tab_title
+            else
+              assign smart_desc_tab_titles_str = smart_desc_tab_titles_str | append: smart_desc_tab_divider_string | append: smart_desc_section_tab_title
+            endif
+
+            if smart_desc_tab_contents_str == blank
+              assign smart_desc_tab_contents_str = smart_desc_section_tab_content
+            else
+              assign smart_desc_tab_contents_str = smart_desc_tab_contents_str | append: smart_desc_tab_divider_string | append: smart_desc_section_tab_content
+            endif
+          endif
+        endfor
+      endif
+
+      assign smart_desc_tab_titles = smart_desc_tab_titles_str | split: smart_desc_tab_divider_string
+      assign smart_desc_tab_contents = smart_desc_tab_contents_str | split: smart_desc_tab_divider_string
+      assign smart_description_tab_block_end_tab_index = smart_description_tab_block_start_tab_index | plus: smart_desc_tab_titles.size
+
+      if smart_desc_tab_titles.size > 0
+        assign tabs_count = tabs_count | plus: smart_desc_tab_titles.size | minus: 1
+      else
+        if smart_description_tab_block != blank
+          assign tabs_count = tabs_count | minus: 1
+        endif
+      endif
+    endif
+  -%}
+
+  <style>
+    .pu-ptb-{{ section.id }} {
+      background: {{ background_color }};
+      margin-top: {{ margin_top }}px;
+      margin-bottom: {{ margin_bottom }}px;
+      padding-top: {{ padding_top }}px;
+      padding-bottom: {{ padding_bottom }}px;
+      padding-left: {{ padding_left }}px;
+      padding-right: {{ padding_right }}px;
+    }
+
+    .pu-ptb-{{ section.id }}-tab {
+      border-bottom: {% if show_dividers %}{{ divider_height }}px solid {{ divider_color }}{% else %}none{% endif %};
+    }
+
+    .pu-ptb-{{ section.id }}-tab:last-child {
+      border-bottom: none;
+    }
+
+    .pu-ptb-{{ section.id }}-head {
+      background: {{ tab_title_background_color }};
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .pu-ptb-{{ section.id }}-head-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    {% if tab_title_show_icon %}
+      .pu-ptb-{{ section.id }}-icon {
+        width: {{ tab_title_icon_size }}px;
+        height: {{ tab_title_icon_size }}px;
+        color: {{ tab_title_font_color }};
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .pu-ptb-{{ section.id }}-icon svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .pu-ptb-{{ section.id }}-icon img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+    {% endif %}
+
+    .pu-ptb-{{ section.id }}-title {
+      font-size: {{ tab_title_font_size_mobile }}px;
+      line-height: {{ tab_title_line_height }};
+      color: {{ tab_title_font_color }};
+      margin: 0;
+    }
+
+    .pu-ptb-{{ section.id }}-title > * {
+      margin: 0;
+    }
+
+    {% if tab_title_use_theme_font != true %}
+      {{ tab_title_font | font_face: font_display: 'swap' }}
+
+      .pu-ptb-{{ section.id }}-title {
+        font-family: {{ tab_title_font.family }}, {{ tab_title_font.fallback_families }};
+        font-weight: {{ tab_title_font.weight }};
+        font-style: {{ tab_title_font.style }};
+      }
+    {% endif %}
+
+    .pu-ptb-{{ section.id }}-chevron {
+      transition: all {{ animation_duration }}s ease;
+      color: {{ tab_title_chevron_color }};
+      width: {{ tab_title_chevron_size }}px;
+      height: {{ tab_title_chevron_size }}px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-origin: center;
+      margin-right: 8px;
+    }
+
+    .pu-ptb-{{ section.id }}-chevron svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .pu-ptb-{{ section.id }}-tab.active .pu-ptb-{{ section.id }}-chevron {
+      transform: rotate(180deg);
+    }
+
+    .pu-ptb-{{ section.id }}-body-wrapper {
+      transition: all {{ animation_duration }}s ease;
+      overflow: hidden;
+      max-height: 0;
+      padding: 0;
+    }
+
+    .pu-ptb-{{ section.id }}-tab.active .pu-ptb-{{ section.id }}-body-wrapper {
+      max-height: 1000px;
+      padding: 0 0 16px 0;
+    }
+
+    .pu-ptb-{{ section.id }}-content {
+      font-size: {{ tab_content_font_size_mobile }}px;
+      line-height: {{ tab_content_line_height }};
+      color: {{ tab_content_font_color }};
+      background: {{ tab_content_background_color }};
+    }
+
+    .pu-ptb-{{ section.id }}-content > * {
+      margin: 0;
+    }
+
+    {% if tab_content_use_theme_font != true %}
+      {{ tab_content_font | font_face: font_display: 'swap' }}
+
+      .pu-ptb-{{ section.id }}-content {
+        font-family: {{ tab_content_font.family }}, {{ tab_content_font.fallback_families }};
+        font-weight: {{ tab_content_font.weight }};
+        font-style: {{ tab_content_font.style }};
+      }
+    {% endif %}
+
+    @media (width >= {{ mobile_breakpoint }}) {
+      .pu-ptb-{{ section.id }}-title {
+        font-size: {{ tab_title_font_size }}px;
+      }
+
+      .pu-ptb-{{ section.id }}-content {
+        font-size: {{ tab_content_font_size }}px;
+      }
+    }
+  </style>
+
+  <template data-{{ section.id }}-template>
+    <div
+      class="pu-ptb-{{ section.id }} pu-ptb"
+      data-section-id="{{ section.id }}"
+      data-allow-multiple-open="{{ allow_multiple_open }}"
+    >
+      {%- for tab_index in (1..tabs_count) -%}
+        {%- liquid
+          assign block_icon = icon_info_svg
+
+          if tab_index == 1
+            assign block_icon = icon_info_svg
+          elsif tab_index == 2
+            assign block_icon = icon_truck_svg
+          elsif tab_index == 3
+            assign block_icon = icon_return_svg
+          else
+            assign block_icon = icon_info_svg
+          endif
+
+          assign block = ''
+          assign smart_desc_tab_title = ''
+          assign smart_desc_tab_content = ''
+          assign default_open = true
+
+          if smart_description_tab_block_start_tab_index == blank
+            assign block = section.blocks[forloop.index0]
+            assign default_open = block.settings.default_open
+          else
+            if forloop.index < smart_description_tab_block_start_tab_index
+              assign block = section.blocks[forloop.index0]
+              assign default_open = block.settings.default_open
+            elsif forloop.index >= smart_description_tab_block_end_tab_index
+              assign block_index = forloop.index | minus: smart_desc_tab_titles.size
+              assign block = section.blocks[block_index]
+              assign default_open = block.settings.default_open
+            else
+              assign block = smart_description_tab_block
+              assign block_icon = icon_info_svg
+              assign smart_tab_index = forloop.index | minus: smart_description_tab_block_start_tab_index
+
+              assign default_open = block.settings.default_open
+
+              if default_open and smart_tab_index > 0
+                assign default_open = false
+              endif
+
+              assign smart_desc_tab_title = smart_desc_tab_titles[smart_tab_index]
+              assign smart_desc_tab_content = smart_desc_tab_contents[smart_tab_index]
+            endif
+          endif
+        -%}
+        <div
+          class="pu-ptb-{{ section.id }}-tab pu-ptb-tab{% if default_open %} active{% endif %}"
+          data-tab-index="{{ tab_index }}"
+          {{ block.shopify_attributes }}
+        >
+          <div
+            class="pu-ptb-{{ section.id }}-head pu-ptb-head"
+            role="button"
+            tabindex="0"
+          >
+            <div class="pu-ptb-{{ section.id }}-head-wrapper pu-ptb-head-wrapper">
+              {%- if tab_title_show_icon -%}
+                <div class="pu-ptb-{{ section.id }}-icon pu-ptb-icon">
+                  {%- if block.settings.icon != blank -%}
+                    <img
+                      src="{{ block.settings.icon | image_url: width: 64 }}"
+                      alt="{{ block.settings.icon.alt | default: block.settings.tab_title | escape }}"
+                      width="100%"
+                      height="100%"
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    {{ block_icon }}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+              <div class="pu-ptb-{{ section.id }}-title pu-ptb-title">
+                {% if smart_desc_tab_title != blank %}
+                  {{ smart_desc_tab_title }}
+                {% else %}
+                  {{ block.settings.tab_title }}
+                {% endif %}
+              </div>
+            </div>
+            <div class="pu-ptb-{{ section.id }}-chevron pu-ptb-chevron">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 12 12"
+                fill="none"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  d="M1 3.5L6 8.5L11 3.5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            id="pu-ptb-{{ section.id }}-body-{{ block.id }}"
+            class="pu-ptb-{{ section.id }}-body pu-ptb-body"
+            {% if default_open %}
+              style="height: auto;"
+            {% endif %}
+            role="region"
+          >
+            <div class="pu-ptb-{{ section.id }}-body-wrapper pu-ptb-body-wrapper">
+              <div class="pu-ptb-{{ section.id }}-content pu-ptb-content">
+                {% if smart_desc_tab_content != blank %}
+                  {{ smart_desc_tab_content }}
+                {% else %}
+                  {% case block.type %}
+                    {% when 'richtext' %}
+                      {{ block.settings.tab_content }}
+                    {% when 'product_description' %}
+                      {{ product.description }}
+                    {% when 'pageuni_countdown_timer' %}
+                      <div class="page-uni-app-block" data-page-uni-uid="{{ block.settings.timer_bar_id }}"></div>
+                  {% endcase %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <script>
+      !function(){"use strict";(()=>{const e=window.pageUniProductTabsSectionId,t=`.pu-ptb-${e}`,c=`.pu-ptb-${e}-tab`,s=`.pu-ptb-${e}-head`,a=`.pu-ptb-${e}-body-wrapper`,n=document.querySelector(t);if(!n)return;const r=n.querySelectorAll(c),o="true"===n.dataset.allowMultipleOpen;function i(e){const t=e.classList.contains("active");e.querySelector(a)&&(t?e.classList.remove("active"):(o||r.forEach(t=>{t!==e&&t.classList.contains("active")&&t.classList.remove("active")}),e.classList.add("active")))}r.forEach(e=>{const t=e.querySelector(s),c=e.querySelector(a);t&&c&&(t.addEventListener("click",()=>i(e)),t.addEventListener("keydown",t=>{"Enter"!==t.key&&" "!==t.key||(t.preventDefault(),i(e))}))})})()}();
+    </script>
+  </template>
+
+  <script>
+    window.pageUniProductTabsSectionId = '{{ section.id }}';
+    window.pageUniProductTabsId = '{{ product_tabs_id }}';
+    window.pageUniProductTabsPlacementMode = '{{ placement_mode }}';
+  </script>
+
+  <script>
+    !function(){"use strict";var e=(e=>(e.AboveAddToCart="above_add_to_cart",e.BelowAddToCart="below_add_to_cart",e.Custom="custom",e))(e||{});const t=e=>{if(!e)return null;let t=document.querySelector(e.query);if("number"==typeof(o=null==e?void 0:e.up)?o-o===0:"string"==typeof o&&""!==o.trim()&&(Number.isFinite?Number.isFinite(+o):isFinite(+o)))for(let r=0;r<e.up&&t;r++)t=t.parentElement;var o;return t},o=()=>{const e=(null==(r=null==(o=window.Shopify)?void 0:o.theme)?void 0:r.schema_name)||null;var o,r;const n=window.Shopify.routes.root||"/";return t({Eurus:{query:`.product_form form[action="${`${n}cart/add`}"]`},Trade:{query:`form[action="${n}cart/update"]`},Refine:{query:".product-summary__action"},Baseline:{query:".add-to-cart-container"},Blockshop:{query:'div[data-block-type="buy-buttons"]'},Sahara:{query:"product-form"}}[e])};(()=>{const t=window.pageUniProductTabsId,r=window.pageUniProductTabsSectionId,n=`[data-${r}-template]`,a=document.querySelector(n);if(!a)return;let d=[],u=!1;switch(window.pageUniProductTabsPlacementMode){case e.Custom:{const e=`[data-${t}-target]`;d=Array.from(document.querySelectorAll(e));break}case e.AboveAddToCart:case e.BelowAddToCart:{const t=o();if(t)d.push(t);else{const e=(window.Shopify.routes.root||"/")+"cart/add",t=Array.from(document.querySelectorAll('form[action^="'+e+'"]')).filter(e=>e.textContent.trim());t.length>0&&d.push(t[0])}window.pageUniProductTabsPlacementMode===e.AboveAddToCart&&(u=!0);break}default:return null}0!==d.length&&d.forEach(e=>{const t=`.pu-ptb-${r}`;e.querySelectorAll(t).forEach(e=>{e.remove()}),u?e.prepend(a.content.cloneNode(!0)):e.append(a.content.cloneNode(!0))})})()}();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "PU - Product Tabs #01",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Placement"
+    },
+    {
+      "type": "select",
+      "id": "placement_mode",
+      "label": "Placement",
+      "default": "below_add_to_cart",
+      "options": [
+        { "value": "below_add_to_cart", "label": "Below add-to-cart" },
+        { "value": "above_add_to_cart", "label": "Above add-to-cart" },
+        { "value": "custom", "label": "Custom placement" }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "placement_custom_code_snippet",
+      "label": "Custom placement code snippet",
+      "default": "<div data-pu-product-tabs-01-target><\/div>",
+      "info": "Paste this code snippet on your store page where you want the section to show.",
+      "visible_if": "{{ section.settings.placement_mode == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "targeting_mode",
+      "label": "Show on",
+      "default": "all",
+      "options": [
+        { "value": "all", "label": "All products" },
+        { "value": "selected_products", "label": "Selected products" },
+        { "value": "products_in_collection", "label": "Products in collection" },
+        { "value": "products_with_tags", "label": "Products with tags" }
+      ]
+    },
+    {
+      "type": "product_list",
+      "id": "targeting_selected_products",
+      "label": "Selected products"
+    },
+    {
+      "type": "collection",
+      "id": "targeting_product_collection",
+      "label": "Product collection"
+    },
+    {
+      "type": "textarea",
+      "id": "targeting_product_tags",
+      "label": "Product tags",
+      "info": "Example: tag1,tag2,tag3"
+    },
+
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color_background",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding right",
+      "default": 0
+    },
+
+    {
+      "type": "header",
+      "content": "Tab title"
+    },
+    {
+      "type": "color",
+      "id": "tab_title_background_color",
+      "label": "Background color",
+      "default": "transparent"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_title_use_theme_font",
+      "label": "Use theme font",
+      "default": true
+    },
+    {
+      "type": "font_picker",
+      "id": "tab_title_font",
+      "label": "Font family",
+      "default": "sans_serif_n4",
+      "visible_if": "{{ section.settings.tab_title_use_theme_font != true }}"
+    },
+    {
+      "type": "range",
+      "id": "tab_title_font_size",
+      "min": 12,
+      "max": 42,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "tab_title_font_size_mobile",
+      "min": 12,
+      "max": 42,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size (mobile)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "tab_title_line_height",
+      "min": 0.5,
+      "max": 2.0,
+      "step": 0.1,
+      "label": "Line height",
+      "default": 1.2
+    },
+    {
+      "type": "color",
+      "id": "tab_title_font_color",
+      "label": "Font color",
+      "default": "#303030"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_title_show_icon",
+      "label": "Show icon",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "tab_title_icon_size",
+      "min": 12,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 20,
+      "visible_if": "{{ section.settings.tab_title_show_icon == true }}"
+    },
+    {
+      "type": "color",
+      "id": "tab_title_chevron_color",
+      "label": "Chevron color",
+      "default": "#aaaaaa"
+    },
+    {
+      "type": "range",
+      "id": "tab_title_chevron_size",
+      "min": 12,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Chevron size",
+      "default": 16
+    },
+
+    {
+      "type": "header",
+      "content": "Tab content"
+    },
+    {
+      "type": "color",
+      "id": "tab_content_background_color",
+      "label": "Background color",
+      "default": "transparent"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_content_use_theme_font",
+      "label": "Use theme font",
+      "default": true
+    },
+    {
+      "type": "font_picker",
+      "id": "tab_content_font",
+      "label": "Font family",
+      "default": "sans_serif_n4",
+      "visible_if": "{{ section.settings.tab_content_use_theme_font != true }}"
+    },
+    {
+      "type": "range",
+      "id": "tab_content_font_size",
+      "min": 12,
+      "max": 42,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "tab_content_font_size_mobile",
+      "min": 12,
+      "max": 42,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size (mobile)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "tab_content_line_height",
+      "min": 0.5,
+      "max": 2.0,
+      "step": 0.1,
+      "label": "Line height",
+      "default": 1.5
+    },
+    {
+      "type": "color",
+      "id": "tab_content_font_color",
+      "label": "Font color",
+      "default": "#303030"
+    },
+
+    {
+      "type": "header",
+      "content": "Other"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dividers",
+      "label": "Show dividers",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "divider_height",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Divider height",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#eeeeee"
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "min": 0,
+      "max": 1.0,
+      "step": 0.1,
+      "unit": "s",
+      "label": "Animation duration",
+      "default": 0.2
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_multiple_open",
+      "label": "Allow multiple tabs to be open at once",
+      "info": "If unchecked, opening one tab will close others (accordion style).",
+      "default": false
+    }
+  ],
+  "blocks": [
+  {
+    "type": "richtext",
+    "name": "Rich Text",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "icon",
+        "label": "Icon",
+        "visible_if": "{{ section.settings.tab_title_show_icon == true }}"
+      },
+      {
+        "type": "richtext",
+        "id": "tab_title",
+        "label": "Tab title",
+        "default": "<p>Tab title</p>"
+      },
+      {
+        "type": "richtext",
+        "id": "tab_content",
+        "label": "Tab content",
+        "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim volutpat turpis non gravida. Suspendisse eget purus massa.</p>"
+      },
+      {
+        "type": "checkbox",
+        "id": "default_open",
+        "label": "Open by default on page load",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Tutorial & tips"
+      },
+      {
+        "type": "paragraph",
+        "content": "The Rich Text Tab displays formatting such as headings, lists, links, and more."
+      },
+      {
+        "type": "paragraph",
+        "content": "Click the \"Generate text\" button above the rich text input to let AI help you write."
+      },
+      {
+        "type": "paragraph",
+        "content": "Read [this guide](https://help.shopify.com/en/manual/shopify-admin/productivity-tools/rich-text-editor) to learn more about rich text editing."
+      }
+    ]
+  },
+  {
+    "type": "product_description",
+    "name": "Product Description",
+    "limit": 1,
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "icon",
+        "label": "Icon",
+        "visible_if": "{{ section.settings.tab_title_show_icon == true }}"
+      },
+      {
+        "type": "richtext",
+        "id": "tab_title",
+        "label": "Tab title",
+        "default": "<p>Description</p>"
+      },
+      {
+        "type": "checkbox",
+        "id": "default_open",
+        "label": "Open by default on page load",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Tutorial & tips"
+      },
+      {
+        "type": "paragraph",
+        "content": "The Product Description Tab shows the product description directly."
+      },
+      {
+        "type": "paragraph",
+        "content": "Open the store’s [admin](https://admin.shopify.com/products), select the product, and edit its description. To learn how to edit the product description, see [this guide](https://help.shopify.com/en/manual/products/add-update-products#edit-a-product)."
+      },
+      {
+        "type": "paragraph",
+        "content": "If the product has no description, this tab will be empty."
+      }
+    ]
+  },
+  {
+    "type": "smart_description",
+    "name": "Smart Description",
+    "limit": 1,
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "icon",
+        "label": "Icon",
+        "visible_if": "{{ section.settings.tab_title_show_icon == true }}"
+      },
+      {
+        "type": "select",
+        "id": "tab_heading_tag",
+        "label": "Tab heading tag",
+        "options": [
+          {
+            "value": "h1",
+            "label": "H1"
+          },
+          {
+            "value": "h2",
+            "label": "H2"
+          },
+          {
+            "value": "h3",
+            "label": "H3"
+          },
+          {
+            "value": "h4",
+            "label": "H4"
+          },
+          {
+            "value": "h5",
+            "label": "H5"
+          },
+          {
+            "value": "h6",
+            "label": "H6"
+          }
+        ],
+        "default": "h4"
+      },
+      {
+        "type": "checkbox",
+        "id": "default_open",
+        "label": "Open by default on page load",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Tutorial & tips"
+      },
+      {
+        "type": "paragraph",
+        "content": "The Smart Description Tab splits the product description into multiple product tabs based on its structure."
+      },
+      {
+        "type": "paragraph",
+        "content": "Each heading in the product description, along with the content that follows it, becomes a separate tab. Use this tab when you want to present the product description in multiple clear sections."
+      },
+      {
+        "type": "paragraph",
+        "content": "Check [this example](https://assets.cms.pageuni.com/media/2025-11-24-e6e73abf0fc95e70804f1249fa484c8f.png) to better understand how this rule works."
+      },
+      {
+        "type": "paragraph",
+        "content": "Open the store’s [admin](https://admin.shopify.com/products), select the product, and edit its description. To learn how to edit the product description, see [this guide](https://help.shopify.com/en/manual/products/add-update-products#edit-a-product)."
+      },
+      {
+        "type": "paragraph",
+        "content": "If the product has no description or does not include the selected heading tag (such as H4), this tab will be empty."
+      }
+    ]
+  },
+  {
+    "type": "pageuni_countdown_timer",
+    "name": "PageUni Countdown Timer",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "icon",
+        "label": "Icon",
+        "visible_if": "{{ section.settings.tab_title_show_icon == true }}"
+      },
+      {
+        "type": "richtext",
+        "id": "tab_title",
+        "label": "Tab title",
+        "default": "<p>Limited time offer</p>"
+      },
+      {
+        "type": "text",
+        "id": "timer_bar_id",
+        "label": "Timer bar ID",
+        "info": "Copy the Timer bar ID from the PageUni Countdown Timer app and paste it here"
+      },
+      {
+        "type": "checkbox",
+        "id": "default_open",
+        "label": "Open by default on page load",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Tutorial & tips"
+      },
+      {
+        "type": "paragraph",
+        "content": "The PageUni Countdown Timer tab shows a countdown timer inside product tabs."
+      },
+      {
+        "type": "paragraph",
+        "content": "Countdown timers are proven by many merchants to be effective for holiday campaigns, limited-time offers, and flash sales. They help create urgency and increase conversions."
+      },
+      {
+        "type": "paragraph",
+        "content": "To display a countdown timer, please install [PageUni Countdown Timer](https://apps.shopify.com/pageuni-timer-bar?utm_source=pageuni-apps&utm_campaign=product-tabs-promotion&utm_content=theme-editor-help), create a campaign in the app, then copy the campaign's Timer Bar ID and paste it into the tab setting."
+      },
+      {
+        "type": "paragraph",
+        "content": "Follow [this guide](https://helpdesk.pageuni.com/hc/pageuni-help-center-countdown-timer/articles/1747070661-custom-placement-timer-bar#using-custom-placement-with-shopify-app-blocks) to learn how to copy the campaign's Timer Bar ID. You can also contact our support team in the app."
+      }
+    ]
+  }
+],
+  "presets": [
+    {
+      "name": "PU - Product Tabs #01",
+      "blocks": [
+  {
+    "type": "product_description",
+    "settings": {
+      "tab_title": "<p>Description</p>",
+      "default_open": true
+    }
+  },
+  {
+    "type": "richtext",
+    "settings": {
+      "tab_title": "<p>Shipping</p>",
+      "tab_content": "<p>We offer free standard shipping on all orders over $50. Express shipping options are available at checkout. Orders are typically processed within 1-2 business days.</p>"
+    }
+  },
+  {
+    "type": "richtext",
+    "settings": {
+      "tab_title": "<p>Returns</p>",
+      "tab_content": "<p>We accept returns for a full refund within 30 days of purchase, provided the item is unworn and in its original condition. Please visit our returns portal to start a return.</p>"
+    }
+  }
+]
+    }
+  ]
+}
+{% endschema %}

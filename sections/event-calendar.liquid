@@ -1,0 +1,406 @@
+<div class="{{ section.settings.color_scheme }}-scheme spacing-box">
+  <div class="{{ settings.layout_width }}">
+    <div class="event-calendar-wrapper column-spacing">
+      {% if section.settings.heading != blank or section.settings.text != blank %}
+        <div class="event-calendar-content-wrapper">
+          {% if section.settings.heading != blank %}
+            <h2 class="{{ section.settings.heading_size }} {{ section.settings.heading_size_mobile }} event-calendar-heading">
+              {{ section.settings.heading }}
+            </h2>
+          {% endif %}
+          {% if section.settings.text != blank %}
+            <div class="event-calendar-text textXLarge">
+              {{ section.settings.text | replace: '<p></p>', '<br>' }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if section.blocks.size > 0 %}
+        <div class="grid-row">
+          {% for block in section.blocks %}
+            <div class="grid-item-sm-6 grid-item-md-4">
+              <div class="event-calendar-item">
+              {% if block.settings.image != blank %}  
+                <div class="event-calendar-img ">
+            
+                  {% liquid
+                    if section.settings.image_size == 'landscape'
+                      assign image_ratio = 75
+                    elsif section.settings.image_size == 'square'
+                      assign image_ratio = 100
+                    elsif section.settings.image_size == 'portrait'
+                      assign image_ratio = 125
+                    else
+                      assign image_ratio = 1 | divided_by: block.settings.image.aspect_ratio | times: 100 | plus: 1
+                    endif
+                  %}
+
+                  <div class="media-image" style="--mediaRatio:{{ image_ratio }}%">
+                    {%- render 'image', image: block.settings.image -%}
+                  </div>
+                
+                  {% if block.settings.date != blank %}
+                    <span class="calendar-post-value h6">{{ block.settings.date }}</span>
+                  {% endif %}
+                </div>
+              {% endif %}
+                <div class="event-calendar-content">
+                  {% if block.settings.image == blank and  block.settings.date != blank %}  
+                      <span class="calendar-post-date h6">{{ block.settings.date }}</span>
+                    {% endif %}
+                  {% if block.settings.time != blank or block.settings.location != blank %}
+                    <ul class="no-bullet">
+                      {% if block.settings.time != blank %}
+                        <li>
+                          <span>
+                            <svg
+                              width="18"
+                              height="18"
+                              viewBox="0 0 18 18"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M9 1.5C7.51664 1.5 6.0666 1.93987 4.83323 2.76398C3.59986 3.58809 2.63856 4.75943 2.07091 6.12987C1.50325 7.50032 1.35472 9.00832 1.64411 10.4632C1.9335 11.918 2.64781 13.2544 3.6967 14.3033C4.7456 15.3522 6.08197 16.0665 7.53683 16.3559C8.99168 16.6453 10.4997 16.4968 11.8701 15.9291C13.2406 15.3614 14.4119 14.4001 15.236 13.1668C16.0601 11.9334 16.5 10.4834 16.5 9C16.5 8.01509 16.306 7.03982 15.9291 6.12987C15.5522 5.21993 14.9997 4.39314 14.3033 3.6967C13.6069 3.00026 12.7801 2.44781 11.8701 2.0709C10.9602 1.69399 9.98492 1.5 9 1.5ZM12 9.75H9C8.80109 9.75 8.61033 9.67098 8.46967 9.53033C8.32902 9.38968 8.25 9.19891 8.25 9V6C8.25 5.80109 8.32902 5.61032 8.46967 5.46967C8.61033 5.32902 8.80109 5.25 9 5.25C9.19892 5.25 9.38968 5.32902 9.53033 5.46967C9.67099 5.61032 9.75 5.80109 9.75 6V8.25H12C12.1989 8.25 12.3897 8.32902 12.5303 8.46967C12.671 8.61032 12.75 8.80109 12.75 9C12.75 9.19891 12.671 9.38968 12.5303 9.53033C12.3897 9.67098 12.1989 9.75 12 9.75Z" fill="currentColor"></path>
+                            </svg>
+                            {{ block.settings.time }}
+                          </span>
+                        </li>
+                      {% endif %}
+                      {% if block.settings.location != blank %}
+                        <li>
+                          <{% if block.settings.location_url  != blank %}a href="{{ block.settings.location_url  }}" aria-label="loction link"{% else %}span{% endif %}>
+                          <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                              <path d="M9.16667 0C5.20452 0 2 3.26279 2 7.29697C2 12.7697 9.16667 17.8485 9.16667 17.8485C9.16667 17.8485 16.3333 12.7697 16.3333 7.29697C16.3333 3.26279 13.1288 0 9.16667 0ZM9.16667 9.90303C7.75381 9.90303 6.60714 8.73551 6.60714 7.29697C6.60714 5.85842 7.75381 4.69091 9.16667 4.69091C10.5795 4.69091 11.7262 5.85842 11.7262 7.29697C11.7262 8.73551 10.5795 9.90303 9.16667 9.90303Z" fill="currentcolor"/>
+                            </svg>
+                            {{ block.settings.location }}
+                          </span>
+                          </{% if block.settings.location_url  != blank %}a{% else %}span{% endif %}>
+                        </li>
+                      {% endif %}
+                    </ul>
+                  {% endif %}
+                  {% if block.settings.title != blank %}
+                    <h6 class="event-calendar-title">{{ block.settings.title }}</h6>
+                  {% endif %}
+                  {% if block.settings.description != blank %}
+                    {{ block.settings.description | replace: '<p></p>', '<br>' }}
+                  {% endif %}
+                  {% if block.settings.link_text != blank and block.settings.link_url != blank %}
+                    <a href="{{ block.settings.link_url }}" class="btn btn-medium"
+                      ><span>{{ block.settings.link_text }}</span></a
+                    >
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+  {% if section.settings.image != blank  %}
+    #shopify-section-{{ section.id }} .spacing-box {
+      background: url('{{ section.settings.image |image_url }}');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      --overlayBgColor:{{ section.settings.bg_color_opacity }};
+      --overlayOpacity:{{ section.settings.overlay_opacity | divided_by:100.0 }};
+    }
+  {% endif %}
+
+  #shopify-section-{{ section.id }} .spacing-box:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--overlayBgColor);
+      opacity: var(--overlayOpacity);
+    }
+
+   #shopify-section-{{ section.id }} {
+      --topSpace:{{ section.settings.top_space_desktop }}px;
+      --bottomSpace:{{ section.settings.bottom_space_desktop }}px;
+       position: relative;
+    }
+
+    @media only screen and (max-width:767px) {
+      #shopify-section-{{ section.id }}.shopify-section{
+        --topSpace:{{ section.settings.top_space_mobile }}px;
+        --bottomSpace:{{ section.settings.bottom_space_mobile }}px;
+      }
+
+    }
+</style>
+
+{% schema %}
+{
+  "name": "t:sections.event_calendar.name",
+  "class": "event-calendar-section",
+  "tag": "section",
+  "disabled_on": {
+     "groups": ["header", "footer","aside"]
+  },
+  "settings": [
+   {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.event_calendar.settings.background_image.label"
+    },
+    {
+    "type": "text",
+    "id": "heading",
+    "default": "Event Calendar",
+    "label": "t:common.global.heading.label"
+  },
+  {
+    "type": "select",
+    "id": "heading_size",
+    "default": "h2",
+     "label": "t:common.heading_size.desktop_label",
+    "options": [
+      {
+      "value": "h1",
+        "label": "t:common.heading_size.options.extra_large.label"
+      },
+      {
+        "value": "h2",
+        "label": "t:common.heading_size.options.large.label"
+      },
+      {
+        "value": "h3",
+        "label": "t:common.heading_size.options.medium.label"
+      },
+      {
+        "value": "h4",
+        "label": "t:common.heading_size.options.small.label"
+      },
+      {
+        "value": "h5",
+        "label": "t:common.heading_size.options.extra_small.label"
+      }
+    ]
+  },
+  {
+        "type": "select",
+        "id": "heading_size_mobile",
+        "default": "h3_mobile",
+        "label": "t:common.heading_size.mobile_label",
+        "options": [
+         {
+          "value": "h1_mobile",
+          "label": "t:common.heading_size.options.extra_large.label"
+          },
+          {
+            "value": "h2_mobile",
+            "label": "t:common.heading_size.options.large.label"
+          },
+          {
+            "value": "h3_mobile",
+            "label": "t:common.heading_size.options.medium.label"
+          },
+          {
+            "value": "h4_mobile",
+            "label": "t:common.heading_size.options.small.label"
+          },
+          {
+            "value": "h5_mobile",
+            "label": "t:common.heading_size.options.extra_small.label"
+          }
+        ]
+    },
+    {
+        "type": "richtext",
+        "id": "text",
+        "label": "t:common.global.text.label",
+        "default": "<p>Add short discription here</p>"
+    },
+     {
+        "type": "select",
+        "id": "image_size",
+        "label": "t:sections.event_calendar.settings.image_size.label",
+        "default": "square",
+        "options": [
+       {
+          "value": "auto",
+          "label": "t:common.image_size.options.auto.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:common.image_size.options.landscape.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:common.image_size.options.portrait.label"
+        },
+        {
+          "value": "square",
+          "label": "t:common.image_size.options.square.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+     "content": "t:common.header.colors.content"
+    },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "primary",
+        "label": "t:common.global.color_scheme.label"
+    },
+     {
+          "type": "color",
+          "id": "bg_color_opacity",
+          "default": "#000000",
+          "label": "t:common.global.image_overlay.label"
+     },
+    {
+          "type": "range",
+          "id": "overlay_opacity",
+          "label": "t:common.global.overlay_opacity.label",
+          "default": 34,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%"
+      },
+    {
+      "type": "header",
+      "content": "t:common.header.section_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+       "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 80,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 80,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+    "blocks": [
+    {
+      "type": "event",
+      "name": "t:sections.event_calendar.blocks.name",
+      "settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "t:common.global.image.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:common.global.title.label",
+          "default": "Event heading"
+        },
+        {
+          "id": "description",
+          "type": "richtext",
+        "label": "t:common.global.description.label",
+          "default": "<p>Share information and details about this event.</p>"
+        },
+        {
+          "id": "date",
+          "type": "text",
+          "label": "t:sections.event_calendar.blocks.settings.date.label",
+          "default": "10th december"
+        },
+        {
+          "id": "time",
+          "type": "text",
+          "label": "t:sections.event_calendar.blocks.settings.time.label",
+          "default": "10.00pm - 12.00pm"
+        },
+        {
+          "id": "location",
+          "type": "text",
+          "label": "t:sections.event_calendar.blocks.settings.location.label",
+          "default": "Event location"
+        },
+        {
+          "id": "location_url",
+          "type": "url",
+          "label": "t:sections.event_calendar.blocks.settings.location_url.label"
+        },
+        {
+          "id": "link_text",
+          "type": "text",
+          "label": "t:sections.event_calendar.blocks.settings.link_text.label",
+          "default": "Book now"
+        },
+        {
+          "id": "link_url",
+          "type": "url",
+          "label": "t:common.global.link.label"
+        }
+
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.event_calendar.presets.name",
+      "blocks": [
+        {
+          "type": "event",
+          "settings": {
+            "date": "20th April",
+            "time": "8PM - 12PM"
+          }
+        },
+        {
+          "type": "event",
+          "settings": {
+            "date": "20th August",
+             "time": "12PM"
+          }
+        },
+        {
+          "type": "event",
+          "settings": {
+            "date": "21 october",
+            "time": "8PM"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+

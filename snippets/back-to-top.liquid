@@ -1,0 +1,77 @@
+{% if settings.enable_back_to_top %}
+  <scroll-to-back
+    id="scroll-top"
+    style="display: grid; background: conic-gradient(rgb(var(--scroll-top-color)) 60%, rgb(var(--scroll-top-background)) 60%);"
+  >
+    <span id="scroll-value">
+      <svg width="13" height="12" viewBox="0 0 13 12" fill="none">
+        <path d="M1 5.7619L11.5588 5.7619M7.58824 11L12 5.7619L7.58824 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </scroll-to-back>
+  <style>
+    #scroll-top {
+        --scroll-top-background:{{ settings.btp_background }};
+        --scroll-top-color:{{ settings.btp_icon }};
+    }
+  </style>
+  <script>
+    class ScrollToBack extends HTMLElement {
+      constructor() {
+        (super(), (this.pageHeight = window.innerHeight));
+      }
+
+      connectedCallback() {
+        (this.addEventListener('click', this.onClick),
+          this.addEventListener('touchstart', this.onClick, {
+            passive: !0,
+          }),
+          window.addEventListener('scroll', this.checkVisible.bind(this)));
+      }
+      checkVisible(event) {
+        window.requestAnimationFrame(() => {
+          window.scrollY > this.pageHeight
+            ? this.classList.add('back-to-top--active')
+            : this.classList.remove('back-to-top--active');
+        });
+
+        let scrollProgress = document.getElementById('scroll-top');
+        let progressValue = document.getElementById('scroll-value');
+        let pos = document.documentElement.scrollTop;
+        let calcHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let scrollValue = Math.round((pos * 100) / calcHeight);
+        if (pos > 100) {
+          scrollProgress.style.display = 'grid';
+        } else {
+          scrollProgress.style.display = 'none';
+        }
+        scrollProgress.style.background = `conic-gradient(var(--bodyTextColor) ${scrollValue}%, var(--bodyColor) ${scrollValue}%)`;
+      }
+      onClick() {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
+      }
+
+      // backtoTop() {
+      //   let scrollProgress = document.getElementById("scroll-top");
+      //   let progressValue = document.getElementById("scroll-value");
+      //   let pos = document.documentElement.scrollTop;
+      //   let calcHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      //   let scrollValue = Math.round((pos * 100) / calcHeight);
+      //   if (pos > 100) {
+      //       scrollProgress.style.display = "grid";
+      //   } else {
+      //       scrollProgress.style.display = "none";
+      //   }
+      //   scrollProgress.addEventListener("click", () => {
+      //       document.documentElement.scrollTop = 0;
+      //   });
+      //   scrollProgress.style.background = `conic-gradient(var(--bodyTextColor) ${scrollValue}%, var(--bodyColor) ${scrollValue}%)`;
+      // }
+    }
+    customElements.define('scroll-to-back', ScrollToBack);
+  </script>
+{% endif %}

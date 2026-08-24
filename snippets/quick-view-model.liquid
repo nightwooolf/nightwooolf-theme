@@ -1,0 +1,44 @@
+{% capture productQuickView %}
+    {%- assign unique_3d_model = product.media | where: 'media_type', 'model' | first -%}
+
+{%- assign volume_price_configured = product.quantity_price_breaks_configured? -%}
+
+{%- if unique_3d_model -%}
+  <link rel="stylesheet" href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css">
+{%- endif -%}
+    {% assign product_variant = product.selected_or_first_available_variant %}
+    <div class="featured-inner-box grid-row quick-view-content product-view-content">
+      <div class="grid-item-md-12 grid-item-l-7">
+        {% render 'featured-product-media-gallery',
+          product: product,
+          section: section,
+          product_variant: product_variant
+        %}
+      </div>
+      <div class="grid-item-md-12 grid-item-l-5">
+        {% render 'product-info', product:product, section: section, product_variant: product_variant, productInfo: true, quickView: true %}
+      </div>
+    </div>
+
+  <script type="application/json" id="ProductJSON-{{ product.id }}">
+  {{ product.media | where: 'media_type', 'model' | json }}
+</script>
+{% if volume_price_configured and settings.volume_pricing_quickview_style != 'none' %}
+<script src="{{ 'volume-pricing.js' | asset_url }}" defer></script>
+<script src="{{ 'volume-pricing-tooltip.js' | asset_url }}" defer></script>
+<script src="{{ 'price-per-item.js' | asset_url }}" defer></script>
+{% endif %}
+<script src="{{ 'product-model.js' | asset_url }}" defer></script>
+
+{% endcapture %}
+
+{% if productQuickView != blank %}
+  <quick-view>
+    {% render 'popup',
+      id: 'product-quic-kview',
+      class: 'quickview modal-panel-drawer side-drawer-panel',
+      popupContent: productQuickView,
+      bodyClass: 'quickview-body-content'
+    %}
+  </quick-view>
+{% endif %}

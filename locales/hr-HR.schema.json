@@ -1,0 +1,2530 @@
+{
+  "common": {
+    "global": {
+      "title": {
+        "label": "Titula"
+      },
+      "background_image_overlay": {
+        "label": "Prekrivanje pozadinske slike"
+      },
+      "heading": {
+        "label": "Naslov"
+      },
+      "subheading": {
+        "label": "Podnaslov"
+      },
+      "description": {
+        "label": "Opis"
+      },
+      "text": {
+        "label": "Tekst"
+      },
+      "background": {
+        "label": "Pozadina"
+      },
+      "link": {
+        "label": "Veza"
+      },
+      "alignment": {
+        "label": "Poravnanje"
+      },
+      "image": {
+        "label": "Slika"
+      },
+      "mobile_image": {
+        "label": "Slika (mobilni)"
+      },
+      "desktop_height": {
+        "label": "Visina radne površine"
+      },
+      "mobile_height": {
+        "label": "Mobilna visina"
+      },
+      "auto": {
+        "label": "Prilagodite prvi slajd"
+      },
+      "full": {
+        "label": "puna"
+      },
+      "position": {
+        "label": "Položaj"
+      },
+      "color_scheme": {
+        "label": "Shema boja"
+      },
+      "heading_alignment": {
+        "label": "Usklađivanje naslova"
+      },
+      "content_alignment": {
+        "label": "Usklađivanje sadržaja"
+      },
+      "top": {
+        "label": "Vrh"
+      },
+      "middle": {
+        "label": "sredina"
+      },
+      "bottom": {
+        "label": "Dno"
+      },
+      "left": {
+        "label": "Lijevo"
+      },
+      "center": {
+        "label": "Centar"
+      },
+      "right": {
+        "label": "Pravo"
+      },
+      "collection": {
+        "label": "Kolekcija"
+      },
+      "overlay_text": {
+        "label": "Prekrivajući tekst"
+      },
+      "overlay_background": {
+        "label": "Prekrivanje pozadine"
+      },
+      "overlay_opacity": {
+        "label": "Neprozirnost sloja"
+      },
+      "section_full_width": {
+        "label": "Napravi odjeljak punom širinom"
+      },
+      "image_position": {
+        "label": "Položaj slike"
+      },
+      "background_image": {
+        "label": "Pozadinska slika"
+      },
+      "product": {
+        "label": "Proizvod"
+      },
+      "icon": {
+        "label": "Ikona"
+      },
+      "Highlight": {
+        "label": "istaknuti"
+      },
+      "border": {
+        "label": "Granica"
+      },
+      "image_overlay": {
+        "label": "Preklapanje slike"
+      },
+      "overlay_color": {
+        "label": "Prekrivajuća boja"
+      },
+      "svg_icon": {
+        "label": "Prilagođena SVG ikona"
+      },
+      "hover_background": {
+        "label": "Lebdite u pozadini"
+      },
+      "hover_text": {
+        "label": "Lebdite iznad teksta"
+      },
+      "hover_border": {
+        "label": "Granica lebdenja"
+      },
+      "video": {
+        "label": "Video"
+      },
+      "heading_font_size": {
+        "label": "Veličina fonta naslova (stolno računalo)"
+      },
+      "heading_font_size_mobile": {
+        "label": "Veličina fonta naslova (mobilno)"
+      },
+      "divider": {
+        "label": "Šestar"
+      },
+      "input": {
+        "label": "Ulazni"
+      },
+      "button": {
+        "label": "Dugme"
+      }
+    },
+    "header": {
+      "desktop": {
+        "label": "Radna površina"
+      },
+      "mobile": {
+        "label": "Mobilni"
+      },
+      "colors": {
+        "content": "Boje"
+      },
+      "before": {
+        "content": "Prije"
+      },
+      "after": {
+        "content": "Nakon"
+      },
+      "drag": {
+        "content": "Opterećenje"
+      },
+      "section_spacing": {
+        "content": "Razmak sekcija"
+      },
+      "button": {
+        "content": "Dugme"
+      },
+      "button_1": {
+        "content": "Gumb 1"
+      },
+      "button_2": {
+        "content": "Gumb 2"
+      },
+      "text": {
+        "content": "Tekst"
+      },
+      "content": {
+        "content": "Sadržaj"
+      },
+      "collections_layout": {
+        "content": "Izgled zbirke"
+      },
+      "mobile_menu": {
+        "content": "Mobilni izbornik"
+      },
+      "payment_methods": {
+        "content": "Metode Plačanja"
+      },
+      "copyright_content": {
+        "content": "Autorski sadržaj"
+      },
+      "transparent_header": {
+        "content": "Prozirno zaglavlje"
+      },
+      "navigation": {
+        "content": "Navigacija"
+      },
+      "header_icons": {
+        "content": "Ikone zaglavlja"
+      },
+      "content_1": {
+        "content": "Sadržaj 1"
+      },
+      "content_2": {
+        "content": "Sadržaj 2"
+      },
+      "content_3": {
+        "content": "Sadržaj 3"
+      },
+      "content_4": {
+        "content": "Sadržaj 4"
+      },
+      "content_5": {
+        "content": "Sadržaj 5"
+      },
+      "sales_banner": {
+        "content": "Banner za prodaju"
+      },
+      "icon": {
+        "content": "Banner za prodaju"
+      },
+      "marquee": {
+        "content": "Nadstrešnica"
+      },
+      "grid": {
+        "content": "Mreža"
+      },
+      "sort_filter": {
+        "content": "filtar"
+      },
+      "pagination": {
+        "content": "Paginacija"
+      },
+      "video": {
+        "content": "Video"
+      },
+      "layout": {
+        "content": "Raspored"
+      },
+      "font": {
+        "content": "Font"
+      },
+      "general": {
+        "content": "Općenito"
+      },
+      "product_badge": {
+        "content": "Oznaka proizvoda"
+      },
+      "alerts": {
+        "content": "upozorenja"
+      },
+      "header": {
+        "content": "Zaglavlje"
+      },
+      "footer": {
+        "content": "Podnožje"
+      },
+      "submenu": {
+        "content": "Podizbornik"
+      },
+      "input": {
+        "content": "Ulazni"
+      },
+      "heading": {
+        "content": "Naslov"
+      },
+      "body": {
+        "content": "Tijelo"
+      },
+      "custom_badge": {
+        "content": "Prilagođena značka"
+      }
+    },
+    "heading_style": {
+      "label": "Stil naslova",
+      "options": {
+        "solid": {
+          "label": "Čvrsto"
+        },
+        "stroke": {
+          "label": "Moždani udar"
+        }
+      }
+    },
+    "direction": {
+      "label": "Smjer",
+      "options": {
+        "rtl": {
+          "label": "S desna na lijevo"
+        },
+        "ltr": {
+          "label": "S lijeva nadesno"
+        }
+      }
+    },
+    "icon": {
+      "label": "Ikona",
+      "options": {
+        "none": {
+          "label": "Nijedan"
+        },
+        "chat": {
+          "label": "razgovor"
+        },
+        "danger": {
+          "label": "Opasnost"
+        },
+        "delivery": {
+          "label": "Dostava"
+        },
+        "edit": {
+          "label": "Uredi"
+        },
+        "envelope": {
+          "label": "Omotnica"
+        },
+        "eye": {
+          "label": "Oko"
+        },
+        "file": {
+          "label": "Datoteka"
+        },
+        "guarantee": {
+          "label": "Jamčiti"
+        },
+        "heart": {
+          "label": "Srce"
+        },
+        "location": {
+          "label": "Mjesto"
+        },
+        "lock": {
+          "label": "brava"
+        },
+        "support": {
+          "label": "podrška"
+        },
+        "music": {
+          "label": "glazba, muzika"
+        },
+        "note-text": {
+          "label": "Napomena Tekst"
+        },
+        "notification": {
+          "label": "Obavijest"
+        },
+        "phone": {
+          "label": "Telefon"
+        },
+        "question": {
+          "label": "Pitanje"
+        },
+        "return": {
+          "label": "Povratak"
+        },
+        "setting": {
+          "label": "Postavka"
+        },
+        "shipping": {
+          "label": "dostava"
+        },
+        "shop": {
+          "label": "Dućan"
+        },
+        "star": {
+          "label": "Zvijezda"
+        },
+        "tag": {
+          "label": "Označiti"
+        },
+        "thumb": {
+          "label": "Palac"
+        },
+        "user": {
+          "label": "Korisnik"
+        },
+        "video": {
+          "label": "Video"
+        },
+        "wallet": {
+          "label": "Novčanik"
+        }
+      }
+    },
+    "heading_size": {
+      "desktop_label": "Veličina naslova",
+      "mobile_label": "Veličina naslova (mobilno)",
+      "options": {
+        "extra_large": {
+          "label": "Jako veliko"
+        },
+        "large": {
+          "label": "velika"
+        },
+        "medium": {
+          "label": "Srednji"
+        },
+        "small": {
+          "label": "Mali"
+        },
+        "extra_small": {
+          "label": "Ekstra malo"
+        }
+      }
+    },
+    "description_size": {
+      "label": "Veličina opisa",
+      "options": {
+        "small": {
+          "label": "Mali"
+        },
+        "medium": {
+          "label": "Srednji"
+        },
+        "large": {
+          "label": "velika"
+        }
+      }
+    },
+    "content_width": {
+      "label": "Širina",
+      "options": {
+        "small": {
+          "label": "Mali"
+        },
+        "medium": {
+          "label": "Srednji"
+        },
+        "Large": {
+          "label": "velika"
+        }
+      }
+    },
+    "text_alignment": {
+      "label": "Poravnanje teksta",
+      "options": {
+        "top": {
+          "label": "Vrh"
+        },
+        "center": {
+          "label": "Centar"
+        },
+        "bottom": {
+          "label": "Dno"
+        }
+      }
+    },
+    "section_spacing": {
+      "top_space_desktop": {
+        "label": "Gornji razmak (radna površina)"
+      },
+      "bottom_space_desktop": {
+        "label": "Donji razmak (radna površina)"
+      },
+      "top_space_mobile": {
+        "label": "Gornji razmak (mobilno)"
+      },
+      "bottom_space_mobile": {
+        "label": "Donji razmak (mobilno)"
+      }
+    },
+    "image_size": {
+      "label": "Omjer slike",
+      "options": {
+        "auto": {
+          "label": "Auto"
+        },
+        "landscape": {
+          "label": "Krajolik"
+        },
+        "portrait": {
+          "label": "Portret"
+        },
+        "square": {
+          "label": "Kvadrat"
+        }
+      }
+    },
+    "image_height": {
+      "label": "Visina slike",
+      "options": {
+        "auto": {
+          "label": "Prilagodite se slici"
+        },
+        "small": {
+          "label": "Mali"
+        },
+        "medium": {
+          "label": "Srednji"
+        },
+        "large": {
+          "label": "velika"
+        }
+      }
+    },
+    "image_width": {
+      "label": "Širina slike",
+      "options": {
+        "small": {
+          "label": "Mali"
+        },
+        "medium": {
+          "label": "Srednji"
+        },
+        "large": {
+          "label": "velika"
+        }
+      }
+    },
+    "height": {
+      "label": "Visina",
+      "height-ratio-adapt": {
+        "label": "Prilagodite se sadržaju"
+      },
+      "small": {
+        "label": "Mali"
+      },
+      "medium": {
+        "label": "Srednji"
+      },
+      "large": {
+        "label": "velika"
+      }
+    },
+    "tab_alignment": {
+      "label": "Poravnanje kartica radne površine",
+      "options": {
+        "left": {
+          "label": "Lijevo"
+        },
+        "center": {
+          "label": "Centar"
+        }
+      }
+    },
+    "icon_size": {
+      "label": "Veličina",
+      "options": {
+        "small": {
+          "label": "Mali"
+        },
+        "medium": {
+          "label": "Srednji"
+        },
+        "large": {
+          "label": "velika"
+        }
+      }
+    },
+    "btn_size": {
+      "label": "Veličina",
+      "options": {
+        "xsmall": {
+          "label": "Xsmall"
+        },
+        "small": {
+          "label": "Mali"
+        },
+        "medium": {
+          "label": "Srednji"
+        },
+        "large": {
+          "label": "velika"
+        }
+      }
+    },
+    "font": {
+      "label": "Obitelj fontova",
+      "options": {
+        "heading": {
+          "label": "Naslov"
+        },
+        "body": {
+          "label": "Tijelo"
+        }
+      }
+    },
+    "font_size": {
+      "options": {
+        "small": {
+          "label": "Mali"
+        },
+        "regular": {
+          "label": "Redovno"
+        },
+        "Medium": {
+          "label": "srednji"
+        },
+        "large": {
+          "label": "velika"
+        }
+      }
+    },
+    "content_position": {
+      "mid-start": {
+        "label": "Sredina lijevo"
+      },
+      "mid-center": {
+        "label": "Srednji centar"
+      },
+      "mid-end": {
+        "label": "Sredina desno"
+      },
+      "down-start": {
+        "label": "Dolje lijevo"
+      },
+      "down-center": {
+        "label": "Donji centar"
+      },
+      "down-end": {
+        "label": "Dolje desno"
+      }
+    }
+  },
+  "sections": {
+    "404": {
+      "name": "Glavni 404"
+    },
+    "banner-with-text-on-hover": {
+      "name": "Banner s tekstom pri lebdenju",
+      "settings": {
+        "backhround_image": {
+          "label": "Pozadinska slika"
+        },
+        "title_animation": {
+          "label": "Omogući animaciju naslova proizvoda (stolno računalo)"
+        },
+        "scrolling_speed": {
+          "label": "Brzina pomicanja radne površine",
+          "info": "Radit će samo ako je omogućena animacija naslova."
+        },
+        "scrolling_speed_mobile": {
+          "label": "Brzina pomicanja na mobitelu",
+          "info": "Radit će samo ako je omogućena animacija naslova."
+        },
+        "image_size": {
+          "label": "Veličina blok slike"
+        }
+      },
+      "blocks": {
+        "name": "Slika s tekstom"
+      },
+      "presets": {
+        "name": "Banner s tekstom pri lebdenju"
+      }
+    },
+    "event_calendar": {
+      "name": "Kalendar događaja",
+      "settings": {
+        "background_image": {
+          "label": "Pozadinska slika"
+        },
+        "image_size": {
+          "label": "Veličina slike događaja"
+        }
+      },
+      "blocks": {
+        "name": "Događaj",
+        "settings": {
+          "date": {
+            "label": "Datum"
+          },
+          "time": {
+            "label": "Vrijeme"
+          },
+          "location": {
+            "label": "Mjesto"
+          },
+          "location_url": {
+            "label": "Link lokacije"
+          },
+          "link_text": {
+            "label": "Rezervirajte sada"
+          }
+        }
+      },
+      "presets": {
+        "name": "Kalendar događaja"
+      }
+    },
+    "main_article": {
+      "settings": {
+        "image_size": {
+          "label": "Veličina slike članka"
+        },
+        "show_image": {
+          "label": "Prikaži sliku članka"
+        },
+        "show_date": {
+          "label": "Prikaži datum članka"
+        },
+        "show_author": {
+          "label": "Prikaži autora"
+        },
+        "show_excerpt": {
+          "label": "Prikaži izvatke iz članka"
+        },
+        "show_tags": {
+          "label": "Prikaži oznake članka"
+        },
+        "show_comments": {
+          "label": "Prikaži komentare na članak"
+        },
+        "show_social": {
+          "label": "Prikaži ikone dijeljenja na društvenim mrežama"
+        }
+      },
+      "name": "Članak"
+    },
+    "main_product": {
+      "settings": {
+        "gallery_type": {
+          "label": "Stil galerije slika",
+          "options": {
+            "stacked": {
+              "label": "Složeno"
+            },
+            "carousel": {
+              "label": "Karusel"
+            }
+          }
+        },
+        "container_type": {
+          "label": "Izgled proizvoda",
+          "options": {
+            "container": {
+              "label": "Kontejner"
+            },
+            "fullwidth": {
+              "label": "Puna širina"
+            }
+          }
+        }
+      },
+      "name": "Glavni proizvod",
+      "blocks": {
+        "title": {
+          "name": "Titula"
+        },
+        "sku": {
+          "name": "Sku"
+        },
+        "text": {
+          "name": "Tekst"
+        },
+        "price": {
+          "name": "Cijena",
+          "settings": {
+            "hide_shipping_content": {
+              "label": "Sakrij sadržaj otpreme"
+            }
+          }
+        },
+        "review_rating": {
+          "name": "Ocjena pregleda",
+          "setting": {
+            "paragraph": {
+              "content": "Za prikaz ocjena dodajte bilo koju aplikaciju za pregled proizvoda."
+            }
+          }
+        },
+        "variant": {
+          "name": "Birač varijanti"
+        },
+        "quantity": {
+          "name": "Birač količine"
+        },
+        "sizeChart": {
+          "name": "Tablica veličina",
+          "settings": {
+            "size_chart": {
+              "label": "Odaberite tablicu veličina"
+            }
+          }
+        },
+        "button": {
+          "name": "Kupi gumbe",
+          "settings": {
+            "dynamic_checkout_btn": {
+              "label": "Prikaži gumb za dinamičku naplatu"
+            },
+            "show_recipient_form": {
+              "label": "Prikaži obrazac s podacima o primatelju za darovne kartice",
+              "info": "Kupcima omogućuje slanje darovnih kartica na zakazani datum zajedno s osobnom porukom. [Uči više](https://help.shopify.com/en/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields)"
+            }
+          }
+        },
+        "share": {
+          "name": "Dijeljenje na društvenim mrežama"
+        },
+        "description": {
+          "name": "Opis"
+        },
+        "custom_liquid": {
+          "name": "Prilagođena tekućina",
+          "settings": {
+            "custom_liquid": {
+              "label": "Tekućina",
+              "info": "Dodajte isječke aplikacije ili drugi tekući kod za izradu naprednih prilagodbi."
+            }
+          }
+        },
+        "inventory": {
+          "name": "Inventar",
+          "settings": {
+            "minimun_inventory": {
+              "label": "Minimalni inventar"
+            }
+          }
+        },
+        "collapsible_content": {
+          "name": "sklopivi",
+          "settings": {
+            "open_first_content": {
+              "label": "Zadano otvori prvi sadržaj"
+            },
+            "show_description": {
+              "label": "Prikaži naslov Opis"
+            },
+            "description_heading": {
+              "label": "Dodajte naslov Opis"
+            },
+            "add_content": {
+              "label": "Dodajte sadržaj"
+            },
+            "paragraph": {
+              "content1": {
+                "content": "Sadržaj 1"
+              },
+              "content2": {
+                "content": "Sadržaj 2"
+              },
+              "content3": {
+                "content": "Sadržaj 3"
+              }
+            },
+            "page": {
+              "label": "Dodajte stranice"
+            }
+          }
+        },
+        "pickup": {
+          "name": "Pokupiti"
+        },
+        "complementary_products": {
+          "name": "Komplementarni proizvodi",
+          "settings": {
+            "paragraph": {
+              "content": "Za odabir komplementarnih proizvoda dodajte Pretraživanje.[Uči više](https://shopify.dev/themes/product-merchandising/recommendations)s"
+            },
+            "products_count": {
+              "label": "Proizvodi se broje"
+            }
+          }
+        }
+      }
+    },
+    "newsletter": {
+      "name": "Newsletter",
+      "settings": {
+        "background_image": {
+          "label": "Pozadinska slika"
+        }
+      },
+      "presets": {
+        "name": "Newsletter"
+      }
+    },
+    "store_locator": {
+      "name": "Lokator trgovine",
+      "blocks": {
+        "name": "Store",
+        "settings": {
+          "store_image": {
+            "label": "Spremi sliku"
+          },
+          "store_name": {
+            "label": "Naziv trgovine"
+          },
+          "store_detail": {
+            "label": "Detalji trgovine"
+          },
+          "phone": {
+            "label": "Kontakt broj"
+          },
+          "timing": {
+            "label": "Vrijeme otvaranja"
+          },
+          "location_imgae": {
+            "label": "Slika lokacije"
+          },
+          "location": {
+            "label": "Mjesto",
+            "info": "Provjerite jeste li dodali API za Google karte u postavkama teme>Google karte."
+          }
+        }
+      },
+      "presets": {
+        "name": "Lokator trgovine"
+      }
+    },
+    "parallax_scrolling": {
+      "name": "Pomicanje paralakse",
+      "settings": {
+        "content_position": {
+          "label": "Položaj",
+          "options": {
+            "mid-start": {
+              "label": "Sredina lijevo"
+            },
+            "mid-center": {
+              "label": "Srednji centar"
+            },
+            "mid-end": {
+              "label": "Sredina desno"
+            },
+            "down-start": {
+              "label": "Dolje lijevo"
+            },
+            "down-center": {
+              "label": "Donji centar"
+            },
+            "down-end": {
+              "label": "Dolje desno"
+            }
+          }
+        }
+      },
+      "blocks": {
+        "name": "Naslov"
+      },
+      "presets": {
+        "name": "Pomicanje paralakse"
+      }
+    },
+    "apps": {
+      "name": "aplikacije",
+      "presets": {
+        "name": "aplikacije"
+      }
+    },
+    "age_verification_popup": {
+      "name": "Skočni prozor za provjeru dobi",
+      "settings": {
+        "enable_age_verification": {
+          "label": "Omogući skočni prozor za provjeru dobi"
+        },
+        "age_logo_img": {
+          "label": "Slika logotipa"
+        },
+        "decline_text": {
+          "label": "Tekst gumba za odbijanje"
+        },
+        "approve_text": {
+          "label": "Odobri tekst gumba"
+        },
+        "paragraph_verification_requirment": {
+          "content": "Ovaj će se sadržaj prikazati ako korisnik ne ispunjava zahtjeve za provjeru dobi."
+        },
+        "decline_heading": {
+          "label": "Naslov do 18 godina"
+        },
+        "decline_subheading": {
+          "label": "Opis ispod 18 godina"
+        },
+        "age_decline_button_text": {
+          "label": "Tekst gumba za odbijanje"
+        },
+        "agepopup_cookie_set": {
+          "label": "Frekvencija",
+          "info": "Broj dana prije ponovnog pojavljivanja odbačenog skočnog prozora."
+        }
+      }
+    },
+    "announcement_bar": {
+      "name": "Traka s najavama",
+      "settings": {
+        "enable_announcement": {
+          "label": "Omogući traku s najavama"
+        },
+        "enable_on_homepage": {
+          "label": "Prikaži samo na početnoj stranici"
+        },
+        "layout_type": {
+          "label": "Stil rasporeda",
+          "options": {
+            "marquee": {
+              "label": "Nadstrešnica"
+            },
+            "carousel": {
+              "label": "Karusel"
+            }
+          }
+        },
+        "header": {
+          "carousel": {
+            "content": "Karusel"
+          },
+          "marquee": {
+            "content": "Nadstrešnica"
+          }
+        },
+        "rotate": {
+          "label": "Automatsko zakretanje slajdova"
+        },
+        "interval": {
+          "label": "Promijeni slajd svaki"
+        }
+      },
+      "blocks": {
+        "name": "Obavijest",
+        "carousel_layout": {
+          "content": "Koristi se na karuselu"
+        }
+      }
+    },
+    "before_after": {
+      "name": "Slika prije/poslije",
+      "settings": {
+        "before_after_text": {
+          "label": "Prije/poslije teksta"
+        },
+        "before_after_background": {
+          "label": "Pozadina prije/poslije"
+        }
+      },
+      "presets": {
+        "name": "Slika prije/poslije"
+      }
+    },
+    "breadcrumb": {
+      "name": "Breadcrumb",
+      "presets": {
+        "name": "Krušne mrvice"
+      }
+    },
+    "collapsible_content": {
+      "name": "Sadržaj koji se može sklopiti",
+      "settings": {
+        "enable_first_default": {
+          "label": "Otvoreno sklopivo prema zadanim postavkama"
+        }
+      },
+      "blocks": {
+        "name": "Sklopivi red"
+      },
+      "presets": {
+        "name": "Sadržaj koji se može sklopiti"
+      }
+    },
+    "collection_carousel": {
+      "name": "Zbirni vrtuljak",
+      "settings": {
+        "enable_grid_style": {
+          "label": "Omogući stil rešetke"
+        }
+      },
+      "blocks": {
+        "name": "Kolekcija",
+        "settings": {
+          "collection_name": {
+            "label": "Naziv zbirke"
+          }
+        }
+      },
+      "presets": {
+        "name": "Zbirni vrtuljak"
+      }
+    },
+    "collection_list": {
+      "name": "Popis zbirke",
+      "settings": {
+        "collections_column": {
+          "label": "Broj stupaca radne površine"
+        }
+      },
+      "blocks": {
+        "name": "Kolekcija"
+      },
+      "presets": {
+        "name": "Popis zbirki"
+      }
+    },
+    "collection_tab": {
+      "name": "Kartice zbirke",
+      "settings": {
+        "stacked_products": {
+          "label": "Omogući složeni prikaz"
+        },
+        "products_count": {
+          "label": "Proizvodi za pokazati"
+        }
+      },
+      "blocks": {
+        "name": "Kolekcija"
+      },
+      "presets": {
+        "name": "Kartica zbirke"
+      }
+    },
+    "contact_form": {
+      "name": "Kontakt obrazac",
+      "presets": {
+        "name": "Kontakt obrazac"
+      }
+    },
+    "countdown": {
+      "name": "Odbrojavanje",
+      "settings": {
+        "enable_countdown": {
+          "label": "Omogući odbrojavanje"
+        },
+        "date": {
+          "info": "Datum završetka mora biti postavljen na budući datum i uključivati ​​sljedeći format: DD/MM/GGGG Primjer: 01.01.2024.",
+          "label": "Datum završetka"
+        },
+        "layout_style": {
+          "label": "Stil rasporeda",
+          "options": {
+            "square": {
+              "label": "Kvadrat"
+            },
+            "rounded": {
+              "label": "Zaobljena"
+            }
+          }
+        },
+        "marquee": {
+          "label": "Omogući okvir za izbor"
+        },
+        "scrolling_speed": {
+          "label": "Ubrzati"
+        }
+      },
+      "blocks": {
+        "name": "Kolekcija"
+      },
+      "presets": {
+        "name": "Odbrojavanje"
+      }
+    },
+    "custom_liquid": {
+      "name": "Prilagođena tekućina",
+      "settings": {
+        "custom_liquid": {
+          "label": "Kod tekućine",
+          "info": "Dodajte isječke aplikacije ili drugi kod za izradu naprednih prilagodbi. [Uči više](https://shopify.dev/docs/api/liquid)"
+        }
+      },
+      "presets": {
+        "name": "Prilagođena tekućina"
+      }
+    },
+    "featured_blogs": {
+      "name": "Istaknuti blogovi",
+      "settings": {
+        "blog": {
+          "label": "Blog"
+        },
+        "post_limit": {
+          "label": "Broj članaka"
+        },
+        "show_date": {
+          "label": "Prikaži datum"
+        },
+        "show_author": {
+          "label": "Prikaži autora"
+        },
+        "show_excerpt": {
+          "label": "Prikaži izvatke iz članka"
+        }
+      },
+      "blocks": {
+        "name": "Post",
+        "settings": {
+          "label": "Odaberite članak"
+        }
+      },
+      "presets": {
+        "name": "Istaknuti blogovi"
+      }
+    },
+    "featured_collection": {
+      "name": "Istaknuta zbirka",
+      "settings": {
+        "enable_collection_title": {
+          "label": "Prikaži naslov zbirke"
+        },
+        "products_style": {
+          "label": "Omogući vrtuljak"
+        },
+        "products_to_show": {
+          "label": "Proizvod za pokazati"
+        },
+        "columns_desktop": {
+          "label": "Stupac (radna površina)"
+        }
+      },
+      "presets": {
+        "name": "Istaknuta zbirka"
+      }
+    },
+    "featured_product": {
+      "name": "Opremljenog proizvoda",
+      "blocks": {
+        "title": {
+          "name": "Titula"
+        },
+        "sku": {
+          "name": "Sku"
+        },
+        "text": {
+          "name": "Tekst"
+        },
+        "price": {
+          "name": "Cijena",
+          "settings": {
+            "hide_shipping_content": {
+              "label": "Sakrij sadržaj otpreme"
+            }
+          }
+        },
+        "review_rating": {
+          "name": "Ocjena pregleda",
+          "setting": {
+            "paragraph": {
+              "content": "Za prikaz ocjena dodajte bilo koju aplikaciju za pregled proizvoda."
+            }
+          }
+        },
+        "variant": {
+          "name": "Birač varijanti"
+        },
+        "quantity": {
+          "name": "Birač količine"
+        },
+        "button": {
+          "name": "Kupi gumbe",
+          "settings": {
+            "dynamic_checkout_btn": {
+              "label": "Prikaži gumb za dinamičku naplatu"
+            },
+            "show_recipient_form": {
+              "label": "Prikaži obrazac s podacima o primatelju za darovne kartice",
+              "info": "Kupcima omogućuje slanje darovnih kartica na zakazani datum zajedno s osobnom porukom. [Uči više](https://help.shopify.com/en/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields)"
+            }
+          }
+        },
+        "share": {
+          "name": "Dijeljenje na društvenim mrežama"
+        },
+        "description": {
+          "name": "Opis"
+        },
+        "custom_liquid": {
+          "name": "Prilagođena tekućina",
+          "settings": {
+            "custom_liquid": {
+              "label": "Tekućina",
+              "info": "Dodajte isječke aplikacije ili drugi tekući kod za izradu naprednih prilagodbi."
+            }
+          }
+        },
+        "inventory": {
+          "name": "Inventar",
+          "settings": {
+            "minimun_inventory": {
+              "label": "Minimalni inventar"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Opremljenog proizvoda"
+      }
+    },
+    "footer": {
+      "name": "Podnožje",
+      "settings": {
+        "logo_width": {
+          "label": "Širina logotipa"
+        },
+        "show_social": {
+          "label": "Omogući ikonu društvenih mreža"
+        },
+        "enable_follow_on_shop": {
+          "label": "Omogući praćenje u trgovini"
+        },
+        "open_menu_mobile": {
+          "label": "Otvorite izbornik prema zadanim postavkama u harmoničnom prikazu"
+        },
+        "enable_language_selector": {
+          "label": "Omogući birač jezika",
+          "info": "Da biste dodali jezik, idite na svoje [jezične postavke.](/admin/settings/languages)"
+        },
+        "enable_currency_selector": {
+          "label": "Omogući pretvarač valuta ",
+          "info": "Da biste dodali državu/regiju, idite na [postavke plaćanja.](/admin/settings/payments)"
+        },
+        "payment_enable": {
+          "label": "Prikaži ikone plaćanja"
+        },
+        "hide_copyright_content": {
+          "label": "Sakrij sadržaj zaštićen autorskim pravima"
+        },
+        "custom_copyright_content": {
+          "label": "Prilagođeni sadržaj"
+        }
+      },
+      "blocks": {
+        "menu": {
+          "name": "Jelovnik ",
+          "settings": {
+            "heading": {
+              "label": "Naslov",
+              "info": "Naslov je potreban za prikaz izbornika."
+            },
+            "menu": {
+              "label": "Jelovnik ",
+              "info": "Prikazuje samo stavke izbornika najviše razine."
+            }
+          }
+        },
+        "newsletter": {
+          "name": "Newsletter",
+          "settings": {
+            "placeholder": {
+              "label": "Tekst rezerviranog mjesta"
+            }
+          }
+        }
+      }
+    },
+    "header": {
+      "name": "Zaglavlje",
+      "settings": {
+        "enable_sticky_header": {
+          "label": "Omogući ljepljivo zaglavlje"
+        },
+        "sticky_header_type": {
+          "label": "Vrsta ljepljivog zaglavlja",
+          "options": {
+            "on_scroll": {
+              "label": "Na pomaknite se prema gore"
+            },
+            "always": {
+              "label": "Stalno"
+            }
+          }
+        },
+        "logo": {
+          "label": "Logo"
+        },
+        "logo_width": {
+          "label": "Širina logotipa"
+        },
+        "logo_alignment": {
+          "label": "Poravnanje logotipa"
+        },
+        "desktop_transparent_header": {
+          "label": "Omogući transparentnost (Desktop)"
+        },
+        "transparent_logo": {
+          "label": "Logo",
+          "info": "Prikazuje se kada je omogućeno prozirno zaglavlje. "
+        },
+        "menu": {
+          "label": "Jelovnik "
+        },
+        "menu_type": {
+          "label": "Vrsta izbornika",
+          "options": {
+            "dropdown": {
+              "label": "Padajući izbornik"
+            },
+            "mega_menu": {
+              "label": "Mega meni"
+            }
+          }
+        },
+        "menu_font": {
+          "label": "Font izbornika"
+        },
+        "menu_font_size": {
+          "label": "Veličina fonta izbornika"
+        },
+        "sub_menu_font": {
+          "label": "Font podizbornika"
+        },
+        "submenu_font_size": {
+          "label": "Veličina fonta podizbornika"
+        },
+        "enable_search": {
+          "label": "Omogući pretraživanje"
+        },
+        "enable_account": {
+          "label": "Omogući račun"
+        },
+        "enable_cart": {
+          "label": "Omogući košaricu"
+        },
+        "enable_language_selector": {
+          "label": "Omogući birač jezika",
+          "info": "Da biste dodali jezik, idite na svoje [jezične postavke.](/admin/settings/languages)"
+        },
+        "enable_currency_selector": {
+          "label": "Omogući pretvarač valuta ",
+          "info": "Da biste dodali državu/regiju, idite na [postavke plaćanja.](/admin/settings/payments)"
+        }
+      },
+      "blocks": {
+        "name": "Mega meni",
+        "settings": {
+          "title": {
+            "label": "Oznaka jelovnika",
+            "info": "Unesite naziv izbornika za primjenu mega izbornika."
+          },
+          "icon_width": {
+            "label": "Širina ikone"
+          }
+        }
+      }
+    },
+    "text-with-icon": {
+      "name": "Tekst s ikonama",
+      "settings": {
+        "number_column": {
+          "label": "Broj stupaca na radnoj površini"
+        },
+        "icon_background_enable": {
+          "label": "Omogući pozadinu ikone"
+        },
+        "column_background": {
+          "label": "Pozadina stupca"
+        },
+        "icon_background": {
+          "label": "Pozadina ikone"
+        }
+      },
+      "blocks": {
+        "name": "Stupac",
+        "settings": {
+          "custom_svg": {
+            "label": "Prilagođeni svg"
+          },
+          "image_icon": {
+            "label": "Ikona slike"
+          }
+        }
+      },
+      "presets": {
+        "name": "Tekst s ikonama"
+      }
+    },
+    "image_with_text": {
+      "name": "Slike s tekstom",
+      "setting": {
+        "image1": {
+          "label": "Slika prva"
+        },
+        "image2": {
+          "label": "Druga slika"
+        },
+        "layout_style": {
+          "label": "Stil rasporeda",
+          "description_center": {
+            "label": "Centar sadržaja"
+          },
+          "both_image_first": {
+            "label": "Prvo slike"
+          },
+          "both_image_last": {
+            "label": "Traju slike"
+          }
+        }
+      },
+      "blocks": {
+        "heading": {
+          "name": "Naslov"
+        },
+        "text": {
+          "name": "Tekst"
+        },
+        "button": {
+          "name": "Dugme"
+        }
+      },
+      "presets": {
+        "name": "Slike s tekstom"
+      }
+    },
+    "images_carousel": {
+      "name": "Vrtuljak sa slikama",
+      "blocks": {
+        "name": "Slika"
+      },
+      "presets": {
+        "name": "Vrtuljak sa slikama"
+      }
+    },
+    "logo_list": {
+      "name": "Popis logotipa",
+      "settings": {
+        "images_height": {
+          "label": "Izjednačite visinu karata"
+        },
+        "swipe_enable_mobile": {
+          "label": "Omogućite prevlačenje prstom na mobitelu"
+        },
+        "show_card_background": {
+          "label": "Prikaži pozadinu kartice"
+        },
+        "show_card_border": {
+          "label": "Prikaži obrub kartice"
+        },
+        "layout_type": {
+          "label": "Stil rasporeda",
+          "options": {
+            "marquee": {
+              "label": "Nadstrešnica"
+            },
+            "carousel": {
+              "label": "Rešetka"
+            }
+          }
+        },
+        "scrolling_speed": {
+          "label": "Markezna brzina"
+        },
+        "column_spacing": {
+          "label": "Razmak u stupcima"
+        }
+      },
+      "blocks": {
+        "name": "Logo",
+        "settings": {
+          "image_width": {
+            "label": "Širina slike"
+          }
+        }
+      },
+      "presets": {
+        "name": "Popis logotipa"
+      }
+    },
+    "main_account": {
+      "name": "Glavni račun"
+    },
+    "main_active_account": {
+      "name": "Glavni aktivni račun"
+    },
+    "main_addresses": {
+      "name": "Glavna adresa"
+    },
+    "main_blog_banner": {
+      "name": "Banner",
+      "settings": {
+        "banner_image": {
+          "info": "Preporučuje se 1920 x 200 px."
+        }
+      }
+    },
+    "main_blog": {
+      "name": "Postovi na blogu",
+      "settings": {
+        "artical_per_page": {
+          "label": "Objava po stranici"
+        },
+        "show_date": {
+          "label": "Prikaži datum članka"
+        },
+        "show_author": {
+          "label": "Prikaži autora"
+        },
+        "show_excerpt": {
+          "label": "Prikaži izvatke iz članka"
+        },
+        "show_tags": {
+          "label": "Prikaži oznake članka"
+        }
+      }
+    },
+    "main_cart": {
+      "name": "Glavna kolica",
+      "settings": {
+        "show_cart_note": {
+          "label": "Prikaži napomenu o košarici"
+        },
+        "payment_enable": {
+          "label": "Prikaži ikone plaćanja"
+        },
+        "shipping_estimates": {
+          "label": "Prikaži procjenu dostave"
+        }
+      }
+    },
+    "main_collection_banner": {
+      "name": "Banner zbirke",
+      "settings": {
+        "show_collection_title": {
+          "label": "Prikaži naslov zbirke"
+        },
+        "show_collection_description": {
+          "label": "Prikaži opis zbirke"
+        },
+        "show_collection_image": {
+          "label": "Prikaži sliku zbirke"
+        },
+        "custom_collection_image": {
+          "label": "Kolekcija prilagođenih slika"
+        }
+      }
+    },
+    "main_collection_list": {
+      "name": "Popis zbirke",
+      "settings": {
+        "collections_per_page": {
+          "label": "Zbirke po stranici"
+        },
+        "collections_column": {
+          "label": "Broj stupaca radne površine"
+        },
+        "sort": {
+          "label": "Vrsta",
+          "options": {
+            "alphabetical": {
+              "label": "Abecednim redom, a-z"
+            },
+            "alphabetical_reversed": {
+              "label": "Abecednim redom, z-a"
+            },
+            "date_reversed": {
+              "label": "Datum, novo u staro"
+            },
+            "date": {
+              "label": "Datum, od starog do novog"
+            },
+            "products_high": {
+              "label": "Broj proizvoda, od visokog prema niskom"
+            },
+            "products_low": {
+              "label": "Broj proizvoda, od niskog do visokog"
+            }
+          }
+        },
+        "title_postion": {
+          "label": "Položaj naslova"
+        }
+      }
+    },
+    "main_collection": {
+      "name": "Glavna zbirka",
+      "settings": {
+        "products_per_page": {
+          "label": "Proizvodi po stranici"
+        },
+        "enable_filtering": {
+          "label": "Omogući filtar"
+        },
+        "enable_sorting": {
+          "label": "Omogući sortiranje"
+        },
+        "pagination_type": {
+          "label": "Tip",
+          "settings": {
+            "pagination": {
+              "label": "Paginacija"
+            },
+            "infinite": {
+              "label": "Beskonačno"
+            },
+            "on-button": {
+              "label": "Kliknite za učitavanje"
+            }
+          }
+        }
+      }
+    },
+    "main_login": {
+      "name": "Prijaviti se"
+    },
+    "main_order": {
+      "name": "Glavne narudžbe"
+    },
+    "main_page": {
+      "name": "Glavna stranica"
+    },
+    "main_register": {
+      "name": "Registar"
+    },
+    "main_reset_password": {
+      "name": "Glavna lozinka za ponovno postavljanje"
+    },
+    "main_search": {
+      "name": "traži",
+      "settings": {
+        "enable_filtering": {
+          "label": "Omogući filtar",
+          "info": "Izbornik filtera"
+        },
+        "enable_sorting": {
+          "label": "Omogući sortiranje"
+        }
+      }
+    },
+    "media_gallery": {
+      "name": "Galerija",
+      "blocks": {
+        "name": "Mreža"
+      },
+      "presets": {
+        "name": "Galerija"
+      }
+    },
+    "media_grid": {
+      "name": "Medijska rešetka",
+      "settings": {
+        "grid_row_gap": {
+          "label": "Razmak stupaca"
+        }
+      },
+      "blocks": {
+        "name": "Mreža",
+        "settings": {
+          "column": {
+            "label": "Stupac"
+          },
+          "row": {
+            "label": "Red"
+          }
+        }
+      },
+      "presets": {
+        "name": "Medijska rešetka"
+      }
+    },
+    "newsletter_popup": {
+      "name": "Skočni prozor za bilten",
+      "settings": {
+        "newsletter_enable": {
+          "label": "Omogući skočni prozor za bilten"
+        },
+        "popup_cookie_set": {
+          "label": "Frekvencija",
+          "info": "Broj dana prije ponovnog pojavljivanja odbačenog skočnog prozora."
+        }
+      }
+    },
+    "banner": {
+      "name": "Banner",
+      "settings": {
+        "banner_image": {
+          "info": "Preporučuje se 1920 x 200 px."
+        }
+      }
+    },
+    "password_page": {
+      "name": "Stranica s lozinkom",
+      "settings": {
+        "logo": {
+          "label": "Logo",
+          "info": "Preporučeno 110 x 36 px."
+        },
+        "logo_max_width": {
+          "label": "Veličina logotipa"
+        },
+        "password_heading": {
+          "label": "Naslov lozinke"
+        },
+        "show_newsletter": {
+          "label": "Prikaži bilten"
+        }
+      }
+    },
+    "trending_products": {
+      "name": "Proizvodi u trendu",
+      "settings": {
+        "title_animation": {
+          "label": "Omogući animaciju naslova proizvoda"
+        },
+        "scrolling_speed": {
+          "label": "Brzina listanja",
+          "info": "Radit će samo ako je omogućena animacija naslova."
+        },
+        "product_list": {
+          "label": "Proizvodi"
+        }
+      },
+      "presets": {
+        "name": "Proizvodi u trendu"
+      }
+    },
+    "recently_view_products": {
+      "name": "Nedavno pregledani proizvodi",
+      "settings": {
+        "paragraph": {
+          "content": "Odjeljak je skriven ako nijedan proizvod nije posjećen."
+        },
+        "products_count": {
+          "label": "Proizvodi za pokazati"
+        }
+      },
+      "presets": {
+        "name": "Nedavno pregledani proizvodi"
+      }
+    },
+    "related_products": {
+      "name": "Povezani proizvodi",
+      "settings": {
+        "products_count": {
+          "label": "Proizvodi za pokazati"
+        }
+      }
+    },
+    "rich_text": {
+      "name": "Bogati tekst",
+      "settings": {
+        "layout_type": {
+          "label": "Omogući izgled pune širine"
+        }
+      },
+      "blocks": {
+        "heading": {
+          "name": "Naslov"
+        },
+        "text": {
+          "name": "Tekst"
+        },
+        "button": {
+          "name": "Dugme"
+        }
+      },
+      "presets": {
+        "name": "Bogati tekst"
+      }
+    },
+    "scrolling_text": {
+      "name": "Pomicanje bannera",
+      "settings": {
+        "scrolling_speed": {
+          "label": "Ubrzati"
+        },
+        "items_gap": {
+          "label": "Razmak između stavki"
+        }
+      },
+      "blocks": {
+        "text": {
+          "name": "Tekst",
+          "settings": {
+            "highlighted": {
+              "label": "Označite tekst"
+            },
+            "enable_text_gradient": {
+              "label": "Omogući gradijent teksta"
+            },
+            "textbackground": {
+              "label": "Gradijent teksta"
+            }
+          }
+        },
+        "icon": {
+          "name": "Ikona",
+          "settings": {
+            "custom_icon": {
+              "label": "Prilagođeni SVG kod"
+            },
+            "color": {
+              "label": "Boja ikone"
+            }
+          }
+        },
+        "image": {
+          "name": "Slika"
+        },
+        "button": {
+          "name": "Dugme"
+        }
+      },
+      "presets": {
+        "name": "Pomicanje bannera"
+      }
+    },
+    "slideshow": {
+      "name": "Dijaprojekcija",
+      "settings": {
+        "layout_type": {
+          "label": "Raspored",
+          "options": {
+            "container": {
+              "label": "Kontejner"
+            },
+            "fullwidth": {
+              "label": "Puna širina"
+            }
+          }
+        },
+        "rotate": {
+          "label": "Automatsko zakretanje slajdova"
+        },
+        "interval": {
+          "label": "Promijeni slajd svaki"
+        },
+        "transition": {
+          "label": "Tranzicija",
+          "fade": {
+            "label": "Uvenuti"
+          },
+          "swipe": {
+            "label": "Ukrasti"
+          }
+        },
+        "controls": {
+          "number": {
+            "label": "Broj"
+          },
+          "arrows": {
+            "label": "strelice"
+          }
+        }
+      },
+      "blocks": {
+        "name": "slajd",
+        "settings": {
+          "heading_font_family": {
+            "label": "Obitelj fontova naslova"
+          },
+          "content_position": {
+            "label": "Položaj",
+            "options": {
+              "mid-start": {
+                "label": "Sredina lijevo"
+              },
+              "mid-center": {
+                "label": "Srednji centar"
+              },
+              "mid-end": {
+                "label": "Sredina desno"
+              },
+              "down-start": {
+                "label": "Dolje lijevo"
+              },
+              "down-center": {
+                "label": "Donji centar"
+              },
+              "down-end": {
+                "label": "Dolje desno"
+              }
+            }
+          },
+          "btn_as_link_1": {
+            "label": "Koristite gumb za tekst"
+          },
+          "overlay": {
+            "label": "Prekrivanje"
+          },
+          "text_overlay_opacity": {
+            "label": "Neprozirnost sloja teksta"
+          }
+        }
+      },
+      "presets": {
+        "name": "Dijaprojekcija"
+      }
+    },
+    "shop_the_look": {
+      "name": "Kupujte izgled",
+      "blocks": {
+        "name": "Mjesto",
+        "settings": {
+          "product": {
+            "label": "Proizvod"
+          },
+          "horizontal": {
+            "label": "Vodoravni položaj"
+          },
+          "vertical": {
+            "label": "vertikalni položaj"
+          },
+          "spot_color_bg": {
+            "label": "Spot pozadina"
+          },
+          "spot_color": {
+            "label": "Mjesto"
+          }
+        }
+      },
+      "presets": {
+        "name": "Kupujte izgled"
+      }
+    },
+    "testimonials": {
+      "name": "Svjedočanstva",
+      "settings": {
+        "column_count": {
+          "label": "Broje se stupci"
+        },
+        "content_alignment": {
+          "info": "Bit će primjenjivo kada je slika prazna."
+        }
+      },
+      "blocks": {
+        "name": "Citat",
+        "settings": {
+          "rating": {
+            "label": "Broj zvjezdica"
+          },
+          "header": {
+            "content": "Autor"
+          },
+          "author": {
+            "label": "Ime"
+          }
+        }
+      },
+      "presets": {
+        "name": "Svjedočanstva"
+      }
+    },
+    "video": {
+      "name": "Video",
+      "settings": {
+        "video_type": {
+          "label": "Stil",
+          "options": {
+            "onclick": {
+              "label": "Na klik"
+            },
+            "autoplay": {
+              "label": "Auto Play"
+            },
+            "onscroll": {
+              "label": "Na svitku"
+            }
+          }
+        },
+        "image": {
+          "label": "Naslovna slika",
+          "info": "Autoplay 'true' naslovna slika se ne prikazuje"
+        },
+        "video": {
+          "label": "Shopify hostirani video"
+        },
+        "overlay_text": {
+          "label": "Omogući preklapanje"
+        },
+        "overlay": {
+          "content": "Prekrivanje"
+        }
+      },
+      "presets": {
+        "name": "Video"
+      }
+    }
+  },
+  "settings_schema": {
+    "google_map": {
+      "name": "Google karta",
+      "settings": {
+        "google_map_api": {
+          "label": "Google Maps API ključ",
+          "info": "Za prikaz karte morat ćete registrirati Google Map API."
+        },
+        "google_map_id": {
+          "label": "ID karte"
+        }
+      }
+    },
+    "header_and_footer": {
+      "settings": {
+        "icon_color": {
+          "label": "Ikona"
+        },
+        "icon_color_hover": {
+          "label": "Lebdenje ikone"
+        },
+        "icon_background": {
+          "label": "Pozadina ikone"
+        },
+        "header_tsp_color": {
+          "label": "Prozirno zaglavlje"
+        },
+        "header_hover_color": {
+          "label": "Lebdjeti"
+        },
+        "submenu_hover_color": {
+          "label": "Veza za lebdenje teksta"
+        },
+        "footer_hover_color": {
+          "label": "Lebdenje linka"
+        }
+      },
+      "name": "Zaglavlje"
+    },
+    "swatches": {
+      "settings": {
+        "swatches_style": {
+          "label": "Swatchevi stil",
+          "options": {
+            "square": {
+              "label": "Kvadrat"
+            },
+            "circle": {
+              "label": "Krug"
+            }
+          }
+        },
+        "show_variant_image": {
+          "label": "Prikaži sliku varijante u boji"
+        },
+        "colorname": {
+          "label": "Naziv opcija boja",
+          "info": "Naziv opcije koji sadrži boje. "
+        },
+        "swatchs_custom_value": {
+          "label": "Prilagođeni kodovi boja/slike"
+        },
+        "sizename": {
+          "label": "Naziv opcija veličine",
+          "info": "Naziv opcije koji sadrži veličinu. "
+        }
+      },
+      "name": "Swatchevi"
+    },
+    "search_drawer": {
+      "settings": {
+        "enable_full_width": {
+          "label": "Omogući punu širinu"
+        },
+        "enable_search_drawer": {
+          "label": "Omogući ladicu za pretraživanje"
+        },
+        "enable_queries": {
+          "label": "Omogući povezane upite"
+        },
+        "enable_collections": {
+          "label": "Omogući zbirke"
+        },
+        "enable_pages": {
+          "label": "Omogući stranice"
+        },
+        "enable_article": {
+          "label": "Omogući članke"
+        },
+        "header": {
+          "search_suggestions": {
+            "content": "Prijedlozi za pretraživanje"
+          },
+          "product_suggestion": {
+            "content": "Prijedlozi proizvoda"
+          }
+        },
+        "enable_product_suggestions": {
+          "label": "Omogući prijedloge proizvoda"
+        },
+        "enable_suggestions": {
+          "label": "Omogući prijedloge"
+        },
+        "suggestions_list": {
+          "label": "Upiti"
+        },
+        "product_suggestions": {
+          "label": "Proizvodi"
+        }
+      },
+      "name": "Ladica za pretraživanje"
+    },
+    "scroll_to_top": {
+      "name": "Pomaknite se na vrh",
+      "settings": {
+        "enable_back_to_top": {
+          "label": "Omogući pomicanje na vrh"
+        },
+        "back_to_top_btn_position": {
+          "label": "Položaj",
+          "options": {
+            "left": {
+              "label": "Lijevo"
+            },
+            "center": {
+              "label": "Centar"
+            },
+            "right": {
+              "label": "Pravo"
+            }
+          }
+        },
+        "back_to_top_bottom_position": {
+          "label": "Položaj dolje"
+        },
+        "btp_icon": {
+          "label": "Ikone"
+        },
+        "btp_background": {
+          "label": "Pozadina"
+        }
+      }
+    },
+    "favicon": {
+      "name": "Favicon",
+      "settings": {
+        "favicon": {
+          "label": "Ikona",
+          "info": "Preporučeno 16 x 16 px."
+        }
+      }
+    },
+    "global_color": {
+      "name": "Globalna boja",
+      "settings": {
+        "image_background": {
+          "label": "Slika pozadine"
+        },
+        "shadow_color": {
+          "label": "Sjena"
+        },
+        "shadow_opacity": {
+          "label": "Neprozirnost sjene"
+        },
+        "blur_background_color": {
+          "label": "Zamućenje pozadine"
+        },
+        "custom_badge_text": {
+          "label": "Prilagođeni tekst značke"
+        },
+        "custom_badge_background": {
+          "label": "Prilagođena pozadina značke"
+        },
+        "sale_badge_text": {
+          "label": "Tekst značke rasprodaje"
+        },
+        "sale_badge_background": {
+          "label": "Pozadina bedža rasprodaje"
+        },
+        "soldout_badge_text": {
+          "label": "Rasprodan tekst značke"
+        },
+        "soldout_badge_background": {
+          "label": "Rasprodana pozadina značke"
+        },
+        "preorder_badge_text": {
+          "label": "Tekst bedža predbilježbe"
+        },
+        "preorder_badge_background": {
+          "label": "Pozadina značke za predbilježbu"
+        },
+        "successMsg": {
+          "label": "Tekst poruke o uspjehu"
+        },
+        "successMsgbg": {
+          "label": "Pozadina poruke o uspjehu"
+        },
+        "errorMsg": {
+          "label": "Tekst poruke o pogrešci"
+        },
+        "errorMsgbg": {
+          "label": "Pozadina poruke o pogrešci"
+        }
+      }
+    },
+    "colors": {
+      "name": "Boje",
+      "settings": {
+        "alternate_bg_color": {
+          "label": "Alternativna pozadina"
+        }
+      }
+    },
+    "typography": {
+      "name": "Tipografija",
+      "settings": {
+        "font": {
+          "label": "Font"
+        },
+        "type_heading_scale": {
+          "label": "Mjerilo fonta"
+        },
+        "type_heading_line_height": {
+          "label": "Visina linije"
+        },
+        "type_heading_spacing": {
+          "label": "Razmak između slova"
+        }
+      }
+    },
+    "animation": {
+      "name": "Animacija",
+      "settings": {
+        "animation_enable": {
+          "label": "Omogući animaciju"
+        }
+      }
+    },
+    "layout": {
+      "name": "Izgled",
+      "settings": {
+        "paragraph": {
+          "radius": {
+            "content": "Radius"
+          }
+        },
+        "radius": {
+          "options": {
+            "square": {
+              "label": "Kvadrat"
+            },
+            "gentle_curve": {
+              "label": "Nježna krivulja"
+            },
+            "solid_curve": {
+              "label": "Čvrsta krivulja"
+            },
+            "circular": {
+              "label": "Kružni"
+            }
+          }
+        },
+        "all_box_radius": {
+          "label": "Kutija"
+        },
+        "all_product_grid_radius": {
+          "label": "Mreža proizvoda"
+        }
+      }
+    },
+    "product": {
+      "name": "Proizvod",
+      "settings": {
+        "enable_preorder": {
+          "label": "Omogući predbilježbu",
+          "info": "Prednarudžba će funkcionirati kada je omogućena opcija \"Nastavi s prodajom kada nema zaliha\"."
+        },
+        "show_save_amount": {
+          "label": "Prikaži ušteđeni iznos"
+        },
+        "option_style": {
+          "label": "Stil opcije",
+          "options": {
+            "dropdown": {
+              "label": "Padajući izbornik"
+            },
+            "swatch": {
+              "label": "Uzorak"
+            }
+          }
+        }
+      }
+    },
+    "product_card": {
+      "name": "Kartica proizvoda",
+      "settings": {
+        "text_alignment": {
+          "label": "Poravnanje teksta"
+        },
+        "quickview": {
+          "label": "Prikaži brzi prikaz"
+        },
+        "image_border": {
+          "label": "Omogući obrub"
+        },
+        "image_background": {
+          "label": "Omogući pozadinu"
+        },
+        "hover_second_image": {
+          "label": "Prikaži drugu sliku dok lebdite"
+        },
+        "product_vendor": {
+          "label": "Prikaži dobavljača proizvoda"
+        },
+        "product_rating": {
+          "label": "Prikaži ocjenu proizvoda",
+          "info": "Za prikaz ocjene dodajte aplikaciju za ocjenjivanje proizvoda."
+        },
+        "show_swatches": {
+          "label": "Omogući uzorke"
+        }
+      }
+    },
+    "product_badges": {
+      "name": "Značke proizvoda",
+      "settings": {
+        "sale_badge": {
+          "label": "Prikaži značku Rasprodaja"
+        },
+        "soldout_badge": {
+          "label": "Prikaži značku Rasprodano"
+        },
+        "preorder_badge": {
+          "label": "Prikaži značku prednarudžbe",
+          "info": "Predbilježba će funkcionirati kada je omogućena opcija Nastavi s prodajom"
+        },
+        "paragraph": {
+          "content": "Prikaži prilagođenu značku za proizvode sa sljedećim oznakama"
+        },
+        "custom_tag": {
+          "label": "Oznaka proizvoda"
+        },
+        "custom_tag_badge": {
+          "label": "Tekst značke"
+        }
+      }
+    },
+    "social_media": {
+      "name": "Društveni mediji",
+      "settings": {
+        "header": {
+          "content": "Računi na društvenim mrežama"
+        },
+        "social_twitter_link": {
+          "label": "Cvrkut",
+          "info": "https://twitter.com/shopify"
+        },
+        "social_facebook_link": {
+          "label": "Facebook",
+          "info": "https://facebook.com/shopify"
+        },
+        "social_pinterest_link": {
+          "label": "Pinterest",
+          "info": "https://pinterest.com/shopify"
+        },
+        "social_instagram_link": {
+          "label": "Instagram",
+          "info": "http://instagram.com/shopify"
+        },
+        "social_tiktok_link": {
+          "label": "TikTok",
+          "info": "https://tiktok.com/@shopify"
+        },
+        "social_tumblr_link": {
+          "label": "Tumblr",
+          "info": "https://shopify.tumblr.com"
+        },
+        "social_snapchat_link": {
+          "label": "Snapchat",
+          "info": "https://www.snapchat.com/add/shopify"
+        },
+        "social_youtube_link": {
+          "label": "YouTube",
+          "info": "https://www.youtube.com/shopify"
+        },
+        "social_vimeo_link": {
+          "label": "Vimeo",
+          "info": "https://vimeo.com/shopify"
+        }
+      }
+    },
+    "gitf_card": {
+      "name": "Poklon kartica",
+      "settings": {
+        "logo": {
+          "content": "Logo"
+        },
+        "gift_logo_width": {
+          "label": "Širina logotipa"
+        }
+      }
+    },
+    "cart": {
+      "name": "Košarica",
+      "settings": {
+        "show_shipping": {
+          "label": "Omogući traku za otpremu",
+          "info": "Napomena: Ova značajka radi samo s načinom dostave. "
+        },
+        "shipping_rate": {
+          "label": "Minimalna cijena dostave",
+          "info": "Napišite broj, bez slova ili posebnih znakova."
+        },
+        "shipping_text": {
+          "label": "Poruka"
+        },
+        "shipping_success_text": {
+          "label": "Poruka o uspjehu"
+        },
+        "enable_gift_wrap": {
+          "label": "Omogući pakiranje poklona"
+        },
+        "gift_wrap_product": {
+          "label": "Proizvod"
+        }
+      }
+    },
+    "cart_drawer": {
+      "name": "Ladica kolica",
+      "settings": {
+        "enable_cart_drawer": {
+          "label": "Omogući ladicu kolica"
+        },
+        "show_cart_drawer_note": {
+          "label": "Bilješka o košarici"
+        },
+        "shipping_estimates": {
+          "label": "Procjena dostave"
+        },
+        "header": {
+          "scrolling_content": {
+            "content": "Pomicanje sadržaja"
+          },
+          "categories": {
+            "content": "Kategorije"
+          },
+          "upsell": {
+            "content": "Skuplja prodaja"
+          }
+        },
+        "enable_categories": {
+          "label": "Omogući kategorije"
+        },
+        "enable_marquee_ct": {
+          "label": "Omogući sadržaj"
+        },
+        "collections": {
+          "label": "Zbirke"
+        },
+        "enable_upsell_product": {
+          "label": "Omogući skuplju prodaju proizvoda"
+        },
+        "upsell_product": {
+          "label": "Proizvodi"
+        }
+      }
+    }
+  }
+}

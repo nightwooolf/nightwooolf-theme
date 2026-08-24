@@ -1,0 +1,44 @@
+{%- liquid
+  assign variant = variant | default: product.selected_or_first_available_variant
+  assign popover_id = 'VolumePricingTooltip-' | append: variant.id
+  if unique_id != blank
+    assign popover_id = popover_id | append: '-' | append: unique_id
+  endif
+-%}
+
+{%- if product != blank
+  and variant != blank
+  and product.quantity_price_breaks_configured?
+  and variant.quantity_price_breaks.size > 0
+-%}
+  <div
+    class="volume-pricing-tooltip"
+    data-volume-pricing-tooltip
+    {% if context == 'drawer' %}
+      data-tooltip-context="drawer"
+    {% endif %}
+  >
+    <button
+      type="button"
+      class="volume-pricing-tooltip__trigger button-unstyled"
+      aria-label="{{ 'products.product.volume_pricing.note' | t }}"
+      aria-expanded="false"
+      aria-controls="{{ popover_id }}"
+      data-volume-pricing-tooltip-trigger
+    >
+      <span class="volume-pricing-tooltip__icon" aria-hidden="true">
+        {%- render 'icons', icon: 'question' -%}
+      </span>
+    </button>
+
+    <div
+      id="{{ popover_id }}"
+      class="volume-pricing-tooltip__popover"
+      role="tooltip"
+      aria-label="{{ 'products.product.volume_pricing.title' | t }}"
+      data-volume-pricing-tooltip-popover
+    >
+      {% render 'volume-pricing', product: product, variant: variant, quantity: quantity %}
+    </div>
+  </div>
+{%- endif -%}

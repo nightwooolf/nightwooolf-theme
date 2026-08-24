@@ -1,0 +1,147 @@
+{
+  "sections": {
+    "banner": {
+      "type": "page-banner",
+      "settings": {
+        "banner_image": "shopify:\/\/shop_images\/Before.jpg",
+        "banner_height_desktop": "medium",
+        "banner_height_mobile": "small",
+        "heading": "",
+        "description": "Reach Out, We're Here to Help!",
+        "heading_size": "h1",
+        "heading_size_mobile": "h2_mobile",
+        "content_width": "medium",
+        "heading_alignment": "center",
+        "color_scheme": "tertiary",
+        "bg_color_opacity": "#000000",
+        "overlay_opacity": 50,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 0
+      }
+    },
+    "fc4df4b6-8997-4b6d-8366-fe595dc3ceb8": {
+      "type": "rich-text",
+      "blocks": {
+        "cd0ba03e-d054-4098-ba05-b92a4e55d391": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Submit your queries or remarks using the form below. <\/h2>"
+          }
+        }
+      },
+      "block_order": ["cd0ba03e-d054-4098-ba05-b92a4e55d391"],
+      "settings": {
+        "layout_type": true,
+        "content_width": "small",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_scheme": "secondary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 10,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 0
+      }
+    },
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "primary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "7b795057-e8af-4445-9d0a-bdd1be4f74bc": {
+      "type": "icon-with-text",
+      "blocks": {
+        "template--21937765482811__7b795057-e8af-4445-9d0a-bdd1be4f74bc-column-1": {
+          "type": "column",
+          "settings": {
+            "icon": "support",
+            "custom_svg": "",
+            "heading": "How to Find Us",
+            "description": "Navigate to our address or drop us <br> a message for directions",
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "medium"
+          }
+        },
+        "template--21937765482811__7b795057-e8af-4445-9d0a-bdd1be4f74bc-column-2": {
+          "type": "column",
+          "settings": {
+            "icon": "chat",
+            "custom_svg": "",
+            "heading": "Live chat",
+            "description": "Our live chat support offers real-time <br> assistance whenever you need it.",
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "medium"
+          }
+        },
+        "template--21937765482811__7b795057-e8af-4445-9d0a-bdd1be4f74bc-column-3": {
+          "type": "column",
+          "settings": {
+            "icon": "phone",
+            "custom_svg": "",
+            "heading": "Free Shipping",
+            "description": "Enjoy free shipping on <br> every your order!",
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "template--21937765482811__7b795057-e8af-4445-9d0a-bdd1be4f74bc-column-1",
+        "template--21937765482811__7b795057-e8af-4445-9d0a-bdd1be4f74bc-column-2",
+        "template--21937765482811__7b795057-e8af-4445-9d0a-bdd1be4f74bc-column-3"
+      ],
+      "settings": {
+        "number_column": 3,
+        "heading_size": "h4",
+        "icon_position": "top",
+        "icon_size": "medium",
+        "icon_background_enable": false,
+        "color_scheme": "secondary",
+        "column_background": "#ffffff",
+        "icon_background": "#ffffff",
+        "icon_color": "#000000",
+        "heading_color": "#000000",
+        "text_color": "#000000",
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 10,
+        "bottom_space_mobile": 40
+      }
+    },
+    "cbac65eb-fe19-4b57-ba80-0b407b4f4e71": {
+      "type": "contact-form",
+      "settings": {
+        "section_full_width": false,
+        "image": "shopify:\/\/shop_images\/contact.jpg",
+        "image_position": "left",
+        "heading": "How can we help you?",
+        "heading_size": "h2",
+        "heading_size_mobile": "h3_mobile",
+        "description": "Please submit your queries or remarks using the form below. We appreciate your input and will get back to you as soon as possible. Our top goal is making sure you're satisfied.",
+        "content_alignment": "left",
+        "color_scheme": "primary",
+        "top_space_desktop": 65,
+        "bottom_space_desktop": 95,
+        "top_space_mobile": 15,
+        "bottom_space_mobile": 60
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "fc4df4b6-8997-4b6d-8366-fe595dc3ceb8",
+    "main-page",
+    "7b795057-e8af-4445-9d0a-bdd1be4f74bc",
+    "cbac65eb-fe19-4b57-ba80-0b407b4f4e71"
+  ]
+}

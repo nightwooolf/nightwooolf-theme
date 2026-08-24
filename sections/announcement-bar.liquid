@@ -1,0 +1,367 @@
+{% if section.settings.enable_announcement %}
+  {% capture announcement_content %}
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+     
+        {% if block.settings.announcement_text != blank %}
+          <div id="block-{{ block.id }}" class="announcement-item" {% if section.settings.layout_type == "carousel" %} data-color="{{ block.settings.text_color }}" data-bg="{{ block.settings.background_color }}" data-link="{{ block.settings.link_color }}"{% endif %}> 
+          {% if block.settings.icon !=  'none' %}
+            {% render 'icons', icon: block.settings.icon %}
+          {% endif %}
+            {{ block.settings.announcement_text }}
+          </div>
+        {% endif %}
+      {% endfor %}
+      {% endif %}
+  {% endcapture %}
+
+  <div
+    id="announcement-bar-{{section.id}}"
+    class="announcement-inner-card {% if section.settings.enable_on_homepage and template != 'index' %}hide-announcemnt-for-pages{% endif %}"
+  >
+    <div
+      class="container {% if section.settings.layout_type == "marquee" %} announcement-bar-marquee {{ section.settings.direction }}-direction {% else %} announcement-bar-carousel {% endif %}"
+      {% if section.settings.layout_type == 'marquee' %}
+        data-marquee-text
+        data-scrolling-content
+        data-scrolling-speed="{{ section.settings.scrolling_speed }}"
+        data-scrolling-speed-mobile="{{ section.settings.scrolling_speed_mobile }}"
+      {% endif %}
+    >
+      {% if section.settings.layout_type == 'marquee' %}
+        {% if announcement_content != blank %}
+          {% for i in (1..20) %}
+            <div data-marque-node data-scrolling-item>
+              {{ announcement_content }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% else %}
+        {% if announcement_content != blank %}
+          <div
+            class="announcement-slider slider-wrapper"
+            {% if section.blocks.size > 1 %}
+              data-flickity-slider
+              data-flickity='
+                {
+                  "wrapAround": true,
+                 "cellAlign": "left",
+                 "contain": true,
+                 "autoPlay":{%- if section.settings.rotate -%}{{ section.settings.interval | times: 1000 }}{%- else -%}false{%- endif -%}
+                }
+              '
+            {% endif %}
+          >
+            {{ announcement_content }}
+            
+          </div>
+        {% endif %}
+      {% endif %}
+      <div class="contact-head" style="color:#fff;display:flex;justify-content: center;align-items: center;"><span style="padding-top: 4px;"> <img src="https://cdn.shopify.com/s/files/1/0994/6107/1134/files/phone.svg?v=1782571205" width="16" height="16"> </span>
+       <span style="padding-left:10px">+ 18007786690</span> <span style="padding:0 10px">|</span><span style="padding-top: 4px;"> <img src="https://cdn.shopify.com/s/files/1/0994/6107/1134/files/email.png?v=1782571349" width="16" height="16"> </span>
+        <span style="padding-left:10px">service@nightwooolf.com</span></div>
+    </div>
+  </div>
+  <style>
+    #shopify-section-{{ section.id }}.announcement-wrapper{
+      --annouceBgColor:{{ section.blocks.first.settings.background_color }};
+      --annouceTextColor:{{ section.blocks.first.settings.text_color }};
+      --announcementLinkColor:{{section.blocks.first.settings.link_color  }};
+    }
+  </style>
+  <script>
+    function announcementBarInt() {
+      if (document.querySelector('.announcement-bar-carousel')) {
+        let announcementSliderElement = $('#announcement-bar-{{section.id}}').find('[data-flickity-slider]');
+        if (announcementSliderElement.length > 0) {
+          themeSlidersInit(announcementSliderElement);
+        }
+      }
+      let scrollTopValue = window.scrollY;
+      let announcemnt = document.querySelector('.announcement-wrapper');
+      window.addEventListener('scroll', function () {
+        let annoucementBarHeight = announcemnt.offsetHeight;
+        setTimeout(() => {
+          if (scrollTopValue > annoucementBarHeight) {
+            document.querySelector('body').style.setProperty('--announcementheight', `0px`);
+          } else {
+            let annoucementBarNewHeight = Math.max(annoucementBarHeight - scrollTopValue, 0);
+            document.querySelector('body').style.setProperty('--announcementheight', `${annoucementBarNewHeight}px`);
+          }
+        }, 200);
+        scrollTopValue = window.scrollY;
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', announcementBarInt, false);
+    document.addEventListener('shopify:section:load', announcementBarInt, false);
+  </script>
+{% endif %}
+{% schema %}
+{
+  "name": "t:sections.announcement_bar.name",
+  "class": "announcement-wrapper",
+  "max_blocks": 3,
+  "disabled_on": {
+    "groups": ["footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_announcement",
+      "label": "t:sections.announcement_bar.settings.enable_announcement.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_on_homepage",
+      "label": "t:sections.announcement_bar.settings.enable_on_homepage.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "layout_type",
+      "label": "t:sections.announcement_bar.settings.layout_type.label",
+      "default": "marquee",
+      "options": [
+        {
+          "value": "marquee",
+          "label": "t:sections.announcement_bar.settings.layout_type.options.marquee.label"
+        },
+        {
+          "value": "carousel",
+          "label": "t:sections.announcement_bar.settings.layout_type.options.carousel.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.announcement_bar.settings.header.carousel.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "rotate",
+      "label": "t:sections.announcement_bar.settings.rotate.label",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "interval",
+      "label": "t:sections.announcement_bar.settings.interval.label",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "t:sections.announcement_bar.settings.header.marquee.content"
+    },
+    {
+      "type": "range",
+      "id": "scrolling_speed",
+      "label": "t:sections.scrolling_text.settings.scrolling_speed.label",
+      "min": 5,
+      "max": 100,
+      "unit": "s",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "scrolling_speed_mobile",
+      "label": "Mobile speed",
+      "min": 5,
+      "max": 100,
+      "unit": "s",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "t:common.direction.label",
+      "options": [
+        {
+          "value": "rtl",
+          "label": "t:common.direction.options.rtl.label"
+        },
+        {
+          "value": "ltr",
+          "label": "t:common.direction.options.ltr.label"
+        }
+      ],
+      "default": "rtl"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "t:sections.announcement_bar.blocks.name",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "announcement_text",
+          "default": "Welcome to our store",
+          "label": "t:common.global.text.label"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:common.icon.label",
+          "default": "none",
+          "options": [
+            {
+              "label": "t:common.icon.options.none.label",
+              "value": "none"
+            },
+            {
+              "label": "t:common.icon.options.chat.label",
+              "value": "chat"
+            },
+            {
+              "label": "t:common.icon.options.danger.label",
+              "value": "danger"
+            },
+            {
+              "label": "t:common.icon.options.delivery.label",
+              "value": "delivery"
+            },
+            {
+              "label": "t:common.icon.options.edit.label",
+              "value": "edit"
+            },
+            {
+              "label": "t:common.icon.options.envelope.label",
+              "value": "envelope"
+            },
+            {
+              "label": "t:common.icon.options.eye.label",
+              "value": "eye"
+            },
+            {
+              "label": "t:common.icon.options.file.label",
+              "value": "file"
+            },
+            {
+              "label": "t:common.icon.options.guarantee.label",
+              "value": "guarantee"
+            },
+            {
+              "label": "t:common.icon.options.heart.label",
+              "value": "heart"
+            },
+            {
+              "label": "t:common.icon.options.location.label",
+              "value": "location"
+            },
+            {
+              "label": "t:common.icon.options.lock.label",
+              "value": "lock"
+            },
+            {
+              "label": "t:common.icon.options.support.label",
+              "value": "support"
+            },
+            {
+              "label": "t:common.icon.options.music.label",
+              "value": "music"
+            },
+            {
+              "label": "t:common.icon.options.note-text.label",
+              "value": "note-text"
+            },
+            {
+              "label": "t:common.icon.options.notification.label",
+              "value": "notification"
+            },
+            {
+              "label": "t:common.icon.options.phone.label",
+              "value": "phone"
+            },
+            {
+              "label": "t:common.icon.options.question.label",
+              "value": "question"
+            },
+            {
+              "label": "t:common.icon.options.return.label",
+              "value": "return"
+            },
+            {
+              "label": "t:common.icon.options.setting.label",
+              "value": "setting"
+            },
+            {
+              "label": "t:common.icon.options.shipping.label",
+              "value": "shipping"
+            },
+            {
+              "label": "t:common.icon.options.shop.label",
+              "value": "shop"
+            },
+            {
+              "label": "t:common.icon.options.star.label",
+              "value": "star"
+            },
+            {
+              "label": "t:common.icon.options.tag.label",
+              "value": "tag"
+            },
+            {
+              "label": "t:common.icon.options.thumb.label",
+              "value": "thumb"
+            },
+            {
+              "label": "t:common.icon.options.user.label",
+              "value": "user"
+            },
+            {
+              "label": "t:common.icon.options.video.label",
+              "value": "video"
+            },
+            {
+              "label": "t:common.icon.options.wallet.label",
+              "value": "wallet"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "t:common.header.colors.content"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.announcement_bar.blocks.carousel_layout.content"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "t:common.global.background.label",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "t:common.global.text.label",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "link_color",
+          "label": "t:common.global.link.label",
+          "default": "#FFFFFF"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "announcement"
+      },
+      {
+        "type": "announcement"
+      }
+    ]
+  }
+}
+{% endschema %}

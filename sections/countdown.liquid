@@ -1,0 +1,435 @@
+<div
+  class="{{ section.settings.color_scheme }}-scheme spacing-box"
+  data-countdown-main
+  {% if section.settings.background_image != blank %}
+    style=" background-image: url('{{ section.settings.background_image | image_url }}')"
+  {% endif -%}
+>
+  <div class="{{ settings.layout_width }}">
+    <div class="countdown-outer align-{{ section.settings.heading_alignment }}">
+      {% if section.settings.heading != blank %}
+        <div class="heading-header">
+          <h2 class="{{ section.settings.heading_size }} {{ section.settings.heading_size_mobile }} ">
+            {% if section.settings.heading != blank %}{{ section.settings.heading }}{% endif %}
+          </h2>
+        </div>
+      {% endif %}
+      {% if section.settings.enable_countdown %}
+        <ul class="no-bullet countdown-wrapper">
+          <input type="hidden" id="countdowndate" data-countdown value="{{ section.settings.date }}">
+          <li class="item-countdown">
+            <span id="dDays">00</span>
+            <span class="count-type">{{ 'general.countdown.days' | t }}</span>
+          </li>
+          <li class="item-countdown">:</li>
+          <li class="item-countdown">
+            <span id="Hours">00</span>
+            <span class="count-type">{{ 'general.countdown.hours' | t }}</span>
+          </li>
+          <li class="item-countdown">:</li>
+          <li class="item-countdown">
+            <span id="Minutes">00</span>
+            <span class="count-type">{{ 'general.countdown.minutes' | t }}</span>
+          </li>
+          <li class="item-countdown">:</li>
+          <li class="item-countdown">
+            <span id="Seconds">00</span>
+            <span class="count-type">{{ 'general.countdown.seconds' | t }}</span>
+          </li>
+        </ul>
+      {% endif %}
+      {% if section.settings.btn_text != blank and section.settings.btn_link != blank %}
+        <div class="btn-outer-box">
+          <a href="{{  section.settings.btn_link }}" class="btn btn-{{ section.settings.btn_size }}"
+            ><span>{{ section.settings.btn_text }}</span></a
+          >
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  {% if section.blocks.size > 0 %}
+    <div class="collection-marquee-wrapper">
+      {% capture collectionLayout %}
+           {%- for block in section.blocks -%}
+            {%- assign image_ratio = 100 -%}
+            {%- assign image_url = '' -%}
+            {%- assign collection = block.settings.collection -%}
+            {%- if block.settings.image != blank -%}
+              {%- assign image_ratio = 1 | divided_by: block.settings.image.aspect_ratio | times: 100 | plus: 1 -%}
+              {%- assign image_url = block.settings.image -%}
+            {%- elsif collection.featured_image -%}
+              {%- assign image_ratio = 1 | divided_by: collection.featured_image.aspect_ratio | times: 100 | plus: 1 -%}
+              {%- assign image_url = collection.featured_image -%}
+               {% if section.settings.marquee or section.settings.layout_style == 'rounded'  %}
+                   {%- assign image_ratio = 100 -%}
+                {% endif %}
+            {%- endif -%}
+             {% assign aosDelayAttr = forloop.index | times:50 %}
+            <div class="{% if section.settings.marquee %}collection-grid-item{% else %}grid-item-sm-4 grid-item-md-4 grid-item-xl-2{% endif %}"  {% if section.settings.marquee %}
+                data-scrolling-item
+              {% endif %}>
+              <div class="collection-wrapper" >
+                    <a href="{{ collection.url }}" aria-label="{{ collection.title }}">
+                <div class="media-image" style="--mediaRatio:{{ image_ratio }}%">
+                  {%- if image_url != blank -%}
+                      {%- render 'image', image: image_url -%}
+                  {%- else -%}
+                    {%- assign placeholder_image_index = forloop.index0 | modulo: 4 | plus: 1 -%}
+                    {%- assign placeholder_image = 'collection-apparel-' | append: placeholder_image_index -%}
+                    {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                    </a>
+
+                <div class="collection-text align-center">
+                  <p>
+                    {% if block.settings.collection_heading != blank -%}
+                      {{- block.settings.collection_heading -}}
+                    {%- elsif collection != blank -%}
+                      {{- collection.title -}}
+                    {% else %}
+                     {{ 'sections.onboarding_collection.title' | t }}
+                    {%- endif %}
+                  </p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+      {% endcapture %}
+
+      <div
+        class="{% if section.settings.marquee == false %}mobile-swipe grid-row content-justify-center {% else %}marquee-inner-item{% endif %}{% if section.settings.layout_style == 'rounded' %} rounded{% else %} square{% endif %}{% if section.settings.marquee %} {{ section.settings.direction }}-direction{% endif %}"
+        {% if section.settings.marquee %}
+          data-scrolling-content
+          data-scrolling-speed="{{ section.settings.scrolling_speed }}"
+          data-scrolling-speed-mobile="{{ section.settings.scrolling_speed_mobile }}"
+        {% endif %}
+      >
+        {% if section.settings.marquee %}
+          {% for i in (1..5) %}
+            <div
+              class="marquee-items-wrapper"
+            >
+              {{ collectionLayout }}
+            </div>
+          {% endfor %}
+
+        {% else %}
+          {{ collectionLayout }}
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  #shopify-section-{{ section.id }} {
+      overflow: hidden;
+     --topSpace:{{ section.settings.top_space_desktop }}px;
+     --bottomSpace:{{ section.settings.bottom_space_desktop }}px;
+      --overlayBgColor:{{ section.settings.overlay_color }};
+      --overlayOpacity:{{ section.settings.overlay_opacity | divided_by:100.0 }};
+   }
+
+   @media only screen and (max-width:767px) {
+     #shopify-section-{{ section.id }}.shopify-section{
+       --topSpace:{{ section.settings.top_space_mobile }}px;
+       --bottomSpace:{{ section.settings.bottom_space_mobile }}px;
+     }
+
+   }
+</style>
+{% schema %}
+{
+  "name": "t:sections.countdown.name",
+  "tag": "section",
+  "class": "section-countdown",
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "t:common.global.background_image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_countdown",
+      "label": "t:sections.countdown.settings.enable_countdown.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.content.content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Countdown Heading Here",
+      "label": "t:common.global.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "default": "h2",
+      "label": "t:common.heading_size.desktop_label",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:common.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:common.heading_size.options.large.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:common.heading_size.options.medium.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:common.heading_size.options.small.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:common.heading_size.options.extra_small.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_size_mobile",
+      "default": "h3_mobile",
+      "label": "t:common.heading_size.mobile_label",
+      "options": [
+        {
+          "value": "h1_mobile",
+          "label": "t:common.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h2_mobile",
+          "label": "t:common.heading_size.options.large.label"
+        },
+        {
+          "value": "h3_mobile",
+          "label": "t:common.heading_size.options.medium.label"
+        },
+        {
+          "value": "h4_mobile",
+          "label": "t:common.heading_size.options.small.label"
+        },
+        {
+          "value": "h5_mobile",
+          "label": "t:common.heading_size.options.extra_small.label"
+        }
+      ]
+    },
+    {
+      "type": "text_alignment",
+      "id": "heading_alignment",
+      "label": "t:common.global.content_alignment.label",
+      "default": "center"
+    },
+    {
+      "type": "text",
+      "id": "date",
+      "info": "t:sections.countdown.settings.date.info",
+      "label": "t:sections.countdown.settings.date.label"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.button.content"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "default": "Shop Now",
+      "label": "t:common.global.text.label"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "default": "/collections/all",
+      "label": "t:common.global.link.label"
+    },
+    {
+      "type": "select",
+      "id": "btn_size",
+      "label": "t:common.btn_size.label",
+      "default": "medium",
+      "options": [
+        {
+          "value": "xsmall",
+          "label": "t:common.btn_size.options.xsmall.label"
+        },
+        {
+          "value": "small",
+          "label": "t:common.btn_size.options.small.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:common.btn_size.options.medium.label"
+        },
+        {
+          "value": "large",
+          "label": "t:common.btn_size.options.large.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.collections_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "layout_style",
+      "label": "t:sections.countdown.settings.layout_style.label",
+      "default": "square",
+      "options": [
+        {
+          "label": "t:sections.countdown.settings.layout_style.options.square.label",
+          "value": "square"
+        },
+        {
+          "label": "t:sections.countdown.settings.layout_style.options.rounded.label",
+          "value": "rounded"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "marquee",
+      "label": "t:sections.countdown.settings.marquee.label"
+    },
+    {
+      "type": "range",
+      "id": "scrolling_speed",
+      "label": "t:sections.countdown.settings.scrolling_speed.label",
+      "min": 5,
+      "max": 100,
+      "unit": "s",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "scrolling_speed_mobile",
+      "label": "Mobile speed",
+      "min": 5,
+      "max": 100,
+      "unit": "s",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "t:common.direction.label",
+      "options": [
+        {
+          "value": "rtl",
+          "label": "t:common.direction.options.rtl.label"
+        },
+        {
+          "value": "ltr",
+          "label": "t:common.direction.options.ltr.label"
+        }
+      ],
+      "default": "rtl"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.colors.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "secondary",
+      "label": "t:common.global.color_scheme.label"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "t:common.global.overlay_background.label",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "t:common.global.overlay_opacity.label",
+      "min": 0,
+      "max": 100,
+      "default": 50,
+      "step": 10,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.section_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 80,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 50,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 70,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "content",
+      "name": "t:sections.countdown.blocks.name",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:common.global.collection.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:common.global.image.label"
+        },
+        {
+          "type": "text",
+          "id": "collection_heading",
+          "label": "t:common.global.heading.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.countdown.presets.name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,140 @@
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign has_volume_pricing = false
+  if product.quantity_price_breaks_configured? and variant.quantity_price_breaks.size > 0
+    assign has_volume_pricing = true
+  endif
+  assign use_currency = false
+  if settings.currency_code_enabled
+    assign use_currency = true
+  endif
+  assign has_quantity_rules = false
+  if variant.quantity_rule.min > 1 or variant.quantity_rule.increment > 1 or variant.quantity_rule.max != null
+    assign has_quantity_rules = true
+  endif
+  assign cart_quantity = cart | item_count_for_variant: variant.id
+-%}
+
+<quantity-input
+  id="Quantity-Form-{{ product_form_id }}"
+  class="quantity-wrapper"
+  data-url="{{ product.url }}"
+  data-section="{{ section.id }}"
+  data-in-cart-text="{{ 'products.product.quantity.in_cart' | t | escape }}"
+>
+  <div class="quantity-label">
+    {{ 'products.product.quantity.label' | t }}
+    <span
+      class="quantity-label__cart-count{% if cart_quantity == 0 %} hidden{% endif %}"
+      data-quantity-label-cart-count
+      >({{ cart_quantity }}
+      {{ 'products.product.quantity.in_cart' | t }})</span
+    >
+  </div>
+  <div class="quantity-inner">
+    <button
+      type="button"
+      name="minus"
+      class="qunt-btn qunt-minus"
+      aria-label="{{ 'products.product.quantity.decrease' | t }}"
+      data-decrement-quantity
+    >
+      <span class="hidden">{{ 'products.product.quantity.decrease' | t }}</span>
+      <svg x="0px" y="0px" width="14px" height="14px" viewBox="0 0 14 14">
+        <rect x="6" transform="matrix(6.123234e-17 -1 1 6.123234e-17 0 14)"
+            width="2.1" height="14"></rect>
+      </svg>
+    </button>
+    {%- liquid
+      assign qty_max_rule = variant.quantity_rule.max
+      assign qty_cart = cart | item_count_for_variant: variant.id
+      assign qty_adjusted_max = null
+      if qty_max_rule != null
+        assign qty_adjusted_max = qty_max_rule | minus: qty_cart
+        if qty_adjusted_max < 1
+          assign qty_adjusted_max = 1
+        endif
+      endif
+    -%}
+    <input
+      id="product-quantity-{{ product_form_id }}"
+      class="quantity-input"
+      type="number"
+      name="quantity"
+      min="{{ variant.quantity_rule.min | default: 1 }}"
+      {% if qty_adjusted_max != null %}
+        max="{{ qty_adjusted_max }}"
+      {% endif %}
+      step="{{ variant.quantity_rule.increment | default: 1 }}"
+      value="1"
+      form="{{ product_form_id }}"
+      data-input-quantity
+      data-cart-quantity="{{ qty_cart }}"
+      {% if qty_max_rule != null %}
+        data-max-rule="{{ qty_max_rule }}"
+      {% endif %}
+      aria-label="{{ 'products.product.quantity.label' | t }}"
+    >
+
+    <button
+      type="button"
+      name="plus"
+      class="qunt-btn qunt-plus"
+      aria-label="{{ 'products.product.quantity.increase' | t }}"
+      data-increment-quantity
+    >
+      <span class="hidden">{{ 'products.product.quantity.increase' | t }}</span>
+      <svg x="0px" y="0px" width="14px" height="14px" viewBox="0 0 14 14">
+        <polygon
+            points="14,6 8,6 8,0 6,0 6,6 0,6 0,8 6,8 6,14 8,14 8,8 14,8 ">
+        </polygon>
+      </svg>
+    </button>
+  </div>
+  {%- if has_volume_pricing -%}
+    {%- capture price_breaks_json -%}
+      [{%- for price_break in variant.quantity_price_breaks -%}{%- unless forloop.first -%},{%- endunless -%}{%- if use_currency -%}{"quantity":{{ price_break.minimum_quantity }},"price":{{ price_break.price | money_with_currency | json }}}{%- else -%}{"quantity":{{ price_break.minimum_quantity }},"price":{{ price_break.price | money | json }}}{%- endif -%}{%- endfor -%}]
+    {%- endcapture -%}
+    {%- liquid
+      assign min_qty = variant.quantity_rule.min | default: 1
+      assign display_price = variant.price
+    -%}
+    <price-per-item
+      class="price-per-item"
+      data-variant-id="{{ variant.id }}"
+      data-variant-price="{%- if use_currency -%}{{ variant.price | money_with_currency | escape }}{%- else -%}{{ variant.price | money | escape }}{%- endif -%}"
+      data-min-quantity="{{ min_qty }}"
+      data-price-breaks="{{ price_breaks_json | strip | escape }}"
+      data-at-text="{{ 'products.product.volume_pricing.price_at' | t | escape }}"
+      data-each-text="{{ 'products.product.volume_pricing.each_abbreviation' | t | escape }}"
+    >
+      <span class="price-per-item__text">
+        {{ 'products.product.volume_pricing.price_at' | t }}
+        {%- if use_currency -%}
+          {{ display_price | money_with_currency }}
+        {%- else -%}
+          {{ display_price | money }}
+        {%- endif -%}
+        /{{ 'products.product.volume_pricing.each_abbreviation' | t }}
+      </span>
+    </price-per-item>
+    {%- liquid
+      assign show_tooltip = false
+      if block.settings.show_volume_pricing_tooltip
+        assign show_tooltip = true
+      elsif block.settings.show_volume_pricing_tooltip == null and settings.volume_pricing_quickview_style == 'tooltip'
+        assign show_tooltip = true
+      endif
+    -%}
+    {%- if show_tooltip -%}
+      {{ 'volume-pricing.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'volume-pricing-tooltip.js' | asset_url }}" defer></script>
+      {% render 'volume-pricing-tooltip', product: product, variant: variant %}
+    {%- endif -%}
+  {%- endif -%}
+  {%- if variant.quantity_rule.max != null -%}
+    <span class="quantity-rules__item quantity-rules__item-max">
+      {{ 'products.product.quantity.maximum_of' | t: quantity: variant.quantity_rule.max }}
+    </span>
+  {%- endif -%}
+</quantity-input>

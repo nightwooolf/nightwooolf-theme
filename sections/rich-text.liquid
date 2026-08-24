@@ -1,0 +1,311 @@
+<div class="{% if section.settings.layout_type == false%}{{ settings.layout_width }}{% endif %}">
+  <div class="{{ section.settings.color_scheme }}-scheme spacing-box">
+    <div class="{% if section.settings.layout_type == true %}container{% endif %} inner-container">
+      <div class="rich-text content-width-{{  section.settings.content_width }} align-{{section.settings.text_position }} ">
+        <div class="align-{{ section.settings.text_alignment}}">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'heading' %}
+                {% if block.settings.heading != blank %}
+                  <h2
+                    class="rich-text-title {{  block.settings.heading_size }} {{  block.settings.heading_size_mobile }}"
+                    {{ block.shopify_attributes }}
+                  >
+                    {{ block.settings.heading }}
+                  </h2>
+                {% endif %}
+              {% when 'text' %}
+                {% if block.settings.text != blank %}
+                  <div class="rich-text-desc textMedium rte" {{ block.shopify_attributes }}>
+                    {{ block.settings.text | replace: '<p></p>', '<br>' }}
+                  </div>
+                {% endif %}
+              {% when 'button' %}
+                {% if block.settings.text != blank and block.settings.link != blank %}
+                  <div class="btn-outer-box ">
+                    <a
+                      href="{{ block.settings.link }}"
+                      class="btn btn-{{ block.settings.size }}"
+                      {{ block.shopify_attributes }}
+                    >
+                      <span>{{ block.settings.text }}</span>
+                    </a>
+                  </div>
+                {% endif %}
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  #shopify-section-{{ section.id }} {
+    --topSpace:{{ section.settings.top_space_desktop }}px;
+    --bottomSpace:{{ section.settings.bottom_space_desktop }}px;
+  }
+
+  @media only screen and (max-width:767px) {
+    #shopify-section-{{ section.id }}.shopify-section{
+      --topSpace:{{ section.settings.top_space_mobile }}px;
+      --bottomSpace:{{ section.settings.bottom_space_mobile }}px;
+    }
+
+  }
+</style>
+
+{% schema %}
+{
+  "name": "t:sections.rich_text.name",
+  "class": "section-rich-text hidden-small",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:common.header.content.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "layout_type",
+      "label": "t:sections.rich_text.settings.layout_type.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "t:common.content_width.label",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:common.content_width.options.small.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:common.content_width.options.medium.label"
+        },
+        {
+          "value": "large",
+          "label": "t:common.content_width.options.Large.label"
+        }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "t:common.global.position.label",
+      "options": [
+        {
+          "value": "start",
+          "label": "t:common.global.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:common.global.center.label"
+        },
+        {
+          "value": "end",
+          "label": "t:common.global.right.label"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "text_alignment",
+      "id": "text_alignment",
+      "label": "t:common.global.alignment.label",
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.colors.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "primary",
+      "label": "t:common.global.color_scheme.label"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.section_spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 80,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 80,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "t:sections.rich_text.blocks.heading.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "t:common.global.heading.label",
+          "default": "Rich text here"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "default": "h2",
+          "label": "t:common.heading_size.desktop_label",
+          "options": [
+            {
+              "value": "h1",
+              "label": "t:common.heading_size.options.extra_large.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:common.heading_size.options.large.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:common.heading_size.options.medium.label"
+            },
+            {
+              "value": "h4",
+              "label": "t:common.heading_size.options.small.label"
+            },
+            {
+              "value": "h5",
+              "label": "t:common.heading_size.options.extra_small.label"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "heading_size_mobile",
+          "default": "h3_mobile",
+          "label": "t:common.heading_size.mobile_label",
+          "options": [
+            {
+              "value": "h1_mobile",
+              "label": "t:common.heading_size.options.extra_large.label"
+            },
+            {
+              "value": "h2_mobile",
+              "label": "t:common.heading_size.options.large.label"
+            },
+            {
+              "value": "h3_mobile",
+              "label": "t:common.heading_size.options.medium.label"
+            },
+            {
+              "value": "h4_mobile",
+              "label": "t:common.heading_size.options.small.label"
+            },
+            {
+              "value": "h5_mobile",
+              "label": "t:common.heading_size.options.extra_small.label"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "t:sections.rich_text.blocks.text.name",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:common.global.text.label",
+          "default": "<p>Share brand-related information with your customers by using this text. Product descriptions, or greetings to customers are all welcome.</p>"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "t:sections.rich_text.blocks.button.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:common.global.text.label",
+          "default": "Button text"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:common.global.link.label"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "t:common.btn_size.label",
+          "default": "medium",
+          "options": [
+            {
+              "value": "xsmall",
+              "label": "t:common.btn_size.options.xsmall.label"
+            },
+            {
+              "value": "small",
+              "label": "t:common.btn_size.options.small.label"
+            },
+            {
+              "value": "medium",
+              "label": "t:common.btn_size.options.medium.label"
+            },
+            {
+              "value": "large",
+              "label": "t:common.btn_size.options.large.label"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.rich_text.presets.name",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

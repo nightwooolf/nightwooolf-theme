@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-search",
+      "settings": {
+        "grid_image_size": "auto",
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "color_scheme": "",
+        "top_space_desktop": 80,
+        "bottom_space_desktop": 60,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    }
+  },
+  "order": ["main"]
+}
