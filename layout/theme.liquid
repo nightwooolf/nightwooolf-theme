@@ -35,12 +35,14 @@
             <link
               rel="preload"
               as="image"
-              href="{{ first_block.settings.image_desktop | image_url: width: 1200 }}"
+              href="{{ first_block.settings.image_desktop | image_url: width: 1920 }}"
               fetchpriority="high"
+              imagesrcset="{{ first_block.settings.image_desktop | image_url: width: 480 }} 480w, {{ first_block.settings.image_desktop | image_url: width: 768 }} 768w, {{ first_block.settings.image_desktop | image_url: width: 1024 }} 1024w, {{ first_block.settings.image_desktop | image_url: width: 1440 }} 1440w, {{ first_block.settings.image_desktop | image_url: width: 1920 }} 1920w"
+              imagesizes="100vw"
             >
           {%- endif -%}
           {%- break -%}
-        {%- endif -%}
+        {%- endif --}
       {%- endfor -%}
     {%- endif -%}
 
