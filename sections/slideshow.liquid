@@ -130,7 +130,7 @@
                 <div class="hero-media-content-wrapper">
                   <div class="hero-media-cont-inner width-{{ block.settings.content_width }} text-position-{{ block.settings.content_position }} align-{{ block.settings.content_alignment }} mobile-text-position-{{ block.settings.mobile_content_position }} mobile-align-{{  block.settings.mobile_content_alignment }}">
                     {% if block.settings.subheading != blank %}
-                      <h5>{{ block.settings.subheading }}</h5>
+                      <span class="hero-media-subheading">{{ block.settings.subheading }}</span>
                     {% endif %}
                     {% if block.settings.heading != blank %}
                       <h1 class="hero-media-heading {{block.settings.heading_size }} {{ block.settings.heading_size_mobile }} font-{{ block.settings.font_family }}">
@@ -206,6 +206,13 @@
 <style>
   .hero-media-inner .flickity-page-dots{
     z-index:1;
+  }
+
+  .hero-media-subheading {
+    font-size: calc(var(--h5Text) * var(--headingFontScale));
+    font-weight: 700;
+    margin: 0 0 10px;
+    display: block;
   }
 
   #shopify-section-{{ section.id }}{

@@ -1,9 +1,3 @@
-<link rel="preload" as="style" href="{{ 'theme.css' | asset_url }}">
-<link rel="preload" as="style" href="{{ 'base.css' | asset_url }}">
-<link rel="preload" as="style" href="{{ 'header.css' | asset_url }}">
-<link rel="preload" as="style" href="{{ 'footer.css' | asset_url }}">
-<link rel="preload" as="style" href="{{ 'responsive.css' | asset_url }}">
-<link rel="preload" as="style" href="{{ 'cart.css' | asset_url }}">
 {{ 'theme.css' | asset_url | stylesheet_tag }}
 {{ 'header.css' | asset_url | stylesheet_tag }}
 {{ 'footer.css' | asset_url | stylesheet_tag }}
@@ -67,8 +61,8 @@ const PUB_SUB_EVENTS = {
   const storeLoader='<div class="loader-state"><svg height="18" width="18" class="loader-icon"><circle r="7" cx="9" cy="9"></circle><circle stroke-dasharray="87.96459430051421 87.96459430051421" r="7" cx="9" cy="9"></circle></svg></div>';
 </script>
 
-<script src="{{ 'jquery.min.js' | asset_url }}"></script>
-<script src="{{ 'flickity.min.js' | asset_url }}"></script>
+<script src="{{ 'jquery.min.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'flickity.min.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'lazysizes.min.js' | asset_url }}" defer></script>
 
 <script src="{{ 'header.js' | asset_url }}" defer></script>

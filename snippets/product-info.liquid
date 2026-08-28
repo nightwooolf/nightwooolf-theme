@@ -8,15 +8,15 @@
     {% when 'title' %}
       <div class="heading-header" {{ block.shopify_attributes }}>
         {% if productInfo %}
-          <h2 class="product-title font-heading" tabindex="0">
+          <h1 class="product-title font-heading" tabindex="0">
             {% if product != blank %}
               <a href="{{ product.url }}" class="">{{- product.title | strip_html -}}</a>
             {% else %}
               {{ 'onboarding.product_title' | t }}
             {% endif %}
-          </h2>
+          </h1>
         {% else %}
-          <h2 class="product-title font-heading" tabindex="0">{{- product.title | strip_html -}}</h2>
+          <h1 class="product-title font-heading" tabindex="0">{{- product.title | strip_html -}}</h1>
         {% endif %}
       </div>
     {% when 'sku' %}
@@ -181,14 +181,14 @@
               open
             {% endif %}
           >
-            <summary class="product-collapsed-head" content="collapsed-content">
-              <h6 class="font-body textMedium">
+              <summary class="product-collapsed-head" content="collapsed-content">
+              <h3 class="font-body textMedium">
                 {% if block.settings.description_heading != blank %}
                   {{- block.settings.description_heading -}}
                 {% else %}
                   Description
                 {% endif %}
-              </h6>
+              </h3>
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                 <rect x="4" width="2" height="10" fill="currentColor"></rect>
                 <rect y="4" width="10" height="2" fill="currentColor"></rect>
@@ -221,7 +221,7 @@
               {% endif %}
             >
               <summary class="product-collapsed-head" content="collapsed-content">
-                <h6 class="font-body textMedium">{{- heading -}}</h6>
+                <h3 class="font-body textMedium">{{- heading -}}</h3>
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                   <rect x="4" width="2" height="10" fill="currentColor"></rect>
                   <rect y="4" width="10" height="2" fill="currentColor"></rect>
