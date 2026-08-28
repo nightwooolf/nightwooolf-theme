@@ -10,6 +10,7 @@
 {{ 'cart.css' | asset_url | stylesheet_tag }}
 {{ 'base.css' | asset_url | stylesheet_tag }}
 {{ 'responsive.css' | asset_url | stylesheet_tag }}
+{{ 'flickity.min.css' | asset_url | stylesheet_tag }}
 
 <style>
    {% assign swatchesColor = settings.swatchs_custom_value | newline_to_br %}
@@ -66,6 +67,8 @@ const PUB_SUB_EVENTS = {
   const storeLoader='<div class="loader-state"><svg height="18" width="18" class="loader-icon"><circle r="7" cx="9" cy="9"></circle><circle stroke-dasharray="87.96459430051421 87.96459430051421" r="7" cx="9" cy="9"></circle></svg></div>';
 </script>
 
+<script src="{{ 'jquery.min.js' | asset_url }}"></script>
+<script src="{{ 'flickity.min.js' | asset_url }}"></script>
 <script src="{{ 'lazysizes.min.js' | asset_url }}" defer></script>
 
 <script src="{{ 'header.js' | asset_url }}" defer></script>
