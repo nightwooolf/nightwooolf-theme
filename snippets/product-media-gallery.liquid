@@ -171,7 +171,9 @@
                       >
                         {% comment %}theme-check-disable ImgWidthAndHeight{% endcomment %}
                         <img
-                          src="{{ media.preview_image | image_url: width: '[246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946]' }}"
+                          src="{{ media.preview_image | image_url: width: 990 }}"
+                          srcset="{{ media.preview_image | image_url: width: 246 }} 246w, {{ media.preview_image | image_url: width: 493 }} 493w, {{ media.preview_image | image_url: width: 600 }} 600w, {{ media.preview_image | image_url: width: 990 }} 990w, {{ media.preview_image | image_url: width: 1206 }} 1206w"
+                          sizes="(max-width: 767px) 100vw, 50vw"
                           alt="{{ media.preview_image.alt | escape }}"
                           loading="lazy"
                         >

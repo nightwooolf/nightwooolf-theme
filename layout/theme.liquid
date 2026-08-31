@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
-    {{ 'custom-global.css' | asset_url | stylesheet_tag }}
+    <link rel="preload" href="{{ 'custom-global.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ 'custom-global.css' | asset_url }}"></noscript>
     {% render 'meta-tags' %}
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -68,7 +69,7 @@
     {% render 'back-to-top' %}
     <script>
       {% if settings.animation_enable %}
-        document.addEventListener('DOMContentLoaded', function () {
+        window.addEventListener('load', function () {
           AOS.init({
               easing: 'ease',
               once: true,

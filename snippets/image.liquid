@@ -7,6 +7,7 @@
   {% endif %}
   class="no-js-hidden {{ class }}{% if loading_attr == 'lazy' %} lazyload{% endif %}"
   src="{{ img_url }}"
+  srcset="{{ image | image_url: width: 360 }} 360w, {{ image | image_url: width: 540 }} 540w, {{ image | image_url: width: 720 }} 720w, {{ image | image_url: width: 900 }} 900w, {{ image | image_url: width: 1080 }} 1080w, {{ image | image_url: width: 1296 }} 1296w"
   data-aspectratio="{{ image.aspect_ratio }}"
   data-sizes="auto"
   data-widths="{{ sizes }}"
@@ -23,7 +24,9 @@
 <noscript>
   <img
     class="{{ class }}"
-    src="{{ image | img_url: 'master' }}"
+    src="{{ image | image_url: width: 720 }}"
+    srcset="{{ image | image_url: width: 360 }} 360w, {{ image | image_url: width: 540 }} 540w, {{ image | image_url: width: 720 }} 720w, {{ image | image_url: width: 900 }} 900w"
+    sizes="(max-width: 767px) 100vw, 50vw"
     alt="{{ image.alt | default: shop.name | strip_html }}"
     width="{{ image.width }}"
     height="{{ image.height }}"
