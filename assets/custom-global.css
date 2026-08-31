@@ -286,3 +286,10 @@
     }
  }
 
+.flickity-page-dots .dot {
+  will-change: transform;
+}
+.flickity-page-dots .dot.is-selected {
+  transform: scale(1.3);
+}
+

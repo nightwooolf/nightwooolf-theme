@@ -1,6 +1,5 @@
 function stickyheaderLoadInit() {
   var windowScroll = window.scrollY;
-  let scrollHeightValue = 0;
   var headerElement = document.querySelector(".main-header-top");
   let header = document.querySelector("header");
   if (header) {
@@ -14,34 +13,24 @@ function stickyheaderLoadInit() {
     }
 
     if (headerElement.querySelector("[data-header-main]")) {
-      var headerHeight = headerElement
-        .querySelector("[data-header-main]")
-        .getBoundingClientRect()
-        .height.toFixed(2);
-      document
-        .querySelector("body")
-        .style.setProperty("--headerheight", `${headerHeight}px`);
-      scrollHeightValue = scrollHeightValue + headerHeight;
-      var outerheight = headerHeight + 50;
+      var headerMain = headerElement.querySelector("[data-header-main]");
+      var announcementEl = document.querySelector(".announcement-wrapper");
 
-      if (document.querySelector(".announcement-wrapper")) {
-        let announcementMain = document.querySelector(".announcement-wrapper");
-        let annoucementHeight = announcementMain
-          .getBoundingClientRect()
-          .height.toFixed(2);
-        document
-          .querySelector("body")
-          .style.setProperty("--announcementheight", `${annoucementHeight}px`);
-      }
+      var headerHeight = headerMain.getBoundingClientRect().height.toFixed(2);
+      var annoucementHeight = announcementEl
+        ? announcementEl.getBoundingClientRect().height.toFixed(2)
+        : "0";
+
+      var body = document.querySelector("body");
+      body.style.setProperty("--headerheight", `${headerHeight}px`);
+      body.style.setProperty("--announcementheight", `${annoucementHeight}px`);
 
       if (window.innerWidth > 991) {
         if (headerElement.querySelector('[transparent="true"]')) {
-          document
-            .querySelector("body")
-            .style.setProperty(
-              "--transparentheaderheight",
-              `${headerHeight}px`,
-            );
+          body.style.setProperty(
+            "--transparentheaderheight",
+            `${headerHeight}px`,
+          );
         }
       }
       window.addEventListener("scroll", function () {

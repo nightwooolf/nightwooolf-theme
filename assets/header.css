@@ -7,6 +7,9 @@
 
 .announcement-wrapper .announcement-inner-card {
   padding: 10px 0;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .hide-announcemnt-for-pages {
