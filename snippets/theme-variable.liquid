@@ -1,7 +1,6 @@
 {{ 'theme.css' | asset_url | stylesheet_tag }}
 {{ 'header.css' | asset_url | stylesheet_tag }}
-<link rel="preload" href="{{ 'base.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'base.css' | asset_url }}"></noscript>
+{{ 'base.css' | asset_url | stylesheet_tag }}
 <link rel="preload" href="{{ 'footer.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="{{ 'footer.css' | asset_url }}"></noscript>
 <link rel="preload" href="{{ 'cart.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
