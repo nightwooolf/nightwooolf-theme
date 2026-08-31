@@ -1,5 +1,4 @@
-<link rel="preload" href="{{ 'search.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ 'search.css' | asset_url }}"></noscript>
+{{ 'search.css' | asset_url | stylesheet_tag }}
 <div id="predictive-search" class="predictive-search-main" data-model-main-body>
   <div class="{% if settings.enable_full_width %}{% else %}container{% endif %}">
     <div class="search-modal predictive-search-card">
