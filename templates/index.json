@@ -616,11 +616,7 @@
         "description_gcwdkz",
         "share_LHxGKF"
       ],
-      "custom_css": [
-        "/* Featured Product 标题自适应字体 */.featured-product .product__title {font-size: 2rem; /* 默认桌面端，约32px */}",
-        "@media screen and (max-width: 749px) {.featured-product .product__title {font-size: 1.25rem; /* 移动端，约20px */ }}",
-        "@media screen and (min-width: 750px) and (max-width: 989px) {.featured-product .product__title {font-size: 1.5rem; /* 平板端，约24px */ }}"
-      ],
+      "custom_css": [],
       "settings": {
         "product": "nightwooolf-wireless-tv-headphones-for-seniors-hearing-impaired",
         "image_position": "left",
