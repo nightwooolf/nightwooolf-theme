@@ -176,6 +176,9 @@
     .mobile-logo-text {
         display:none !important;
     }
+    .home-feature-product-class .product-title a {
+        font-size:48px !important;
+    }
     
 }
 @media screen and (min-width:989px) {
@@ -201,6 +204,9 @@
    .article-contain-wrapper .grid-row .article-list-item .article-list-content {
     margin-left:20px;
    } 
+    .home-feature-product-class .product-title a {
+        font-size:38px !important;
+    }
 }
 @media screen and (max-width: 1200px) { 
     /* 小桌面 */
