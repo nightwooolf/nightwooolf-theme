@@ -618,6 +618,7 @@
       ],
       "custom_css": [],
       "settings": {
+        "custom_class": "home-feature-product-class",
         "product": "nightwooolf-wireless-tv-headphones-for-seniors-hearing-impaired",
         "image_position": "left",
         "heading": "",
@@ -1268,9 +1269,9 @@
       ],
       "settings": {
         "heading": "Auracast Bluetooth Audio Blog",
-        "heading_size": "h4",
+        "heading_size": "h2",
         "heading_size_mobile": "h4_mobile",
-        "heading_alignment": "left",
+        "heading_alignment": "center",
         "blog": "news",
         "post_limit": 4,
         "show_date": true,
