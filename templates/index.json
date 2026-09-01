@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "e2c6f89f-cbfa-49b1-b922-e7b77caa0573": {
@@ -607,12 +616,17 @@
         "description_gcwdkz",
         "share_LHxGKF"
       ],
+      "custom_css": [
+        "/* Featured Product 标题自适应字体 */.featured-product .product__title {font-size: 2rem; /* 默认桌面端，约32px */}",
+        "@media screen and (max-width: 749px) {.featured-product .product__title {font-size: 1.25rem; /* 移动端，约20px */ }}",
+        "@media screen and (min-width: 750px) and (max-width: 989px) {.featured-product .product__title {font-size: 1.5rem; /* 平板端，约24px */ }}"
+      ],
       "settings": {
         "product": "nightwooolf-wireless-tv-headphones-for-seniors-hearing-impaired",
         "image_position": "left",
         "heading": "",
-        "heading_size": "h3",
-        "heading_size_mobile": "h3_mobile",
+        "heading_size": "h4",
+        "heading_size_mobile": "h4_mobile",
         "heading_alignment": "left",
         "color_scheme": "primary",
         "top_space_desktop": 35,
