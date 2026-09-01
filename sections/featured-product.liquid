@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css">
 {%- endif -%}
 
-<div class="{{ section.settings.color_scheme }}-scheme spacing-box">
+<div class="{{ section.settings.color_scheme }}-scheme spacing-box {{ section.settings.custom_class }}">
   <div class="{{ settings.layout_width }}">
     {% if section.settings.heading != blank %}
       <div class="heading-header">
