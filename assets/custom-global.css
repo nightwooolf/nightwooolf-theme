@@ -272,6 +272,9 @@
     .home-feature-product-class .product-title a {
         font-size:30px !important;
     }
+    .video-wrapper.content-overlay-true h2 {
+        font-size:18px !important;
+    }
  }
 @media screen and (max-width: 480px)  { 
     /* 小屏手机 */
@@ -298,6 +301,9 @@
     }
     .home-feature-product-class .product-title a {
         font-size:30px !important;
+    }
+    .video-wrapper.content-overlay-true h2 {
+        font-size:16px !important;
     }
  }
 
