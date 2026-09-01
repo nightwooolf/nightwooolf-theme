@@ -1,1 +1,150 @@
-{"sections":{"main-page":{"type":"main-page","settings":{"color_scheme":"primary","top_space_desktop":70,"bottom_space_desktop":70,"top_space_mobile":40,"bottom_space_mobile":40}},"banner":{"type":"page-banner","disabled":true,"settings":{"banner_height_desktop":"small","banner_height_mobile":"small","heading":"LED bulbs and fixtures that can be controlled remotely, scheduled, and even change color. Examples include Philips Hue and LIFX.","description":"Midlands Trashion Show's stunning repurposed clothing.","heading_size":"h2","heading_size_mobile":"h1_mobile","content_width":"small","heading_alignment":"center","color_scheme":"secondary","bg_color_opacity":"#000000","overlay_opacity":35,"top_space_desktop":55,"bottom_space_desktop":55,"top_space_mobile":0,"bottom_space_mobile":0}},"658178d8-5095-495e-9e46-567641a056ff":{"type":"rich-text","blocks":{"template--21937777180987__658178d8-5095-495e-9e46-567641a056ff-heading-1":{"type":"heading","settings":{"heading":"Headphones and Multi-Device Connectivity","heading_size":"h2","heading_size_mobile":"h3_mobile"}},"template--21937777180987__658178d8-5095-495e-9e46-567641a056ff-text-1":{"type":"text","settings":{"text":"<h4><br\/>\"Unrestricted Listening, Anywhere, Anytime\"<\/h4><p>With our advanced multi-device connectivity feature, you have the freedom to enjoy your audio content wherever you go. Whether you're at home, on the move, or in the office, simply pair your headphones with multiple devices and effortlessly transition between them with a tap of a button.<\/p><p><\/p><h4>\"Stay Connected, Stay Engaged\"<\/h4><p>Never miss an important call or notification while immersed in your audio world. With our multi-device headphone connectivity, you can seamlessly switch between your entertainment and communication devices, keeping you connected and engaged without interruption.<\/p>"}}},"block_order":["template--21937777180987__658178d8-5095-495e-9e46-567641a056ff-heading-1","template--21937777180987__658178d8-5095-495e-9e46-567641a056ff-text-1"],"disabled":true,"settings":{"layout_type":false,"content_width":"medium","text_position":"center","text_alignment":"center","color_scheme":"primary","top_space_desktop":90,"bottom_space_desktop":70,"top_space_mobile":55,"bottom_space_mobile":20}},"e558ac3d-a095-410a-9a9b-5eb645a95c61":{"type":"rich-text","blocks":{"65000c99-5186-4c50-a5bc-133e0ba80e66":{"type":"heading","settings":{"heading":"About 页面内容","heading_size":"h2","heading_size_mobile":"h1_mobile"}},"93e2f0f9-5097-418c-8fcb-66bc9c3b6d7a":{"type":"text","settings":{"text":"<p>Service infrastructure reflects our unwavering commitment to excellence. By investing in state-of-the-art technology, top-tier talent, and a culture of innovation.<\/p>"}}},"block_order":["65000c99-5186-4c50-a5bc-133e0ba80e66","93e2f0f9-5097-418c-8fcb-66bc9c3b6d7a"],"disabled":true,"settings":{"layout_type":true,"content_width":"small","text_position":"center","text_alignment":"center","color_scheme":"primary","top_space_desktop":80,"bottom_space_desktop":20,"top_space_mobile":40,"bottom_space_mobile":15}}},"order":["main-page","banner","658178d8-5095-495e-9e46-567641a056ff","e558ac3d-a095-410a-9a9b-5eb645a95c61"]}
+{
+  "sections": {
+    "banner": {
+      "type": "page-banner",
+      "settings": {
+        "banner_height_desktop": "medium",
+        "banner_height_mobile": "small",
+        "heading": "About Nightwooolf",
+        "description": "Pioneering Auracast Bluetooth audio solutions for a better listening experience",
+        "heading_size": "h1",
+        "heading_size_mobile": "h2_mobile",
+        "content_width": "medium",
+        "heading_alignment": "center",
+        "color_scheme": "tertiary",
+        "bg_color_opacity": "#000000",
+        "overlay_opacity": 35,
+        "top_space_desktop": 55,
+        "bottom_space_desktop": 55,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 0
+      }
+    },
+    "main-page": {
+      "type": "main-page",
+      "settings": {
+        "color_scheme": "primary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "rich-text-auracast": {
+      "type": "rich-text",
+      "blocks": {
+        "heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Our Auracast Bluetooth Audio Vision",
+            "heading_size": "h2",
+            "heading_size_mobile": "h3_mobile"
+          }
+        },
+        "text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<h4>Revolutionizing Wireless Audio with Auracast Technology</h4><p>At Nightwooolf, we are at the forefront of the <strong>Auracast Bluetooth LE Audio revolution</strong>. Our mission is to bring next-generation wireless audio solutions to everyone - from seniors who need clearer TV audio to families who want to share music together.</p><p>Auracast broadcast audio is a groundbreaking Bluetooth capability that allows unlimited devices to receive high-quality audio from a single transmitter. Unlike traditional Bluetooth which only connects one-to-one, Auracast enables one-to-many broadcasting, transforming how we experience wireless audio.</p><h4>Why Auracast Changes Everything</h4><p>The <strong>LC3 codec</strong> at the heart of Auracast delivers superior audio quality with ultra-low latency. This means perfect lip-sync when watching TV, crystal-clear dialogue for those with hearing difficulties, and the ability for multiple family members to listen at their own preferred volume levels simultaneously.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading-1",
+        "text-1"
+      ],
+      "settings": {
+        "layout_type": false,
+        "content_width": "small",
+        "text_position": "center",
+        "text_alignment": "left",
+        "color_scheme": "primary",
+        "top_space_desktop": 20,
+        "bottom_space_desktop": 40,
+        "top_space_mobile": 15,
+        "bottom_space_mobile": 20
+      }
+    },
+    "icon-with-text-features": {
+      "type": "icon-with-text",
+      "blocks": {
+        "col-1": {
+          "type": "column",
+          "settings": {
+            "icon": "support",
+            "custom_svg": "",
+            "heading": "Auracast Technology",
+            "description": "Bluetooth LE Audio with LC3 codec for broadcast-quality wireless audio",
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "medium"
+          }
+        },
+        "col-2": {
+          "type": "column",
+          "settings": {
+            "icon": "user",
+            "custom_svg": "",
+            "heading": "Senior-Friendly Design",
+            "description": "Easy plug-and-play setup with voice clarity enhancement for hearing impaired",
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "medium"
+          }
+        },
+        "col-3": {
+          "type": "column",
+          "settings": {
+            "icon": "delivery",
+            "custom_svg": "",
+            "heading": "Universal Compatibility",
+            "description": "Works with all TVs and Bluetooth devices. Optical, RCA, and AUX support",
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "medium"
+          }
+        },
+        "col-4": {
+          "type": "column",
+          "settings": {
+            "icon": "return",
+            "custom_svg": "",
+            "heading": "30-Day Free Trial",
+            "description": "Risk-free shopping with free returns and lifetime customer support",
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "col-1",
+        "col-2",
+        "col-3",
+        "col-4"
+      ],
+      "settings": {
+        "number_column": 4,
+        "heading_size": "h5",
+        "icon_position": "top",
+        "icon_size": "medium",
+        "icon_background_enable": true,
+        "color_scheme": "primary",
+        "column_background": "#f8f8f8",
+        "icon_background": "#EB5C20",
+        "icon_color": "#ffffff",
+        "heading_color": "#000000",
+        "text_color": "#333333",
+        "top_space_desktop": 40,
+        "bottom_space_desktop": 60,
+        "top_space_mobile": 20,
+        "bottom_space_mobile": 30
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "main-page",
+    "rich-text-auracast",
+    "icon-with-text-features"
+  ]
+}

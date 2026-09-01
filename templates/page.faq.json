@@ -1,1 +1,239 @@
-{"sections":{"banner":{"type":"page-banner","settings":{"banner_height_desktop":"medium","banner_height_mobile":"small","heading":"","description":"","heading_size":"h3","heading_size_mobile":"h3_mobile","content_width":"medium","heading_alignment":"center","color_scheme":"tertiary","bg_color_opacity":"#000000","overlay_opacity":20,"top_space_desktop":0,"bottom_space_desktop":0,"top_space_mobile":0,"bottom_space_mobile":0}},"main-page":{"type":"main-page","disabled":true,"settings":{"color_scheme":"primary","top_space_desktop":70,"bottom_space_desktop":70,"top_space_mobile":40,"bottom_space_mobile":40}},"d5c7ff8f-ebd7-48a4-83d4-6136e845a327":{"type":"collapsible-content","blocks":{"template--21937765515579__d5c7ff8f-ebd7-48a4-83d4-6136e845a327-content-1":{"type":"content","settings":{"heading":"After a year, does your handbag still require repairs?","content":"<p>Absolutely! You can find our comprehensive size guide here. It provides detailed measurements to help you find your perfect fit.Absolutely! You can find our comprehensive size guide here. It provides detailed measurements to help you find your perfect fit.<\/p>"}},"template--21937765515579__d5c7ff8f-ebd7-48a4-83d4-6136e845a327-content-2":{"type":"content","settings":{"heading":"What certification does a B Corp hold?","content":"<p>Use this text to answer questions in as much detail as possible for your customers.<\/p>"}},"template--21937765515579__d5c7ff8f-ebd7-48a4-83d4-6136e845a327-content-3":{"type":"content","settings":{"heading":"Oh no! Can I participate in the challenge that has already begun?","content":"<p>Use this text to answer questions in as much detail as possible for your customers.<\/p>"}},"f0050294-bc5d-43e5-bea0-cc7f26c644ab":{"type":"content","settings":{"heading":"If my order is confirmed, how will I know?","content":"<p>Use this text to answer questions in as much detail as possible for your customers.<\/p>"}},"c3c44235-38e0-46aa-9b21-30d3e7e22c32":{"type":"content","settings":{"heading":"Are next-day or express delivery options available?","content":"<p>Use this text to answer questions in as much detail as possible for your customers.<\/p>"}}},"block_order":["template--21937765515579__d5c7ff8f-ebd7-48a4-83d4-6136e845a327-content-1","template--21937765515579__d5c7ff8f-ebd7-48a4-83d4-6136e845a327-content-2","template--21937765515579__d5c7ff8f-ebd7-48a4-83d4-6136e845a327-content-3","f0050294-bc5d-43e5-bea0-cc7f26c644ab","c3c44235-38e0-46aa-9b21-30d3e7e22c32"],"settings":{"enable_first_default":true,"heading":"Frequently Asked Questions","heading_size":"h2","heading_size_mobile":"h3_mobile","heading_alignment":"left","color_scheme":"scheme-10d07f3f-8a29-4d3b-a1e9-97a250b6a1a9","top_space_desktop":90,"bottom_space_desktop":120,"top_space_mobile":40,"bottom_space_mobile":0}}},"order":["banner","main-page","d5c7ff8f-ebd7-48a4-83d4-6136e845a327"]}
+{
+  "sections": {
+    "banner": {
+      "type": "page-banner",
+      "settings": {
+        "banner_height_desktop": "medium",
+        "banner_height_mobile": "small",
+        "heading": "Frequently Asked Questions",
+        "description": "Everything you need to know about Nightwooolf Auracast Bluetooth wireless audio products",
+        "heading_size": "h1",
+        "heading_size_mobile": "h2_mobile",
+        "content_width": "medium",
+        "heading_alignment": "center",
+        "color_scheme": "tertiary",
+        "bg_color_opacity": "#000000",
+        "overlay_opacity": 20,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 0
+      }
+    },
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "primary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "faq-auracast": {
+      "type": "collapsible-content",
+      "blocks": {
+        "auracast-1": {
+          "type": "content",
+          "settings": {
+            "heading": "What is Auracast Bluetooth technology?",
+            "content": "<p>Auracast broadcast audio is a new Bluetooth capability that allows audio to be shared from a single transmitter to unlimited receivers without pairing. Unlike traditional Bluetooth which connects one-to-one, Auracast enables one-to-many audio broadcasting, letting you share audio with friends, family, or an unlimited audience using compatible headphones, earbuds, speakers, or hearing aids.</p>"
+          }
+        },
+        "auracast-2": {
+          "type": "content",
+          "settings": {
+            "heading": "How does Auracast differ from traditional Bluetooth audio?",
+            "content": "<p>Traditional Bluetooth audio creates a one-to-one connection between devices. Auracast uses Bluetooth LE Audio to broadcast audio that any number of compatible receivers can tune into, similar to how a radio station works. It offers lower latency, better audio quality with the LC3 codec, and the ability for multiple people to listen simultaneously without pairing.</p>"
+          }
+        },
+        "auracast-3": {
+          "type": "content",
+          "settings": {
+            "heading": "Are Nightwooolf headphones compatible with Auracast?",
+            "content": "<p>Yes! Nightwooolf products feature the latest Bluetooth LE Audio technology with Auracast support. Our wireless TV headphones and audio devices are designed to work with Auracast-enabled transmitters, TVs, and smartphones, providing you with the next-generation wireless audio experience.</p>"
+          }
+        },
+        "auracast-4": {
+          "type": "content",
+          "settings": {
+            "heading": "What are the benefits of Auracast for seniors and hearing impaired?",
+            "content": "<p>Auracast offers significant benefits for seniors and those with hearing difficulties: individual volume control without affecting others, enhanced dialogue clarity, low-latency audio that syncs perfectly with TV lips, and the ability to connect hearing aids directly to TV audio. It's the next generation of assistive listening technology.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "auracast-1",
+        "auracast-2",
+        "auracast-3",
+        "auracast-4"
+      ],
+      "settings": {
+        "enable_first_default": true,
+        "heading": "Auracast Bluetooth Technology",
+        "heading_size": "h2",
+        "heading_size_mobile": "h3_mobile",
+        "heading_alignment": "left",
+        "color_scheme": "primary",
+        "top_space_desktop": 85,
+        "bottom_space_desktop": 40,
+        "top_space_mobile": 45,
+        "bottom_space_mobile": 20
+      }
+    },
+    "faq-products": {
+      "type": "collapsible-content",
+      "blocks": {
+        "product-1": {
+          "type": "content",
+          "settings": {
+            "heading": "What types of wireless TV headphones does Nightwooolf offer?",
+            "content": "<p>Nightwooolf offers a range of wireless TV headphones designed for different needs: over-ear headphones for maximum comfort during extended viewing, in-ear neckband styles for lightweight convenience, and specialized models with enhanced voice clarity for seniors and hearing impaired users. All our products feature Bluetooth connectivity and many support Auracast broadcast technology.</p>"
+          }
+        },
+        "product-2": {
+          "type": "content",
+          "settings": {
+            "heading": "How long is the battery life on Nightwooolf headphones?",
+            "content": "<p>Most Nightwooolf wireless headphones provide 8-12 hours of continuous playback on a single charge. Many models include a charging transmitter base that doubles as a stand, keeping your headphones charged and ready. Some models also feature replaceable batteries for uninterrupted listening.</p>"
+          }
+        },
+        "product-3": {
+          "type": "content",
+          "settings": {
+            "heading": "Are Nightwooolf headphones easy to set up for seniors?",
+            "content": "<p>Absolutely! Our products are designed with simplicity in mind. Most Nightwooolf headphones feature plug-and-play setup - simply connect the transmitter to your TV's audio output, turn on the headphones, and they automatically connect. No complicated Bluetooth pairing required. We also provide clear, step-by-step instructions.</p>"
+          }
+        },
+        "product-4": {
+          "type": "content",
+          "settings": {
+            "heading": "What is the wireless range of Nightwooolf headphones?",
+            "content": "<p>Nightwooolf wireless headphones typically offer a range of 100-164 feet (30-50 meters), allowing you to move freely around your home while listening to TV. The exact range depends on the model and environmental conditions such as walls and obstacles.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "product-1",
+        "product-2",
+        "product-3",
+        "product-4"
+      ],
+      "settings": {
+        "enable_first_default": false,
+        "heading": "Products & Features",
+        "heading_size": "h2",
+        "heading_size_mobile": "h3_mobile",
+        "heading_alignment": "left",
+        "color_scheme": "primary",
+        "top_space_desktop": 40,
+        "bottom_space_desktop": 40,
+        "top_space_mobile": 20,
+        "bottom_space_mobile": 20
+      }
+    },
+    "faq-shipping": {
+      "type": "collapsible-content",
+      "blocks": {
+        "shipping-1": {
+          "type": "content",
+          "settings": {
+            "heading": "Do you offer free shipping?",
+            "content": "<p>Yes! Nightwooolf offers free standard shipping on all orders over $19.98 within the United States. International shipping rates vary by destination and are calculated at checkout.</p>"
+          }
+        },
+        "shipping-2": {
+          "type": "content",
+          "settings": {
+            "heading": "What is your return policy?",
+            "content": "<p>We offer a 30-day free trial on all Nightwooolf products. If you're not completely satisfied with your purchase, you can return it within 30 days for a full refund. Products must be in their original condition with all accessories included.</p>"
+          }
+        },
+        "shipping-3": {
+          "type": "content",
+          "settings": {
+            "heading": "How long does delivery take?",
+            "content": "<p>Standard shipping within the US typically takes 3-5 business days. Express shipping options are available at checkout for faster delivery. International orders may take 7-14 business days depending on the destination.</p>"
+          }
+        },
+        "shipping-4": {
+          "type": "content",
+          "settings": {
+            "heading": "Do you ship internationally?",
+            "content": "<p>Yes, Nightwooolf ships to most countries worldwide. Shipping costs and delivery times vary by location. You can check shipping rates for your country during the checkout process.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "shipping-1",
+        "shipping-2",
+        "shipping-3",
+        "shipping-4"
+      ],
+      "settings": {
+        "enable_first_default": false,
+        "heading": "Shipping & Returns",
+        "heading_size": "h2",
+        "heading_size_mobile": "h3_mobile",
+        "heading_alignment": "left",
+        "color_scheme": "primary",
+        "top_space_desktop": 40,
+        "bottom_space_desktop": 40,
+        "top_space_mobile": 20,
+        "bottom_space_mobile": 20
+      }
+    },
+    "faq-support": {
+      "type": "collapsible-content",
+      "blocks": {
+        "support-1": {
+          "type": "content",
+          "settings": {
+            "heading": "How can I contact Nightwooolf support?",
+            "content": "<p>You can reach our customer support team by email at service@nightwooolf.com. We provide lifetime support for all Nightwooolf products and typically respond within 24 hours.</p>"
+          }
+        },
+        "support-2": {
+          "type": "content",
+          "settings": {
+            "heading": "Do your products come with a warranty?",
+            "content": "<p>Yes, all Nightwooolf products come with a manufacturer's warranty covering defects in materials and workmanship. We also offer extended warranty options for additional peace of mind.</p>"
+          }
+        },
+        "support-3": {
+          "type": "content",
+          "settings": {
+            "heading": "Where can I find the user manual for my product?",
+            "content": "<p>User manuals and setup guides are available on our Product Manuals page. You can also find video tutorials and troubleshooting guides to help you get the most out your Nightwooolf headphones.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "support-1",
+        "support-2",
+        "support-3"
+      ],
+      "settings": {
+        "enable_first_default": false,
+        "heading": "Support & Warranty",
+        "heading_size": "h2",
+        "heading_size_mobile": "h3_mobile",
+        "heading_alignment": "left",
+        "color_scheme": "primary",
+        "top_space_desktop": 40,
+        "bottom_space_desktop": 80,
+        "top_space_mobile": 20,
+        "bottom_space_mobile": 50
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "main-page",
+    "faq-auracast",
+    "faq-products",
+    "faq-shipping",
+    "faq-support"
+  ]
+}

@@ -1,1 +1,81 @@
-{"sections":{"banner":{"type":"main-blog-banner","disabled":true,"settings":{"banner_height_desktop":"medium","banner_height_mobile":"small","heading":"Style Diaries","description":"Your Daily Dose of Fashion Inspiration","heading_size":"h1","heading_size_mobile":"h1_mobile","content_width":"medium","heading_alignment":"center","color_scheme":"tertiary","bg_color_opacity":"#000000","overlay_opacity":50,"top_space_desktop":0,"bottom_space_desktop":0,"top_space_mobile":0,"bottom_space_mobile":0}},"rich_text_XkjzBH":{"type":"rich-text","blocks":{"heading_89nLfK":{"type":"heading","settings":{"heading":"<strong>Welcome to our blog.<\/strong>","heading_size":"h2","heading_size_mobile":"h3_mobile"}},"text_BUV73V":{"type":"text","settings":{"text":"<p>Find out more about how <strong>Headphones <\/strong>is helping our users, all the latest <strong>NightWooolf <\/strong>news, and upcoming releases, all here.<\/p>"}}},"block_order":["heading_89nLfK","text_BUV73V"],"custom_css":[".rich-text-desc {color: #a8a8a8;}"],"name":"t:sections.rich_text.presets.name","settings":{"layout_type":false,"content_width":"small","text_position":"center","text_alignment":"center","color_scheme":"","top_space_desktop":80,"bottom_space_desktop":0,"top_space_mobile":40,"bottom_space_mobile":40}},"main":{"type":"main-blog","settings":{"artical_per_page":12,"show_date":true,"show_author":false,"show_tags":false,"show_excerpt":true,"color_scheme":"quaternary","top_space_desktop":0,"bottom_space_desktop":70,"top_space_mobile":40,"bottom_space_mobile":10}}},"order":["banner","rich_text_XkjzBH","main"]}
+{
+  "sections": {
+    "banner": {
+      "type": "main-blog-banner",
+      "disabled": true,
+      "settings": {
+        "banner_height_desktop": "medium",
+        "banner_height_mobile": "small",
+        "heading": "Auracast Bluetooth Audio Blog",
+        "description": "Latest news, guides, and insights on Auracast Bluetooth LE Audio technology",
+        "heading_size": "h1",
+        "heading_size_mobile": "h1_mobile",
+        "content_width": "medium",
+        "heading_alignment": "center",
+        "color_scheme": "tertiary",
+        "bg_color_opacity": "#000000",
+        "overlay_opacity": 50,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 0
+      }
+    },
+    "rich_text_XkjzBH": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_89nLfK": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Nightwooolf Auracast Audio Blog</strong>",
+            "heading_size": "h2",
+            "heading_size_mobile": "h3_mobile"
+          }
+        },
+        "text_BUV73V": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Stay updated with the latest on <strong>Auracast Bluetooth LE Audio technology</strong>, wireless TV headphones for seniors, hearing aid solutions, and audio tips from <strong>Nightwooolf</strong>. Learn how Auracast is transforming wireless audio sharing and assistive listening.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_89nLfK",
+        "text_BUV73V"
+      ],
+      "custom_css": [".rich-text-desc {color: #a8a8a8;}"],
+      "name": "t:sections.rich_text.presets.name",
+      "settings": {
+        "layout_type": false,
+        "content_width": "small",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_scheme": "",
+        "top_space_desktop": 80,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "artical_per_page": 12,
+        "show_date": true,
+        "show_author": false,
+        "show_tags": false,
+        "show_excerpt": true,
+        "color_scheme": "quaternary",
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 10
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "rich_text_XkjzBH",
+    "main"
+  ]
+}

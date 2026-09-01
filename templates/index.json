@@ -1,4 +1,4 @@
-/*
+﻿/*
  * ------------------------------------------------------------
  * IMPORTANT: The contents of this file are auto-generated.
  *
@@ -245,7 +245,7 @@
           "settings": {
             "icon": "user",
             "custom_svg": "",
-            "heading": "Trusted by 100k+ Families",
+            "heading": "Trusted by 100k+ Families for Auracast Bluetooth Audio",
             "description": "",
             "btn_text": "",
             "btn_link": "",
@@ -318,7 +318,7 @@
       ],
       "settings": {
         "collections_column": 4,
-        "heading": "<strong>Hot Category</strong>",
+        "heading": "<strong>Auracast Bluetooth Audio Products</strong>",
         "heading_size": "h2",
         "heading_size_mobile": "h4_mobile",
         "heading_alignment": "center",
@@ -336,7 +336,7 @@
         "heading_cFMcj3": {
           "type": "heading",
           "settings": {
-            "heading": "<strong>Nightwooolf  </strong>Audio Vision",
+            "heading": "<strong>Nightwooolf</strong> - Auracast Bluetooth Audio Pioneer",
             "heading_size": "h2",
             "heading_size_mobile": "h3_mobile"
           }
@@ -344,13 +344,13 @@
         "text_Ux9WmP": {
           "type": "text",
           "settings": {
-            "text": "<p>Focusing on the human connections among community members, we are committed to becoming an outstanding wireless audio solutions provider. Through high-quality audio products, we are building a more inclusive, interactive and engaging <em><strong>“Community Audio Ecosystem”</strong></em>, and offering our audio products and services to every senior, child and youth in the community.</p>"
+            "text": "<p>Pioneering the future of wireless audio with <strong>Auracast Bluetooth LE Audio technology</strong>. Nightwooolf delivers next-generation audio solutions including wireless TV headphones for seniors, hearing aid headphones, and innovative Bluetooth audio devices. Our products feature the latest <strong>LC3 codec</strong> for crystal-clear sound with ultra-low latency - perfect for TV watching, hearing assistance, and shared audio experiences.</p><p>Experience the future of wireless listening with Auracast - no pairing required, unlimited devices, and perfect lip-sync.</p>"
           }
         },
         "button_NYgTkj": {
           "type": "button",
           "settings": {
-            "text": "VIEW DETAILS",
+            "text": "DISCOVER AURACAST",
             "link": "shopify://pages/about-nightwooolf",
             "btn_size": "large"
           }
@@ -532,7 +532,7 @@
         "video": "shopify://files/videos/Wireless TV Headphones for Seniors with Large Buttons.mp4",
         "overlay_text": true,
         "font_family_contet": "heading",
-        "video_heading": "Wireless TV Headphones  with Large Buttons{{ metaobjects[\"shopify--noise-cancellation-technology\"][\"passive-noise-isolation\"].label.value }}",
+        "video_heading": "Auracast Wireless TV Headphones - Bluetooth LE Audio for Seniors{{ metaobjects[\"shopify--noise-cancellation-technology\"][\"passive-noise-isolation\"].label.value }}",
         "heading_size_video": "h2",
         "heading_size_mobile_video": "h3_mobile",
         "description": "",
@@ -872,7 +872,7 @@
         "heading_AkP3Cc": {
           "type": "heading",
           "settings": {
-            "heading": "All fresh for an improved you",
+            "heading": "Next-Gen Auracast Bluetooth Audio Solutions",
             "heading_size": "h2",
             "heading_size_mobile": "h2_mobile"
           }
@@ -880,13 +880,13 @@
         "text_PtqhxV": {
           "type": "text",
           "settings": {
-            "text": "<p>Discover a plethora of items with generous discounts awaiting you. Take advantage of our enticing offers and indulge in savings today!</p>"
+            "text": "<p>Explore our range of Auracast Bluetooth wireless headphones, TV speakers, and audio adapters. Featuring the latest LE Audio technology with LC3 codec for crystal-clear sound and ultra-low latency.</p>"
           }
         },
         "button_HR784N": {
           "type": "button",
           "settings": {
-            "text": "View Details",
+            "text": "DISCOVER AURACAST",
             "link": "",
             "size": "medium"
           }
@@ -1173,7 +1173,7 @@
       "settings": {
         "column_count": 3,
         "content_alignment": "left",
-        "heading": "Trusted by 100k+ Families",
+        "heading": "Trusted by 100k+ Families for Auracast Bluetooth Audio",
         "heading_size": "h2",
         "heading_size_mobile": "h1_mobile",
         "heading_alignment": "center",
@@ -1266,7 +1266,7 @@
         "cb9e12ff-1a4b-48e6-bf31-d868cec86d2c"
       ],
       "settings": {
-        "heading": "Featured blogs",
+        "heading": "Auracast Bluetooth Audio Blog",
         "heading_size": "h4",
         "heading_size_mobile": "h4_mobile",
         "heading_alignment": "left",
@@ -1369,7 +1369,7 @@
         "heading": "",
         "heading_size": "h2",
         "heading_size_mobile": "h3_mobile",
-        "description": "<h4>Sign up to receive exclusive offers and updates</h4>",
+        "description": "<h4>Stay Updated on Auracast Bluetooth Audio Technology</h4>",
         "text_alignment": "center",
         "color_scheme": "scheme-33312f08-d201-439f-8cf6-1b9e0e68d7b8",
         "bg_color_opacity": "#000000",
@@ -1407,3 +1407,4 @@
     "newsletter_hwpyfQ"
   ]
 }
+

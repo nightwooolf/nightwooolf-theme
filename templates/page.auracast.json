@@ -1,0 +1,203 @@
+{
+  "sections": {
+    "banner": {
+      "type": "page-banner",
+      "settings": {
+        "banner_height_desktop": "medium",
+        "banner_height_mobile": "small",
+        "heading": "Auracast Bluetooth LE Audio Technology",
+        "description": "Experience the future of wireless audio with Auracast broadcast technology",
+        "heading_size": "h1",
+        "heading_size_mobile": "h2_mobile",
+        "content_width": "medium",
+        "heading_alignment": "center",
+        "color_scheme": "tertiary",
+        "bg_color_opacity": "#000000",
+        "overlay_opacity": 30,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 0
+      }
+    },
+    "main-page": {
+      "type": "main-page",
+      "settings": {
+        "color_scheme": "primary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "rich-text-intro": {
+      "type": "rich-text",
+      "blocks": {
+        "heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "What is Auracast?",
+            "heading_size": "h2",
+            "heading_size_mobile": "h3_mobile"
+          }
+        },
+        "text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Auracast broadcast audio</strong> is a revolutionary new Bluetooth capability that enables one-to-many audio broadcasting. Unlike traditional Bluetooth which creates a one-to-one connection, Auracast allows a single transmitter to broadcast audio to an unlimited number of compatible receivers - headphones, earbuds, speakers, and hearing aids.</p><p>Built on <strong>Bluetooth LE Audio</strong> and the advanced <strong>LC3 codec</strong>, Auracast delivers superior audio quality with ultra-low latency, making it perfect for TV watching, public venues, and shared listening experiences.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading-1",
+        "text-1"
+      ],
+      "settings": {
+        "layout_type": false,
+        "content_width": "small",
+        "text_position": "center",
+        "text_alignment": "left",
+        "color_scheme": "primary",
+        "top_space_desktop": 60,
+        "bottom_space_desktop": 40,
+        "top_space_mobile": 30,
+        "bottom_space_mobile": 20
+      }
+    },
+    "icon-with-text-benefits": {
+      "type": "icon-with-text",
+      "blocks": {
+        "benefit-1": {
+          "type": "column",
+          "settings": {
+            "icon": "support",
+            "custom_svg": "",
+            "heading": "No Pairing Required",
+            "description": "Simply tune in to an Auracast broadcast - no Bluetooth pairing menus needed",
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "medium"
+          }
+        },
+        "benefit-2": {
+          "type": "column",
+          "settings": {
+            "icon": "user",
+            "custom_svg": "",
+            "heading": "Unlimited Listeners",
+            "description": "One transmitter can broadcast to unlimited receivers simultaneously",
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "medium"
+          }
+        },
+        "benefit-3": {
+          "type": "column",
+          "settings": {
+            "icon": "delivery",
+            "custom_svg": "",
+            "heading": "Ultra-Low Latency",
+            "description": "LC3 codec provides perfect lip-sync with minimal audio delay",
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "medium"
+          }
+        },
+        "benefit-4": {
+          "type": "column",
+          "settings": {
+            "icon": "return",
+            "custom_svg": "",
+            "heading": "Hearing Accessibility",
+            "description": "Enhanced dialogue clarity for seniors and hearing impaired users",
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "benefit-1",
+        "benefit-2",
+        "benefit-3",
+        "benefit-4"
+      ],
+      "settings": {
+        "number_column": 4,
+        "heading_size": "h5",
+        "icon_position": "top",
+        "icon_size": "medium",
+        "icon_background_enable": true,
+        "color_scheme": "primary",
+        "column_background": "#f8f8f8",
+        "icon_background": "#EB5C20",
+        "icon_color": "#ffffff",
+        "heading_color": "#000000",
+        "text_color": "#333333",
+        "top_space_desktop": 40,
+        "bottom_space_desktop": 60,
+        "top_space_mobile": 20,
+        "bottom_space_mobile": 30
+      }
+    },
+    "rich-text-use-cases": {
+      "type": "rich-text",
+      "blocks": {
+        "heading-2": {
+          "type": "heading",
+          "settings": {
+            "heading": "Auracast Use Cases",
+            "heading_size": "h2",
+            "heading_size_mobile": "h3_mobile"
+          }
+        },
+        "text-2": {
+          "type": "text",
+          "settings": {
+            "text": "<h4>Home Entertainment</h4><p>Watch TV with family members each using their own headphones at their preferred volume. Auracast eliminates lip-sync issues, making it perfect for late-night viewing without disturbing others.</p><h4>Public Venues</h4><p>Airports, gyms, hospitals, and conference rooms can broadcast audio directly to visitors' headphones. No pairing, no hassle - just tune in and listen.</p><h4>Assistive Listening</h4><p>Auracast is the next generation of assistive listening technology, replacing outdated hearing loops with a standardized, high-quality wireless solution for those with hearing difficulties.</p><h4>Shared Audio Experiences</h4><p>Share music with friends by broadcasting from your phone. Everyone nearby with compatible headphones can tune in and listen together.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading-2",
+        "text-2"
+      ],
+      "settings": {
+        "layout_type": false,
+        "content_width": "small",
+        "text_position": "center",
+        "text_alignment": "left",
+        "color_scheme": "primary",
+        "top_space_desktop": 40,
+        "bottom_space_desktop": 60,
+        "top_space_mobile": 20,
+        "bottom_space_mobile": 30
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Auracast Compatible Products",
+        "heading_size": "h2",
+        "heading_size_mobile": "h3_mobile",
+        "heading_alignment": "center",
+        "collection": "all",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "primary",
+        "top_space_desktop": 40,
+        "bottom_space_desktop": 80,
+        "top_space_mobile": 20,
+        "bottom_space_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "main-page",
+    "rich-text-intro",
+    "icon-with-text-benefits",
+    "rich-text-use-cases",
+    "featured-collection"
+  ]
+}
