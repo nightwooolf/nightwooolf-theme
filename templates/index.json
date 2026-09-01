@@ -1267,6 +1267,9 @@
         "c18675d6-b03b-42c9-aef1-a11976ff84ef",
         "cb9e12ff-1a4b-48e6-bf31-d868cec86d2c"
       ],
+      "custom_css": [
+        ".heading-header{padding-bottom:30px;}"
+      ],
       "settings": {
         "heading": "Auracast Bluetooth Audio Blog",
         "heading_size": "h2",
