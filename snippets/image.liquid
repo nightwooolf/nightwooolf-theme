@@ -1,35 +1,73 @@
 {% comment %}theme-check-disable ImgWidthAndHeight,ImgLazyLoading,DeprecateLazysizes,DeprecatedFilter{% endcomment %}
-{%- assign img_url = image | image_url: width: '100' | replace: 'width=100', 'width={width}' -%}
 {%- assign loading_attr = loading | default: 'lazy' -%}
-<img
-  {% if id != blank %}
-    id="{{ id }}"
-  {% endif %}
-  class="no-js-hidden {{ class }}{% if loading_attr == 'lazy' %} lazyload{% endif %}"
-  src="{{ img_url }}"
-  srcset="{{ image | image_url: width: 360 }} 360w, {{ image | image_url: width: 540 }} 540w, {{ image | image_url: width: 720 }} 720w, {{ image | image_url: width: 900 }} 900w, {{ image | image_url: width: 1080 }} 1080w, {{ image | image_url: width: 1296 }} 1296w"
-  data-aspectratio="{{ image.aspect_ratio }}"
-  data-sizes="auto"
-  data-widths="{{ sizes }}"
-  width="{{ image.width }}"
-  height="{{ image.height }}"
-  data-original="{{ image | image_url }}"
-  alt="{{ image.alt | escape }}"
-  loading="{{ loading_attr }}"
-  {% if loading_attr == 'eager' %}fetchpriority="high"{% endif %}
-  style="object-position:{{ image.presentation.focal_point }}"
-  {% if loading_attr == 'lazy' %}data-flickity-lazyload="{{ img_url }}"{% endif %}
->
-<div class="loader-image"></div>
-<noscript>
+{%- assign img_widths = '375,540,750,900,1080,1296,1440,1920' -%}
+
+{%- if loading_attr == 'eager' -%}
+  {%- comment -%} 首屏图片：直接输出真实 src，fetchpriority=high {%- endcomment -%}
   <img
-    class="{{ class }}"
-    src="{{ image | image_url: width: 720 }}"
-    srcset="{{ image | image_url: width: 360 }} 360w, {{ image | image_url: width: 540 }} 540w, {{ image | image_url: width: 720 }} 720w, {{ image | image_url: width: 900 }} 900w"
-    sizes="(max-width: 767px) 100vw, 50vw"
-    alt="{{ image.alt | default: shop.name | strip_html }}"
+    {% if id != blank %}id="{{ id }}"{% endif %}
+    class="no-js-hidden {{ class }}"
+    src="{{ image | image_url: width: 750 }}"
+    srcset="
+      {{ image | image_url: width: 375 }} 375w,
+      {{ image | image_url: width: 540 }} 540w,
+      {{ image | image_url: width: 750 }} 750w,
+      {{ image | image_url: width: 900 }} 900w,
+      {{ image | image_url: width: 1080 }} 1080w,
+      {{ image | image_url: width: 1296 }} 1296w,
+      {{ image | image_url: width: 1440 }} 1440w,
+      {{ image | image_url: width: 1920 }} 1920w
+    "
+    sizes="(max-width: 767px) 100vw, (max-width: 1200px) 80vw, 1440px"
     width="{{ image.width }}"
     height="{{ image.height }}"
+    alt="{{ image.alt | escape }}"
+    loading="eager"
+    fetchpriority="high"
+    decoding="sync"
+    style="object-position:{{ image.presentation.focal_point }}"
   >
-</noscript>
+{%- else -%}
+  {%- comment -%} 非首屏图片：lazyload {%- endcomment -%}
+  {%- assign img_url = image | image_url: width: 100 | replace: 'width=100', 'width={width}' -%}
+  <img
+    {% if id != blank %}id="{{ id }}"{% endif %}
+    class="no-js-hidden lazyload {{ class }}"
+    src="{{ image | image_url: width: 20 }}"
+    data-src="{{ image | image_url: width: 750 }}"
+    data-srcset="
+      {{ image | image_url: width: 375 }} 375w,
+      {{ image | image_url: width: 540 }} 540w,
+      {{ image | image_url: width: 750 }} 750w,
+      {{ image | image_url: width: 900 }} 900w,
+      {{ image | image_url: width: 1080 }} 1080w,
+      {{ image | image_url: width: 1296 }} 1296w
+    "
+    data-sizes="auto"
+    data-aspectratio="{{ image.aspect_ratio }}"
+    width="{{ image.width }}"
+    height="{{ image.height }}"
+    alt="{{ image.alt | escape }}"
+    loading="lazy"
+    decoding="async"
+    style="object-position:{{ image.presentation.focal_point }}"
+  >
+  <div class="loader-image"></div>
+  <noscript>
+    <img
+      class="{{ class }}"
+      src="{{ image | image_url: width: 750 }}"
+      srcset="
+        {{ image | image_url: width: 375 }} 375w,
+        {{ image | image_url: width: 540 }} 540w,
+        {{ image | image_url: width: 750 }} 750w,
+        {{ image | image_url: width: 900 }} 900w
+      "
+      sizes="(max-width: 767px) 100vw, 50vw"
+      alt="{{ image.alt | default: shop.name | strip_html }}"
+      width="{{ image.width }}"
+      height="{{ image.height }}"
+    >
+  </noscript>
+{%- endif -%}
 {% comment %}theme-check-enable ImgWidthAndHeight,ImgLazyLoading,DeprecateLazysizes,DeprecatedFilter{% endcomment %}

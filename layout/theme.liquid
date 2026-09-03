@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#EB5C20">
     <meta name="robots" content="index, follow">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://monorail-edge.shopifysvc.com" crossorigin>
+    <link rel="dns-prefetch" href="https://monorail-edge.shopifysvc.com">
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="preload" href="{{ 'custom-global.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ 'custom-global.css' | asset_url }}"></noscript>
@@ -32,23 +34,33 @@
     <meta name="description" content="{{ page_description | default: shop.description | default: shop.name | escape }}">
     {{ content_for_header }}
     {%- if request.page_type == 'index' -%}
-      {%- for section in template.sections -%}
-        {%- if section.type == 'slideshow' -%}
-          {%- assign first_block = section.blocks | first -%}
-          {%- if first_block.settings.image_desktop != blank -%}
-            <link
-              rel="preload"
-              as="image"
-              href="{{ first_block.settings.image_desktop | image_url: width: 1920 }}"
-              fetchpriority="high"
-              imagesrcset="{{ first_block.settings.image_desktop | image_url: width: 480 }} 480w, {{ first_block.settings.image_desktop | image_url: width: 768 }} 768w, {{ first_block.settings.image_desktop | image_url: width: 1024 }} 1024w, {{ first_block.settings.image_desktop | image_url: width: 1440 }} 1440w, {{ first_block.settings.image_desktop | image_url: width: 1920 }} 1920w"
-              imagesizes="100vw"
-            >
-          {%- endif -%}
-          {%- break -%}
+    {%- for section in template.sections -%}
+      {%- if section.type == 'slideshow' -%}
+        {%- assign first_block = section.blocks | first -%}
+        {%- if first_block.settings.image_mobile != blank -%}
+          <link
+            rel="preload"
+            as="image"
+            href="{{ first_block.settings.image_mobile | image_url: width: 750 }}"
+            fetchpriority="high"
+            imagesrcset="{{ first_block.settings.image_mobile | image_url: width: 375 }} 375w, {{ first_block.settings.image_mobile | image_url: width: 750 }} 750w"
+            imagesizes="100vw"
+            media="(max-width: 767px)"
+          >
+        {%- elsif first_block.settings.image_desktop != blank -%}
+          <link
+            rel="preload"
+            as="image"
+            href="{{ first_block.settings.image_desktop | image_url: width: 750 }}"
+            fetchpriority="high"
+            media="(max-width: 767px)"
+          >
         {%- endif -%}
-      {%- endfor -%}
-    {%- endif -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+
 
     {% render 'style-variable' %}
     {% render 'theme-variable' %}
