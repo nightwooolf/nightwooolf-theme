@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "e2c6f89f-cbfa-49b1-b922-e7b77caa0573": {
@@ -607,12 +616,14 @@
         "description_gcwdkz",
         "share_LHxGKF"
       ],
+      "custom_css": [],
       "settings": {
+        "custom_class": "home-feature-product-class",
         "product": "nightwooolf-wireless-tv-headphones-for-seniors-hearing-impaired",
         "image_position": "left",
         "heading": "",
-        "heading_size": "h3",
-        "heading_size_mobile": "h3_mobile",
+        "heading_size": "h4",
+        "heading_size_mobile": "h4_mobile",
         "heading_alignment": "left",
         "color_scheme": "primary",
         "top_space_desktop": 35,
@@ -1256,11 +1267,14 @@
         "c18675d6-b03b-42c9-aef1-a11976ff84ef",
         "cb9e12ff-1a4b-48e6-bf31-d868cec86d2c"
       ],
+      "custom_css": [
+        ".heading-header{padding-bottom:30px;}"
+      ],
       "settings": {
         "heading": "Auracast Bluetooth Audio Blog",
-        "heading_size": "h4",
+        "heading_size": "h2",
         "heading_size_mobile": "h4_mobile",
-        "heading_alignment": "left",
+        "heading_alignment": "center",
         "blog": "news",
         "post_limit": 4,
         "show_date": true,

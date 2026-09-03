@@ -1,1 +1,48 @@
-{"sections":{"main-page":{"type":"main-page","settings":{"color_scheme":"","top_space_desktop":80,"bottom_space_desktop":80,"top_space_mobile":40,"bottom_space_mobile":40}},"banner":{"type":"page-banner","disabled":true,"settings":{"banner_height_desktop":"small","banner_height_mobile":"small","heading":"","description":"Nightwooolf - Auracast Bluetooth Audio Solutions","heading_size":"h2","heading_size_mobile":"h3_mobile","content_width":"medium","heading_alignment":"left","color_scheme":"","bg_color_opacity":"#eeeeee","overlay_opacity":50,"top_space_desktop":0,"bottom_space_desktop":0,"top_space_mobile":0,"bottom_space_mobile":0}}},"order":["main-page","banner"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "settings": {
+        "color_scheme": "",
+        "top_space_desktop": 80,
+        "bottom_space_desktop": 80,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "banner": {
+      "type": "page-banner",
+      "disabled": true,
+      "settings": {
+        "banner_height_desktop": "small",
+        "banner_height_mobile": "small",
+        "heading": "",
+        "description": "Nightwooolf - Auracast Bluetooth Audio Solutions",
+        "heading_size": "h2",
+        "heading_size_mobile": "h3_mobile",
+        "content_width": "medium",
+        "heading_alignment": "left",
+        "color_scheme": "",
+        "bg_color_opacity": "#eeeeee",
+        "overlay_opacity": 50,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 0
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "banner"
+  ]
+}

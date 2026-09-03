@@ -171,10 +171,13 @@
 .shopify-policy__container {
     max-width:90% !important;
 }
-@media screen and (max-width: 1440px) { 
+@media screen and (min-width: 1440px) { 
     /* 普通桌面 */
     .mobile-logo-text {
         display:none !important;
+    }
+    .home-feature-product-class .product-title a {
+        font-size:48px !important;
     }
     
 }
@@ -201,6 +204,9 @@
    .article-contain-wrapper .grid-row .article-list-item .article-list-content {
     margin-left:20px;
    } 
+    .home-feature-product-class .product-title a {
+        font-size:38px !important;
+    }
 }
 @media screen and (max-width: 1200px) { 
     /* 小桌面 */
@@ -215,6 +221,9 @@
     }
     .mobile-logo {
         display:block !important;
+    }
+     .home-feature-product-class .product-title a {
+        font-size:30px !important;
     }
  }
 @media screen and (max-width: 767px)  { 
@@ -260,6 +269,12 @@
     .custom_icon_text_class .grid-row .grid-item-md-3 {
         width:43% !important;
     }
+    .home-feature-product-class .product-title a {
+        font-size:30px !important;
+    }
+    .video-wrapper.content-overlay-true h2 {
+        font-size:18px !important;
+    }
  }
 @media screen and (max-width: 480px)  { 
     /* 小屏手机 */
@@ -283,6 +298,12 @@
         display:block !important;
         width:60px !important;
         height:30px !important;
+    }
+    .home-feature-product-class .product-title a {
+        font-size:30px !important;
+    }
+    .video-wrapper.content-overlay-true h2 {
+        font-size:16px !important;
     }
  }
 
