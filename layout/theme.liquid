@@ -86,28 +86,15 @@
     {% render 'back-to-top' %}
     <script>
       {% if settings.animation_enable %}
-        // AOS：移动端禁用动画，减少性能消耗
-        (function() {
-          var isMobile = window.innerWidth < 768;
-          if (isMobile) {
-            // 移动端直接显示所有元素，跳过动画
-            document.documentElement.setAttribute('data-aos-easing', 'ease');
-            var style = document.createElement('style');
-            style.textContent = '[data-aos] { opacity: 1 !important; transform: none !important; transition: none !important; }';
-            document.head.appendChild(style);
-          } else {
-            window.addEventListener('load', function () {
-              AOS.init({
-                easing: 'ease',
-                once: true,
-                duration: 800,
-                offset: 60,
-                disableMutationObserver: true,
-              });
-            });
-          }
-        })();
-
+        window.addEventListener('load', function () {
+          AOS.init({
+              easing: 'ease',
+              once: true,
+              duration: 1000,
+              offset: 60,
+              disableMutationObserver: true,
+          });
+        });
       {% endif %}
     </script>
     {%- if settings.enable_search_drawer -%}
