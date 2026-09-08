@@ -11,6 +11,7 @@
   "sections": {
     "banner": {
       "type": "page-banner",
+      "disabled": true,
       "settings": {
         "banner_height_desktop": "small",
         "banner_height_mobile": "small",
