@@ -294,7 +294,7 @@
         "collection_gPLVYx": {
           "type": "collection",
           "settings": {
-            "collection": "memory-learning-headsets"
+            "collection": "bluetooth-adapters"
           }
         },
         "collection_7WXNhq": {
@@ -1268,7 +1268,7 @@
         "cb9e12ff-1a4b-48e6-bf31-d868cec86d2c"
       ],
       "custom_css": [
-        ".heading-header{padding-bottom:30px;}"
+        ".heading-header {padding-bottom: 30px;}"
       ],
       "settings": {
         "heading": "Auracast Bluetooth Audio Blog",
