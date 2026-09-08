@@ -11,6 +11,7 @@
   "sections": {
     "banner": {
       "type": "page-banner",
+      "disabled": true,
       "settings": {
         "banner_height_desktop": "medium",
         "banner_height_mobile": "small",
@@ -20,7 +21,7 @@
         "heading_size_mobile": "h2_mobile",
         "content_width": "medium",
         "heading_alignment": "center",
-        "color_scheme": "tertiary",
+        "color_scheme": "primary",
         "bg_color_opacity": "#000000",
         "overlay_opacity": 35,
         "top_space_desktop": 55,
@@ -132,6 +133,7 @@
         "col-4"
       ],
       "settings": {
+        "custom_class": "custom_icon_text_class",
         "number_column": 4,
         "heading_size": "h5",
         "icon_position": "top",
@@ -139,7 +141,7 @@
         "icon_background_enable": true,
         "color_scheme": "primary",
         "column_background": "#f8f8f8",
-        "icon_background": "#EB5C20",
+        "icon_background": "#eb5c20",
         "icon_color": "#ffffff",
         "heading_color": "#000000",
         "text_color": "#333333",
