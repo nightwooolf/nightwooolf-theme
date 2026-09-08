@@ -275,6 +275,9 @@
     .video-wrapper.content-overlay-true h2 {
         font-size:18px !important;
     }
+    .banner-main-box {
+        height:0px!important;
+    }
  }
 @media screen and (max-width: 480px)  { 
     /* 小屏手机 */
