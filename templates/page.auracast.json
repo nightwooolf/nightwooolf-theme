@@ -11,6 +11,7 @@
   "sections": {
     "banner": {
       "type": "page-banner",
+      "disabled": true,
       "settings": {
         "banner_height_desktop": "medium",
         "banner_height_mobile": "small",
@@ -20,7 +21,7 @@
         "heading_size_mobile": "h2_mobile",
         "content_width": "medium",
         "heading_alignment": "center",
-        "color_scheme": "tertiary",
+        "color_scheme": "primary",
         "bg_color_opacity": "#000000",
         "overlay_opacity": 30,
         "top_space_desktop": 0,
@@ -31,10 +32,46 @@
     },
     "main-page": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "color_scheme": "primary",
         "top_space_desktop": 70,
         "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "rich_text_qUNtyV": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_WDygn7": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Auracast Bluetooth LE Audio Technology</strong>",
+            "heading_size": "h3",
+            "heading_size_mobile": "h4_mobile"
+          }
+        },
+        "text_ecVMcm": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Experience the future of wireless audio with Auracast broadcast technology</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_WDygn7",
+        "text_ecVMcm"
+      ],
+      "name": "t:sections.rich_text.presets.name",
+      "settings": {
+        "layout_type": false,
+        "content_width": "small",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_scheme": "",
+        "top_space_desktop": 40,
+        "bottom_space_desktop": 0,
         "top_space_mobile": 40,
         "bottom_space_mobile": 40
       }
@@ -132,6 +169,7 @@
         "benefit-4"
       ],
       "settings": {
+        "custom_class": "custom_icon_text_class",
         "number_column": 4,
         "heading_size": "h5",
         "icon_position": "top",
@@ -139,7 +177,7 @@
         "icon_background_enable": true,
         "color_scheme": "primary",
         "column_background": "#f8f8f8",
-        "icon_background": "#EB5C20",
+        "icon_background": "#eb5c20",
         "icon_color": "#ffffff",
         "heading_color": "#000000",
         "text_color": "#333333",
@@ -186,13 +224,21 @@
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
+        "custom_class": "custom_featured_collection_class",
+        "grid_image_size": "auto",
         "heading": "Auracast Compatible Products",
         "heading_size": "h2",
         "heading_size_mobile": "h3_mobile",
         "heading_alignment": "center",
+        "enable_collection_title": false,
         "collection": "all",
+        "products_style": true,
         "products_to_show": 4,
         "columns_desktop": 4,
+        "btn_text": "",
+        "btn_link": "",
+        "btn_size": "medium",
+        "button_alignment": "center",
         "color_scheme": "primary",
         "top_space_desktop": 40,
         "bottom_space_desktop": 80,
@@ -204,6 +250,7 @@
   "order": [
     "banner",
     "main-page",
+    "rich_text_qUNtyV",
     "rich-text-intro",
     "icon-with-text-benefits",
     "rich-text-use-cases",
