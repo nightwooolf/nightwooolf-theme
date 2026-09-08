@@ -276,7 +276,7 @@
         font-size:18px !important;
     }
     .banner-main-box {
-        height:0px!important;
+        height:100px!important;
     }
  }
 @media screen and (max-width: 480px)  { 
