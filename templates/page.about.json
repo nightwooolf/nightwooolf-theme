@@ -11,9 +11,8 @@
   "sections": {
     "banner": {
       "type": "page-banner",
-      "disabled": true,
       "settings": {
-        "banner_height_desktop": "medium",
+        "banner_height_desktop": "small",
         "banner_height_mobile": "small",
         "heading": "About Nightwooolf",
         "description": "Pioneering Auracast Bluetooth audio solutions for a better listening experience",
@@ -23,9 +22,9 @@
         "heading_alignment": "center",
         "color_scheme": "primary",
         "bg_color_opacity": "#000000",
-        "overlay_opacity": 35,
-        "top_space_desktop": 55,
-        "bottom_space_desktop": 55,
+        "overlay_opacity": 0,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 0,
         "top_space_mobile": 0,
         "bottom_space_mobile": 0
       }
