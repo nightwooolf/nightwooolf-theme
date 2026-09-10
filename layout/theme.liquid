@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#EB5C20">
     <meta name="robots" content="index, follow">
+    {% if collection.handle == 'all-products' %}
+      <meta name="robots" content="noindex, follow">
+    {% endif %}
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
     <link rel="preconnect" href="https://monorail-edge.shopifysvc.com" crossorigin>
     <link rel="dns-prefetch" href="https://monorail-edge.shopifysvc.com">
