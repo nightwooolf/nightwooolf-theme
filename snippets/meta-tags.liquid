@@ -37,3 +37,32 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ og_title | escape }}">
 <meta name="twitter:description" content="{{ og_description | escape }}">
+
+{%- comment -%} Additional SEO Meta Tags for Nightwooolf {%- endcomment -%}
+{%- if request.page_type == 'index' -%}
+  <meta name="keywords" content="Auracast, Bluetooth headphones, wireless TV headphones, headphones for seniors, hearing aid headphones, Bluetooth LE Audio, LC3 codec, wireless audio, TV listening devices, assistive listening">
+{%- elsif request.page_type == 'product' -%}
+  <meta name="keywords" content="{{ product.title | escape }}, wireless headphones, Bluetooth headphones, TV headphones, {{ product.vendor | escape }}, Auracast, LE Audio">
+{%- elsif request.page_type == 'collection' -%}
+  <meta name="keywords" content="{{ collection.title | escape }}, wireless headphones, Bluetooth audio, TV listening, {{ shop.name }}">
+{%- endif -%}
+
+{%- comment -%} Additional Open Graph for Products {%- endcomment -%}
+{%- if request.page_type == 'product' -%}
+  {%- if product.vendor != blank -%}
+    <meta property="product:brand" content="{{ product.vendor | escape }}">
+  {%- endif -%}
+  {%- if product.selected_or_first_available_variant.sku != blank -%}
+    <meta property="product:retailer_item_id" content="{{ product.selected_or_first_available_variant.sku | escape }}">
+  {%- endif -%}
+  {%- for tag in product.tags limit: 5 -%}
+    <meta property="product:tag" content="{{ tag | escape }}">
+  {%- endfor -%}
+{%- endif -%}
+
+{%- comment -%} Geo meta tags for local SEO {%- endcomment -%}
+<meta name="geo.region" content="US">
+<meta name="geo.placename" content="United States">
+<meta name="author" content="{{ shop.name }}">
+<link rel="dns-prefetch" href="https://cdn.shopify.com">
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>

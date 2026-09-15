@@ -1,0 +1,43 @@
+{%- comment -%}
+  FAQ Schema Structured Data for Nightwooolf
+  Use this on FAQ pages to enable rich results in Google
+{%- endcomment -%}
+
+{%- comment -%} Collect FAQ items from collapsible-content sections {%- endcomment -%}
+{%- assign faq_items = '' -%}
+{%- for section in template.sections -%}
+  {%- if section.type == 'collapsible-content' and section.blocks.size > 0 -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'content' and block.settings.heading != blank and block.settings.content != blank -%}
+        {%- assign faq_items = faq_items | append: block.settings.heading | append: '|||' | append: block.settings.content | append: ';;;' -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if faq_items != blank -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- assign faq_array = faq_items | split: ';;;' -%}
+    {%- for item in faq_array -%}
+      {%- if item != blank -%}
+        {%- assign parts = item | split: '|||' -%}
+        {%- if parts.size == 2 -%}
+    {
+      "@type": "Question",
+      "name": {{ parts[0] | strip_html | json }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ parts[1] | strip_html | json }}
+      }
+    }{%- unless forloop.last -%},{%- endunless -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}

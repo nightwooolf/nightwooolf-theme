@@ -1,0 +1,184 @@
+{%- comment -%}
+  SEO Schema Structured Data - Organization, WebSite, BreadcrumbList
+  Nightwooolf - Auracast Bluetooth Audio Solutions
+{%- endcomment -%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Nightwooolf",
+  "url": "https://www.nightwooolf.com",
+  "logo": "https://www.nightwooolf.com/cdn/shop/files/nightwooolf-logo.png?v=1",
+  "description": "Nightwooolf specializes in Auracast Bluetooth wireless audio solutions including TV headphones for seniors, hearing aid headphones, and innovative Bluetooth audio devices powered by the latest LE Audio technology.",
+  "sameAs": [
+    {%- if settings.social_facebook_link != blank %}{{ settings.social_facebook_link | json }}{% endif -%}
+    {%- if settings.social_instagram_link != blank %},{{ settings.social_instagram_link | json }}{% endif -%}
+    {%- if settings.social_youtube_link != blank %},{{ settings.social_youtube_link | json }}{% endif -%}
+    {%- if settings.social_tiktok_link != blank %},{{ settings.social_tiktok_link | json }}{% endif -%}
+    {%- if settings.social_twitter_link != blank %},{{ settings.social_twitter_link | json }}{% endif -%}
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "service@nightwooolf.com",
+    "contactType": "customer service",
+    "availableLanguage": "English"
+  },
+  "founder": {
+    "@type": "Organization",
+    "name": "Nightwooolf"
+  },
+  "areaServed": "Worldwide",
+  "knowsAbout": [
+    "Auracast Bluetooth",
+    "Bluetooth LE Audio",
+    "Wireless TV Headphones",
+    "Hearing Aid Headphones",
+    "Bluetooth Audio Transmitter",
+    "LC3 Codec",
+    "Assistive Listening Technology"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Nightwooolf",
+  "url": "https://www.nightwooolf.com",
+  "description": "Auracast Bluetooth wireless audio solutions - TV headphones for seniors, hearing aid headphones, and next-generation Bluetooth audio devices.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.nightwooolf.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+{%- if request.page_type == 'collection' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ page_title | json }},
+  "description": {{ page_description | default: collection.description | strip_html | json }},
+  "url": {{ request.origin | append: collection.url | json }},
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": {{ collection.products_count }},
+    "itemListElement": [
+      {%- for product in collection.products limit: 20 -%}
+      {
+        "@type": "ListItem",
+        "position": {{ forloop.index }},
+        "url": {{ request.origin | append: product.url | json }}
+      }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]
+  }
+}
+</script>
+{%- endif -%}
+
+{%- if request.page_type == 'product' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.nightwooolf.com"
+    }
+    {%- if collection -%}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ collection.title | json }},
+      "item": {{ request.origin | append: collection.url | json }}
+    }
+    ,{
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ product.title | json }}
+    }
+    {%- else -%}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ product.title | json }}
+    }
+    {%- endif -%}
+  ]
+}
+</script>
+{%- elsif request.page_type == 'collection' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.nightwooolf.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ collection.title | json }}
+    }
+  ]
+}
+</script>
+{%- elsif request.page_type == 'page' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.nightwooolf.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ page.title | json }}
+    }
+  ]
+}
+</script>
+{%- elsif request.page_type == 'article' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.nightwooolf.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ blog.title | json }},
+      "item": {{ request.origin | append: blog.url | json }}
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ article.title | json }}
+    }
+  ]
+}
+</script>
+{%- endif -%}
