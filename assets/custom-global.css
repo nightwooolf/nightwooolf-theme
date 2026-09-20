@@ -171,6 +171,9 @@
 .shopify-policy__container {
     max-width:90% !important;
 }
+.hero-media-content .hero-media-heading {
+    opacity:0;
+}
 @media screen and (min-width: 1440px) { 
     /* 普通桌面 */
     .mobile-logo-text {
