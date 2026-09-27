@@ -347,18 +347,6 @@
             "text": "<p>Focusing on the human connections among community members,we are committed to becoming an outstanding wireless audio solutions provider.</p><p>Through high-quality audio products,we are building a more build a more inclusive, interactive and engaging<em><strong> “Community Audio Ecosystem”</strong></em> ,and offering our audio products and serves to every senior,child and youth in the community.</p>"
           }
         },
-        "text_HnzFgy": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Focusing on the human connections among community members,we are committed to becoming an outstanding wireless audio solutions provider.</p><p>Through high-quality audio products,we are building a more build a more inclusive, interactive and engaging<em><strong> “Community Audio Ecosystem”</strong></em> ,and offering our audio products and serves to every senior,child and youth in the community.</p>"
-          }
-        },
-        "text_kVgXbP": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Focusing on the human connections among community members,we are committed to becoming an outstanding wireless audio solutions provider.</p><p>Through high-quality audio products,we are building a more build a more inclusive, interactive and engaging<em><strong> “Community Audio Ecosystem”</strong></em> ,and offering our audio products and serves to every senior,child and youth in the community.</p>"
-          }
-        },
         "button_NYgTkj": {
           "type": "button",
           "settings": {
@@ -371,11 +359,9 @@
       "block_order": [
         "heading_cFMcj3",
         "text_Ux9WmP",
-        "text_HnzFgy",
-        "text_kVgXbP",
         "button_NYgTkj"
       ],
-      "name": "Nightwooolf community audio Ecosystem",
+      "name": "Nightwooolf Community Audio Ecosystem",
       "settings": {
         "image1": "shopify://shop_images/Memory_Learning_Headphones_Bluetooth_5.3_with_Real-Time_Echoic_for_Reading_Practice_Language_Training_Multisensory_Learning.jpg",
         "image_height": "auto",
