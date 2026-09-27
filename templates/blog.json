@@ -36,7 +36,7 @@
         "heading_89nLfK": {
           "type": "heading",
           "settings": {
-            "heading": "<strong>Nightwooolf Auracast Audio Blog</strong>",
+            "heading": "<strong>Nightwooolf &nbsp;Audio Blog</strong>",
             "heading_size": "h2",
             "heading_size_mobile": "h3_mobile"
           }
@@ -52,7 +52,9 @@
         "heading_89nLfK",
         "text_BUV73V"
       ],
-      "custom_css": [".rich-text-desc {color: #a8a8a8;}"],
+      "custom_css": [
+        ".rich-text-desc {color: #a8a8a8;}"
+      ],
       "name": "t:sections.rich_text.presets.name",
       "settings": {
         "layout_type": false,
