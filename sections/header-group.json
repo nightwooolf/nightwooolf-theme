@@ -17,7 +17,7 @@
         "628f7340-ab34-4a31-8ebd-a951e25a8c0f": {
           "type": "announcement",
           "settings": {
-            "announcement_text": "Free shipping on all orders over $19.98",
+            "announcement_text": "Free shipping all orders&nbsp;",
             "icon": "none",
             "background_color": "#000000",
             "text_color": "#ffffff",
