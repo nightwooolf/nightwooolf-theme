@@ -350,7 +350,7 @@
         "button_NYgTkj": {
           "type": "button",
           "settings": {
-            "text": "DISCOVER AURACAST",
+            "text": "VIEW DETAILS",
             "link": "shopify://pages/about-nightwooolf",
             "btn_size": "large"
           }
