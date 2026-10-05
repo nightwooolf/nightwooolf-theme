@@ -284,6 +284,9 @@
     .banner-main-box {
         /* height:200px!important; */
     }
+    .featured-product-content .product-title {
+        font-size:34px !important;
+    }
  }
 @media screen and (max-width: 480px)  { 
     /* 小屏手机 */
