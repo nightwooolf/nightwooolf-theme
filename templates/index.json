@@ -191,6 +191,9 @@
         "slide_GyCAmn",
         "slide_ErVVXt"
       ],
+      "custom_css": [
+        ".hero-media-cont-inner.width-small {width: 100%; max-width: none !important;}"
+      ],
       "settings": {
         "layout_type": "fullwidth",
         "desktop_height": "desktop-adapt-image",
