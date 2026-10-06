@@ -45,7 +45,7 @@
         "cd0ba03e-d054-4098-ba05-b92a4e55d391": {
           "type": "text",
           "settings": {
-            "text": "<h2>Submit your queries or remarks using the form below. </h2>"
+            "text": "<h2>Submit your queries or remarks using the form below.&nbsp;</h2>"
           }
         }
       },
@@ -82,10 +82,10 @@
         "template--21937765482811__7b795057-e8af-4445-9d0a-bdd1be4f74bc-column-1": {
           "type": "column",
           "settings": {
-            "icon": "support",
+            "icon": "envelope",
             "custom_svg": "",
-            "heading": "How to Find Us",
-            "description": "Navigate to our address or drop us <br> a message for directions",
+            "heading": "service@nightwooolf.com",
+            "description": "Guaranteed reply in 1 business day\nby a real agent.",
             "btn_text": "",
             "btn_link": "",
             "btn_size": "medium"
@@ -108,8 +108,20 @@
           "settings": {
             "icon": "phone",
             "custom_svg": "",
-            "heading": "Free Shipping",
+            "heading": "+8615016704165",
             "description": "Enjoy free shipping on <br> every your order!",
+            "btn_text": "",
+            "btn_link": "",
+            "btn_size": "medium"
+          }
+        },
+        "column_nC9rCd": {
+          "type": "column",
+          "settings": {
+            "icon": "location",
+            "custom_svg": "",
+            "heading": "Our Address",
+            "description": "253-261 Henessy Road,Rm1801 Easey Comm Bldg,Wanchai,HongKong",
             "btn_text": "",
             "btn_link": "",
             "btn_size": "medium"
@@ -119,7 +131,8 @@
       "block_order": [
         "template--21937765482811__7b795057-e8af-4445-9d0a-bdd1be4f74bc-column-1",
         "template--21937765482811__7b795057-e8af-4445-9d0a-bdd1be4f74bc-column-2",
-        "template--21937765482811__7b795057-e8af-4445-9d0a-bdd1be4f74bc-column-3"
+        "template--21937765482811__7b795057-e8af-4445-9d0a-bdd1be4f74bc-column-3",
+        "column_nC9rCd"
       ],
       "settings": {
         "custom_class": "custom_icon_text_class",
