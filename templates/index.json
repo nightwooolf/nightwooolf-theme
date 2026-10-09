@@ -193,7 +193,8 @@
       ],
       "custom_css": [
         ".hero-media-cont-inner.width-small {width: 100%; max-width: none !important;}",
-        ".hero-media-subheading{opacity: 0;}"
+        ".hero-media-subheading {opacity: 0;}",
+        "@media (max-width: 767px) {.mobile-align-left {text-align: center; }}"
       ],
       "settings": {
         "layout_type": "fullwidth",
