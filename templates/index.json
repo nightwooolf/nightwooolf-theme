@@ -192,7 +192,8 @@
         "slide_ErVVXt"
       ],
       "custom_css": [
-        ".hero-media-cont-inner.width-small {width: 100%; max-width: none !important;}"
+        ".hero-media-cont-inner.width-small {width: 100%; max-width: none !important;}",
+        ".hero-media-subheading{opacity: 0;}"
       ],
       "settings": {
         "layout_type": "fullwidth",
