@@ -60,8 +60,8 @@
           "settings": {
             "image_desktop": "shopify://shop_images/Qualcomm_Dual_Mold_2.4G_Bluetooth_Wireless_Headphones_for_TV_Watching_with_Transmitter.jpg",
             "image_mobile": "shopify://shop_images/Qualcomm_Wireless_TV_Headphones.jpg",
-            "subheading": "",
-            "heading": "Dual Mold 2.4G & Bluetooth Wireless Headphones for TV Watching",
+            "subheading": "Dual Mold 2.4G & Bluetooth Wireless Headphones for TV Watching",
+            "heading": "",
             "heading_size": "h2",
             "heading_size_mobile": "h2_mobile",
             "font_family": "heading",
@@ -103,8 +103,8 @@
           "settings": {
             "image_desktop": "shopify://shop_images/Memory_Learning_Headphones_Bluetooth_5.3_with_Real-Time_Echoic_for_Reading_Practice.jpg",
             "image_mobile": "shopify://shop_images/Language_Training_Multisensory_Learning_Memory_Learning_Headphones.jpg",
-            "subheading": "",
-            "heading": "Memory Learning Headphones, Bluetooth 5.3 with Real-Time Echoic",
+            "subheading": "Memory Learning Headphones, Bluetooth 5.3 with Real-Time Echoic",
+            "heading": "",
             "heading_size": "h1",
             "heading_size_mobile": "h1_mobile",
             "font_family": "heading",
