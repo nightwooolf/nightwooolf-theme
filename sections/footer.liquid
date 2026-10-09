@@ -153,7 +153,7 @@
       {% endif %}
       <div class="grid-item-md-12 grid-item-l-4 footer-navi-column">
         <div class="footer-logo-box">
-          <a href="{{ routes.root_url }}" class="footer-logo">
+          <a href="{{ routes.root_url }}" class="footer-logo" aria-label="Nightwooolf home">
             {%- if section.settings.image != blank -%}
               <img
                 srcset="{{ section.settings.image | image_url: width: section.settings.image_width }} 1x, {{ section.settings.image | image_url: width: 200 }} 2x"
