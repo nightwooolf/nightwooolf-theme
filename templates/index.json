@@ -556,6 +556,12 @@
     "featured_product_hECtzV": {
       "type": "featured-product",
       "blocks": {
+        "text_wUCt9z": {
+          "type": "text",
+          "settings": {
+            "text": "Dual Mold 2.4GHz & Bluetooth Wireless Headphones for TV Watching with Transmitter"
+          }
+        },
         "sku_GDpREh": {
           "type": "sku",
           "disabled": true,
@@ -563,6 +569,7 @@
         },
         "title_9L3mbC": {
           "type": "title",
+          "disabled": true,
           "settings": {}
         },
         "inventory_PUVytg": {
@@ -609,6 +616,7 @@
         }
       },
       "block_order": [
+        "text_wUCt9z",
         "sku_GDpREh",
         "title_9L3mbC",
         "inventory_PUVytg",
@@ -620,7 +628,9 @@
         "description_gcwdkz",
         "share_LHxGKF"
       ],
-      "custom_css": [],
+      "custom_css": [
+        ".product-text{font-size: 24px;}"
+      ],
       "settings": {
         "custom_class": "Specialty products",
         "product": "dual-mold-2-4ghz-bluetooth-wireless-headphones-for-tv-watching-with-transmitter",
