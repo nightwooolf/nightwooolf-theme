@@ -629,7 +629,7 @@
         "share_LHxGKF"
       ],
       "custom_css": [
-        ".product-text{font-size: 24px;}"
+        ".product-text {font-size: 24px;}"
       ],
       "settings": {
         "custom_class": "Specialty products",
@@ -1259,18 +1259,21 @@
       "blocks": {
         "e5d28e5f-b77f-48a9-9324-a1bea6166798": {
           "type": "article",
+          "disabled": true,
           "settings": {
             "article": "news/if-you-are-seniors-with-unilateral-hearing-loss-or-hearing-asymmetry-between-your-left-and-right-ears-which-wireless-tv-headset-is-most-suitable-for-you"
           }
         },
         "c18675d6-b03b-42c9-aef1-a11976ff84ef": {
           "type": "article",
+          "disabled": true,
           "settings": {
             "article": "news/the-best-wireless-tv-headphones-for-seniors-latest-buying-guide"
           }
         },
         "cb9e12ff-1a4b-48e6-bf31-d868cec86d2c": {
           "type": "article",
+          "disabled": true,
           "settings": {
             "article": "news/if-you-are-seniors-with-unilateral-hearing-loss-or-hearing-asymmetry-between-your-left-and-right-ears-which-wireless-tv-headset-is-most-suitable-for-you"
           }
@@ -1290,7 +1293,7 @@
         "heading_size_mobile": "h4_mobile",
         "heading_alignment": "center",
         "blog": "news",
-        "post_limit": 4,
+        "post_limit": 3,
         "show_date": true,
         "show_author": false,
         "show_excerpt": true,
