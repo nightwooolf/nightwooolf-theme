@@ -48,7 +48,7 @@
 }
 .main-product-content .product-title {
     font-size:24px;
-    font-weight:500;
+    /* font-weight:500; */
 }
 
 .main-product-content .item-discount-price {
@@ -175,7 +175,7 @@
     opacity:0;
 }
 .featured-product-content .product-title {
-    font-size:54px;
+    font-size:36px;
 }
 .sr-only {
   position: absolute;
