@@ -1145,6 +1145,15 @@
     "349e387b-77bd-49f6-a607-2aacbdd8bf29": {
       "type": "testimonial",
       "blocks": {
+        "quote_d93DCf": {
+          "type": "quote",
+          "settings": {
+            "rating": 5,
+            "heading": "<strong>PERFETTO E ADATTO A QUALUNQUE SOLUZIONE</strong>",
+            "message": "<p>Ottimo prodotto che si adatta praticamente a qualunque uscita audio e di conseguenza a qualunque televisore. Il kit comprende i cavi per adattarsi a qualunque soluzione. Potete passare da un uscita all'altra con un semplice clic sul tasto dell'apparecchio e i controlli sulle cuffie rendono molto semplice regolare l'audio.</p>",
+            "author": "Cirik88"
+          }
+        },
         "quote_mnwHHf": {
           "type": "quote",
           "settings": {
@@ -1264,6 +1273,7 @@
         }
       },
       "block_order": [
+        "quote_d93DCf",
         "quote_mnwHHf",
         "quote_8nBhg6",
         "quote_bVCg8e",
