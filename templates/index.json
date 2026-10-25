@@ -1145,6 +1145,15 @@
     "349e387b-77bd-49f6-a607-2aacbdd8bf29": {
       "type": "testimonial",
       "blocks": {
+        "quote_8nBhg6": {
+          "type": "quote",
+          "settings": {
+            "rating": 5,
+            "heading": "<strong>Il y a vraiment le choix de connexion</strong>",
+            "message": "<p>📺 Il y a vraiment le choix de connexion, peut-être connecté sur un ancien téléviseur✅️L'émetteur se connecte rapidement quelques secondesJe n'ai pas remarqué de latence, au contraire, offre une excellente synchronisation, avec une très bonne qualité de son 🎶🎵🚉Peut-être utilisé en train ❌️ Pas recommandé en avion ✈️Un casque avec un véritable choix de connectivité et sans fil, confortable même après de longues sessions, technologie à très faible latence, synchronisation rapide et précise, une réussite ✅️</p>",
+            "author": "Jean Dupont"
+          }
+        },
         "quote_mnwHHf": {
           "type": "quote",
           "settings": {
@@ -1255,6 +1264,7 @@
         }
       },
       "block_order": [
+        "quote_8nBhg6",
         "quote_mnwHHf",
         "quote_6Gi8AF",
         "quote_bVCg8e",
