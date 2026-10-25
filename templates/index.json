@@ -1145,6 +1145,15 @@
     "349e387b-77bd-49f6-a607-2aacbdd8bf29": {
       "type": "testimonial",
       "blocks": {
+        "quote_6Gi8AF": {
+          "type": "quote",
+          "settings": {
+            "rating": 4,
+            "heading": "<strong>The combination of wireless technologies&nbsp;</strong>",
+            "message": "<p>&nbsp; &nbsp; The combination of wireless technologies can be particularly appealing for users who want an alternative to traditional wired headphones. Depending on device compatibility, the Bluetooth connection may also work with other personal electronics, while the dedicated transmitter offers another option for TV viewing. Before purchasing, check which audio outputs your television supports, whether the transmitter connects through USB or another required port, and whether your preferred devices are compatible. For anyone who wants to enjoy TV audio more privately and move around more freely, this dual-connectivity design offers useful versatility.</p>",
+            "author": "Author name here"
+          }
+        },
         "quote_mnwHHf": {
           "type": "quote",
           "settings": {
@@ -1157,9 +1166,9 @@
         "quote_bVCg8e": {
           "type": "quote",
           "settings": {
-            "rating": 4,
+            "rating": 5,
             "heading": "<strong>Enjoy TV Your Way: Dual Wireless Headphones for Private Listening Without the Cables</strong>",
-            "message": "<p>&nbsp; &nbsp; &nbsp; These dual-mode wireless headphones make TV watching more convenient, especially for people who want to enjoy their favorite shows without disturbing others. With both 2.4GHz wireless connectivity and Bluetooth, the headphones offer flexibility across devices and listening setups. The included transmitter helps connect compatible TVs and other supported equipment, making this a useful option for movie nights, late-night viewing, or households with different preferred listening volumes.</p><p>&nbsp; &nbsp; &nbsp; The combination of wireless technologies can be particularly appealing for users who want an alternative to traditional wired headphones. Depending on device compatibility, the Bluetooth connection may also work with other personal electronics, while the dedicated transmitter offers another option for TV viewing. Before purchasing, check which audio outputs your television supports, whether the transmitter connects through USB or another required port, and whether your preferred devices are compatible. For anyone who wants to enjoy TV audio more privately and move around more freely, this dual-connectivity design offers useful versatility.</p>",
+            "message": "<p>&nbsp; &nbsp; &nbsp; These dual-mode wireless headphones make TV watching more convenient, especially for people who want to enjoy their favorite shows without disturbing others. With both 2.4GHz wireless connectivity and Bluetooth, the headphones offer flexibility across devices and listening setups. The included transmitter helps connect compatible TVs and other supported equipment, making this a useful option for movie nights, late-night viewing, or households with different preferred listening volumes.</p>",
             "author": "moogie14"
           }
         },
@@ -1246,6 +1255,7 @@
         }
       },
       "block_order": [
+        "quote_6Gi8AF",
         "quote_mnwHHf",
         "quote_bVCg8e",
         "quote_PL6jyg",
