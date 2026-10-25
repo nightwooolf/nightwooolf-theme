@@ -1145,6 +1145,15 @@
     "349e387b-77bd-49f6-a607-2aacbdd8bf29": {
       "type": "testimonial",
       "blocks": {
+        "quote_hP8ENV": {
+          "type": "quote",
+          "settings": {
+            "rating": 4,
+            "heading": "Heading",
+            "message": "<p>Add client reviews & testimonials to showcase your store’s happy clients.</p>",
+            "author": "Author name here"
+          }
+        },
         "quote_njMhmH": {
           "type": "quote",
           "settings": {
@@ -1158,7 +1167,7 @@
           "type": "quote",
           "settings": {
             "rating": 5,
-            "heading": "<strong>&nbsp;I bought this for my hearing, impaired mother who is 94&nbsp;</strong>",
+            "heading": "<strong>I bought this for my hearing, impaired mother who is 94&nbsp;</strong>",
             "message": "<p>My mother is having a hard time hearing the television so I bought her these headphones. She says she can hear the TV so much better now and is very happy with them.<br/><br/></p>",
             "author": "Phil"
           }
@@ -1167,22 +1176,23 @@
           "type": "quote",
           "settings": {
             "rating": 5,
-            "heading": "Great",
-            "message": "<p>I absolutely love the this brands item. I purchased it  . It's not only stylish but also incredibly comfortable. I've received so many compliments.</p>",
-            "author": "Emily Rodriguez"
+            "heading": "Great item. Tried others, these were best.",
+            "message": "<p>Perfect fit for 83 yr old. And love the large volume controls. Also plug and play, no fiddling ti pair.<br/><br/></p>",
+            "author": "Al Trimels"
           }
         },
         "template--21230859977023__349e387b-77bd-49f6-a607-2aacbdd8bf29-quote-2": {
           "type": "quote",
           "settings": {
             "rating": 5,
-            "heading": "Save money",
-            "message": "<p>I've been a loyal customer of brand for years now, and their clothing never disappoints. The quality is best, and their designs are always on-trend.</p>",
-            "author": "Sarah Johnson"
+            "heading": "<strong>Easy to Use</strong>",
+            "message": "<p>These headphones are easy to use and to see because of the large buttons. After I took it out of the box I was listening to music within 7 minutes. &nbsp;It is also used for sound on the TV. &nbsp;I have a hard time hearing the TV, so it worked perfectly to give me more volume. &nbsp;I feel these are a great value for the price of the headphones.<br/><br/></p>",
+            "author": "Muehl Public Library"
           }
         }
       },
       "block_order": [
+        "quote_hP8ENV",
         "quote_njMhmH",
         "template--21230859977023__349e387b-77bd-49f6-a607-2aacbdd8bf29-quote-1",
         "template--21230859977023__349e387b-77bd-49f6-a607-2aacbdd8bf29-quote-4",
