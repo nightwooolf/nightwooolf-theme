@@ -1145,6 +1145,33 @@
     "349e387b-77bd-49f6-a607-2aacbdd8bf29": {
       "type": "testimonial",
       "blocks": {
+        "quote_bVCg8e": {
+          "type": "quote",
+          "settings": {
+            "rating": 4,
+            "heading": "<strong>Enjoy TV Your Way: Dual Wireless Headphones for Private Listening Without the Cables</strong>",
+            "message": "<p>&nbsp; &nbsp; &nbsp; These dual-mode wireless headphones make TV watching more convenient, especially for people who want to enjoy their favorite shows without disturbing others. With both 2.4GHz wireless connectivity and Bluetooth, the headphones offer flexibility across devices and listening setups. The included transmitter helps connect compatible TVs and other supported equipment, making this a useful option for movie nights, late-night viewing, or households with different preferred listening volumes.</p><p>&nbsp; &nbsp; &nbsp; The combination of wireless technologies can be particularly appealing for users who want an alternative to traditional wired headphones. Depending on device compatibility, the Bluetooth connection may also work with other personal electronics, while the dedicated transmitter offers another option for TV viewing. Before purchasing, check which audio outputs your television supports, whether the transmitter connects through USB or another required port, and whether your preferred devices are compatible. For anyone who wants to enjoy TV audio more privately and move around more freely, this dual-connectivity design offers useful versatility.</p>",
+            "author": "moogie14"
+          }
+        },
+        "quote_PL6jyg": {
+          "type": "quote",
+          "settings": {
+            "rating": 5,
+            "heading": "<strong>Un véritable choix de connectivité, sans fil et confortable&nbsp;</strong>",
+            "message": "<p>J'aime beaucoup regarder la télé tard le soir, j'ai aussi souvent tendance à augmenter le volume car j'aime entendre correctement et être vraiment dans la scène 🎬Avec ce casque, mon entourage n'est plus dérangé par mes heures tardives et moi j'entends vraiment mieux 👌✅️Confortable même après de longues séances 🎧Un confort d'écoute sans déranger mon entourage 🔈➕️➕️Compatible avec 99 % des téléviseurs grâce à son émetteur USB universel.➡️Dispose de : Sortie optique, USB, AUX, RCA et du Bluetooth !📺 Il y a vraiment le choix de connexion, peut-être connecté sur un ancien téléviseur✅️L'émetteur se connecte rapidement quelques secondesJe n'ai pas remarqué de latence, au contraire, offre une excellente synchronisation, avec une très bonne qualité de son 🎶🎵🚉Peut-être utilisé en train ❌️ Pas recommandé en avion ✈️Un casque avec un véritable choix de connectivité et sans fil, confortable même après de longues sessions, technologie à très faible latence, synchronisation rapide et précise, une réussite ✅️</p>",
+            "author": "Vanessa"
+          }
+        },
+        "quote_ctqQbr": {
+          "type": "quote",
+          "settings": {
+            "rating": 5,
+            "heading": "<strong>Excellent sound and easy set up</strong>",
+            "message": "<p>Great Sound and Easy to Use.These wireless TV headphones are a great option for watching TV without disturbing others. The sound is clear and loud, and the over-ear design is comfortable for extended viewing. I like that they offer both Bluetooth and 2.4G connectivity, making them versatile for different devices. The transmitter is a nice addition, and the low-latency feature helps keep the audio in sync with the picture. A convenient product and a great value. Easy Bluetooth connectivity.</p>",
+            "author": "Happy Happy Joy Joy"
+          }
+        },
         "quote_4gTqBF": {
           "type": "quote",
           "settings": {
@@ -1210,6 +1237,9 @@
         }
       },
       "block_order": [
+        "quote_bVCg8e",
+        "quote_PL6jyg",
+        "quote_ctqQbr",
         "quote_4gTqBF",
         "quote_fbQ49F",
         "quote_njMhmH",
