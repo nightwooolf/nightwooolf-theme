@@ -1302,11 +1302,11 @@
         "btn_text": "View all",
         "btn_link": "",
         "btn_size": "medium",
-        "color_scheme": "scheme-10d07f3f-8a29-4d3b-a1e9-97a250b6a1a9",
-        "top_space_desktop": 65,
-        "bottom_space_desktop": 75,
-        "top_space_mobile": 50,
-        "bottom_space_mobile": 50
+        "color_scheme": "secondary",
+        "top_space_desktop": 40,
+        "bottom_space_desktop": 40,
+        "top_space_mobile": 25,
+        "bottom_space_mobile": 25
       }
     },
     "logo_list_NTGGHH": {
