@@ -1189,11 +1189,12 @@
         "template--21230859977023__349e387b-77bd-49f6-a607-2aacbdd8bf29-quote-2"
       ],
       "settings": {
+        "background_image": "shopify://shop_images/LOGO_Nightwooolf.jpg",
         "column_count": 3,
         "content_alignment": "left",
         "heading": "Trusted by 8k+ Families for Wireless Audio",
         "heading_size": "h2",
-        "heading_size_mobile": "h1_mobile",
+        "heading_size_mobile": "h2_mobile",
         "heading_alignment": "center",
         "color_scheme": "primary",
         "overlay_color": "#ffffff",
