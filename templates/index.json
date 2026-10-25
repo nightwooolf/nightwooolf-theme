@@ -1145,6 +1145,15 @@
     "349e387b-77bd-49f6-a607-2aacbdd8bf29": {
       "type": "testimonial",
       "blocks": {
+        "quote_mnwHHf": {
+          "type": "quote",
+          "settings": {
+            "rating": 4,
+            "heading": "<strong>I can hear the TV again</strong>",
+            "message": "<p>This device helped me hear the TV while laying in bed. It wasn’t inhibitory. It worked out very well. It’s very durable. I like the it’s quality. It’s very comfortable easy to use. It’s very good price and battery. Life lasts quite a long</p>",
+            "author": "Ted"
+          }
+        },
         "quote_bVCg8e": {
           "type": "quote",
           "settings": {
@@ -1237,6 +1246,7 @@
         }
       },
       "block_order": [
+        "quote_mnwHHf",
         "quote_bVCg8e",
         "quote_PL6jyg",
         "quote_ctqQbr",
