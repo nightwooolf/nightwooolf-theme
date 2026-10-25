@@ -1145,15 +1145,6 @@
     "349e387b-77bd-49f6-a607-2aacbdd8bf29": {
       "type": "testimonial",
       "blocks": {
-        "quote_7tHDzn": {
-          "type": "quote",
-          "settings": {
-            "rating": 4,
-            "heading": "<strong>Un casque sans fil hyper performant pour profiter de ses films et séries.</strong>",
-            "message": "<p>J'ai acheté ce casque pour regarder la télé le soir sans réveiller toute la maison, et franchement, l'expérience sonore est tout simplement parfaite.Aucun décalage entre le son et l'image : Grâce à la connexion 2.4G via l'émetteur, la faible latence fait toute la différence. Le son est parfaitement synchronisé avec les mouvements des lèvres à l'écran, ce qui est indispensable pour les films ou les matchs.qui le rend compatible avec la grande majorité des écrans récents comme plus anciens.</p>",
-            "author": "Isabelle W."
-          }
-        },
         "quote_mnwHHf": {
           "type": "quote",
           "settings": {
@@ -1215,6 +1206,15 @@
             "heading": "<strong>Excellent headphones for TVs&nbsp;</strong>",
             "message": "<p>I ordered these Nightwooolf Wireless TV Headphones for Seniors & Hearing Impaired, Semi-in-Ear TV with Independent L/R Volume Adjustment, Large Buttons, Lightweight, Support USB/Optical/RCA/3.5mm Connections for Most TVs as I am already losing my hearing and wear NHS hearing aids (had since my mid 40’s) My hearing aids are good but don’t give me a full range back so wanted to try these as an alternative.</p>",
             "author": "S.Mackay"
+          }
+        },
+        "quote_7tHDzn": {
+          "type": "quote",
+          "settings": {
+            "rating": 4,
+            "heading": "<strong>Un casque sans fil hyper performant pour profiter de ses films et séries.</strong>",
+            "message": "<p>J'ai acheté ce casque pour regarder la télé le soir sans réveiller toute la maison, et franchement, l'expérience sonore est tout simplement parfaite.Aucun décalage entre le son et l'image : Grâce à la connexion 2.4G via l'émetteur, la faible latence fait toute la différence. Le son est parfaitement synchronisé avec les mouvements des lèvres à l'écran, ce qui est indispensable pour les films ou les matchs.qui le rend compatible avec la grande majorité des écrans récents comme plus anciens.</p>",
+            "author": "Isabelle W."
           }
         },
         "quote_PL6jyg": {
@@ -1282,7 +1282,6 @@
         }
       },
       "block_order": [
-        "quote_7tHDzn",
         "quote_mnwHHf",
         "quote_8nBhg6",
         "quote_bVCg8e",
@@ -1290,6 +1289,7 @@
         "quote_6Gi8AF",
         "quote_4gTqBF",
         "quote_fbQ49F",
+        "quote_7tHDzn",
         "quote_PL6jyg",
         "quote_njMhmH",
         "quote_d93DCf",
