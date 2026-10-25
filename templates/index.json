@@ -1145,15 +1145,6 @@
     "349e387b-77bd-49f6-a607-2aacbdd8bf29": {
       "type": "testimonial",
       "blocks": {
-        "quote_6Gi8AF": {
-          "type": "quote",
-          "settings": {
-            "rating": 4,
-            "heading": "<strong>The combination of wireless technologies&nbsp;</strong>",
-            "message": "<p>&nbsp; &nbsp; The combination of wireless technologies can be particularly appealing for users who want an alternative to traditional wired headphones. Depending on device compatibility, the Bluetooth connection may also work with other personal electronics, while the dedicated transmitter offers another option for TV viewing. Before purchasing, check which audio outputs your television supports, whether the transmitter connects through USB or another required port, and whether your preferred devices are compatible. For anyone who wants to enjoy TV audio more privately and move around more freely, this dual-connectivity design offers useful versatility.</p>",
-            "author": "Author name here"
-          }
-        },
         "quote_mnwHHf": {
           "type": "quote",
           "settings": {
@@ -1161,6 +1152,15 @@
             "heading": "<strong>I can hear the TV again</strong>",
             "message": "<p>This device helped me hear the TV while laying in bed. It wasn’t inhibitory. It worked out very well. It’s very durable. I like the it’s quality. It’s very comfortable easy to use. It’s very good price and battery. Life lasts quite a long</p>",
             "author": "Ted"
+          }
+        },
+        "quote_6Gi8AF": {
+          "type": "quote",
+          "settings": {
+            "rating": 4,
+            "heading": "<strong>The combination of wireless technologies&nbsp;</strong>",
+            "message": "<p>&nbsp; &nbsp; The combination of wireless technologies can be particularly appealing for users who want an alternative to traditional wired headphones. Depending on device compatibility, the Bluetooth connection may also work with other personal electronics, while the dedicated transmitter offers another option for TV viewing. Before purchasing, check which audio outputs your television supports, whether the transmitter connects through USB or another required port, and whether your preferred devices are compatible. For anyone who wants to enjoy TV audio more privately and move around more freely, this dual-connectivity design offers useful versatility.</p>",
+            "author": "Author name here"
           }
         },
         "quote_bVCg8e": {
@@ -1177,7 +1177,7 @@
           "settings": {
             "rating": 5,
             "heading": "<strong>Un véritable choix de connectivité, sans fil et confortable&nbsp;</strong>",
-            "message": "<p>J'aime beaucoup regarder la télé tard le soir, j'ai aussi souvent tendance à augmenter le volume car j'aime entendre correctement et être vraiment dans la scène 🎬Avec ce casque, mon entourage n'est plus dérangé par mes heures tardives et moi j'entends vraiment mieux 👌✅️Confortable même après de longues séances 🎧Un confort d'écoute sans déranger mon entourage 🔈➕️➕️Compatible avec 99 % des téléviseurs grâce à son émetteur USB universel.➡️Dispose de : Sortie optique, USB, AUX, RCA et du Bluetooth !📺 Il y a vraiment le choix de connexion, peut-être connecté sur un ancien téléviseur✅️L'émetteur se connecte rapidement quelques secondesJe n'ai pas remarqué de latence, au contraire, offre une excellente synchronisation, avec une très bonne qualité de son 🎶🎵🚉Peut-être utilisé en train ❌️ Pas recommandé en avion ✈️Un casque avec un véritable choix de connectivité et sans fil, confortable même après de longues sessions, technologie à très faible latence, synchronisation rapide et précise, une réussite ✅️</p>",
+            "message": "<p>J'aime beaucoup regarder la télé tard le soir, j'ai aussi souvent tendance à augmenter le volume car j'aime entendre correctement et être vraiment dans la scène 🎬Avec ce casque, mon entourage n'est plus dérangé par mes heures tardives et moi j'entends vraiment mieux 👌✅️Confortable même après de longues séances 🎧Un confort d'écoute sans déranger mon entourage 🔈➕️➕️Compatible avec 99 % des téléviseurs grâce à son émetteur USB universel.➡️Dispose de : Sortie optique, USB, AUX, RCA et du Bluetooth !</p>",
             "author": "Vanessa"
           }
         },
@@ -1255,8 +1255,8 @@
         }
       },
       "block_order": [
-        "quote_6Gi8AF",
         "quote_mnwHHf",
+        "quote_6Gi8AF",
         "quote_bVCg8e",
         "quote_PL6jyg",
         "quote_ctqQbr",
