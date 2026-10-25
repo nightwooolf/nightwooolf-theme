@@ -1145,13 +1145,22 @@
     "349e387b-77bd-49f6-a607-2aacbdd8bf29": {
       "type": "testimonial",
       "blocks": {
-        "quote_hP8ENV": {
+        "quote_4gTqBF": {
           "type": "quote",
           "settings": {
             "rating": 4,
-            "heading": "Heading",
-            "message": "<p>Add client reviews & testimonials to showcase your store’s happy clients.</p>",
-            "author": "Author name here"
+            "heading": "Auriculares inalámbricos para TV colgando del cuello",
+            "message": "<p>Muy cómodo: tener los auriculares colgando del cuello. Muy positivo: incluye varias clases de cables para elegir. Una vez que se haya aprendido como funciona (no es tan complicado), es muy agradable usarlos. Además se puede uno mover por las estancias cercanas y seguir escuchando el audio del programa de TV.</p>",
+            "author": "Joseline"
+          }
+        },
+        "quote_fbQ49F": {
+          "type": "quote",
+          "settings": {
+            "rating": 4,
+            "heading": "<strong>Excellent headphones for TVs&nbsp;</strong>",
+            "message": "<p>I ordered these Nightwooolf Wireless TV Headphones for Seniors & Hearing Impaired, Semi-in-Ear TV with Independent L/R Volume Adjustment, Large Buttons, Lightweight, Support USB/Optical/RCA/3.5mm Connections for Most TVs as I am already losing my hearing and wear NHS hearing aids (had since my mid 40’s) My hearing aids are good but don’t give me a full range back so wanted to try these as an alternative.<br/><br/>I like the fact that they are easy to connect, are comfortable to wear, even when I am lying down but because they are wired, I’m not at risk of misplacing one if I nod off.<br/><br/>The quality of sound is good, especially for the price point, which is very competitive. I like that you can change levels independently. The buttons to to change are not huge but if you already wear hearing aids you will quickly get used to not needing to look at the device to change settings, it becomes automatic. Overall good value for money, great useful product.</p>",
+            "author": "S.Mackay"
           }
         },
         "quote_njMhmH": {
@@ -1159,7 +1168,7 @@
           "settings": {
             "rating": 5,
             "heading": "<strong>Great Headphones, good features, great sound.</strong>",
-            "message": "<p>These are really great headphones. &nbsp;I’ve had Sharper Image, Miracle Ears, that don’t measure up. &nbsp;The 3 levels of audio are outstanding. &nbsp;The headset can be charged on the base unit or the headset alone using USB-C, &nbsp;nice. &nbsp;Long battery life, good quality workmanship. &nbsp;Nice product for sure.</p><p><br/></p>",
+            "message": "<p>These are really great headphones. &nbsp;I’ve had Sharper Image, Miracle Ears, that don’t measure up. &nbsp;The 3 levels of audio are outstanding. &nbsp;The headset can be charged on the base unit or the headset alone using USB-C, &nbsp;nice. &nbsp;Long battery life, good quality workmanship. &nbsp;Nice product for sure.</p>",
             "author": "PrettyRock"
           }
         },
@@ -1168,7 +1177,7 @@
           "settings": {
             "rating": 5,
             "heading": "<strong>I bought this for my hearing, impaired mother who is 94&nbsp;</strong>",
-            "message": "<p>My mother is having a hard time hearing the television so I bought her these headphones. She says she can hear the TV so much better now and is very happy with them.<br/><br/></p>",
+            "message": "<p>My mother is having a hard time hearing the television so I bought her these headphones. She says she can hear the TV so much better now and is very happy with them.</p>",
             "author": "Phil"
           }
         },
@@ -1176,8 +1185,8 @@
           "type": "quote",
           "settings": {
             "rating": 5,
-            "heading": "Great item. Tried others, these were best.",
-            "message": "<p>Perfect fit for 83 yr old. And love the large volume controls. Also plug and play, no fiddling ti pair.<br/><br/></p>",
+            "heading": "<strong>Great item. Tried others, these were best.</strong>",
+            "message": "<p>Perfect fit for 83 yr old. And love the large volume controls. Also plug and play, no fiddling ti pair.</p>",
             "author": "Al Trimels"
           }
         },
@@ -1186,17 +1195,28 @@
           "settings": {
             "rating": 5,
             "heading": "<strong>Easy to Use</strong>",
-            "message": "<p>These headphones are easy to use and to see because of the large buttons. After I took it out of the box I was listening to music within 7 minutes. &nbsp;It is also used for sound on the TV. &nbsp;I have a hard time hearing the TV, so it worked perfectly to give me more volume. &nbsp;I feel these are a great value for the price of the headphones.<br/><br/></p>",
+            "message": "<p>These headphones are easy to use and to see because of the large buttons. After I took it out of the box I was listening to music within 7 minutes. &nbsp;It is also used for sound on the TV. &nbsp;I have a hard time hearing the TV, so it worked perfectly to give me more volume. &nbsp;I feel these are a great value for the price of the headphones.</p>",
             "author": "Muehl Public Library"
+          }
+        },
+        "quote_hP8ENV": {
+          "type": "quote",
+          "settings": {
+            "rating": 4,
+            "heading": "<strong>Clear speech playback with useful microphone monitoring</strong>",
+            "message": "<p>&nbsp; &nbsp; &nbsp; &nbsp; These look like ordinary over ear Bluetooth headphones but the useful part is being able to hear your own voice with very little delay. That makes them good for reading aloud and pronunciation practice because mistakes are much more obvious when heard back immediately. Voices sound clear and the microphone picks up normal speech without needing to be placed directly in front of the mouth.<br/>&nbsp; &nbsp; &nbsp; &nbsp;The ear cushions are soft and the headband has enough adjustment for a comfortable fit. They are fine for spoken audio and general listening although music is not as rich as it would be through headphones designed purely for that purpose. The controls took a few minutes to learn but are easy once their positions become familiar. Battery life has been more than enough for several practice sessions between charges. Good quality, and they fell durable, for the purpose they are fair value.</p>",
+            "author": "Barclay Bronson"
           }
         }
       },
       "block_order": [
-        "quote_hP8ENV",
+        "quote_4gTqBF",
+        "quote_fbQ49F",
         "quote_njMhmH",
         "template--21230859977023__349e387b-77bd-49f6-a607-2aacbdd8bf29-quote-1",
         "template--21230859977023__349e387b-77bd-49f6-a607-2aacbdd8bf29-quote-4",
-        "template--21230859977023__349e387b-77bd-49f6-a607-2aacbdd8bf29-quote-2"
+        "template--21230859977023__349e387b-77bd-49f6-a607-2aacbdd8bf29-quote-2",
+        "quote_hP8ENV"
       ],
       "settings": {
         "background_image": "shopify://shop_images/LOGO_Nightwooolf.jpg",
