@@ -1145,13 +1145,13 @@
     "349e387b-77bd-49f6-a607-2aacbdd8bf29": {
       "type": "testimonial",
       "blocks": {
-        "quote_d93DCf": {
+        "quote_7tHDzn": {
           "type": "quote",
           "settings": {
-            "rating": 5,
-            "heading": "<strong>PERFETTO E ADATTO A QUALUNQUE SOLUZIONE</strong>",
-            "message": "<p>Ottimo prodotto che si adatta praticamente a qualunque uscita audio e di conseguenza a qualunque televisore. Il kit comprende i cavi per adattarsi a qualunque soluzione. Potete passare da un uscita all'altra con un semplice clic sul tasto dell'apparecchio e i controlli sulle cuffie rendono molto semplice regolare l'audio.Ottimo prodotto consigliato per chi vuole godersi la televisione, magari di notte, senza disturbare il resto della casa e i vicini.</p>",
-            "author": "Cirik88"
+            "rating": 4,
+            "heading": "<strong>Un casque sans fil hyper performant pour profiter de ses films et séries.</strong>",
+            "message": "<p>J'ai acheté ce casque pour regarder la télé le soir sans réveiller toute la maison, et franchement, l'expérience sonore est tout simplement parfaite.Aucun décalage entre le son et l'image : Grâce à la connexion 2.4G via l'émetteur, la faible latence fait toute la différence. Le son est parfaitement synchronisé avec les mouvements des lèvres à l'écran, ce qui est indispensable pour les films ou les matchs.qui le rend compatible avec la grande majorité des écrans récents comme plus anciens.</p>",
+            "author": "Isabelle W."
           }
         },
         "quote_mnwHHf": {
@@ -1235,6 +1235,15 @@
             "author": "PrettyRock"
           }
         },
+        "quote_d93DCf": {
+          "type": "quote",
+          "settings": {
+            "rating": 5,
+            "heading": "<strong>PERFETTO E ADATTO A QUALUNQUE SOLUZIONE</strong>",
+            "message": "<p>Ottimo prodotto che si adatta praticamente a qualunque uscita audio e di conseguenza a qualunque televisore. Il kit comprende i cavi per adattarsi a qualunque soluzione. Potete passare da un uscita all'altra con un semplice clic sul tasto dell'apparecchio e i controlli sulle cuffie rendono molto semplice regolare l'audio.Ottimo prodotto consigliato per chi vuole godersi la televisione, magari di notte, senza disturbare il resto della casa e i vicini.</p>",
+            "author": "Cirik88"
+          }
+        },
         "template--21230859977023__349e387b-77bd-49f6-a607-2aacbdd8bf29-quote-1": {
           "type": "quote",
           "settings": {
@@ -1273,7 +1282,7 @@
         }
       },
       "block_order": [
-        "quote_d93DCf",
+        "quote_7tHDzn",
         "quote_mnwHHf",
         "quote_8nBhg6",
         "quote_bVCg8e",
@@ -1283,6 +1292,7 @@
         "quote_fbQ49F",
         "quote_PL6jyg",
         "quote_njMhmH",
+        "quote_d93DCf",
         "template--21230859977023__349e387b-77bd-49f6-a607-2aacbdd8bf29-quote-1",
         "template--21230859977023__349e387b-77bd-49f6-a607-2aacbdd8bf29-quote-4",
         "template--21230859977023__349e387b-77bd-49f6-a607-2aacbdd8bf29-quote-2",
