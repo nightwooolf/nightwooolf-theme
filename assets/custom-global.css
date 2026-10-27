@@ -300,9 +300,9 @@
     .featured-product-content .product-title {
         font-size:34px !important;
     }
-    .product-reviews {
-        display:flex;
-        flex-direction:column;
+    .product-reviews .AirReviews-PreviewWrapper__Mobile .AirReviews-Blocks  {
+        display:flex !important;
+        flex-direction:column !important;
     }
  }
 @media screen and (max-width: 480px)  { 
