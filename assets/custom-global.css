@@ -300,6 +300,10 @@
     .featured-product-content .product-title {
         font-size:34px !important;
     }
+    .product-reviews {
+        display:flex;
+        flex-direction:column;
+    }
  }
 @media screen and (max-width: 480px)  { 
     /* 小屏手机 */
