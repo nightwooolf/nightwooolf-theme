@@ -222,9 +222,9 @@
     .home-feature-product-class .product-title a {
         font-size:38px !important;
     }
-    .product-reviews {
-        display:flex;
-        flex-direction:column;
+    .product-reviews .AirReviews-PreviewWrapper__Mobile .AirReviews-Blocks  {
+        display:flex !important;
+        flex-direction:column !important;
     }
 }
 @media screen and (max-width: 1200px) { 
@@ -333,6 +333,10 @@
     }
     .video-wrapper.content-overlay-true h2 {
         font-size:16px !important;
+    }
+    .product-reviews .AirReviews-PreviewWrapper__Mobile .AirReviews-Blocks  {
+        display:flex !important;
+        flex-direction:column !important;
     }
  }
 
