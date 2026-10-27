@@ -222,6 +222,10 @@
     .home-feature-product-class .product-title a {
         font-size:38px !important;
     }
+    .product-reviews {
+        display:flex;
+        flex-direction:column;
+    }
 }
 @media screen and (max-width: 1200px) { 
     /* 小桌面 */
