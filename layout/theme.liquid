@@ -8,6 +8,7 @@
     {%- assign noindex_handles = 'data-sharing-opt-out,privacy-policy,contact-information' | split: ',' -%}
       {%- if template == 'cart'
             or collection.handle == 'all'
+            or collection.handle == 'search'
             or collection.handle == 'all-products'
             or request.path contains '/collections/all'
             or noindex_handles contains page.handle -%}
