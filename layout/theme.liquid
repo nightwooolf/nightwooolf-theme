@@ -5,13 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#EB5C20">
-   {%- assign robots_value = 'index, follow' -%}
-{%- if template == 'cart'
-      or collection.handle == 'all'
-      or collection.handle == 'all-products'
-      or request.path contains '/collections/all' -%}
-  {%- assign robots_value = 'noindex, follow' -%}
-{%- endif -%}
+    {%- assign noindex_handles = 'data-sharing-opt-out,privacy-policy,contact-information' | split: ',' -%}
+      {%- if template == 'cart'
+            or collection.handle == 'all'
+            or collection.handle == 'all-products'
+            or request.path contains '/collections/all'
+            or noindex_handles contains page.handle -%}
+        {%- assign robots_value = 'noindex, follow' -%}
+    {%- endif -%}
 <meta name="robots" content="{{ robots_value }}">
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
     <link rel="preconnect" href="https://monorail-edge.shopifysvc.com" crossorigin>
