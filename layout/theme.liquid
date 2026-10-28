@@ -35,7 +35,9 @@
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- unless page_title contains shop.name -%}
+        {%- if page_title.size < 45 %} &ndash; {{ shop.name }}{% endif -%}
+      {%- endunless -%}
     </title>
 
     <meta name="description" content="{{ page_description | default: shop.description | default: shop.name | escape }}">
