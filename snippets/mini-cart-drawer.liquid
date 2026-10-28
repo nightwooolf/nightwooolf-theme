@@ -348,7 +348,7 @@
                           {%- for cmProduct in upProduct -%}
                             {%- assign assign current_variant = cmProduct.selected_or_first_available_variant %}
                             <div class="comparatively-product-card">
-                              <a href="{{ cmProduct.url | within : collection }}" class="comparatively-product-image">
+                              <a href="{{ cmProduct.url }}" class="comparatively-product-image">
                                 {%- capture current -%}{% cycle id: 1, 2, 3, 4 %}{%- endcapture -%}
                                 {%- assign placeholder_image = 'product-apparel-' | append: current -%}
                                 {% if cmProduct.featured_media != blank %}
@@ -358,7 +358,7 @@
                                 {% endif %}
                               </a>
                               <div class="comparatively-product-info">
-                                <a href="{{ cmProduct.url | within : collection }}">
+                                <a href="{{ cmProduct.url }}">
                                   <p class="textBase">{{- cmProduct.title | strip_html -}}</p>
                                 </a>
                                 <div class="price-wrapper">

@@ -80,7 +80,7 @@
             {% endfor %}
             {% if option.values.size > 5 %}
               <li class="product-swatch-item product-value">
-                <a href="{{ cardProduct.url | within : collection }}" class="textSmall"
+                <a href="{{ cardProduct.url }}" class="textSmall"
                   >+{{ option.values.size | minus: 5 -}} more
                 </a>
               </li>
@@ -96,7 +96,7 @@
    <div class="product-media-card{% if settings.image_border %} border-enabled{% endif %}">
         {% render 'badges', product:cardProduct %}
           <div class="media-image" style="--mediaRatio:{{ cardproductImageRatio }}%">
-              <{% if cardProduct != blank %}a href="{{ cardProduct.url | within : collection }}" aria-label="{{ cardProduct.title }}"{% else %}div{%endif %} data-main-image tabindex="-1">
+              <{% if cardProduct != blank %}a href="{{ cardProduct.url }}" aria-label="{{ cardProduct.title }}"{% else %}div{%endif %} data-main-image tabindex="-1">
                  {%- if cardProduct.featured_media != blank -%}
                   {%- render 'image', image: cardProduct.featured_media.preview_image -%}
                   {%- if second_image != blank and settings.hover_second_image == true -%}
@@ -140,7 +140,7 @@
                   {% if settings.product_vendor %}
                   <p class="vendor">{{ cardProduct.vendor }}</p>
                     {% endif %}
-                  <{% if  cardProduct != blank  %}a href="{{ cardProduct.url | within : collection }}"{% else %}div{% endif %} class="product-name textMedium" >
+                  <{% if  cardProduct != blank  %}a href="{{ cardProduct.url }}"{% else %}div{% endif %} class="product-name textMedium" >
                     {% if  cardProduct.title  %}
                         {{- cardProduct.title | strip_html -}}
                       {% else %}

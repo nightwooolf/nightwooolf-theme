@@ -21,7 +21,7 @@
           {%- for recomproduct in recommendations.products limit: block.settings.products_count -%}
             {%- assign assign current_variant = recomproductt.selected_or_first_available_variant %}
             <div class="comparatively-product-card">
-              <a href="{{ recomproduct.url | within : collection }}" class="comparatively-product-image">
+              <a href="{{ recomproduct.url }}" class="comparatively-product-image">
                 {%- capture current -%}{% cycle section.id: 1, 2, 3, 4 %}{%- endcapture -%}
                 {%- assign placeholder_image = 'product-apparel-' | append: current -%}
                 {% if recomproduct.featured_media != blank %}
@@ -31,7 +31,7 @@
                 {% endif %}
               </a>
               <div class="comparatively-product-info">
-                <a href="{{ recomproduct.url | within : collection }}">
+                <a href="{{ recomproduct.url }}">
                   <p class="textBase">{{- recomproduct.title | strip_html -}}</p>
                 </a>
 

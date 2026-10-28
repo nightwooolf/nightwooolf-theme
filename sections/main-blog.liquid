@@ -2,6 +2,7 @@
 <div class="{{ section.settings.color_scheme }}-scheme spacing-box">
   <div class="article-inner-wrapper">
     <div class="{{ settings.layout_width }}">
+      <h1 class="sr-only">{{ blog.title }}{% if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif %}</h1>
       {% assign limit = section.settings.artical_per_page %}
       {%- paginate blog.articles by limit -%}
         {% if section.settings.show_tags %}
