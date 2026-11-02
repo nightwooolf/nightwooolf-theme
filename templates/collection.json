@@ -140,7 +140,7 @@
       "type": "main-collection",
       "custom_css": [
         ".facets-bar-wrapper {display: none;}",
-        ".collection-description {opacity: 0; height: 20px;}"
+        ".collection-description {opacity: 0; height: 40px;}"
       ],
       "settings": {
         "products_per_page": 12,
