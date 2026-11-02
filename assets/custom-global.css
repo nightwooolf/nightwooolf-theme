@@ -186,6 +186,9 @@
   white-space: nowrap;
   border: 0;
 }
+.activator {
+    background: #eb5c20 !important;
+}
 .activator--inverted-colors {
     background: #eb5c20 !important;
 }
