@@ -190,7 +190,7 @@
     background: #eb5c20 !important;
 }
 .activator--inverted-colors {
-    background: #eb5c20 !important;
+    --activator-bg: #eb5c20 !important;
 }
 @media screen and (min-width: 1440px) { 
     /* 普通桌面 */
