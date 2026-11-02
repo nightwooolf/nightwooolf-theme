@@ -139,7 +139,8 @@
     "main-collection": {
       "type": "main-collection",
       "custom_css": [
-        ".facets-bar-wrapper {display: none;}"
+        ".facets-bar-wrapper {display: none;}",
+        ".collection-description {opacity: 0; height: 20px;}"
       ],
       "settings": {
         "products_per_page": 12,
