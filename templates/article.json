@@ -9,6 +9,18 @@
  */
 {
   "sections": {
+    "custom_liquid_qKLCJx": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom_liquid.presets.name",
+      "settings": {
+        "custom_liquid": "{% if request.page_type == 'article' %}\n  <nav class=\"article-breadcrumb-{{ section.id }}\"\n       aria-label=\"Breadcrumb\">\n    <a href=\"{{ routes.root_url }}\">Home</a>\n    <span aria-hidden=\"true\">›</span>\n    <a href=\"{{ blog.url }}\">{{ blog.title | escape }}</a>\n    <span aria-hidden=\"true\">›</span>\n    <span aria-current=\"page\">{{ article.title | escape }}</span>\n  </nav>\n\n  <style>\n    .article-breadcrumb-{{ section.id }} {\n      max-width: 1200px;\n      margin: 0 auto;\n      padding: 20px 40px;\n      font-size: 13px;\n      line-height: 1.6;\n      overflow-wrap: anywhere;\n    }\n    .article-breadcrumb-{{ section.id }} a {\n      color: inherit;\n      text-underline-offset: 3px;\n    }\n    .article-breadcrumb-{{ section.id }} [aria-hidden] {\n      margin: 0 8px;\n    }\n    @media screen and (max-width: 749px) {\n      .article-breadcrumb-{{ section.id }} {\n        padding: 16px 20px;\n      }\n    }\n  </style>\n{% endif %}",
+        "color_scheme": "",
+        "top_space_desktop": 25,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 20,
+        "bottom_space_mobile": 0
+      }
+    },
     "main": {
       "type": "main-article",
       "settings": {
@@ -51,6 +63,7 @@
     }
   },
   "order": [
+    "custom_liquid_qKLCJx",
     "main",
     "featured_blog_gHQEWc"
   ]
