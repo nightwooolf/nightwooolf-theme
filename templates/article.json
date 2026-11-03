@@ -33,9 +33,9 @@
         "show_social": true,
         "desktop_height": "height-large",
         "color_scheme": "",
-        "top_space_desktop": 70,
+        "top_space_desktop": 10,
         "bottom_space_desktop": 70,
-        "top_space_mobile": 40,
+        "top_space_mobile": 0,
         "bottom_space_mobile": 40
       }
     },
