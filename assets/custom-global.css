@@ -196,6 +196,7 @@
         font-size:48px !important;
     }
     
+    
 }
 @media screen and (min-width:989px) {
     .article-contain-wrapper .grid-row {
@@ -305,6 +306,9 @@
         display:flex !important;
         flex-direction:column !important;
     }
+    .article-detail-card .article-title {
+        font-size:30px !important;
+    }
  }
 @media screen and (max-width: 480px)  { 
     /* 小屏手机 */
@@ -338,6 +342,9 @@
     .product-reviews .AirReviews-PreviewWrapper__Mobile .AirReviews-Blocks  {
         display:flex !important;
         flex-direction:column !important;
+    }
+    .article-detail-card .article-title {
+        font-size:28px !important;
     }
  }
 
