@@ -42,7 +42,7 @@
 {%- if request.page_type == 'index' -%}
   <meta name="keywords" content="Bluetooth headphones, wireless TV headphones, headphones for seniors, hearing aid headphones, Bluetooth LE Audio, LC3 codec, wireless audio, TV listening devices, assistive listening">
 {%- elsif request.page_type == 'product' -%}
-  <meta name="keywords" content="{{ product.title | escape }}, wireless headphones, Bluetooth headphones, TV headphones, {{ product.vendor | escape }}, Auracast, LE Audio">
+  <meta name="keywords" content="{{ product.title | escape }}, wireless headphones, Bluetooth headphones, TV headphones, {{ product.vendor | escape }}, LE Audio">
 {%- elsif request.page_type == 'collection' -%}
   <meta name="keywords" content="{{ collection.title | escape }}, wireless headphones, Bluetooth audio, TV listening, {{ shop.name }}">
 {%- endif -%}
