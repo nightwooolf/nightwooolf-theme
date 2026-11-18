@@ -195,6 +195,9 @@
     .home-feature-product-class .product-title a {
         font-size:48px !important;
     }
+     .article-detail-card .article-title {
+        font-size:30px !important;
+    }
     
     
 }
