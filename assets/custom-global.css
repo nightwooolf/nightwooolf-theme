@@ -188,6 +188,7 @@
 }
  .article-detail-card .article-title {
         font-size:30px !important;
+        text-align:center;
     }
 @media screen and (min-width: 1440px) { 
     /* 普通桌面 */
