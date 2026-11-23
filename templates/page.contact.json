@@ -9,8 +9,44 @@
  */
 {
   "sections": {
+    "rich_text_aTeX8d": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_LfKxxj": {
+          "type": "heading",
+          "settings": {
+            "heading": "Contact",
+            "heading_size": "h2",
+            "heading_size_mobile": "h3_mobile"
+          }
+        },
+        "text_rW9yQE": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Reach Out, We're Here to Help!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_LfKxxj",
+        "text_rW9yQE"
+      ],
+      "name": "t:sections.rich_text.presets.name",
+      "settings": {
+        "layout_type": false,
+        "content_width": "small",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_scheme": "",
+        "top_space_desktop": 20,
+        "bottom_space_desktop": 20,
+        "top_space_mobile": 20,
+        "bottom_space_mobile": 20
+      }
+    },
     "banner": {
       "type": "page-banner",
+      "disabled": true,
       "settings": {
         "banner_height_desktop": "medium",
         "banner_height_mobile": "small",
@@ -171,6 +207,7 @@
     }
   },
   "order": [
+    "rich_text_aTeX8d",
     "banner",
     "fc4df4b6-8997-4b6d-8366-fe595dc3ceb8",
     "main-page",
